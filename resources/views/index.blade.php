@@ -1,4 +1,4 @@
-@extends('layouts.landingLayout')
+@extends('layouts.landingNavbar')
 
 @section('content')
 
