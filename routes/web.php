@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\WargaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/warga', [WargaController::class, 'index']) -> name('warga.index');
+Route::get('/warga/masuk', [AuthController::class, 'wargaMasuk']) -> name('warga.masuk');
+Route::post('/warga', [AuthController::class, 'wargaLogin']) -> name('warga.login');
+Route::get('/warga/register', [WargaController::class, 'create']) -> name('warga.create');
+Route::post('/warga/store', [WargaController::class, 'store']) -> name('warga.store');
+Route::get('/hasil', function () {
+    auth() -> check();
+    return view('hasil');
 });
