@@ -14,3 +14,34 @@
 .nav li{
     margin-right: 30px;
 }
+
+/* laman login */
+.container {
+    max-width: 100%;
+}
+.login-card {
+    width: 100%;
+    max-width: 750px;
+}
+.form-floating {
+    position: relative;
+}
+.form-floating label {
+    top: 10%;
+    left: 15px;
+    transform: translateY(-10%);
+    padding: 0 5px;
+    transition: 0.2s ease all;
+    pointer-events: none;
+}
+.form-floating input:focus ~ label,
+.form-floating input:not(:placeholder-shown) ~ label {
+    top: 0;
+    left: 10px;
+    transform: translateY(-100%);
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+.password-toggle {
+    cursor: pointer;
+}
