@@ -16,7 +16,7 @@ return new class extends Migration
             $table -> unsignedBigInteger('id_rt');
             $table -> String('nama');
             $table -> String('email');
-            $table -> integer('no_hp');
+            $table -> String('no_hp');
             $table -> String('username');
             $table -> String('password');
             $table -> enum('role', ['Admin_RT', 'Ketua_RT']);

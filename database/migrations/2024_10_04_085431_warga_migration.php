@@ -15,7 +15,7 @@ return new class extends Migration
             $table -> unsignedBigInteger('id_warga')->autoIncrement();
             $table -> String('nama');
             $table -> String('email');
-            $table -> integer('no_hp');
+            $table -> String('no_hp');
             $table -> String('username');
             $table -> String('password');
             $table -> enum('aktivasi', ['Activated', 'Unactivated']) -> default('Unactivated');
