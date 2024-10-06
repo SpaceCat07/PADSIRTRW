@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Penjabat_RT;
+use Hash;
 use Illuminate\Http\Request;
 
 class PenjabatRTController extends Controller
@@ -19,7 +21,7 @@ class PenjabatRTController extends Controller
      */
     public function create()
     {
-        //
+        return view('rt.RegisterPenjabat');
     }
 
     /**
@@ -27,7 +29,27 @@ class PenjabatRTController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request -> validate([
+            'nama' => 'required|min:5',
+            'email' => 'required|email:rfc,dns',
+            'no_hp' => 'required',
+            'username' => 'required|min:5|unique:penjabat_rt,username',
+            'password' => 'required|min:6',
+            'role' => 'required'
+        ]);
+
+        $selectedRole = $request ->input('Role');
+
+        $penjabat = new Penjabat_RT();
+        $penjabat -> nama = $request -> nama;
+        $penjabat -> email = $request -> email;
+        $penjabat -> no_hp = $request -> no_hp;
+        $penjabat -> username = $request -> username;
+        $penjabat -> password =  Hash::make($request -> password);
+        $penjabat -> role = $request -> input('Role');
+        $penjabat -> save();
+
+        return redirect('/hasil');
     }
 
     /**

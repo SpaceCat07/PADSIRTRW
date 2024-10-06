@@ -43,14 +43,15 @@ class AuthController extends Controller
     public function wargaLogout (Request $request)
     {
         $request -> session() -> flush();
+        Auth::logout();
 
         // kembali ke route login
-        return redirect() -> route('');
+        return redirect() -> route('/index');
     }
 
     public function penjabatRTMasuk ()
     {
-        return view('rt.penjabatLogin');
+        return view('rt.LoginPenjabat');
     }
 
     public function penjabatRTLogin (Request $request)
@@ -63,28 +64,33 @@ class AuthController extends Controller
         if ($penjabat) {
             if (Hash::check($pasword, $penjabat -> password)) {
                 if ($penjabat -> role === "Admin_RT") {
-                    Auth::login();
+                    Auth::login($penjabat);
                     session() -> regenerate();
+                    return redirect('/hasil');
                     // mengarah ke dashboard admin rt
                 } else {
+                    Auth::login($penjabat);
+                    session() -> regenerate();
+                    return redirect('/hasil');
                     // mengarah ke dashboard ketua rt
                 }
             } else {
                 // mengarah ke login penjabat rt
-                return redirect() -> with('password', 'Incorrect Password');
+                return redirect('/rt/masuk') -> with('password', 'Incorrect Password');
             }
         } else {
             // mengarah ke login penjabat rt
-            return redirect() -> with('email', 'User not Found');
+            return redirect('/rt/masuk') -> with('email', 'User not Found');
         }
     }
 
     public function penjabatRTLogout (Request $request)
     {
         $request -> session() -> flush();
+        Auth::logout();
 
         // kembali ke route login
-        return redirect() -> route('');
+        return redirect() -> route('/index');
     }
 
     public function penjabatRWMasuk ()
@@ -102,27 +108,32 @@ class AuthController extends Controller
         if ($penjabat) {
             if (Hash::check($pasword, $penjabat -> password)) {
                 if ($penjabat -> role === "Admin_RT") {
-                    Auth::login();
+                    Auth::login($penjabat);
                     session() -> regenerate();
+                    return redirect('/hasil');
                     // mengarah ke dashboard admin rt
                 } else {
+                    Auth::login($penjabat);
+                    session() -> regenerate();
+                    return redirect('/hasil');
                     // mengarah ke dashboard ketua rt
                 }
             } else {
                 // mengarah ke login penjabat rt
-                return redirect() -> with('password', 'Incorrect Password');
+                return redirect('/rw/masuk') -> with('password', 'Incorrect Password');
             }
         } else {
             // mengarah ke login penjabat rt
-            return redirect() -> with('email', 'User not Found');
+            return redirect('/rw/masuk') -> with('email', 'User not Found');
         }
     }
 
     public function penjabatRWLogout (Request $request)
     {
         $request -> session() -> flush();
+        Auth::logout();
 
         // kembali ke route login
-        return redirect() -> route('');
+        return redirect() -> route('/index');
     }
 }
