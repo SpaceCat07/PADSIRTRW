@@ -9,7 +9,7 @@
         <form action="{{route('warga.login')}}" method="post">
             @csrf
             <!-- Floating label for email (username) field -->
-            <div class="form-floating mb-3">
+            <div class="form-floating mb-3"> m
                 <input type="text" class="form-control" name="email" id="floatingEmail"
                     placeholder="johndoe@example.com" value="{{ old('email') }}">
                 <label for="floatingEmail">EMAIL ADDRESS</label>

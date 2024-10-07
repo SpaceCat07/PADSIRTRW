@@ -27,6 +27,8 @@ Route::post('/warga', [AuthController::class, 'wargaLogin']) -> name('warga.logi
 Route::get('/warga/register', [WargaController::class, 'create']) -> name('warga.create');
 Route::post('/warga/store', [WargaController::class, 'store']) -> name('warga.store');
 
+Route::get('/login', [AuthController::class, 'wargaMasuk']) -> name('warga.masuk');
+
 // route untuk login register penjabat rt
 Route::get('/rt/masuk', [AuthController::class, 'penjabatRTMasuk']) -> name('rt.masuk');
 Route::post('/rt', [AuthController::class, 'penjabatRTLogin']) -> name('rt.login');

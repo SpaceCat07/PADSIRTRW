@@ -2,138 +2,58 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Penjabat_RT;
-use App\Models\Penjabat_RW;
-use App\Models\Warga;
+use App\Models\User;
 use Auth;
 use Hash;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function wargaMasuk ()
+    public function login(Request $request)
     {
-        return view('warga.LoginWarga');
-    }
+        $email = $request->email;
+        $password = $request->password;
 
-    public function wargaLogin (Request $request)
-    {
-        $email = $request -> email;
-        $password = $request -> password;
+        // Cari user berdasarkan email di tabel users
+        $user = User::where('email', $email)->first();
 
-        $warga = Warga::where('email', $email) -> first();
+        if ($user) {
+            if (Hash::check($password, $user->password)) {
+                Auth::login($user);
+                session()->regenerate();
 
-        if ($warga) {
-            if (Hash::check($password, $warga -> password)) {
-                if ($warga -> aktivasi === 'Activated') {
-                    Auth::login($warga);
-                    session() -> regenerate();
-                    return redirect('/hasil');
-                } else {
-                    return redirect('/warga/masuk') -> with('password', 'Password incorrect');
+                // Mengarahkan berdasarkan role
+                switch ($user->role) {
+                    case 'Super_Admin':
+                        return redirect('/superadmin/dashboard');
+                    case 'Admin_RW':
+                        return redirect('/adminrw/dashboard');
+                    case 'Admin_RT':
+                        return redirect('/adminrt/dashboard');
+                    case 'Ketua_RW':
+                        return redirect('/ketuarw/dashboard');
+                    case 'Ketua_RT':
+                        return redirect('/ketuart/dashboard');
+                    case 'Warga':
+                        return redirect('/warga/dashboard');
+                    default:
+                        Auth::logout();
+                        return redirect('/login')->with('error', 'Role tidak dikenali.');
                 }
             } else {
-                return redirect('/warga/masuk') -> with('aktivasi', "Account hasn't been activated");
+                return redirect('/login')->with('password', 'Password salah.');
             }
         } else {
-            return redirect('/warga/masuk') -> with('email', 'User not found');
+            return redirect('/login')->with('email', 'User tidak ditemukan.');
         }
     }
 
-    public function wargaLogout (Request $request)
+    public function logout(Request $request)
     {
-        $request -> session() -> flush();
+        $request->session()->flush();
         Auth::logout();
 
-        // kembali ke route login
-        return redirect() -> route('/index');
-    }
-
-    public function penjabatRTMasuk ()
-    {
-        return view('rt.LoginPenjabat');
-    }
-
-    public function penjabatRTLogin (Request $request)
-    {
-        $email = $request -> email;
-        $pasword = $request -> password;
-
-        $penjabat = Penjabat_RT::where('email', $email) -> first();
-
-        if ($penjabat) {
-            if (Hash::check($pasword, $penjabat -> password)) {
-                if ($penjabat -> role === "Admin_RT") {
-                    Auth::login($penjabat);
-                    session() -> regenerate();
-                    return redirect('/hasil');
-                    // mengarah ke dashboard admin rt
-                } else {
-                    Auth::login($penjabat);
-                    session() -> regenerate();
-                    return redirect('/hasil');
-                    // mengarah ke dashboard ketua rt
-                }
-            } else {
-                // mengarah ke login penjabat rt
-                return redirect('/rt/masuk') -> with('password', 'Incorrect Password');
-            }
-        } else {
-            // mengarah ke login penjabat rt
-            return redirect('/rt/masuk') -> with('email', 'User not Found');
-        }
-    }
-
-    public function penjabatRTLogout (Request $request)
-    {
-        $request -> session() -> flush();
-        Auth::logout();
-
-        // kembali ke route login
-        return redirect() -> route('/index');
-    }
-
-    public function penjabatRWMasuk ()
-    {
-        return view('rw.penjabatLogin');
-    }
-
-    public function penjabatRWLogin (Request $request)
-    {
-        $email = $request -> email;
-        $pasword = $request -> password;
-
-        $penjabat = Penjabat_RW::where('email', $email) -> first();
-
-        if ($penjabat) {
-            if (Hash::check($pasword, $penjabat -> password)) {
-                if ($penjabat -> role === "Admin_RT") {
-                    Auth::login($penjabat);
-                    session() -> regenerate();
-                    return redirect('/hasil');
-                    // mengarah ke dashboard admin rt
-                } else {
-                    Auth::login($penjabat);
-                    session() -> regenerate();
-                    return redirect('/hasil');
-                    // mengarah ke dashboard ketua rt
-                }
-            } else {
-                // mengarah ke login penjabat rt
-                return redirect('/rw/masuk') -> with('password', 'Incorrect Password');
-            }
-        } else {
-            // mengarah ke login penjabat rt
-            return redirect('/rw/masuk') -> with('email', 'User not Found');
-        }
-    }
-
-    public function penjabatRWLogout (Request $request)
-    {
-        $request -> session() -> flush();
-        Auth::logout();
-
-        // kembali ke route login
-        return redirect() -> route('/index');
+        // Kembali ke halaman login
+        return redirect('/index');
     }
 }
