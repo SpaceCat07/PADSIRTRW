@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Warga;
 use Auth;
 use Hash;
 use Illuminate\Http\Request;
 
-class WargaController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,7 +31,7 @@ class WargaController extends Controller
      */
     public function store(Request $request)
     {
-        $warga = new Warga();
+        $warga = new User();
         $warga -> nama = $request -> nama;
         $warga -> email = $request -> email;
         $warga -> no_hp = $request -> no_hp;

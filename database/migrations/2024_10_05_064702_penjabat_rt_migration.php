@@ -14,12 +14,7 @@ return new class extends Migration
         Schema::create('penjabat_rt', function (Blueprint $table) {
             $table -> unsignedBigInteger('id_penjabat_rt') -> autoIncrement();
             $table -> unsignedBigInteger('id_rt');
-            $table -> String('nama');
-            $table -> String('email');
-            $table -> String('no_hp');
-            $table -> String('username');
-            $table -> String('password');
-            $table -> enum('role', ['Admin_RT', 'Ketua_RT']);
+            $table -> unsignedBigInteger('id_warga');
         });
     }
 

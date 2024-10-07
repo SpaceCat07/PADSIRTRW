@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('warga', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table -> unsignedBigInteger('id_warga')->autoIncrement();
             $table -> String('nama');
             $table -> String('email');
             $table -> String('no_hp');
             $table -> String('username');
             $table -> String('password');
+            $table -> enum('role', ['Ketua_RT', 'Ketua_RW', 'Admin_RT', 'Admin_RW', 'Super_Admin', 'Warga']);
             $table -> enum('aktivasi', ['Activated', 'Unactivated']) -> default('Unactivated');
             $table -> timestamps();
         });

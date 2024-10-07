@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\User;
 use Auth;
-use Hash;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
