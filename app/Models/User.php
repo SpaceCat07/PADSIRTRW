@@ -17,10 +17,13 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
     protected $fillable = [
         'name',
         'email',
         'password',
+        'no_hp',
+        'role'
     ];
 
     /**
@@ -42,4 +45,34 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getAuthIdentifierName()
+    {
+        return 'id_warga';
+    }
+
+    public function getAuthIdentifier()
+    {
+        return $this->attributes[$this->getAuthIdentifierName()];
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
+
+    public function getRememberToken()
+    {
+        return $this->remember_token; // Assuming the remember token field is named 'remember_token'
+    }
+
+    public function setRememberToken($value)
+    {
+        $this->remember_token = $value;
+    }
+
+    public function getRememberTokenName()
+    {
+        return 'remember_token';
+    }
 }

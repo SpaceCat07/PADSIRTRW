@@ -46,9 +46,7 @@ Route::middleware('auth') -> group(function () {
     
 });
 
-Route::get('/login', function () {
-    return view('users.login');
-}) -> name('login');
+Route::get('/login', [AuthController::class, 'Masuk']) -> name('login');
 
 Route::get('/index', function(){
     return view('index');
