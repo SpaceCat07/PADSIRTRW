@@ -45,3 +45,153 @@
 .password-toggle {
     cursor: pointer;
 }
+
+/* dashboard  */
+.dashboard-container {
+    position: relative;
+    width: 1440px;
+    height: 1993px;
+    background: #FFFFFF;
+}
+
+/* Carousel Program Kerja */
+.carousel-program-kerja {
+    position: absolute;
+    width: 1316px;
+    height: 470px;
+    left: calc(50% - 1316px / 2);
+    top: 203px;
+}
+
+/* Informasi Iuran Section */
+.informasi-iuran h2 {
+    position: absolute;
+    /* width: 281px;
+    height: 68px; */
+    left: 122px;
+    top: 776px;
+    font-family: 'DM Sans';
+    font-weight: 700;
+    font-size: 45px;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+    color: #000000;
+}
+
+.group-39490 {
+    position: absolute;
+    width: 190px;
+    height: 162px;
+    left: 122px;
+    top: 862px;
+}
+
+.rectangle-23791 {
+    width: 190px;
+    height: 162px;
+    border-radius: 11px;
+}
+
+.status {
+    position: absolute;
+    width: 75px;
+    height: 38px;
+    left: 179px;
+    top: 864px;
+    font-family: 'Plus Jakarta Sans';
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+    color: #000000;
+}
+
+.vector-container .vector-3,
+.vector-container .vector-4 {
+    position: absolute;
+    width: 100px;
+    height: 91px;
+    border: 2px solid #000000;
+}
+
+.vector-container .vector-3 {
+    left: 167px;
+    top: 915px;
+}
+
+.vector-container .vector-4 {
+    left: 166px;
+    top: 915px;
+}
+
+/* Group 39488 */
+.group-39488 {
+    position: absolute;
+    width: 475px;
+    height: 160px;
+    left: 337px;
+    top: 864px;
+}
+
+.rectangle-23792 {
+    width: 475px;
+    height: 160px;
+    background: #D9D9D9;
+    border-radius: 31px;
+}
+
+.total-iuran-telah-dibayar {
+    position: absolute;
+    width: 265px;
+    height: 38px;
+    left: 505px;
+    top: 889px;
+    font-family: 'Plus Jakarta Sans';
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+    color: #000000;
+}
+
+.total-iuran-telah-dibayar .amount {
+    font-weight: 500;
+    font-size: 40px;
+}
+
+.group-39489 {
+    position: absolute;
+    width: 475px;
+    height: 160px;
+    left: 842px;
+    top: 862px;
+}
+
+.rectangle-23793 {
+    width: 475px;
+    height: 160px;
+    background: #D9D9D9;
+    border-radius: 31px;
+}
+
+.tagihan {
+    position: absolute;
+    width: 192px;
+    height: 107px;
+    left: 1019px;
+    top: 886px;
+}
+
+.tagihan p {
+    font-family: 'Plus Jakarta Sans';
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+    color: #000000;
+}
+
+.tagihan .amount {
+    font-size: 40px;
+    font-weight: 500;
+}
