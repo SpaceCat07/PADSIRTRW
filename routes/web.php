@@ -53,3 +53,7 @@ Route::get('/login', [AuthController::class, 'Masuk']) -> name('login');
 Route::get('/index', function(){
     return view('index');
 });
+
+Route::get('/warga/dashboard', function(){
+    return view('/warga/DashboardWarga');
+});
