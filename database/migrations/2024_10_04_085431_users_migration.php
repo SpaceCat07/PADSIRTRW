@@ -12,14 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pengguna', function (Blueprint $table) {
-            $table -> unsignedBigInteger('id_warga')->autoIncrement();
+            $table -> unsignedBigInteger('id_pengguna');
             $table -> String('nama');
             $table -> String('email');
             $table -> String('no_hp');
-            $table -> String('username');
-            $table -> String('password');
+            $table -> String('password') -> default(Hash::make('masukhantam'));
             $table -> enum('role', ['Ketua_RT', 'Ketua_RW', 'Admin_RT', 'Admin_RW', 'Super_Admin', 'Warga']);
-            $table -> enum('aktivasi', ['Activated', 'Unactivated']) -> default('Unactivated');
+            $table -> enum('aktivasi', ['Activated', 'Unactivated']) -> default('Activated');
             $table -> timestamps();
         });
     }
