@@ -6,16 +6,21 @@
         <h2 class="text-center mb-3">Log In to Sistem RTRW</h2>
         <p class="text-center text-muted mb-4">Quick & Simple way to Automate your payment</p>
 
-        <form action="{{route('warga.login')}}" method="post">
+        <form action="{{route('login')}}" method="post">
             @csrf
             <!-- Floating label for email (username) field -->
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="email" id="floatingEmail"
-                    placeholder="johndoe@example.com" value="{{ old('email') }}">
+                <input type="text" class="form-control" name="nik" id="floatingEmail"
+                    placeholder="johndoe@example.com" value="{{ old('nik') }}">
                 <label for="floatingEmail">EMAIL ADDRESS</label>
-                @if (session('email'))
+                @error('nik')
+                    <div class="alert alert-danger mt-2">
+                        {{$message}}
+                    </div>
+                @enderror
+                <!-- @if (session('email'))
                     <div class="alert alert-danger mt-2">{{ session('email') }}</div>
-                @endif
+                @endif -->
             </div>
 
             <!-- Floating label for password field -->
@@ -27,13 +32,18 @@
                 <span class="position-absolute password-toggle" style="right: 10px; top: 15px; cursor: pointer;">
                     <i class="fas fa-eye" id="togglePassword"></i>
                 </span>
-                @if (session('password'))
+                @error('password')
+                    <div class="alert alert-danger mt-2">
+                        {{$message}}
+                    </div>
+                @enderror
+                <!-- @if (session('password'))
                     <div class="alert alert-danger mt-2">{{ session('password') }}</div>
-                @endif
+                @endif -->
             </div>
 
             <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" value="" id="terms">
+                <input class="form-check-input" type="checkbox" value="" name="terms" id="terms">
                 <label class="form-check-label text-muted" for="terms">
                     I agree to the <a href="#" class="text-decoration-none">Terms of Service</a> and <a href="#"
                         class="text-decoration-none">Privacy Policy</a>.
@@ -42,10 +52,6 @@
 
             <button type="submit" class="btn btn-dark w-100 py-2">Masuk</button>
         </form>
-
-        @if (session('aktivasi'))
-            <div class="alert alert-danger mt-3">{{ session('aktivasi') }}</div>
-        @endif
 
         <p class="text-center mt-4">
             Belum punya akun? <a href="#" class="text-primary">Klik untuk request akun</a>

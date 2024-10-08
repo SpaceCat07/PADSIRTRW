@@ -23,7 +23,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('warga.RegisterWarga');
+        return view('users.addUser');
     }
 
     /**
@@ -31,12 +31,20 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        $this -> validate($request, [
+            'nik' => 'required|min:10',
+            'nama' => 'required|min:5',
+            'email' => 'required|email:rfc,dns',
+            'no_hp' => 'required|min:10',
+            'role' => 'required'
+        ]);
+
         $warga = new User();
+        $warga -> id_pengguna = $request -> nik;
         $warga -> nama = $request -> nama;
         $warga -> email = $request -> email;
         $warga -> no_hp = $request -> no_hp;
-        $warga -> username = $request -> username;
-        $warga -> password =  Hash::make($request -> password);
+        $warga -> role = $request ->input('Role');
         $warga -> save();
 
         return redirect('/hasil');
@@ -49,13 +57,14 @@ class UsersController extends Controller
     {
         //
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $user = User::find($id);
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -63,7 +72,19 @@ class UsersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this -> validate($request, [
+            'nama' => 'required|min:5',
+            'email' => 'required|email:rfc,dns',
+            'no_hp' => 'required|min:10'
+        ]);
+
+        $user = User::find($id);
+        $user -> nama = $request -> nama;
+        $user -> email = $request -> email;
+        $user -> no_hp = $request -> no_hp;
+        $user -> save();
+
+        return redirect('/hasil');
     }
 
     /**
