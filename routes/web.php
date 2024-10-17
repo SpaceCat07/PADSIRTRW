@@ -69,3 +69,7 @@ Route::get('/index', function(){
 Route::get('/warga/dashboard', function(){
     return view('/warga/DashboardWarga');
 });
+
+Route::get('/program-kerja', function () {
+    return view('LihatProgramKerja');
+})->name('program-kerja');
