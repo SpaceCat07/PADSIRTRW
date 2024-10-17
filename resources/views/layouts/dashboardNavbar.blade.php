@@ -30,8 +30,8 @@
             </div>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-right mb-md-0">
-                <li><a href="#" class="nav-link px-2 {{ $page == 'dashboard' ? 'link-active' : 'link-idle' }}">Dashboard</a></li>
-                <li><a href="#" class="nav-link px-2 {{ $page == 'program-kerja' ? 'link-active' : 'link-idle' }}">Program Kerja</a></li>
+                <li><a href="/warga/dashboard" class="nav-link px-2 {{ $page == 'dashboard' ? 'link-active' : 'link-idle' }}">Dashboard</a></li>
+                <li><a href="/program-kerja" class="nav-link px-2 {{ $page == 'program-kerja' ? 'link-active' : 'link-idle' }}">Program Kerja</a></li>
                 <li><a href="#" class="nav-link px-2 {{ $page == 'pembayaran' ? 'link-active' : 'link-idle' }}">Pembayaran</a></li>
                 <li><a href="#" class="nav-link px-2 {{ $page == 'kritik-saran' ? 'link-active' : 'link-idle' }}">Kritik Saran</a></li>
                 <li>

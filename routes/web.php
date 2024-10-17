@@ -68,8 +68,8 @@ Route::get('/index', function(){
 
 Route::get('/warga/dashboard', function(){
     return view('/warga/DashboardWarga');
-});
+})->name('dashboard');
 
 Route::get('/program-kerja', function () {
-    return view('LihatProgramKerja');
+    return view('/warga/LihatProgramKerja');
 })->name('program-kerja');

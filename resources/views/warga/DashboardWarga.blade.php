@@ -58,7 +58,7 @@ $page = 'dashboard'; // or 'program-kerja', 'pembayaran', etc.
     <!-- Informasi Iuran Section -->
     <div class="iuran-container mt-5">
         <div class="informasi-iuran">
-            <h2 class="text-start mb-4">Informasi Iuran</h2>
+            <h2 class="title-text-start mb-4">Informasi Iuran</h2>
             <div class="row">
                 <div class="col-md-4">
                     <div class="group-status">
@@ -99,7 +99,7 @@ $page = 'dashboard'; // or 'program-kerja', 'pembayaran', etc.
     <!-- Laporan Keuangan RT -->
     <div class="iuran-container mt-5">
         <div class="informasi-iuran">
-            <h2 class="text-start mb-4">Laporan Keuangan RT</h2>
+            <h2 class="title-text-start mb-4">Laporan Keuangan RT</h2>
             <div class="row">
                 <div class="col-md-4">
                     <div class="group-status">
