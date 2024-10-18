@@ -12,7 +12,10 @@ class Warga extends Model
     
     protected $table = 'warga';
     protected $fillable = [
+        'id_warga',
         'name',
         'alamat'
     ];
+
+    protected $primaryKey = 'id_warga';
 }

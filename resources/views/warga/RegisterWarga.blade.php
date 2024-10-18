@@ -1,9 +1,16 @@
 <form action="{{route('warga.store')}}" method="post">
     @csrf
+    <input type="number" name="nik" id="" placeholder="NIK">
+    @error('nik')
+        <div><p>{{$message}}</p></div>
+    @enderror
     <input type="text" name="nama" id="" placeholder="Nama">
-    <input type="email" name="email" id="" placeholder="Email">
-    <input type="tel" name="no_hp" id="" placeholder="Nomor HandPhone">
-    <input type="text" name="username" id="" placeholder="username">
-    <input type="password" name="password" id="" placeholder="password">
+    @error('nama')
+        <div><p>{{$message}}</p></div>
+    @enderror
+    <input type="text" name="alamat" id="" placeholder="Alamat">
+    @error('alamat')
+        <div><p>{{$message}}</p></div>
+    @enderror
     <button type="submit">Register</button>
 </form>

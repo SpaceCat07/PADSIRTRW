@@ -29,16 +29,46 @@ Route::get('/', function () {
 // Route::post('/warga/store', [WargaController::class, 'store']) -> name('warga.store');
 
 // route login user
+// Route::resource('/otentikasi', AuthController::class) -> names([
+//     'masuk' => 'masuk',
+//     'login' => 'login',
+//     'logout' => 'logout'
+// ]);
+
 Route::get('/masuk', [AuthController::class, 'masuk']) -> name('masuk');
 Route::post('/login', [AuthController::class, 'login']) -> name('login');
+Route::post('/logout', [AuthController::class, 'logout']) -> name('logout');
 
 // route register warga user by super admin
-Route::get('/account/create', [UsersController::class, 'create']) -> name('account.create');
-Route::post('/account/register', [UsersController::class, 'store']) -> name('account.store');
+Route::resource('/account', UsersController::class) -> names([
+    'index' => 'account.index',
+    'create' => 'account.create',
+    'store' => 'account.store',
+    'edit' => 'account.edit',
+    'update' => 'account.update',
+    'show' => 'account.show', ## ini untuk show profile saja?
+    'destroy' => 'account.destroy'
+]);
+// Route::get('/account/create', [UsersController::class, 'create']) -> name('account.create');
+// Route::post('/account/register', [UsersController::class, 'store']) -> name('account.store');
 
 // route register akun pengguna warga by super admin
-Route::get('/warga/create', [WargaController::class, 'create']) -> name('warga.create');
-Route::post('/warga/register', [WargaController::class, 'store']) -> name('warga.store');
+// Route::get('/warga/create', [WargaController::class, 'create']) -> name('warga.create');
+// Route::post('/warga/register', [WargaController::class, 'store']) -> name('warga.store');
+// Route::get('/warga', [WargaController::class, 'index']) -> name('warga.index');
+// Route::get('/warga/edit/{id}', [WargaController::class, 'edit']) -> name('warga.edit');
+// Route::post('/warga', [WargaController::class, 'update']) -> name('warga.update');
+// Route::delete('/warga/{id}', [WargaController::class, 'destroy']) -> name('warga.destroy');
+
+Route::resource('/warga', WargaController::class) -> names([
+    'index' => 'warga.index',
+    'create' => 'warga.create',
+    'store' => 'warga.store',
+    'edit' => 'warga.edit',
+    'update' => 'warga.update',
+    'destroy' => 'warga.destroy'
+]);
+
 
 // // route untuk login register penjabat rt
 // Route::get('/rt/masuk', [AuthController::class, 'penjabatRTMasuk']) -> name('rt.masuk');

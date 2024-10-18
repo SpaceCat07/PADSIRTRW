@@ -12,14 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pengguna', function (Blueprint $table) {
-            $table -> unsignedBigInteger('id_pengguna');
-            $table -> String('nama');
+            $table -> id();
+            $table -> unsignedBigInteger('id_warga');
+            // $table -> foreignId('id_warga') -> constrained('warga') -> onDelete('cascade');
             $table -> String('email');
             $table -> String('no_hp');
             $table -> String('password') -> default(Hash::make('masukhantam'));
             $table -> enum('role', ['Ketua_RT', 'Ketua_RW', 'Admin_RT', 'Admin_RW', 'Super_Admin', 'Warga']);
-            $table -> enum('aktivasi', ['Activated', 'Unactivated']) -> default('Activated');
+            $table -> enum('aktivasi', ['Activated', 'Unactivated']) -> default('Unactivated');
             $table -> timestamps();
+
+            $table -> foreign('id_warga') -> references('id_warga') -> on('warga') -> onDelete('cascade');
         });
     }
 

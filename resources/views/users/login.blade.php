@@ -10,10 +10,10 @@
             @csrf
             <!-- Floating label for email (username) field -->
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="nik" id="floatingEmail"
-                    placeholder="johndoe@example.com" value="{{ old('nik') }}">
+                <input type="text" class="form-control" name="email" id="floatingEmail"
+                    placeholder="johndoe@example.com" value="{{ old('email') }}">
                 <label for="floatingEmail">EMAIL ADDRESS</label>
-                @error('nik')
+                @error('email')
                     <div class="alert alert-danger mt-2">
                         {{$message}}
                     </div>
@@ -51,6 +51,21 @@
             </div>
 
             <button type="submit" class="btn btn-dark w-100 py-2">Masuk</button>
+            @if(session('error'))
+                <div class="alert alert-success">
+                    {{ session('error') }}
+                </div>
+            @endif
+            @if(session('aktivasi'))
+                <div class="alert alert-success">
+                    {{ session('aktivasi') }}
+                </div>
+            @endif
+            @if(session('akun'))
+                <div class="alert alert-success">
+                    {{ session('akun') }}
+                </div>
+            @endif
         </form>
 
         <p class="text-center mt-4">
