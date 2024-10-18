@@ -159,3 +159,7 @@
     background-color: #000; /* Example color for vectors */
     margin: 0 5px; /* Space between vectors */
 }
+
+.whitespace {
+    height: 400px;
+}

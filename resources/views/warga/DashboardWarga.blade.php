@@ -134,5 +134,7 @@ $page = 'dashboard'; // or 'program-kerja', 'pembayaran', etc.
             </div>
         </div>
     </div>
+    
+    <div class="whitespace"></div>
 </div>
 @endsection
