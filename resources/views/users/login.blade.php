@@ -43,7 +43,7 @@
             </div>
 
             <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" value="" name="terms" id="terms">
+                <input class="form-check-input" type="checkbox" name="terms" id="terms" value="true">
                 <label class="form-check-label text-muted" for="terms">
                     I agree to the <a href="#" class="text-decoration-none">Terms of Service</a> and <a href="#"
                         class="text-decoration-none">Privacy Policy</a>.
@@ -62,7 +62,7 @@
                 </div>
             @endif
             @if(session('akun'))
-                <div class="alert alert-success">
+                <div class="">
                     {{ session('akun') }}
                 </div>
             @endif
