@@ -95,3 +95,11 @@ Route::middleware('auth') -> group(function () {
 Route::get('/index', function(){
     return view('index');
 });
+
+Route::get('/warga/dashboard', function(){
+    return view('/warga/DashboardWarga');
+})->name('dashboard');
+
+Route::get('/program-kerja', function () {
+    return view('/warga/LihatProgramKerja');
+})->name('program-kerja');

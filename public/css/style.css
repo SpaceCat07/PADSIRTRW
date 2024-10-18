@@ -1,17 +1,17 @@
-.header-container{
+.header-container {
     background-color: #E1E1E1;
 }
 
-.link-active{
+.link-active {
     color: black;
     font-weight: 600;
 }
 
-.link-idle{
+.link-idle {
     color: #486284;
 }
 
-.nav li{
+.nav li {
     margin-right: 30px;
 }
 
@@ -19,13 +19,16 @@
 .container {
     max-width: 100%;
 }
+
 .login-card {
     width: 100%;
     max-width: 750px;
 }
+
 .form-floating {
     position: relative;
 }
+
 .form-floating label {
     top: 10%;
     left: 15px;
@@ -34,14 +37,16 @@
     transition: 0.2s ease all;
     pointer-events: none;
 }
-.form-floating input:focus ~ label,
-.form-floating input:not(:placeholder-shown) ~ label {
+
+.form-floating input:focus~label,
+.form-floating input:not(:placeholder-shown)~label {
     top: 0;
     left: 10px;
     transform: translateY(-100%);
     font-size: 0.85rem;
     color: #6c757d;
 }
+
 .password-toggle {
     cursor: pointer;
 }
@@ -49,149 +54,108 @@
 /* dashboard  */
 .dashboard-container {
     position: relative;
-    width: 1440px;
-    height: 1993px;
+    /* height: 1993px; */
     background: #FFFFFF;
 }
 
 /* Carousel Program Kerja */
-.carousel-program-kerja {
-    position: absolute;
-    width: 1316px;
-    height: 470px;
-    left: calc(50% - 1316px / 2);
-    top: 203px;
+.carousel-container {
+    max-width: 1200px; /* Set a maximum width */
+    margin: auto; /* Center the container */
+}
+
+.row {
+    text-align: center; /* Center text in the row */
+}
+
+.card {
+    transition: transform 0.2s; /* Add a transition effect for hover */
+    background-image: url('https://via.placeholder.com/100x100'); /* Set the background image for the active slide */
+}
+
+.card-title {
+    padding-top: 100px;
+}
+
+.card:hover {
+    transform: scale(1.05); /* Scale the card slightly on hover */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(131, 131, 131, 0.5); /* Add a background for better visibility */
+    border-radius: 50%; /* Make the icons circular */
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+    background-color: rgba(131, 131, 131, 0.5); /* Change background on hover */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute; /* Position them absolutely */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for perfect centering */
+    z-index: 1; /* Ensure buttons are above other elements */
+}
+
+.carousel-control-prev {
+    left: -50px; /* Position to the left outside the carousel */
+}
+
+.carousel-control-next {
+    right: -50px; /* Position to the right outside the carousel */
 }
 
 /* Informasi Iuran Section */
-.informasi-iuran h2 {
-    position: absolute;
-    /* width: 281px;
-    height: 68px; */
-    left: 122px;
-    top: 776px;
-    font-family: 'DM Sans';
-    font-weight: 700;
-    font-size: 45px;
-    line-height: 150%;
-    letter-spacing: -0.03em;
-    color: #000000;
+.informasi-iuran {
+    max-width: 1200px; /* Set a maximum width */
+    margin: auto; /* Center the container */
 }
 
-.group-39490 {
-    position: absolute;
-    width: 190px;
-    height: 162px;
-    left: 122px;
-    top: 862px;
+.group-status, .group-total, .group-tagihan {
+    margin: 10px 0; /* Margin for spacing between groups */
 }
 
-.rectangle-23791 {
-    width: 190px;
-    height: 162px;
-    border-radius: 11px;
+.rectangle-status, .rectangle-total, .rectangle-tagihan {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Make rectangles responsive */
+    height: 200%; 
+    padding: 20px;
+    border-radius: 11px; /* Rounded corners */
+    background: #D9D9D9; /* Background color for rectangles */
 }
 
-.status {
-    position: absolute;
-    width: 75px;
-    height: 38px;
-    left: 179px;
-    top: 864px;
+.status, .total-iuran-telah-dibayar, .tagihan {
     font-family: 'Plus Jakarta Sans';
     font-weight: 600;
-    font-size: 25px;
+    font-size: 20px;
     line-height: 150%;
     letter-spacing: -0.03em;
     color: #000000;
+    margin: 10px 0; /* Space between text */
 }
 
-.vector-container .vector-3,
-.vector-container .vector-4 {
-    position: absolute;
-    width: 100px;
-    height: 91px;
-    border: 2px solid #000000;
-}
-
-.vector-container .vector-3 {
-    left: 167px;
-    top: 915px;
-}
-
-.vector-container .vector-4 {
-    left: 166px;
-    top: 915px;
-}
-
-/* Group 39488 */
-.group-39488 {
-    position: absolute;
-    width: 475px;
-    height: 160px;
-    left: 337px;
-    top: 864px;
-}
-
-.rectangle-23792 {
-    width: 475px;
-    height: 160px;
-    background: #D9D9D9;
-    border-radius: 31px;
-}
-
-.total-iuran-telah-dibayar {
-    position: absolute;
-    width: 265px;
-    height: 38px;
-    left: 505px;
-    top: 889px;
-    font-family: 'Plus Jakarta Sans';
-    font-weight: 600;
-    font-size: 25px;
-    line-height: 150%;
-    letter-spacing: -0.03em;
-    color: #000000;
-}
-
-.total-iuran-telah-dibayar .amount {
+.amount {
     font-weight: 500;
     font-size: 40px;
+    margin-top: 5px; /* Space between text */
 }
 
-.group-39489 {
-    position: absolute;
-    width: 475px;
-    height: 160px;
-    left: 842px;
-    top: 862px;
+/* Optional: Style for vector containers */
+.vector-container {
+    margin-top: 5px; /* Space above vector */
+    display: flex; /* Flexbox for alignment */
+    justify-content: center; /* Center the vectors */
 }
 
-.rectangle-23793 {
-    width: 475px;
-    height: 160px;
-    background: #D9D9D9;
-    border-radius: 31px;
-}
-
-.tagihan {
-    position: absolute;
-    width: 192px;
-    height: 107px;
-    left: 1019px;
-    top: 886px;
-}
-
-.tagihan p {
-    font-family: 'Plus Jakarta Sans';
-    font-weight: 600;
-    font-size: 25px;
-    line-height: 150%;
-    letter-spacing: -0.03em;
-    color: #000000;
-}
-
-.tagihan .amount {
-    font-size: 40px;
-    font-weight: 500;
+.vector-3 {
+    width: 50px; /* Set width for vectors */
+    height: 50px; /* Set height for vectors */
+    background-color: #000; /* Example color for vectors */
+    margin: 0 5px; /* Space between vectors */
 }
