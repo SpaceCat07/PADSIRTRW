@@ -52,24 +52,24 @@
 
             <button type="submit" class="btn btn-dark w-100 py-2">Masuk</button>
             @if(session('error'))
-                <div class="alert alert-success">
+                <div class="alert alert-danger mt-2">
                     {{ session('error') }}
                 </div>
             @endif
             @if(session('aktivasi'))
-                <div class="alert alert-success">
+                <div class="alert alert-danger mt-2">
                     {{ session('aktivasi') }}
                 </div>
             @endif
             @if(session('akun'))
-                <div class="">
+                <div class="alert alert-danger mt-2">
                     {{ session('akun') }}
                 </div>
             @endif
         </form>
 
         <p class="text-center mt-4">
-            Belum punya akun? <a href="#" class="text-primary">Klik untuk request akun</a>
+            Belum punya akun? <a href="{{route('account.requestCreate')}}" class="text-primary">Klik untuk request akun</a>
         </p>
     </div>
 </div>

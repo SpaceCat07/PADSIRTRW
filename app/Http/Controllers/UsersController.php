@@ -30,6 +30,37 @@ class UsersController extends Controller
         return view('users.addUser');
     }
 
+    public function requestCreate ()
+    {
+        return view('users.requestAddUser');
+    }
+
+    public function requestStore (Request $request)
+    {
+        $this -> validate($request, [
+            'nik' => 'required|numeric|min_digits:15',
+            'email' => 'required|email:rfc,dns',
+            'no_hp' => 'required',
+            'password' => 'required|String|min:8'
+        ]);
+
+        if (DB::table('warga') -> where('id_warga', $request -> nik) -> first()) {
+            $users = new User();
+            $users -> id_warga = $request -> nik;
+            $users -> email = $request -> email;
+            $users -> no_hp = $request -> no_hp;
+            $users -> password = Hash::make($request -> password);
+            $users -> role = 'Warga';
+            $users -> save();
+
+            return redirect('/masuk') -> with('success', 'Akun pengguna berhasil dibuat');
+        } else {
+            return redirect('/masuk') -> with('error', 'Akun pengguna gagal dibuat. NIK pada table warga tidak ditemukan');
+        }
+
+
+    }
+
     /**
      * Store a newly created resource in storage.
      */

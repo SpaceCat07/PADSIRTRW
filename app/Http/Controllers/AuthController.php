@@ -33,23 +33,23 @@ class AuthController extends Controller
 
                 switch ($user->role) {
                     case 'Super_Admin':
-                        return view('superadmin.dashboard');
-                        // return redirect('/superadmin/dashboard');
+                        // return view('superadmin.dashboard');
+                        return redirect('/dashboard/superadmin');
                     case 'Admin_RW':
-                        return view('rw.dashboard');
-                        // return redirect('/adminrw/dashboard');
+                        // return view('rw.dashboard');
+                        return redirect('/dashboard/adminrw');
                     case 'Admin_RT':
-                        return view('rt.dashboard');
-                        // return redirect('/adminrt/dashboard');
+                        // return view('rt.dashboard');
+                        return redirect('/dashboard/adminrt');
                     case 'Ketua_RW':
-                        return view('rw.dashboard');
-                        // return redirect('/ketuarw/dashboard');
+                        // return view('rw.dashboard');
+                        return redirect('/dashboard/ketuarw');
                     case 'Ketua_RT':
-                        return view('rt.dashboard');
-                        // return redirect('/ketuart/dashboard');
+                        // return view('rt.dashboard');
+                        return redirect('/dashboard/ketuart');
                     case 'Warga':
                         // return view('warga.dashboard');
-                        return redirect('/warga/dashboard');
+                        return redirect('/dashboard/warga');
                     default:
                         Auth::logout();
                         return redirect() -> route('masuk')->with('error', 'Role tidak dikenali.');
