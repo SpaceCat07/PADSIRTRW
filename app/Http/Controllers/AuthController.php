@@ -21,44 +21,44 @@ class AuthController extends Controller
         ]);
         $email = $request->email;
         $password = $request->password;
-        $syarat = $request -> has('terms');
 
         // Cari user berdasarkan email di tabel users
-        $user = User::where('id_pengguna', $email)->first();
+        $user = User::where('email', $email)->first();
 
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            $user = Auth::user();
             if ($user -> aktivasi === 'Activated') {
-                Auth::login($user);
+                // Auth::login($user);
                 session() -> regenerate();
 
                 switch ($user->role) {
                     case 'Super_Admin':
-                        return view('superadmin.dashboard');
-                        // return redirect('/superadmin/dashboard');
+                        // return view('superadmin.dashboard');
+                        return redirect('/dashboard/superadmin');
                     case 'Admin_RW':
-                        return view('rw.dashboard');
-                        // return redirect('/adminrw/dashboard');
+                        // return view('rw.dashboard');
+                        return redirect('/dashboard/adminrw');
                     case 'Admin_RT':
-                        return view('rt.dashboard');
-                        // return redirect('/adminrt/dashboard');
+                        // return view('rt.dashboard');
+                        return redirect('/dashboard/adminrt');
                     case 'Ketua_RW':
-                        return view('rw.dashboard');
-                        // return redirect('/ketuarw/dashboard');
+                        // return view('rw.dashboard');
+                        return redirect('/dashboard/ketuarw');
                     case 'Ketua_RT':
-                        return view('rt.dashboard');
-                        // return redirect('/ketuart/dashboard');
+                        // return view('rt.dashboard');
+                        return redirect('/dashboard/ketuart');
                     case 'Warga':
-                        return view('warga.dashboard');
-                        // return redirect('/warga/dashboard');
+                        // return view('warga.dashboard');
+                        return redirect('/dashboard/warga');
                     default:
                         Auth::logout();
-                        return redirect('/login')->with('error', 'Role tidak dikenali.');
+                        return redirect() -> route('masuk')->with('error', 'Role tidak dikenali.');
                 }
             } else {
-                return redirect('/login') -> with('aktivasi', 'Akun anda belum diaktivasi oleh admin');
+                return redirect() -> route('masuk') -> with('aktivasi', 'Akun anda belum diaktivasi oleh admin');
             }
         } else {
-            return redirect('/login') -> with('akun', 'Email atau password anda salah');
+            return redirect() -> route('masuk') -> with('akun', 'Email atau password anda salah');
         }
     }
 

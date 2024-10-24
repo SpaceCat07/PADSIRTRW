@@ -49,6 +49,9 @@ Route::resource('/account', UsersController::class) -> names([
     'show' => 'account.show', ## ini untuk show profile saja?
     'destroy' => 'account.destroy'
 ]);
+
+Route::get('/requestacc', [UsersController::class, 'requestCreate']) -> name('account.requestCreate');
+Route::post('/request', [UsersController::class, 'requestStore']) -> name('account.requestStore');
 // Route::get('/account/create', [UsersController::class, 'create']) -> name('account.create');
 // Route::post('/account/register', [UsersController::class, 'store']) -> name('account.store');
 
@@ -96,9 +99,29 @@ Route::get('/index', function(){
     return view('index');
 });
 
-Route::get('/warga/dashboard', function(){
+Route::get('/dashboard/warga', function(){
     return view('/warga/DashboardWarga');
-})->name('dashboard');
+})->name('dashboard.warga');
+
+Route::get('/dashboard/superadmin', function(){
+    return view('/warga/DashboardWarga');
+})->name('dashboard.superadmin');
+
+Route::get('/dashboard/adminrw', function(){
+    return view('/warga/DashboardWarga');
+})->name('dashboard.adminrw');
+
+Route::get('/dashboard/adminrt', function(){
+    return view('/warga/DashboardWarga');
+})->name('dashboard.adminrt');
+
+Route::get('/dashboard/ketuarw', function(){
+    return view('/warga/DashboardWarga');
+})->name('dashboard.ketuarw');
+
+Route::get('/dashboard/ketuart', function(){
+    return view('/warga/DashboardWarga');
+})->name('dashboard.ketuart');
 
 Route::get('/program-kerja', function () {
     return view('/warga/LihatProgramKerja');
