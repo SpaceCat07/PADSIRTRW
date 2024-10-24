@@ -43,7 +43,7 @@
             </div>
 
             <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" value="" name="terms" id="terms">
+                <input class="form-check-input" type="checkbox" name="terms" id="terms" value="1">
                 <label class="form-check-label text-muted" for="terms">
                     I agree to the <a href="#" class="text-decoration-none">Terms of Service</a> and <a href="#"
                         class="text-decoration-none">Privacy Policy</a>.
@@ -76,16 +76,24 @@
 
 <script>
     const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('#password');
+    const password = document.querySelector('#floatingPassword');
 
-    togglePassword.addEventListener('click', function (e) {
-        // Toggle the type attribute
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
-
-        // Toggle the eye icon
+    togglePassword.addEventListener('click', function () {
+        const isPasswordVisible = password.getAttribute('type') === 'password';
+        password.setAttribute('type', isPasswordVisible ? 'text' : 'password');
         this.classList.toggle('fa-eye-slash');
+        this.classList.toggle('fa-eye');
     });
+
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function (e) {
+        const terms = document.querySelector('#terms');
+        if (!terms.checked) {
+            e.preventDefault();
+            alert('Anda harus menyetujui syarat dan ketentuan.');
+        }
+    });
+
 </script>
 
 @endsection
