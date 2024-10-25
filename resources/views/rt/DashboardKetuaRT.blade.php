@@ -5,7 +5,9 @@
 $page = 'dashboard'; // or 'program-kerja', 'pembayaran', etc.
 ?>
 
-<div class="dashboard-container">
+<h2>Dashboard Ketua RT</h2>
+
+<div class="dashboard-rt-container">
     <div class="data-warga">
         <h3>Data Warga</h3>
         <div class="warga-photo"></div>

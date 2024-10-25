@@ -108,21 +108,25 @@ Route::get('/dashboard/superadmin', function(){
 })->name('dashboard.superadmin');
 
 Route::get('/dashboard/adminrw', function(){
-    return view('/warga/DashboardWarga');
+    return view('/rw/DashboardAdminRW');
 })->name('dashboard.adminrw');
 
 Route::get('/dashboard/adminrt', function(){
-    return view('/warga/DashboardWarga');
+    return view('/rt/DashboardAdminRT');
 })->name('dashboard.adminrt');
 
 Route::get('/dashboard/ketuarw', function(){
-    return view('/warga/DashboardWarga');
+    return view('/rw/DashboardKetuaRW');
 })->name('dashboard.ketuarw');
 
 Route::get('/dashboard/ketuart', function(){
-    return view('/warga/DashboardWarga');
+    return view('/rt/DashboardKetuaRT');
 })->name('dashboard.ketuart');
 
 Route::get('/program-kerja', function () {
     return view('/warga/LihatProgramKerja');
 })->name('program-kerja');
+
+Route::get('/laporan-keuangan/warga', function () {
+    return view('/warga/LaporanKeuangan');
+})->name('laporan-keuangan');
