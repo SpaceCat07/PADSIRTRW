@@ -1,18 +1,24 @@
 @extends('layouts.landingNavbar')
 
 @section('content')
-<div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="login-card p-5 shadow-lg bg-white rounded">
-        <h2 class="text-center mb-3">Log In to Sistem RTRW</h2>
-        <p class="text-center text-muted mb-4">Quick & Simple way to Automate your payment</p>
+<div class="login-container d-flex justify-content-center align-items-center">
+
+    <div class="login-vector col-md-2 mb-2 mb-md-0">
+        <a href="/" class="logo d-inline-flex link-body-emphasis text-decoration-none">
+            <img src="{{ asset('storage/Woman.png') }}" alt="Logo" width="100%">
+        </a>
+    </div>
+
+    <div class="login-card p-5 shadow-lg text-white">
+        <h2 class="text-center mb-3 fw-bold">Log In</h2>
 
         <form action="{{route('login')}}" method="post">
             @csrf
             <!-- Floating label for email (username) field -->
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="email" id="floatingEmail"
-                    placeholder="johndoe@example.com" value="{{ old('email') }}">
-                <label for="floatingEmail">EMAIL ADDRESS</label>
+            <div class="mb-4">
+                <label for="floatingEmail" class="form-label fw-semibold">Email</label>
+                <input type="text" class="form-control rounded-pill px-3" name="email" id="floatingEmail"
+                    placeholder="Enter your email" value="{{ old('email') }}" required>
                 @error('email')
                     <div class="alert alert-danger mt-2">
                         {{$message}}
@@ -24,12 +30,12 @@
             </div>
 
             <!-- Floating label for password field -->
-            <div class="form-floating mb-3 position-relative">
-                <input type="password" class="form-control" name="password" id="floatingPassword"
-                    placeholder="*********" value="">
-                <label for="floatingPassword">PASSWORD</label>
+            <div class="mb-4 position-relative">
+                <label for="floatingPassword" class="form-label fw-semibold">PASSWORD</label>
+                <input type="password" class="form-control rounded-pill px-3" name="password" id="floatingPassword"
+                    placeholder="Enter your password" value="" required>
                 <!-- Eye icon to toggle password visibility -->
-                <span class="position-absolute password-toggle" style="right: 10px; top: 15px; cursor: pointer;">
+                <span class="position-absolute password-toggle" style="right: 15px; top: 56px; cursor: pointer;">
                     <i class="fas fa-eye" id="togglePassword"></i>
                 </span>
                 @error('password')
@@ -42,15 +48,10 @@
                 @endif -->
             </div>
 
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" name="terms" id="terms" value="true">
-                <label class="form-check-label text-muted" for="terms">
-                    I agree to the <a href="#" class="text-decoration-none">Terms of Service</a> and <a href="#"
-                        class="text-decoration-none">Privacy Policy</a>.
-                </label>
-            </div>
+            <!-- Login Button -->
+            <button type="submit" class="btn btn-warning w-100 rounded-pill py-2">Masuk</button>
 
-            <button type="submit" class="btn btn-dark w-100 py-2">Masuk</button>
+            <!-- Messages -->
             @if(session('error'))
                 <div class="alert alert-danger mt-2">
                     {{ session('error') }}
@@ -69,23 +70,32 @@
         </form>
 
         <p class="text-center mt-4">
-            Belum punya akun? <a href="{{route('account.requestCreate')}}" class="text-primary">Klik untuk request akun</a>
+            Belum punya akun? <a href="{{route('account.requestCreate')}}" class="text-warning fw-bold">Klik untuk
+                request akun</a>
         </p>
     </div>
 </div>
 
 <script>
     const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('#password');
+    const password = document.querySelector('#floatingPassword');
 
-    togglePassword.addEventListener('click', function (e) {
-        // Toggle the type attribute
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
-
-        // Toggle the eye icon
+    togglePassword.addEventListener('click', function () {
+        const isPasswordVisible = password.getAttribute('type') === 'password';
+        password.setAttribute('type', isPasswordVisible ? 'text' : 'password');
         this.classList.toggle('fa-eye-slash');
+        this.classList.toggle('fa-eye');
     });
+
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function (e) {
+        const terms = document.querySelector('#terms');
+        if (!terms.checked) {
+            e.preventDefault();
+            alert('Anda harus menyetujui syarat dan ketentuan.');
+        }
+    });
+
 </script>
 
 @endsection

@@ -14,6 +14,14 @@
     <!-- script for carousel -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <!-- datatables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+    </style>
 </head>
 
 <body>
@@ -22,18 +30,23 @@
         <header
             class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <div class="col-md-3 mb-2 mb-md-0">
-                <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap">
-                        <use xlink:href="#bootstrap"></use>
-                    </svg>
+                <a href="/" class="logo d-inline-flex link-body-emphasis text-decoration-none">
+                    <img src="{{ asset('storage/Logo.png') }}" alt="Logo" width="40%">
                 </a>
             </div>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-right mb-md-0">
-                <li><a href="/warga/dashboard" class="nav-link px-2 {{ $page == 'dashboard' ? 'link-active' : 'link-idle' }}">Dashboard</a></li>
-                <li><a href="/program-kerja" class="nav-link px-2 {{ $page == 'program-kerja' ? 'link-active' : 'link-idle' }}">Program Kerja</a></li>
-                <li><a href="#" class="nav-link px-2 {{ $page == 'pembayaran' ? 'link-active' : 'link-idle' }}">Pembayaran</a></li>
-                <li><a href="#" class="nav-link px-2 {{ $page == 'kritik-saran' ? 'link-active' : 'link-idle' }}">Kritik Saran</a></li>
+                <li><a href="/dashboard/warga"
+                        class="nav-link px-2 {{ $page == 'dashboard' ? 'link-active' : 'link-idle' }}">Dashboard</a>
+                </li>
+                <li><a href="/program-kerja"
+                        class="nav-link px-2 {{ $page == 'program-kerja' ? 'link-active' : 'link-idle' }}">Program
+                        Kerja</a></li>
+                <li><a href="#"
+                        class="nav-link px-2 {{ $page == 'pembayaran' ? 'link-active' : 'link-idle' }}">Pembayaran</a>
+                </li>
+                <li><a href="#" class="nav-link px-2 {{ $page == 'kritik-saran' ? 'link-active' : 'link-idle' }}">Kritik
+                        Saran</a></li>
                 <li>
                     <div class="dropdown text-end me-3">
                         <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
