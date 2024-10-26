@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('penjabat_rt', function (Blueprint $table) {
-            $table -> unsignedBigInteger('id_penjabat_rt') -> autoIncrement();
-            $table -> unsignedBigInteger('id_rt');
-            $table -> unsignedBigInteger('id_warga');
+        Schema::create('rekening_rw', function (Blueprint $table) {
+            $table -> id();
+            $table -> foreignId('id_rw') -> constrained('rw');
+            $table -> integer('nomor_rekening');
+            $table -> float('saldo') -> nullable(false);
+            $table -> timestamps();
         });
     }
 
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('penjabat_rt');
+        Schema::dropIfExists('rekening_rw');
     }
 };

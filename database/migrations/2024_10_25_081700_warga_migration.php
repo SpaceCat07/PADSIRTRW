@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('warga', function (Blueprint $table) {
             $table -> unsignedBigInteger('id_warga') -> primary() -> nullable(false);
-            // $table -> id() -> autoIncrement();
-            // $table -> bigInteger('nik') -> nullable(false);
+            $table -> foreignId('id_rt') -> constrained('rt');
             $table -> string('nama') -> nullable(false);
             $table -> text('alamat') -> nullable(false);
             $table -> timestamps();

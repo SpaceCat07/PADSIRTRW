@@ -14,7 +14,8 @@ class Warga extends Model
     protected $fillable = [
         'id_warga',
         'name',
-        'alamat'
+        'alamat',
+        'id_rt'
     ];
 
     protected $primaryKey = 'id_warga';

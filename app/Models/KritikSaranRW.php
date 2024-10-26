@@ -2,18 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Penjabat_RW extends Model
+class KritikSaranRW extends Model
 {
     use HasFactory;
 
-    protected $table = 'penjabat_rw';
+    protected $table = 'kritik_saran_rw';
 
     protected $fillable = [
+        'id_rw',
         'id_pengguna',
-        'id_rw'
+        'isi',
+        'status'
     ];
 }

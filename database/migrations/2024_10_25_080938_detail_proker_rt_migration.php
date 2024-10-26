@@ -11,7 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('detail_proker_rt', function (Blueprint $table) {
+            $table -> id();
+            $table -> foreignId('id_proker') -> constrained('proker');
+            $table -> foreignId('id_rt') -> constrained('rt');
+        });
     }
 
     /**
@@ -19,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('detail_proker_rt');
     }
 };

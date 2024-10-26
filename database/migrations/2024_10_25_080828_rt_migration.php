@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('penjabat_rw', function (Blueprint $table) {
-            $table -> unsignedBigInteger('id_penjabat_rw') -> autoIncrement();
-            $table -> unsignedBigInteger('id_rw');
-            $table -> unsignedBigInteger('id_warga');
+        Schema::create('rt', function(Blueprint $table) {
+            $table -> id();
+            $table -> foreignId('id_rw') -> constrained('rw');
+            $table -> string('nama_rt') -> nullable(false);
+            $table -> timestamps();
         });
     }
 
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('penjabat_rw');
+        Schema::dropIfExists('rt');
     }
 };
