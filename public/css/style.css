@@ -8,8 +8,10 @@ body {
 }
 
 .header-container {
+    position: relative;
     background-color: #ffffff;
-    height: 200px;
+    height: auto;
+    z-index: 10;
 }
 
 .link-active {
@@ -390,68 +392,176 @@ button:hover {
 
 /* Laporan Keuangan */
 .financial-report {
-        font-family: Arial, sans-serif;
-        background-color: #f8f9fa;
-        color: #343a40;
-        margin: 35px;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+    margin: 35px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-    .financial-report h1 {
-        color: #4b4c9d;
-    }
+.financial-report h1 {
+    color: #4b4c9d;
+}
 
-    .financial-report .table {
-        width: 100%;
-        margin: 20px 0;
-        border-collapse: collapse;
-    }
+.financial-report .table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
 
-    .financial-report .table th, .financial-report .table td {
-        padding: 12px;
-        text-align: left;
-        border: 1px solid #dee2e6;
-    }
+.financial-report .table th,
+.financial-report .table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #dee2e6;
+}
 
-    .financial-report .table-striped tbody tr:nth-of-type(odd) {
-        background-color: #f2f2f2;
-    }
+.financial-report .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2;
+}
 
-    .financial-report .thead-dark th {
-        background-color: #343a40;
-        color: white;
-    }
+.financial-report .thead-dark th {
+    background-color: #343a40;
+    color: white;
+}
 
-    .financial-report .pagination-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 10px;
-    }
+.financial-report .pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
 
-    .financial-report .pagination-button {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-    }
+.financial-report .pagination-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
 
- .financial-report .pagination-button:hover {
-        background-color: #0056b3;
-    }
+.financial-report .pagination-button:hover {
+    background-color: #0056b3;
+}
 
-    .financial-report .pagination-info {
-        font-weight: bold;
-    }
+.financial-report .pagination-info {
+    font-weight: bold;
+}
+
+/* Program Kerja */
+/* Main container */
+.proker-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Search and filter section */
+.search-filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-filter input[type="text"] {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-filter select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Sort by text */
+.sort-by {
+    margin-top: 10px;
+    text-align: right;
+    color: #888;
+    font-size: 14px;
+}
+
+/* Program list container */
+.program-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Program card styling */
+.program-card {
+    display: flex;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 20px;
+    align-items: center;
+    background-color: #fff;
+}
+
+.program-card .date {
+    background-color: #FFD700;
+    color: #333;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bold;
+    min-width: 80px;
+}
+
+.program-card .date .month {
+    font-size: 12px;
+}
+
+.program-card .date .day {
+    font-size: 28px;
+}
+
+.program-card .details {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.program-card .details h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.program-card .details p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.program-card .details .time-location {
+    font-size: 14px;
+    color: #888;
+}
+
+.program-card .more-options {
+    font-size: 24px;
+    color: #888;
+    cursor: pointer;
+}
+
+
+/* Sidebar */
+
+
 
 
 @media (max-width: 768px) {
     .dashboard-container {
-        grid-template-columns: 1fr; /* Stack all items vertically */
+        grid-template-columns: 1fr;
+        /* Stack all items vertically */
     }
 }
