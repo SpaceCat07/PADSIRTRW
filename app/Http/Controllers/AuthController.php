@@ -16,8 +16,7 @@ class AuthController extends Controller
     {
         $this -> validate($request, [
             'email' => 'required',
-            'password'=> 'required',
-            'terms' => 'required|accepted'
+            'password'=> 'required'
         ]);
         $email = $request->email;
         $password = $request->password;

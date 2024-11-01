@@ -38,20 +38,70 @@ Route::get('/', function () {
 Route::get('/masuk', [AuthController::class, 'masuk']) -> name('masuk');
 Route::post('/login', [AuthController::class, 'login']) -> name('login');
 Route::post('/logout', [AuthController::class, 'logout']) -> name('logout');
-
-// route register warga user by super admin
-Route::resource('/account', UsersController::class) -> names([
-    'index' => 'account.index',
-    'create' => 'account.create',
-    'store' => 'account.store',
-    'edit' => 'account.edit',
-    'update' => 'account.update',
-    'show' => 'account.show', ## ini untuk show profile saja?
-    'destroy' => 'account.destroy'
-]);
-
 Route::get('/requestacc', [UsersController::class, 'requestCreate']) -> name('account.requestCreate');
 Route::post('/request', [UsersController::class, 'requestStore']) -> name('account.requestStore');
+
+// route register warga user by adminRt
+Route::middleware('role:Admin_RT') -> group(function () {
+    Route::resource('/account', UsersController::class) -> names([
+        'index' => 'account.index',
+        'create' => 'account.create',
+        'store' => 'account.store',
+        'edit' => 'account.edit',
+        'update' => 'account.update',
+        'show' => 'account.show', ## ini untuk show profile saja?
+        'destroy' => 'account.destroy'
+    ]);
+
+    Route::resource('/warga', WargaController::class) -> names([
+        'index' => 'warga.index',
+        'create' => 'warga.create',
+        'store' => 'warga.store',
+        'edit' => 'warga.edit',
+        'update' => 'warga.update',
+        'destroy' => 'warga.destroy'
+    ]);
+
+    Route::get('/dashboard/adminrt', function(){
+        return view('/rt/DashboardAdminRT');
+    })->name('dashboard.adminrt');
+});
+
+// middleware untuk role warga
+Route::middleware('role:Warga') -> group(function () {
+    Route::get('/dashboard/warga', function(){
+        return view('/warga/DashboardWarga');
+    })->name('dashboard.warga');
+});
+
+// middleware untuk role admin rw
+Route::middleware('role:Admin_RW') -> group(function () {
+    Route::get('/dashboard/adminrw', function(){
+        return view('/rw/DashboardAdminRW');
+    })->name('dashboard.adminrw');
+});
+
+// middleware untuk role ketua rt
+Route::middleware('role:Ketua_RT') -> group(function () {
+    Route::get('/dashboard/ketuart', function(){
+        return view('/rt/DashboardKetuaRT');
+    })->name('dashboard.ketuart');
+});
+
+// middleware untuk role ketua rw
+Route::middleware('role:Ketua_RW') -> group(function () {
+    Route::get('/dashboard/ketuarw', function(){
+        return view('/rw/DashboardKetuaRW');
+    })->name('dashboard.ketuarw');
+});
+
+// middleware untuk role super admin
+Route::middleware('role:Super_Admin') -> group(function () {
+    Route::get('/dashboard/superadmin', function(){
+        return view('/warga/DashboardWarga');
+    })->name('dashboard.superadmin');
+});
+
 // Route::get('/account/create', [UsersController::class, 'create']) -> name('account.create');
 // Route::post('/account/register', [UsersController::class, 'store']) -> name('account.store');
 
@@ -63,14 +113,14 @@ Route::post('/request', [UsersController::class, 'requestStore']) -> name('accou
 // Route::post('/warga', [WargaController::class, 'update']) -> name('warga.update');
 // Route::delete('/warga/{id}', [WargaController::class, 'destroy']) -> name('warga.destroy');
 
-Route::resource('/warga', WargaController::class) -> names([
-    'index' => 'warga.index',
-    'create' => 'warga.create',
-    'store' => 'warga.store',
-    'edit' => 'warga.edit',
-    'update' => 'warga.update',
-    'destroy' => 'warga.destroy'
-]);
+// Route::resource('/warga', WargaController::class) -> names([
+//     'index' => 'warga.index',
+//     'create' => 'warga.create',
+//     'store' => 'warga.store',
+//     'edit' => 'warga.edit',
+//     'update' => 'warga.update',
+//     'destroy' => 'warga.destroy'
+// ]);
 
 
 // // route untuk login register penjabat rt
@@ -91,37 +141,13 @@ Route::middleware('auth') -> group(function () {
     });
 
     // route edit dan update by himself
-    Route::get('/edit/{id}', [UsersController::class, 'edit']) -> name('edit');
-    Route::post('/update', [UsersController::class, 'update']) -> name('update');
+    // Route::get('/edit/{id}', [UsersController::class, 'edit']) -> name('edit');
+    // Route::post('/update', [UsersController::class, 'update']) -> name('update');
 });
 
 Route::get('/index', function(){
     return view('index');
 });
-
-Route::get('/dashboard/warga', function(){
-    return view('/warga/DashboardWarga');
-})->name('dashboard.warga');
-
-Route::get('/dashboard/superadmin', function(){
-    return view('/warga/DashboardWarga');
-})->name('dashboard.superadmin');
-
-Route::get('/dashboard/adminrw', function(){
-    return view('/rw/DashboardAdminRW');
-})->name('dashboard.adminrw');
-
-Route::get('/dashboard/adminrt', function(){
-    return view('/rt/DashboardAdminRT');
-})->name('dashboard.adminrt');
-
-Route::get('/dashboard/ketuarw', function(){
-    return view('/rw/DashboardKetuaRW');
-})->name('dashboard.ketuarw');
-
-Route::get('/dashboard/ketuart', function(){
-    return view('/rt/DashboardKetuaRT');
-})->name('dashboard.ketuart');
 
 Route::get('/program-kerja', function () {
     return view('/warga/LihatProgramKerja');
