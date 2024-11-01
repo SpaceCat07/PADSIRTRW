@@ -42,10 +42,22 @@
                 <li><a href="/program-kerja"
                         class="nav-link px-2 {{ $page == 'program-kerja' ? 'link-active' : 'link-idle' }}">Program
                         Kerja</a></li>
-                <li><a href="#"
-                        class="nav-link px-2 {{ $page == 'pembayaran' ? 'link-active' : 'link-idle' }}">Pembayaran</a>
+                <li class="nav-item dropdown">
+                    <a href="#"
+                        class="nav-link dropdown-toggle px-2 {{ $page == 'pembayaran' ? 'link-active' : 'link-idle' }}"
+                        id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Pembayaran
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ route('pembayaran') }}">Bayar</a></li>
+                        <!-- Update 'your.pay.url' with the actual route name or URL -->
+                        <li><a class="dropdown-item" href="{{ route('riwayat-pembayaran') }}">Riwayat</a></li>
+                        <!-- Update 'your.history.url' with the actual route name or URL -->
+                    </ul>
                 </li>
-                <li><a href="#" class="nav-link px-2 {{ $page == 'kritik-saran' ? 'link-active' : 'link-idle' }}">Kritik
+
+                <li><a href="#"
+                        class="nav-link px-2 {{ $page == 'kritik-saran' ? 'link-active' : 'link-idle' }}">Kritik
                         Saran</a></li>
                 <li>
                     <div class="dropdown text-end me-3">
@@ -62,10 +74,10 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <form action="{{route('logout')}}" method="post"> @csrf
+                                <form action="{{ route('logout') }}" method="post"> @csrf
                                     <button type="submit">Sign out</button>
                                 </form>
-                                <!-- <a class="dropdown-item" href="{{route('logout')}}">Sign out</a> -->
+                                <!-- <a class="dropdown-item" href="{{ route('logout') }}">Sign out</a> -->
                             </li>
                         </ul>
                     </div>
@@ -82,13 +94,12 @@
 
     <!-- main content and sidebar -->
     @yield('content')
-    
 
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="{{ asset('js/carousel.js') }}"></script>
 </body>
 

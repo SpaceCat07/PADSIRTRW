@@ -557,6 +557,294 @@ button:hover {
 /* Sidebar */
 
 
+/* Pembayaran container */
+.payment-history-container {
+    max-width: 1300px;
+    margin: auto;
+    background-color: #FFF;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+/* Title */
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Filter buttons */
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filters button {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    background-color: #FFF;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #555;
+    transition: all 0.3s ease;
+}
+
+.filters button:hover,
+.filters button.active {
+    background-color: #ddd;
+    color: #333;
+}
+
+/* Date picker */
+.date-picker {
+    margin-left: auto;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    background-color: #4A3AFF;
+    color: #FFF;
+}
+
+tr:nth-child(even) {
+    background-color: #F5F5F5;
+}
+
+/* Status colors */
+.status-success {
+    color: green;
+}
+
+.status-pending {
+    color: blue;
+}
+
+.status-rejected {
+    color: red;
+}
+
+/* Pagination and items per page */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pagination button {
+    border: none;
+    background-color: #FFF;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.pagination button:disabled {
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.items-per-page {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+select {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* pembayaran */
+.payment-container {
+    padding: 20px;
+    max-width: 1800px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+}
+
+.payment-container h2 {
+    color: #6c5ce7;
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.additional-payment,
+.monthly-payment {
+    margin-top: 20px;
+}
+
+.year-picker {
+    background-color: #ffd32a;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #f1f3f5;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+table th {
+    background-color: #6c5ce7;
+    color: white;
+    font-weight: bold;
+}
+
+table .no-data {
+    color: #aaa;
+    text-align: center;
+    font-size: 14px;
+}
+
+.status-paid {
+    color: #00b894;
+    font-weight: bold;
+}
+
+.status-due {
+    color: #d63031;
+    font-weight: bold;
+}
+
+.pay-button {
+    margin-top: 20px;
+    background-color: #6c5ce7;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    display: block;
+    width: 100px;
+}
+
+.pay-button:hover {
+    background-color: #5a4dc7;
+}
+
+/* checkout */
+.checkout-container {
+    max-width: 1300px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #6c63ff;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffc107;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.item label {
+    font-weight: bold;
+}
+
+.item .remove {
+    color: red;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.total-section {
+    margin-top: 20px;
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.input-section {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.input-section input {
+    width: 90%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.checkout-buttons {
+    margin-top: 20px;
+    display: block;
+    justify-content: space-between;
+}
+
+.btn {
+    padding: 10px 20px;
+    margin: 10px 0 10px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+}
+
+.pay-btn {
+    background-color: #6c63ff;
+}
+
+.cancel-btn {
+    background-color: #ffffff;
+    color: #6c63ff;
+    border: 2px solid #6c63ff;
+}
 
 
 @media (max-width: 768px) {

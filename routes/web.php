@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PenjabatRTController;
 use App\Http\Controllers\PenjabatRWController;
 use App\Http\Controllers\UsersController;
@@ -130,3 +131,17 @@ Route::get('/program-kerja', function () {
 Route::get('/laporan-keuangan/warga', function () {
     return view('/warga/LaporanKeuangan');
 })->name('laporan-keuangan');
+
+Route::get('/riwayat-pembayaran/warga', function () {
+    return view('/warga/RiwayatPembayaran');
+})->name('riwayat-pembayaran');
+
+Route::get('/bayar/warga', function () {
+    return view('/warga/Pembayaran');
+})->name('pembayaran');
+
+Route::get('/checkout/warga', function () {
+    return view('/warga/Checkout');
+})->name('checkout');
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout'); // Update with your controller and method
