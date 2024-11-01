@@ -7,10 +7,15 @@
     ?>
 
     <div class="payment-container">
-        <h2>Bayar Iuran Tambahan</h2>
+        <div class="column-flex">
+            <h2>Bayar Iuran Tambahan</h2>
+            <select class="year-picker" id="year-picker">
+                <option value="" disabled selected>Pilih Tahun</option>
+            </select>
+        </div>
 
         <div class="additional-payment">
-            <button class="year-picker">Pilih Tahun</button>
+
             <table>
                 <thead>
                     <tr>
@@ -100,6 +105,29 @@
                     alert('Please select at least one item to proceed to checkout.');
                 }
             }
+
+            function populateYearPicker() {
+                const yearPicker = document.getElementById('year-picker');
+                const currentYear = new Date().getFullYear();
+                const startYear = 2000; // Change this to the earliest year you want to display
+
+                for (let year = currentYear; year >= startYear; year--) {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.textContent = year;
+                    yearPicker.appendChild(option);
+                }
+            }
+
+            // Call the function to populate the year picker when the page loads
+            populateYearPicker();
+
+            // Optional: handle selection
+            yearPicker.addEventListener('change', function() {
+                const selectedYear = this.value;
+                alert("Tahun yang dipilih: " + selectedYear);
+                // Further action can be added here based on the selected year
+            });
         </script>
 
     </div>

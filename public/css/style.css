@@ -696,6 +696,12 @@ select {
     margin-top: 20px;
 }
 
+.column-flex {
+    display: flex;
+    justify-content: space-between; /* Pushes the button to the right */
+    align-items: center; /* Aligns items vertically */
+}
+
 .year-picker {
     background-color: #ffd32a;
     border: none;
