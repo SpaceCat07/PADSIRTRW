@@ -8,7 +8,7 @@
 
     <div class="payment-container">
         <div class="column-flex">
-            <h2>Bayar Iuran Tambahan</h2>
+            <h2 style="color: #5a4dc7">Bayar Iuran Tambahan</h2>
             <select class="year-picker" id="year-picker">
                 <option value="" disabled selected>Pilih Tahun</option>
             </select>
@@ -33,7 +33,7 @@
             </table>
         </div>
 
-        <h2>Bayar Kas Bulanan</h2>
+        <h2 style="color: #5a4dc7">Bayar Kas Bulanan</h2>
 
         <div class="monthly-payment">
             <table>
