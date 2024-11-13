@@ -49,8 +49,10 @@
             </div>
 
             <!-- Login Button -->
-            <button type="submit" class="btn btn-warning w-100 rounded-pill py-2">Masuk</button>
-
+            <div class="text-center">
+                <button type="submit" class="submit-btn btn-warning">Masuk</button>
+            </div>
+        
             <!-- Messages -->
             @if(session('error'))
                 <div class="alert alert-danger mt-2">
@@ -68,11 +70,6 @@
                 </div>
             @endif
         </form>
-
-        <p class="text-center mt-4">
-            Belum punya akun? <a href="{{route('account.requestCreate')}}" class="text-warning fw-bold">Klik untuk
-                request akun</a>
-        </p>
     </div>
 </div>
 
@@ -85,15 +82,6 @@
         password.setAttribute('type', isPasswordVisible ? 'text' : 'password');
         this.classList.toggle('fa-eye-slash');
         this.classList.toggle('fa-eye');
-    });
-
-    const form = document.querySelector('form');
-    form.addEventListener('submit', function (e) {
-        const terms = document.querySelector('#terms');
-        if (!terms.checked) {
-            e.preventDefault();
-            alert('Anda harus menyetujui syarat dan ketentuan.');
-        }
     });
 
 </script>

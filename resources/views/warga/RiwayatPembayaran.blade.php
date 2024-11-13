@@ -31,19 +31,19 @@
                 <tr data-status="success">
                     <td>#16643</td>
                     <td>28 October, 2024</td>
-                    <td>Success</td>
+                    <td>5000</td>
                     <td class="status-success">Success</td>
                 </tr>
                 <tr data-status="rejected">
                     <td>#13568</td>
                     <td>15 September, 2024</td>
-                    <td>Success</td>
+                    <td>5000</td>
                     <td class="status-rejected">Rejected</td>
                 </tr>
                 <tr data-status="pending">
                     <td>#12345</td>
                     <td>29 Agustus, 2024</td>
-                    <td>Success</td>
+                    <td>5000</td>
                     <td class="status-pending">Pending</td>
                 </tr>
                 <!-- Additional rows here -->

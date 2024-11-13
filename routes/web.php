@@ -140,4 +140,8 @@ Route::get('/bayar/warga', function () {
     return view('/warga/Pembayaran');
 })->name('pembayaran');
 
+Route::get('/kritik-saran/warga', function () {
+    return view('/warga/FormKritikSaran');
+})->name('kritik-saran');
+
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout'); // Update with your controller and method
