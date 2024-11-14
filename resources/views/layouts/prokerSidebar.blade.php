@@ -18,37 +18,64 @@
 </head>
 
 <body>
+
     <div class="sidebar">
-        <div class="sidebar-header">
+        <!-- RT/RW Horizontal Toggle -->
+        <div class="toggle-container">
+            <div class="toggle-item active" id="rt-toggle">RT</div>
+            <div class="vertical-line"></div>
+            <div class="toggle-item" id="rw-toggle">RW</div>
+        </div>
+
+        <!-- Sidebar Main Content -->
+        <!-- Sidebar Main Content -->
+        <div class="sidebar-content active" id="rt-content">
             <div class="sidebar-item active">
-                <div class="sidebar-item-title">
-                    <span class="sidebar-item-text">RT</span>
-                </div>
+                Mendatang
             </div>
             <div class="sidebar-item">
-                <div class="sidebar-item-title">
-                    <span class="sidebar-item-text">RW</span>
-                </div>
+                Sudah Terlaksana
             </div>
         </div>
-        <div class="sidebar-content">
-            <div class="sidebar-item">
-                <div class="sidebar-item-title">
-                    <span class="sidebar-item-text">Mendatang</span>
-                </div>
-            </div>
-            <div class="sidebar-item">
-                <div class="sidebar-item-title">
-                    <span class="sidebar-item-text">Sudah Terlaksana</span>
-                </div>
-            </div>
+
+        <div class="sidebar-content" id="rw-content">
+            
         </div>
     </div>
-    
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous">
+    <script>
+        // JavaScript to toggle between RT and RW
+        const rtToggle = document.getElementById('rt-toggle');
+        const rwToggle = document.getElementById('rw-toggle');
+        const rtContent = document.getElementById('rt-content');
+        const rwContent = document.getElementById('rw-content');
+
+        rtToggle.addEventListener('click', () => {
+            rtToggle.classList.add('active');
+            rwToggle.classList.remove('active');
+            rtContent.classList.add('active');
+            rwContent.classList.remove('active');
+        });
+
+        rwToggle.addEventListener('click', () => {
+            rwToggle.classList.add('active');
+            rtToggle.classList.remove('active');
+            rwContent.classList.add('active');
+            rtContent.classList.remove('active');
+        });
+
+        // Optional: Add click event to sidebar items if needed
+        const rtItems = rtContent.getElementsByClassName('sidebar-item');
+
+        for (let item of rtItems) {
+            item.addEventListener('click', () => {
+                for (let i of rtItems) i.classList.remove('active');
+                item.classList.add('active');
+            });
+        }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

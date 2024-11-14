@@ -1,4 +1,4 @@
-@extends('layouts.dashboardNavbar')
+@extends('layouts.checkoutNavbar')
 
 @section('content')
     <?php
@@ -6,17 +6,24 @@
     ?>
 
     <div class="checkout-container">
-        <h2>Checkout</h2> <!-- Updated header -->
+        <h2 style="color: #43459B; margin-left: 30px">Item</h2> <!-- Updated header -->
         <ul id="item-list">
             @php $total = 0; @endphp <!-- Initialize total -->
-            @foreach ($selectedItems as $item)
-                <li class="item" data-price="5000"> <!-- Adjust price as needed -->
-                    <label>{{ $item }}</label>
-                    <span>Rp 5.000</span>
-                    <span class="remove" onclick="removeItem(this)">remove</span>
-                </li>
-                @php $total += 5000; @endphp <!-- Update total amount -->
-            @endforeach
+            <div class="checkout-item-container">
+                @foreach ($selectedItems as $item)
+                    <li class="item" data-price="5000"> <!-- Adjust price as needed -->
+                        <span class="remove" onclick="removeItem(this)">
+                            <div class="remove-container"> <!-- New container for icon and text -->
+                                <img src="{{ asset('storage/Remove.png') }}" alt="Remove" class="remove-icon">
+                                <span class="remove-text">remove</span> <!-- Text underneath the icon -->
+                            </div>
+                        </span>
+                        <label class="item-label">Bayar Kas Bulanan {{ $item }}</label>
+                        <span class="checkout-amount">Rp 5.000</span>
+                    </li>
+                    @php $total += 5000; @endphp <!-- Update total amount -->
+                @endforeach
+            </div>
         </ul>
 
         <div class="total-section">TOTAL: Rp <span id="total">{{ number_format($total) }}</span></div>
@@ -29,8 +36,8 @@
         </div>
 
         <div class="checkout-buttons">
-            <button class="btn pay-btn" onclick="submitPayment()">SUDAH BAYAR</button>
-            <button class="btn cancel-btn" onclick="cancelPayment()">BATAL</button>
+            <button class="checkout-btn pay-btn" onclick="submitPayment()">SUDAH BAYAR</button>
+            <button class="checkout-btn cancel-btn" onclick="cancelPayment()">BATAL</button>
         </div>
     </div>
 

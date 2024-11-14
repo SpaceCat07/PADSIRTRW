@@ -5,6 +5,8 @@
     $page = 'program-kerja'; // or 'program-kerja', 'pembayaran', etc.
     ?>
 
+    @include('layouts.prokerSidebar')
+
     <div class="proker-container">
         <!-- Search and filter section -->
         <div class="search-filter">

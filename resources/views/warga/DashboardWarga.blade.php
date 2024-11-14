@@ -67,27 +67,29 @@ $page = 'dashboard'; // or 'program-kerja', 'pembayaran', etc.
                                 <p>Status</p>
                             </div>
                             <div class="vector-container text-center">
-                                <div class="vector-3"></div>
+                                <img src="status_icon.svg" class="vector-3">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="group-total">
-                        <div class="rectangle-total">
-                            <div class="total-iuran-telah-dibayar text-center">
-                                <p>Total iuran telah dibayar</p>
-                                <p class="amount">Rp 50,000</p>
+                        <div class="rectangle-total d-flex align-items-center">
+                            <img src="sudah_dibayar_icon.svg" class="vector-4 me-3">
+                            <div>
+                                <p>Sudah dibayar</p>
+                                <p class="amount">Rp 10.000</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="group-tagihan">
-                        <div class="rectangle-tagihan">
-                            <div class="tagihan text-center">
-                                <p>Tagihan</p>
-                                <p class="amount">Rp 50,000</p>
+                        <div class="rectangle-tagihan d-flex align-items-center">
+                            <img src="belum_dibayar_icon.svg" class="vector-5 me-3">
+                            <div>
+                                <p>Belum Dibayar</p>
+                                <p class="amount">Rp 50.000</p>
                             </div>
                         </div>
                     </div>
@@ -95,7 +97,8 @@ $page = 'dashboard'; // or 'program-kerja', 'pembayaran', etc.
             </div>
         </div>
     </div>
-
+    
+    
     <!-- Laporan Keuangan RT -->
     <div class="iuran-container mt-5">
         <div class="informasi-iuran">
