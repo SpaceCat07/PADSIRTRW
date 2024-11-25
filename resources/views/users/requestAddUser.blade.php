@@ -32,6 +32,17 @@
                 {{$message}}
             </div>
         @enderror
+
+        <select name="role" id="">
+        @foreach ($roleList as $role)
+        <option value="{{ $role }}">{{ $role }}</option>
+        @endforeach
+        </select>
+        @error('role')
+        <div class="alert alert-danger mt-2">
+            {{$message}}
+        </div>
+        @enderror
     
         <button type="submit">Register</button>
     </form>
