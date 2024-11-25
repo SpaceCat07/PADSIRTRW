@@ -15,6 +15,7 @@ return new class extends Migration
             $table -> id();
             $table -> foreignId('id_proker') -> constrained('proker');
             $table -> foreignId('id_rt') -> constrained('rt');
+            $table -> timestamps();
         });
     }
 
