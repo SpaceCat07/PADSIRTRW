@@ -15,7 +15,7 @@ class IuranRW extends Model
         'id_rw',
         'nama_iuran',
         'total_iuran',
-        'tanggal_pembayaran',
+        'bulan',
         'jenis_iuran'
     ];
 }
