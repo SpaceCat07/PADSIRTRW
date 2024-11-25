@@ -5,21 +5,12 @@
     {{RTModel::find($kritik -> id_rt) -> nama_rt}}
     {{$kritik -> isi}}
 
-    <select name="id_rt" id="">
-        @foreach ($listRT as $RT)
-        <option value="{{ $RT }}">{{'RT ' . $RT }}</option>
+    <select name="status" id="">
+        @foreach ($listStatus as $status)
+        <option value="{{ $status }}" {{}}>{{$status}}</option>
         @endforeach
     </select>
-    @error('id_rt')
-        <div class="alert alert-danger mt-2">
-            {{$message}}
-        </div>
-    @enderror
-
-
-
-    <input type="number" name="nomor_rekening" id="" value="{{$rt -> nomor_rekening}}">
-    @error('nomor_rekening')
+    @error('status')
         <div class="alert alert-danger mt-2">
             {{$message}}
         </div>
