@@ -15,6 +15,7 @@ return new class extends Migration
             // $table -> unsignedBigInteger('id_rw') -> primary() -> nullable(false);
             $table -> id();
             $table -> string('nama_rw') -> nullable(false);
+            $table -> integer('nomer_rekening');
             $table -> timestamps();
         });
     }
