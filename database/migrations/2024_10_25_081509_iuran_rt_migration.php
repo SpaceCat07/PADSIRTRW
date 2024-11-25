@@ -15,8 +15,8 @@ return new class extends Migration
             $table -> id();
             $table -> foreignId('id_rt') -> constrained('rt');
             $table -> string('nama_iuran');
-            $table -> float('total_iuran');
-            $table -> integer('tanggal_pembayaran');
+            $table -> enum('bulan',  ['January','February','March','April','May','June','July','August','September','October','November','December']);
+            $table -> decimal('total_iuran',30, 3);
             $table -> enum('jenis_iuran', ['bulanan', 'tambahan']);
             $table -> timestamps();
         });
