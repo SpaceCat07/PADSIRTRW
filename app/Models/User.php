@@ -26,6 +26,11 @@ class User extends Authenticatable
         'aktivasi'
     ];
 
+    public function warga()
+    {
+        return $this->hasOne(Warga::class, 'id_warga', 'id_warga');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -48,7 +53,7 @@ class User extends Authenticatable
 
     public function getAuthIdentifierName()
     {
-        return 'id_warga';
+        return 'id';
     }
 
     public function getAuthIdentifier()

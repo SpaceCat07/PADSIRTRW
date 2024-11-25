@@ -32,7 +32,9 @@ class UsersController extends Controller
 
     public function requestCreate ()
     {
-        return view('users.requestAddUser');
+        // $roleList = User::select('role') -> distinct() -> get();
+        $roleList = ['Warga', 'Admin_RW', 'Admin_RT', 'Ketua_RW', 'Ketua_RT', 'Super_Admin'];
+        return view('users.requestAddUser', compact('roleList'));
     }
 
     public function requestStore (Request $request)
@@ -41,7 +43,8 @@ class UsersController extends Controller
             'nik' => 'required|numeric|min_digits:15',
             'email' => 'required|email:rfc,dns',
             'no_hp' => 'required',
-            'password' => 'required|String|min:8'
+            'password' => 'required|String|min:8',
+            // 'role' => 'required|in:Warga,Admin_RW,Admin_RT,Ketua_RW,Ketua_RT,Super_Admin'
         ]);
 
         if (DB::table('warga') -> where('id_warga', $request -> nik) -> first()) {
@@ -50,7 +53,7 @@ class UsersController extends Controller
             $users -> email = $request -> email;
             $users -> no_hp = $request -> no_hp;
             $users -> password = Hash::make($request -> password);
-            $users -> role = 'Warga';
+            $users -> role = $request -> input('role');
             $users -> save();
 
             return redirect('/masuk') -> with('success', 'Akun pengguna berhasil dibuat');
@@ -71,7 +74,8 @@ class UsersController extends Controller
             'email' => 'required|email:rfc,dns',
             'no_hp' => 'required',
             'role' => 'required',
-            'password' => 'required|String|min:8'
+            'password' => 'required|String|min:8',
+            'role' => 'required|in:Warga,Admin_RW,Admin_RT,Ketua_RW,Ketua_RT,Super_Admin'
         ]);
 
         if (DB::table('warga') -> where('id_warga', $request -> nik) -> first()) {
@@ -113,7 +117,8 @@ class UsersController extends Controller
     public function edit(string $id)
     {
         $user = User::find($id);
-        return view('users.edit', compact('user'));
+        // $roleList = User::select('role') -> distinct() -> get();
+        return view('users.edit', compact('user', 'roleList'));
     }
 
     /**
@@ -124,13 +129,15 @@ class UsersController extends Controller
         $this -> validate($request, [
             'email' => 'required|email:rfc,dns',
             'no_hp' => 'required|min:10',
-            'aktivasi' => 'required'
+            'aktivasi' => 'required',
+            // 'role' => 'required|in:Warga,Admin_RW,Admin_RT,Ketua_RW,Ketua_RT,Super_Admin'
         ]);
 
         $user = User::find($id);
         $user -> email = $request -> email;
         $user -> no_hp = $request -> no_hp;
         $user -> aktivasi = $request -> input('aktivasi');
+        // $user -> role = $request -> input('role');
         $user -> save();
 
         // return redirect('/hasil');
@@ -142,6 +149,7 @@ class UsersController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        User::where('id', $id) -> delete();
+        return redirect() -> route('account.index') -> with('pesan', "Data pengguna dengan id {$id} telah berhasil dihapus");
     }
 }
