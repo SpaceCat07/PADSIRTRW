@@ -16,9 +16,21 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
-        if (Auth::check() || Auth::user() -> role !== $role) {
+    
+        // dd(Auth::user());
+        // if (Auth::check() || Auth::user() -> role !== $role) {
+        //     return redirect('/');
+        // }
+        // if (Auth::check() && Auth::user() -> role == $role) {
+        //     return $next($request);
+        // }
+        $roles = is_array($role) ? $role : explode(',', $role);
+
+        // dd($roles);
+        if (!Auth::check() || !in_array(Auth::user()->role, $roles)) {
             return redirect('/');
         }
+
         return $next($request);
     }
 }
