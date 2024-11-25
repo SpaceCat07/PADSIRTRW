@@ -14,6 +14,6 @@ class DetailIuranRTPengguna extends Model
     protected $fillable = [
         'id_iuran_rt',
         'id_pengguna',
-        'jumlah'
+        'status',
     ];
 }
