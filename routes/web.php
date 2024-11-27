@@ -1,13 +1,19 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ChartController;
-use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\IuranRTController;
+use App\Http\Controllers\IuranRWController;
+use App\Http\Controllers\KeuanganRTController;
+use App\Http\Controllers\KeuanganRWController;
+use App\Http\Controllers\KritikSaranRTController;
+use App\Http\Controllers\KritikSaranRWCOntroller;
 use App\Http\Controllers\PenjabatRTController;
 use App\Http\Controllers\PenjabatRWController;
+use App\Http\Controllers\ProkerController;
+use App\Http\Controllers\RTController;
+use App\Http\Controllers\RWController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\WargaController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,80 +28,195 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    // dd(Auth::user());
     return view('welcome');
 });
 
-// Route::get('/warga', [WargaController::class, 'index']) -> name('warga.index');
-// Route::get('/warga/masuk', [AuthController::class, 'wargaMasuk']) -> name('warga.masuk');
-// Route::post('/warga', [AuthController::class, 'wargaLogin']) -> name('warga.login');
-// Route::get('/warga/register', [WargaController::class, 'create']) -> name('warga.create');
-// Route::post('/warga/store', [WargaController::class, 'store']) -> name('warga.store');
+Route::get('/masuk', [AuthController::class, 'masuk']) -> name('masuk');
+Route::post('/login', [AuthController::class, 'login']) -> name('login');
+Route::post('/logout', [AuthController::class, 'logout']) -> name('logout');
+Route::get('/requestacc', [UsersController::class, 'requestCreate']) -> name('account.requestCreate');
+Route::post('/request', [UsersController::class, 'requestStore']) -> name('account.requestStore');
 
-// route login user
-// Route::resource('/otentikasi', AuthController::class) -> names([
-//     'masuk' => 'masuk',
-//     'login' => 'login',
-//     'logout' => 'logout'
-// ]);
+Route::middleware('role:Admin_RT,Admin_RW')->group(function () {
+    // route untuk menambahkan data program kerja
+    Route::resource('/proker', ProkerController::class)->names([
+        'index' => 'proker.index',
+        'create' => 'proker.create',
+        'store' => 'proker.store',
+        'edit' => 'proker.edit',
+        'update' => 'proker.update',
+        'destroy' => 'proker.destroy',
+        'show' => 'proker.show',
+    ]);
+});
 
-Route::get('/masuk', [AuthController::class, 'masuk'])->name('masuk');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::middleware('role:Admin_RT,Super_Admin,Admin_RW') -> group(function () {
+    // route untuk menambahkan data akun dari warga
+    Route::resource('/account', UsersController::class) -> names([
+        'index' => 'account.index',
+        'create' => 'account.create',
+        'store' => 'account.store',
+        'edit' => 'account.edit',
+        'update' => 'account.update',
+        'show' => 'account.show', ## ini untuk show profile saja?
+        'destroy' => 'account.destroy'
+    ]);
 
-// route register warga user by super admin
-Route::resource('/account', UsersController::class)->names([
-    'index' => 'account.index',
-    'create' => 'account.create',
-    'store' => 'account.store',
-    'edit' => 'account.edit',
-    'update' => 'account.update',
-    'show' => 'account.show', ## ini untuk show profile saja?
-    'destroy' => 'account.destroy'
-]);
+});
 
-Route::get('/requestacc', [UsersController::class, 'requestCreate'])->name('account.requestCreate');
-Route::post('/request', [UsersController::class, 'requestStore'])->name('account.requestStore');
-// Route::get('/account/create', [UsersController::class, 'create']) -> name('account.create');
-// Route::post('/account/register', [UsersController::class, 'store']) -> name('account.store');
+// route register warga user by adminRt
+Route::middleware('role:Admin_RT') -> group(function () {
+    // route untuk menambahkan data warga
+    Route::resource('/warga', WargaController::class) -> names([
+        'index' => 'warga.index',
+        'create' => 'warga.create',
+        'store' => 'warga.store',
+        'edit' => 'warga.edit',
+        'update' => 'warga.update',
+        'destroy' => 'warga.destroy'
+    ]);
 
-// route register akun pengguna warga by super admin
-// Route::get('/warga/create', [WargaController::class, 'create']) -> name('warga.create');
-// Route::post('/warga/register', [WargaController::class, 'store']) -> name('warga.store');
-// Route::get('/warga', [WargaController::class, 'index']) -> name('warga.index');
-// Route::get('/warga/edit/{id}', [WargaController::class, 'edit']) -> name('warga.edit');
-// Route::post('/warga', [WargaController::class, 'update']) -> name('warga.update');
-// Route::delete('/warga/{id}', [WargaController::class, 'destroy']) -> name('warga.destroy');
+    // route untuk pergi ke dashboard adminrt
+    Route::get('/dashboard/adminrt', function(){
+        return view('/rt/DashboardAdminRT');
+    })->name('dashboard.adminrt');
 
-Route::resource('/warga', WargaController::class)->names([
-    'index' => 'warga.index',
-    'create' => 'warga.create',
-    'store' => 'warga.store',
-    'edit' => 'warga.edit',
-    'update' => 'warga.update',
-    'destroy' => 'warga.destroy'
-]);
+    // route untuk menambahkan data iuran rt
+    Route::resource('/iuran-rt', IuranRTController::class) -> names([
+        'index' => 'iuranRT.index',
+        'create' => 'iuranRT.create',
+        'store' => 'iuranRT.store',
+        'edit' => 'iuranRT.edit',
+        'update' => 'iuranRT.update',
+        'destroy' => 'iuranRT.destroy',
+        'show' => 'iuranRT.show',
+    ]);
+
+    // route untuk menambahkan data laporan keuangan rt
+    Route::resource('/laporan-keuangan-rt', KeuanganRTController::class) -> names([
+        'index' => 'RT.Keuangan.index',
+        'create' => 'RT.Keuangan.create',
+        'store' => 'RT.Keuangan.store',
+        'edit' => 'RT.Keuangan.edit',
+        'update' => 'RT.Keuangan.update',
+        'destroy' => 'RT.Keuangan.destroy',
+        'show' => 'RT.Keuangan.show',
+    ]);
+});
+
+// middleware untuk role warga
+Route::middleware('role:Warga') -> group(function () {
+    Route::get('/dashboard/warga', function(){
+        return view('/warga/DashboardWarga');
+    })->name('dashboard.warga');
+});
+
+// middleware untuk role admin rw
+Route::middleware('role:Admin_RW') -> group(function () {
+    Route::get('/dashboard/adminrw', function(){
+        return view('/rw/DashboardAdminRW');
+    })->name('dashboard.adminrw');
+
+    // route untuk menambahkan rt baru dibawah rw yang dimiliki
+    Route::resource('/rt', RTController::class) -> names([
+        'index' => 'RT.index',
+        'create' => 'RT.create',
+        'store' => 'RT.store',
+        'edit' => 'RT.edit',
+        'update' => 'RT.update',
+        'destroy' => 'RT.destroy',
+        'show' => 'RT.show',
+    ]);
+
+    // route untuk menambahkan laporan keuangan rw
+    Route::resource('/laporan-keuangan-rw', KeuanganRWController::class) -> names([
+        'index' => 'RW.Keuangan.index',
+        'create' => 'RW.Keuangan.create',
+        'store' => 'RW.Keuangan.store',
+        'edit' => 'RW.Keuangan.edit',
+        'update' => 'RW.Keuangan.update',
+        'destroy' => 'RW.Keuangan.destroy',
+        'show' => 'RW.Keuangan.show',
+    ]);
+    Route::get('/laporan-keuangan/lihatgambar/{filename}', [KeuanganRWController::class, 'showImage']) -> name('RW.Keuangan.lihatgambar');
+
+    Route::resource('/iuran-rw', IuranRWController::class) -> names([
+        'index' => 'iuranRW.index',
+        'create' => 'iuranRW.create',
+        'store' => 'iuranRW.store',
+        'edit' => 'iuranRW.edit',
+        'update' => 'iuranRW.update',
+        'destroy' => 'iuranRW.destroy',
+        'show' => 'iuranRW.show',
+    ]);
+});
+
+// middleware untuk role ketua rt
+Route::middleware('role:Ketua_RT') -> group(function () {
+    Route::get('/dashboard/ketuart', function(){
+        return view('/rt/DashboardKetuaRT');
+    })->name('dashboard.ketuart');
+});
+
+// middleware untuk role ketua rw
+Route::middleware('role:Ketua_RW') -> group(function () {
+    Route::get('/dashboard/ketuarw', function(){
+        return view('/rw/DashboardKetuaRW');
+    })->name('dashboard.ketuarw');
+});
+
+// middleware untuk role super admin
+Route::middleware('role:Super_Admin') -> group(function () {
+    Route::get('/dashboard/superadmin', function(){
+        return view('/warga/DashboardWarga');
+    })->name('dashboard.superadmin');
+
+    // manajemen rw yang ada
+    Route::resource('/rw', RWController::class) -> names([
+        'index' => 'RW.index',
+        'create' => 'RW.create',
+        'store' => 'RW.store',
+        'edit' => 'RW.edit',
+        'update' => 'RW.update',
+        'destroy' => 'RW.destroy',
+        'show' => 'RW.show',
+    ]);
+});
 
 
-// // route untuk login register penjabat rt
-// Route::get('/rt/masuk', [AuthController::class, 'penjabatRTMasuk']) -> name('rt.masuk');
-// Route::post('/rt', [AuthController::class, 'penjabatRTLogin']) -> name('rt.login');
-// Route::get('/rt/register', [PenjabatRTController::class, 'create']) -> name('rt.create');
-// Route::post('/rt/store', [PenjabatRTController::class, 'store']) -> name('rt.store');
 
-// // route untuk login register penjabat rw
-// Route::get('/rw/masuk', [AuthController::class, 'penjabatRTMasuk']) -> name('rw.masuk');
-// Route::post('/rw', [AuthController::class, 'penjabatRTLogin']) -> name('rw.login');
-// Route::get('/rw/register', [PenjabatRWController::class, 'create']) -> name('rw.create');
-// Route::post('/rw/store', [PenjabatRWController::class, 'store']) -> name('rw.store');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/hasil', function () {
-        return view('hasil');
-    });
+// middleware bagi pengguna yang sudah login, untuk seluruh role
+Route::middleware('auth') -> group(function () {
+    // Route::get('/hasil', function () {
+    //     return view('hasil');
+    // });
+
+    Route::resource('/kritik-saran-rt', KritikSaranRTController::class) -> names([
+        'index' => 'kritikRT.index',
+        'create' => 'kritikRT.create',
+        'store' => 'kritikRT.store',
+        'edit' => 'kritikRT.edit',
+        'update' => 'kritikRT.update',
+        'destroy' => 'kritikRT.destroy',
+        'show' => 'kritikRT.show',
+    ]);
+
+    Route::resource('/kritik-saran-rw', KritikSaranRWCOntroller::class) -> names([
+        'index' => 'kritikRW.index',
+        'create' => 'kritikRW.create',
+        'store' => 'kritikRW.store',
+        'edit' => 'kritikRW.edit',
+        'update' => 'kritikRW.update',
+        'destroy' => 'kritikRW.destroy',
+        'show' => 'kritikRW.show',
+    ]);
 
     // route edit dan update by himself
-    Route::get('/edit/{id}', [UsersController::class, 'edit'])->name('edit');
-    Route::post('/update', [UsersController::class, 'update'])->name('update');
+    // Route::get('/edit/{id}', [UsersController::class, 'edit']) -> name('edit');
+    // Route::post('/update', [UsersController::class, 'update']) -> name('update');
+
 });
 
 Route::get('/index', function () {
@@ -106,178 +227,179 @@ Route::get('/index', function () {
 //     return view('/warga/DashboardWarga');
 // })->name('dashboard.warga');
 
-Route::get('/dashboard/superadmin', function () {
-    return view('/warga/DashboardWarga');
-})->name('dashboard.superadmin');
+// Route::get('/dashboard/superadmin', function () {
+//     return view('/warga/DashboardWarga');
+// })->name('dashboard.superadmin');
 
-Route::get('/dashboard/adminrw', function () {
-    return view('/rw/DashboardAdminRW');
-})->name('dashboard.adminrw');
+// Route::get('/dashboard/adminrw', function () {
+//     return view('/rw/DashboardAdminRW');
+// })->name('dashboard.adminrw');
 
-Route::get('/dashboard/adminrt', function () {
-    return view('/rt/DashboardAdminRT');
-})->name('dashboard.adminrt');
+// Route::get('/dashboard/adminrt', function () {
+//     return view('/rt/DashboardAdminRT');
+// })->name('dashboard.adminrt');
 
-Route::get('/dashboard/ketuarw', function () {
-    return view('/rw/DashboardKetuaRW');
-})->name('dashboard.ketuarw');
+// Route::get('/dashboard/ketuarw', function () {
+//     return view('/rw/DashboardKetuaRW');
+// })->name('dashboard.ketuarw');
 
-Route::get('/dashboard/ketuart', function () {
-    return view('/rt/DashboardKetuaRT');
-})->name('dashboard.ketuart');
+// Route::get('/dashboard/ketuart', function () {
+//     return view('/rt/DashboardKetuaRT');
+// })->name('dashboard.ketuart');
 
-// Define a function to get the dashboard data
-function getDashboardData(Request $request) {
-    $year = $request->input('year', date('Y')); // Default to current year
-    $interval = $request->input('interval', '7-days'); // Default interval
+// // Define a function to get the dashboard data
+// function getDashboardData(Request $request) {
+//     $year = $request->input('year', date('Y')); // Default to current year
+//     $interval = $request->input('interval', '7-days'); // Default interval
 
-    // Replace these example values with actual data retrieval based on $year and $interval
-    if ($interval === '7-days') {
-        $labels = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'];
-        $pemasukanData = [4500, 5200, 4800, 6000, 5800, 6200, 5000]; // Example values
-        $pengeluaranData = [4000, 4900, 4600, 5800, 5400, 5900, 4500]; // Example values
-    } elseif ($interval === 'month') {
-        $labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
-        $pemasukanData = [15000, 18000, 17000, 20000]; // Example values
-        $pengeluaranData = [14000, 17000, 16000, 19000]; // Example values
-    } elseif ($interval === 'yoy') {
-        $labels = ['2020', '2021', '2022', '2023'];
-        $pemasukanData = [120000, 140000, 160000, 180000]; // Example values
-        $pengeluaranData = [100000, 120000, 140000, 160000]; // Example values
-    }
+//     // Replace these example values with actual data retrieval based on $year and $interval
+//     if ($interval === '7-days') {
+//         $labels = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'];
+//         $pemasukanData = [4500, 5200, 4800, 6000, 5800, 6200, 5000]; // Example values
+//         $pengeluaranData = [4000, 4900, 4600, 5800, 5400, 5900, 4500]; // Example values
+//     } elseif ($interval === 'month') {
+//         $labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+//         $pemasukanData = [15000, 18000, 17000, 20000]; // Example values
+//         $pengeluaranData = [14000, 17000, 16000, 19000]; // Example values
+//     } elseif ($interval === 'yoy') {
+//         $labels = ['2020', '2021', '2022', '2023'];
+//         $pemasukanData = [120000, 140000, 160000, 180000]; // Example values
+//         $pengeluaranData = [100000, 120000, 140000, 160000]; // Example values
+//     }
 
-    // Calculate total Pemasukan and Pengeluaran for the Pie Chart
-    $totalPemasukan = array_sum($pemasukanData);
-    $totalPengeluaran = array_sum($pengeluaranData);
+//     // Calculate total Pemasukan and Pengeluaran for the Pie Chart
+//     $totalPemasukan = array_sum($pemasukanData);
+//     $totalPengeluaran = array_sum($pengeluaranData);
 
-    // Pie Chart Data
-    $piechart_data = [
-        'labels' => ['Pemasukan', 'Pengeluaran'],
-        'data' => [$totalPemasukan, $totalPengeluaran],
-        'backgroundColor' => ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)'], // Matching colors
-    ];
+//     // Pie Chart Data
+//     $piechart_data = [
+//         'labels' => ['Pemasukan', 'Pengeluaran'],
+//         'data' => [$totalPemasukan, $totalPengeluaran],
+//         'backgroundColor' => ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)'], // Matching colors
+//     ];
 
-    // Bar Chart Data
-    $barchart_data = [
-        'labels' => $labels,
-        'datasets' => [
-            [
-                'label' => 'Pemasukan',
-                'data' => $pemasukanData,
-                'backgroundColor' => 'rgba(75, 192, 192, 0.6)', // Color for Pemasukan
-            ],
-            [
-                'label' => 'Pengeluaran',
-                'data' => $pengeluaranData,
-                'backgroundColor' => 'rgba(255, 99, 132, 0.6)', // Color for Pengeluaran
-            ]
-        ]
-    ];
+//     // Bar Chart Data
+//     $barchart_data = [
+//         'labels' => $labels,
+//         'datasets' => [
+//             [
+//                 'label' => 'Pemasukan',
+//                 'data' => $pemasukanData,
+//                 'backgroundColor' => 'rgba(75, 192, 192, 0.6)', // Color for Pemasukan
+//             ],
+//             [
+//                 'label' => 'Pengeluaran',
+//                 'data' => $pengeluaranData,
+//                 'backgroundColor' => 'rgba(255, 99, 132, 0.6)', // Color for Pengeluaran
+//             ]
+//         ]
+//     ];
 
-    // Line Chart Data
-    $linechart_data = [
-        'labels' => $labels,
-        'datasets' => [
-            [
-                'label' => 'Pemasukan',
-                'data' => $pemasukanData,
-                'borderColor' => 'rgba(54, 162, 235, 1)',
-                'backgroundColor' => 'rgba(54, 162, 235, 0.2)',
-                'fill' => true,
-            ],
-            [
-                'label' => 'Pengeluaran',
-                'data' => $pengeluaranData,
-                'borderColor' => 'rgba(255, 99, 132, 1)',
-                'backgroundColor' => 'rgba(255, 99, 132, 0.2)',
-                'fill' => true,
-            ]
-        ]
-    ];
+//     // Line Chart Data
+//     $linechart_data = [
+//         'labels' => $labels,
+//         'datasets' => [
+//             [
+//                 'label' => 'Pemasukan',
+//                 'data' => $pemasukanData,
+//                 'borderColor' => 'rgba(54, 162, 235, 1)',
+//                 'backgroundColor' => 'rgba(54, 162, 235, 0.2)',
+//                 'fill' => true,
+//             ],
+//             [
+//                 'label' => 'Pengeluaran',
+//                 'data' => $pengeluaranData,
+//                 'borderColor' => 'rgba(255, 99, 132, 1)',
+//                 'backgroundColor' => 'rgba(255, 99, 132, 0.2)',
+//                 'fill' => true,
+//             ]
+//         ]
+//     ];
 
-    return compact('barchart_data', 'linechart_data', 'piechart_data', 'totalPemasukan', 'totalPengeluaran', 'year', 'interval');
-}
-
-
-// Admin Dashboard Route
-Route::get('/dashboard/admin', function (Request $request) {
-    $data = getDashboardData($request);
-    return view('admin.DashboardAdmin', $data);
-})->name('admin-dashboard');
-
-// Warga Dashboard Route
-Route::get('/dashboard/warga', function (Request $request) {
-    $data = getDashboardData($request);
-    return view('warga.DashboardWarga', $data);
-})->name('dashboard.warga');
+//     return compact('barchart_data', 'linechart_data', 'piechart_data', 'totalPemasukan', 'totalPengeluaran', 'year', 'interval');
+// }
 
 
-// Route::get('/dashboard/admin', [ChartController::class, 'barChart']);
+// // Admin Dashboard Route
+// Route::get('/dashboard/admin', function (Request $request) {
+//     $data = getDashboardData($request);
+//     return view('admin.DashboardAdmin', $data);
+// })->name('admin-dashboard');
 
-// Route::get('/dashboard/admin', [ChartController::class, 'barChart'])->name('admin-dashboard');
-
-Route::get('/data-warga/admin', function () {
-    return view('/admin/DataWarga');
-})->name('data-warga');
-
-Route::get('/manajemen-iuran/admin', function () {
-    return view('/admin/ManajemenIuran');
-})->name('manajemen-iuran');
-
-Route::get('/program-kerja/admin', function () {
-    return view('/admin/ProgramKerjaAdmin');
-})->name('admin-program-kerja');
-
-Route::get('/edit-program-kerja/admin', function () {
-    return view('/admin/EditProgramKerja');
-})->name('edit-program-kerja');
-
-Route::get('/tambah-program-kerja/admin', function () {
-    return view('/admin/TambahProgramKerja');
-})->name('tambah-program-kerja');
-
-Route::get('/laporan-pengeluaran/admin', function () {
-    return view('/admin/LaporanPengeluaran');
-})->name('laporan-pengeluaran');
-
-Route::get('/laporan-pemasukan/admin', function () {
-    return view('/admin/LaporanPemasukan');
-})->name('laporan-pemasukan');
-
-Route::get('/tambah-data-pemasukan/admin', function () {
-    return view('/admin/TambahDataPemasukan');
-})->name('tambah-data-pemasukan');
-
-Route::get('/tambah-data-pengeluaran/admin', function () {
-    return view('/admin/TambahDataPengeluaran');
-})->name('tambah-data-pengeluaran');
-
-Route::get('/kritik-saran/admin', function () {
-    return view('/admin/KritikSaranAdmin');
-})->name('admin-kritik-saran');
-
-Route::get('/program-kerja', function () {
-    return view('/warga/LihatProgramKerja');
-})->name('program-kerja');
-
-Route::get('/laporan-keuangan/warga', function () {
-    return view('/warga/LaporanKeuangan');
-})->name('laporan-keuangan');
-
-Route::get('/riwayat-pembayaran/warga', function () {
-    return view('/warga/RiwayatPembayaran');
-})->name('riwayat-pembayaran');
-
-Route::get('/bayar/warga', function () {
-    return view('/warga/Pembayaran');
-})->name('pembayaran');
-
-Route::get('/kritik-saran/warga', function () {
-    return view('/warga/FormKritikSaran');
-})->name('kritik-saran');
-
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout'); // Update with your controller and method
+// // Warga Dashboard Route
+// Route::get('/dashboard/warga', function (Request $request) {
+//     $data = getDashboardData($request);
+//     return view('warga.DashboardWarga', $data);
+// })->name('dashboard.warga');
 
 
-// chartttt
-Route::get('/admin/DashboardAdmin', [ChartController::class, 'barChart']);
+// // Route::get('/dashboard/admin', [ChartController::class, 'barChart']);
+
+// // Route::get('/dashboard/admin', [ChartController::class, 'barChart'])->name('admin-dashboard');
+
+// Route::get('/data-warga/admin', function () {
+//     return view('/admin/DataWarga');
+// })->name('data-warga');
+
+// Route::get('/manajemen-iuran/admin', function () {
+//     return view('/admin/ManajemenIuran');
+// })->name('manajemen-iuran');
+
+// Route::get('/program-kerja/admin', function () {
+//     return view('/admin/ProgramKerjaAdmin');
+// })->name('admin-program-kerja');
+
+// Route::get('/edit-program-kerja/admin', function () {
+//     return view('/admin/EditProgramKerja');
+// })->name('edit-program-kerja');
+
+// Route::get('/tambah-program-kerja/admin', function () {
+//     return view('/admin/TambahProgramKerja');
+// })->name('tambah-program-kerja');
+
+// Route::get('/laporan-pengeluaran/admin', function () {
+//     return view('/admin/LaporanPengeluaran');
+// })->name('laporan-pengeluaran');
+
+// Route::get('/laporan-pemasukan/admin', function () {
+//     return view('/admin/LaporanPemasukan');
+// })->name('laporan-pemasukan');
+
+// Route::get('/tambah-data-pemasukan/admin', function () {
+//     return view('/admin/TambahDataPemasukan');
+// })->name('tambah-data-pemasukan');
+
+// Route::get('/tambah-data-pengeluaran/admin', function () {
+//     return view('/admin/TambahDataPengeluaran');
+// })->name('tambah-data-pengeluaran');
+
+// Route::get('/kritik-saran/admin', function () {
+//     return view('/admin/KritikSaranAdmin');
+// })->name('admin-kritik-saran');
+
+
+// Route::get('/program-kerja', function () {
+//     return view('/warga/LihatProgramKerja');
+// })->name('program-kerja');
+
+// Route::get('/laporan-keuangan/warga', function () {
+//     return view('/warga/LaporanKeuangan');
+// })->name('laporan-keuangan');
+
+// Route::get('/riwayat-pembayaran/warga', function () {
+//     return view('/warga/RiwayatPembayaran');
+// })->name('riwayat-pembayaran');
+
+// Route::get('/bayar/warga', function () {
+//     return view('/warga/Pembayaran');
+// })->name('pembayaran');
+
+// Route::get('/kritik-saran/warga', function () {
+//     return view('/warga/FormKritikSaran');
+// })->name('kritik-saran');
+
+// Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout'); // Update with your controller and method
+
+
+// // chartttt
+// Route::get('/admin/DashboardAdmin', [ChartController::class, 'barChart']);

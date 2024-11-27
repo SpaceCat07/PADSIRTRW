@@ -15,6 +15,7 @@ return new class extends Migration
             $table -> id();
             $table -> foreignId('id_rw') -> constrained('rw');
             $table -> string('nama_rt') -> nullable(false);
+            $table -> bigInteger('nomor_rekening');
             $table -> timestamps();
         });
     }

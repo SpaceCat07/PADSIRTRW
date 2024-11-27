@@ -15,9 +15,11 @@ return new class extends Migration
             $table -> id();
             $table -> string('judul') -> nullable(false);
             $table -> text('isi') -> nullable(false);
-            $table -> date('tanggal_mulai');
-            $table -> date('tanggal_selesai');
-            $table -> enum('status', ['on_progress', 'selesai']);
+            $table -> time('waktu');
+            $table -> date('tanggal_pelaksanaan');
+            $table -> string('lokasi');
+            $table -> string('gambar');
+            $table -> enum('status', ['on_progress', 'selesai']) -> default('on_progress');
             $table -> timestamps();
         });
     }

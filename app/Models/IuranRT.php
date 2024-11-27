@@ -15,7 +15,7 @@ class IuranRT extends Model
         'id_rt',
         'nama_iuran',
         'total_iuran',
-        'tanggal_pembayaran',
+        'bulan',
         'jenis_iuran'
     ];
 }
