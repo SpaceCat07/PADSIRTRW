@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <!-- Fonts -->
-    <style>
+    <style>4
 
     </style>
 </head>

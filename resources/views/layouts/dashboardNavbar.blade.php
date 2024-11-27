@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
+    {{-- charts --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <!-- bootstrap for carousel -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css">
     <!-- bootstrap and css -->
@@ -20,7 +23,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- Fonts -->
     <style>
-        
+
     </style>
 </head>
 
@@ -56,7 +59,7 @@
                     </ul>
                 </li>
 
-                <li><a href="#"
+                <li><a href="/kritik-saran/warga"
                         class="nav-link px-2 {{ $page == 'kritik-saran' ? 'link-active' : 'link-idle' }}">Kritik
                         Saran</a></li>
                 <li>
@@ -84,18 +87,11 @@
                 </li>
 
             </ul>
-
-            <!-- <div class="col-md-3 text-end">
-                <button type="button" class="btn btn-outline-primary me-2">Login</button>
-                <button type="button" class="btn btn-primary">Sign-up</button>
-            </div> -->
         </header>
     </div>
 
     <!-- main content and sidebar -->
     @yield('content')
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous">
     </script>

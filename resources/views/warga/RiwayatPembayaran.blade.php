@@ -10,12 +10,12 @@
     <div class="payment-history-container">
         <h2>Riwayat Pembayaran</h2>
 
-        <div class="filters">
+        <div class="status-filters">
             <button class="filter-button active" data-filter="all">All</button>
             <button class="filter-button" data-filter="success">Complete</button>
             <button class="filter-button" data-filter="pending">Pending</button>
             <button class="filter-button" data-filter="rejected">Rejected</button>
-            <button class="date-picker">Pilih Tanggal</button>
+            {{-- <button class="date-picker">Pilih Tanggal</button> --}}
         </div>
 
         <table>
