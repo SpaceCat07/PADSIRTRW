@@ -75,8 +75,9 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <form action="{{ route('logout') }}" method="post"> @csrf
-                                    <button type="submit">Sign out</button>
+                                <form class="text-center justify-content-center" action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                    <button class="profile-logout-btn" type="submit">Sign out</button>
                                 </form>
                                 <!-- <a class="dropdown-item" href="{{ route('logout') }}">Sign out</a> -->
                             </li>

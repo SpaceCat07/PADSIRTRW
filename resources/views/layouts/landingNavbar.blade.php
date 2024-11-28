@@ -26,9 +26,9 @@
             </div>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-right mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-active">Home</a></li>
-                <li><a href="#" class="nav-link px-2 link-idle">About Us</a></li>
-                <li><a href="#" class="nav-link px-2 link-idle">Contact</a></li>
+                <li><a href="/" class="nav-link px-2 link-active">Home</a></li>
+                <li><a href="/#about-us" class="nav-link px-2 link-idle">About Us</a></li>
+                <li><a href="/#contact-section" class="nav-link px-2 link-idle">Contact</a></li>
             </ul>
 
             <!-- <div class="col-md-3 text-end">

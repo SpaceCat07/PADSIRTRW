@@ -227,9 +227,9 @@ Route::get('/index', function () {
     return view('index');
 });
 
-Route::get('/dashboard/warga', function () {
-    return view('/warga/DashboardWarga');
-})->name('dashboard.warga');
+// Route::get('/dashboard/warga', function () {
+//     return view('/warga/DashboardWarga');
+// })->name('dashboard.warga');
 
 // Route::get('/dashboard/superadmin', function () {
 //     return view('/warga/DashboardWarga');
