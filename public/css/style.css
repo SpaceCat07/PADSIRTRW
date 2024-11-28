@@ -2192,6 +2192,9 @@ table .no-data {
 }
 
 .form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="password"],
 .form-group textarea,
 .form-group select {
     width: 800px;
@@ -2284,7 +2287,7 @@ table .no-data {
 .edit-keuangan-container {
     max-width: 1200px;
     width: 100%;
-    margin: auto;
+    margin: 0 auto 100px;
     padding: 50px;
     background-color: #676AFF80;
     border-radius: 0 40px;
@@ -2311,18 +2314,33 @@ table .no-data {
 .dashboard-header {
     width: 100%;
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.header-admin-left {
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
+}
+
+.profile-picture {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-admin-dropdown img {
+    width: 50px;
+    height: auto;
 }
 
 .dashboard-header p{
     margin: 0;
     font-size: 20px;
     font-weight: 500;
-}
-
-.dashboard-header h1 {
-    margin-bottom: 40px;
 }
 
 .dashboard-content {
@@ -2666,6 +2684,166 @@ table .no-data {
     gap: 10px;
     justify-content: Center;
     align-items: center;
+}
+
+
+/* edit profile page */
+/* Container for Sidebar and Edit Profile Section */
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    margin: 20px auto;
+    max-width: 1000px;
+    min-height: 100vh;
+}
+
+/* Sidebar Styles */
+.profile-sidebar {
+    background-color: #f8c23a; /* Yellow background */
+    width: 30%;
+    padding: 70px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 100px 0 100px 0;
+    color: #333;
+}
+
+.profile-image-placeholder {
+    width: 150px;
+    height: 200px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.profile-name {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.profile-id {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.profile-info {
+    margin-bottom: 20px;
+}
+
+.profile-info-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.profile-logout-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+}
+
+.profile-logout-btn {
+    background-color: #676AFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.profile-logout-btn:hover {
+    background-color: #c9302c;
+}
+
+/* Edit Profile Section */
+.profile-edit-section{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 70%;
+    padding: 0;
+}
+
+.profile-edit-title {
+    padding: 20px;
+    margin-top: 50px;
+    background-color: #4a58bd;
+    color: white;
+    border-radius: 0 100px 0 0;
+}
+
+.profile-edit-title h2 {
+    margin: 0;
+}
+
+.profile-edit-content {
+    margin-bottom: 50px;
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+    background-color: #676AFF;
+    border-radius: 0 0 100px 0;
+}
+
+.edit-section-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.profile-edit-form .profile-edit-form-group {
+    margin-bottom: 15px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+textarea.input-address {
+    height: 80px;
+    resize: none;
+}
+
+.change-photo-btn {
+    background-color: white;
+    color: #4a58bd;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.change-photo-btn:hover {
+    background-color: #ddd;
+}
+
+.save-profile-btn {
+    background-color: white;
+    color: #4a58bd;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.save-profile-btn:hover {
+    background-color: #ddd;
 }
 
 /* Landing page  */

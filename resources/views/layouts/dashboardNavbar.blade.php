@@ -53,9 +53,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('pembayaran') }}">Bayar</a></li>
-                        <!-- Update 'your.pay.url' with the actual route name or URL -->
                         <li><a class="dropdown-item" href="{{ route('riwayat-pembayaran') }}">Riwayat</a></li>
-                        <!-- Update 'your.history.url' with the actual route name or URL -->
                     </ul>
                 </li>
 
@@ -72,7 +70,7 @@
                         <ul class="dropdown-menu text-small">
                             <li><a class="dropdown-item" href="#">New project...</a></li>
                             <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('edit.profil') }}">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

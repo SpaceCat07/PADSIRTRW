@@ -36,11 +36,11 @@ class AuthController extends Controller
                         break;
                     case 'Admin_RW':
                         // return view('rw.dashboard');
-                        return redirect('/dashboard/adminrw');
+                        return redirect() -> route('dashboard.adminrw');;
                         break;
                     case 'Admin_RT':
                         // return view('rt.dashboard');
-                        return redirect('/dashboard/adminrt');
+                        return redirect() -> route('dashboard.adminrt');
                         break;
                     case 'Ketua_RW':
                         // return view('rw.dashboard');
