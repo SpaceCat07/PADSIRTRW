@@ -59,7 +59,7 @@ class IuranRWController extends Controller
             'jenis_iuran' => $request -> input('jenis_iuran')
         ]);
 
-        return redirect() -> route('iuranrw.index') -> with('pesan', "Data iuran telah berhasil dibuat");
+        return redirect() -> route('iuranRW.index') -> with('pesan', "Data iuran telah berhasil dibuat");
     }
 
     /**
@@ -100,7 +100,7 @@ class IuranRWController extends Controller
             'jenis_iuran' => $request -> input('jenis_iuran')
         ]);
 
-        return redirect() -> route('iuranrw.index') -> with('pesan', "Data iuran dengan id {$id} telah berhasil diubah");
+        return redirect() -> route('iuranRW.index') -> with('pesan', "Data iuran dengan id {$id} telah berhasil diubah");
     }
 
     /**
@@ -109,6 +109,6 @@ class IuranRWController extends Controller
     public function destroy(string $id)
     {
         IuranRW::destroy($id);
-        return redirect() -> route('iuranrw.index') -> with('pesan', "Data iuran dengan id {$id} telah berhasil dihapus");
+        return redirect() -> route('iuranRW.index') -> with('pesan', "Data iuran dengan id {$id} telah berhasil dihapus");
     }
 }
