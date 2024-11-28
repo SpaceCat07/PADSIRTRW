@@ -48,6 +48,8 @@
                 @endif -->
             </div>
 
+            <p>lupa password anda? <a href="{{route('forgot-password')}}">Klik disini untuk mengubah password</a></p>
+
             <!-- Login Button -->
             <div class="text-center">
                 <button type="submit" class="submit-btn btn-warning">Masuk</button>
