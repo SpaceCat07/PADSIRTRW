@@ -24,7 +24,7 @@ class RoleMiddleware
         // if (Auth::check() && Auth::user() -> role == $role) {
         //     return $next($request);
         // }
-        $roles = is_array($role) ? $role : explode(',', $role);
+        $roles = is_array($role) ? $role : explode('|', $role);
 
         // dd($roles);
         if (!Auth::check() || !in_array(Auth::user()->role, $roles)) {
