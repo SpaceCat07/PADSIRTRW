@@ -551,6 +551,7 @@ body {
 
 .carousel-card {
     transition: transform 0.2s;
+    cursor: pointer;
 }
 
 .carousel-card-title,
@@ -661,6 +662,10 @@ body {
 .iuran-report {
     display: flex;
     flex-direction: row;
+}
+
+.iuran-report a {
+    text-decoration: none;
 }
 
 .iuran-info img {

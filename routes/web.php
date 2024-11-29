@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\IuranRTController;
 use App\Http\Controllers\IuranRWController;
 use App\Http\Controllers\KeuanganRTController;
@@ -405,7 +406,7 @@ Route::get('/edit-profil/warga', function () {
     return view('/warga/editInfo');
 })->name('edit.profil');
 
-// Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout'); // Update with your controller and method
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout'); // Update with your controller and method
 
 
 // // chartttt
