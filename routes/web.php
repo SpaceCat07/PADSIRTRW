@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\IuranRTController;
 use App\Http\Controllers\IuranRWController;
 use App\Http\Controllers\KeuanganRTController;
 use App\Http\Controllers\KeuanganRWController;
+use App\Http\Controllers\KritikSaranController;
 use App\Http\Controllers\KritikSaranRTController;
 use App\Http\Controllers\KritikSaranRWCOntroller;
 use App\Http\Controllers\PenjabatRTController;
@@ -12,6 +14,7 @@ use App\Http\Controllers\PenjabatRWController;
 use App\Http\Controllers\ProkerController;
 use App\Http\Controllers\RTController;
 use App\Http\Controllers\RWController;
+use App\Http\Controllers\SetPasswordController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\WargaController;
 use Illuminate\Support\Facades\Route;
@@ -37,8 +40,29 @@ Route::post('/login', [AuthController::class, 'login']) -> name('login');
 Route::post('/logout', [AuthController::class, 'logout']) -> name('logout');
 Route::get('/requestacc', [UsersController::class, 'requestCreate']) -> name('account.requestCreate');
 Route::post('/request', [UsersController::class, 'requestStore']) -> name('account.requestStore');
+Route::get('/forgot-password', [ForgotPasswordController::class, 'forgotPassword']) -> name('forgot-password');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'validation']) -> name('forgot-password.validation');
+Route::get('/reset-password/{id}', [SetPasswordController::class, 'setPassword']) -> name('reset-password');
+Route::patch('/reset-password/{id}', [SetPasswordController::class, 'updatePassword']) -> name('reset-password.update');
 
-Route::middleware('role:Admin_RT,Admin_RW')->group(function () {
+// route khusus untuk penjabat rt ['Admin_RT', 'Ketua_RT']
+Route::middleware('role:Admin_RT|Ketua_RT') -> group(function () {
+    Route::get('/kritik-saran/rt', [KritikSaranController::class, 'listKritikRT']) -> name('kritikRT.list');
+    Route::get('/kritik-saran/rt/show/{id}', [KritikSaranController::class, 'showKritikRT']) -> name('kritikRT.show');
+    Route::patch('/kritik-saran/rt/{id}/dibaca', [KritikSaranController::class, 'kritikRTDibaca']) -> name('kritikRT.dibaca');
+    Route::patch('/kritik-saran/rt/{id}/selesai', [KritikSaranController::class, 'kritikRTSelesai']) -> name('kritikRT.selesai');
+});
+
+// route khusus untuk penjabat rw ['Admin_RW', 'Ketua_RW']
+Route::middleware('role:Admin_RW|Ketua_RW') -> group(function () {
+    Route::get('/kritik-saran/rw', [KritikSaranController::class, 'listKritikRW']) -> name('kritikRW.list');
+    Route::get('/kritik-saran/rw/show/{id}', [KritikSaranController::class, 'showKritikRW']) -> name('kritikRW.show');
+    Route::patch('/kritik-saran/rw/{id}/dibaca', [KritikSaranController::class, 'kritikRWDibaca']) -> name('kritikRW.dibaca');
+    Route::patch('/kritik-saran/rw/{id}/selesai', [KritikSaranController::class, 'kritikRWSelesai']) -> name('kritikRW.selesai');
+});
+
+// route untuk admin [Admin_RT, Admin_RW]
+Route::middleware('role:Admin_RT|Admin_RW')->group(function () {
     // route untuk menambahkan data program kerja
     Route::resource('/proker', ProkerController::class)->names([
         'index' => 'proker.index',
@@ -51,7 +75,7 @@ Route::middleware('role:Admin_RT,Admin_RW')->group(function () {
     ]);
 });
 
-Route::middleware('role:Admin_RT,Super_Admin,Admin_RW') -> group(function () {
+Route::middleware('role:Admin_RT|Super_Admin|Admin_RW') -> group(function () {
     // route untuk menambahkan data akun dari warga
     Route::resource('/account', UsersController::class) -> names([
         'index' => 'account.index',
@@ -62,11 +86,7 @@ Route::middleware('role:Admin_RT,Super_Admin,Admin_RW') -> group(function () {
         'show' => 'account.show', ## ini untuk show profile saja?
         'destroy' => 'account.destroy'
     ]);
-
-});
-
-// route register warga user by adminRt
-Route::middleware('role:Admin_RT') -> group(function () {
+    
     // route untuk menambahkan data warga
     Route::resource('/warga', WargaController::class) -> names([
         'index' => 'warga.index',
@@ -76,7 +96,10 @@ Route::middleware('role:Admin_RT') -> group(function () {
         'update' => 'warga.update',
         'destroy' => 'warga.destroy'
     ]);
+});
 
+// route register warga user by adminRt
+Route::middleware('role:Admin_RT') -> group(function () {
     // route untuk pergi ke dashboard adminrt
     Route::get('/dashboard/adminrt', function(){
         return view('/rt/DashboardAdminRT');
@@ -193,25 +216,28 @@ Route::middleware('auth') -> group(function () {
     //     return view('hasil');
     // });
 
-    Route::resource('/kritik-saran-rt', KritikSaranRTController::class) -> names([
-        'index' => 'kritikRT.index',
-        'create' => 'kritikRT.create',
-        'store' => 'kritikRT.store',
-        'edit' => 'kritikRT.edit',
-        'update' => 'kritikRT.update',
-        'destroy' => 'kritikRT.destroy',
-        'show' => 'kritikRT.show',
-    ]);
+    Route::get('/kritik-saran', [KritikSaranController::class, 'index']) -> name('kritik.index');
+    Route::post('/kritik-saran', [KritikSaranController::class, 'store']) -> name('kritik.store');
 
-    Route::resource('/kritik-saran-rw', KritikSaranRWCOntroller::class) -> names([
-        'index' => 'kritikRW.index',
-        'create' => 'kritikRW.create',
-        'store' => 'kritikRW.store',
-        'edit' => 'kritikRW.edit',
-        'update' => 'kritikRW.update',
-        'destroy' => 'kritikRW.destroy',
-        'show' => 'kritikRW.show',
-    ]);
+    // Route::resource('/kritik-saran-rt', KritikSaranRTController::class) -> names([
+    //     'index' => 'kritikRT.index',
+    //     'create' => 'kritikRT.create',
+    //     'store' => 'kritikRT.store',
+    //     'edit' => 'kritikRT.edit',
+    //     'update' => 'kritikRT.update',
+    //     'destroy' => 'kritikRT.destroy',
+    //     'show' => 'kritikRT.show',
+    // ]);
+
+    // Route::resource('/kritik-saran-rw', KritikSaranRWCOntroller::class) -> names([
+    //     'index' => 'kritikRW.index',
+    //     'create' => 'kritikRW.create',
+    //     'store' => 'kritikRW.store',
+    //     'edit' => 'kritikRW.edit',
+    //     'update' => 'kritikRW.update',
+    //     'destroy' => 'kritikRW.destroy',
+    //     'show' => 'kritikRW.show',
+    // ]);
 
     // route edit dan update by himself
     // Route::get('/edit/{id}', [UsersController::class, 'edit']) -> name('edit');
