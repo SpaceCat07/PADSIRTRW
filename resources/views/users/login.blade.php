@@ -24,16 +24,13 @@
                             {{ $message }}
                         </div>
                     @enderror
-                    <!-- @if (session('email'))
-    <div class="alert alert-danger mt-2">{{ session('email') }}</div>
-    @endif -->
                 </div>
 
                 <!-- Floating label for password field -->
                 <div class="mb-4 position-relative">
-                    <label for="floatingPassword" class="form-label fw-semibold">PASSWORD</label>
+                    <label for="floatingPassword" class="form-label fw-semibold">Password</label>
                     <input type="password" class="form-control rounded-pill px-3" name="password" id="floatingPassword"
-                        placeholder="Enter your password" value="" required>
+                        placeholder="Enter your password" required>
                     <!-- Eye icon to toggle password visibility -->
                     <span class="position-absolute password-toggle" style="right: 15px; top: 56px; cursor: pointer;">
                         <i class="fas fa-eye" id="togglePassword"></i>
@@ -43,9 +40,6 @@
                             {{ $message }}
                         </div>
                     @enderror
-                    <!-- @if (session('password'))
-    <div class="alert alert-danger mt-2">{{ session('password') }}</div>
-    @endif -->
                 </div>
 
                 <!-- Login Button -->
@@ -63,38 +57,6 @@
                     <div class="alert alert-danger mt-2">
                         {{ session('aktivasi') }}
                     </div>
-
-                @enderror
-                <!-- @if (session('password'))
-                    <div class="alert alert-danger mt-2">{{ session('password') }}</div>
-                @endif -->
-            </div>
-
-            <p>lupa password anda? <a href="{{route('forgot-password')}}">Klik disini untuk mengubah password</a></p>
-
-            <!-- Login Button -->
-            <div class="text-center">
-                <button type="submit" class="submit-btn btn-warning">Masuk</button>
-            </div>
-        
-            <!-- Messages -->
-            @if(session('error'))
-                <div class="alert alert-danger mt-2">
-                    {{ session('error') }}
-                </div>
-            @endif
-            @if(session('aktivasi'))
-                <div class="alert alert-danger mt-2">
-                    {{ session('aktivasi') }}
-                </div>
-            @endif
-            @if(session('akun'))
-                <div class="alert alert-danger mt-2">
-                    {{ session('akun') }}
-                </div>
-            @endif
-        </form>
-
                 @endif
                 @if (session('akun'))
                     <div class="alert alert-danger mt-2">
@@ -102,10 +64,13 @@
                     </div>
                 @endif
             </form>
+
+            <p>lupa password anda? <a href="{{ route('forgot-password') }}">Klik disini untuk mengubah password</a></p>
+
             <p class="text-center mt-4">
                 Belum punya akun? <a href="{{ route('account.requestCreate') }}" class="text-warning fw-bold">Klik untuk
                     request akun</a>
-                </p>
+            </p>
         </div>
     </div>
 
