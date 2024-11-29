@@ -134,7 +134,7 @@
                 const description = card.querySelector('p').textContent.toLowerCase();
 
                 if (title.includes(searchTerm) || description.includes(searchTerm)) {
-                    card.style.display = 'block'; // Show matching cards
+                    card.style.display = 'flex'; // Show matching cards
                 } else {
                     card.style.display = 'none'; // Hide non-matching cards
                 }

@@ -21,19 +21,18 @@
                         <option value="recipient3">RT 3</option>
                     </select>
                 </div>
-                
+
                 <!-- Floating label for name field -->
                 <div class="mb-4">
                     <label for="floatingEmail" class="form-label fw-semibold">Nama</label>
-                    <input type="text" class="form-control px-3" name="name" id="floatingName"
-                        required>
+                    <input type="text" class="form-control px-3" name="name" id="floatingName" required>
                 </div>
 
                 <!-- Floating label for content field -->
                 <div class="mb-4 position-relative">
-                    <label for="floatingPassword" class="form-label fw-semibold">Kritik / Saran</label>
-                    <input type="password" class="form-control px-3" name="kritik" id="floatingKritik"
-                        style="height: 200px; border: 1px solid white;" value="" required>
+                    <label for="floatingContent" class="form-label fw-semibold">Kritik / Saran</label>
+                    <textarea class="form-control px-3" name="kritik" id="floatingKritik" style="height: 200px; border: 1px solid white;"
+                        required></textarea>
                 </div>
 
                 <!-- Submit Button -->
