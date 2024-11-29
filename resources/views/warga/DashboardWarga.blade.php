@@ -19,15 +19,17 @@
                 <div id="programKerjaCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <div class="carousel-card custom-card p-5"
-                                style="background-image: url({{ asset('storage/carouselBackground.png') }});">
-                                <!-- No content in this card, just the background -->
-                            </div>
+                            <a href="{{ route('program-kerja') }}">
+                                <div class="carousel-card custom-card p-5"
+                                    style="background-image: url({{ asset('storage/carouselBackground.png') }});">
+                                    <!-- No content in this card, just the background -->
+                                </div>
+                            </a>
                             <div class="carousel-card-body">
                                 <h5 class="carousel-card-title">Rapat Mingguan</h5>
                                 <div class="carousel-card-date-link">
                                     <p class="carousel-card-text">Senin 33 Maret 2033</p>
-                                    <a href="#" class="btn btn-link">Learn more ></a>
+                                    <a href="{{ route('program-kerja') }}" class="btn btn-link">Learn more ></a>
                                 </div>
                             </div>
                         </div>
@@ -40,7 +42,7 @@
                                 <h5 class="carousel-card-title">Posyandu Balita & Lansia</h5>
                                 <div class="carousel-card-date-link">
                                     <p class="carousel-card-text">Minggu 32 Maret 2033</p>
-                                    <a href="#" class="btn btn-link">Learn more ></a>
+                                    <a href="{{ route('program-kerja') }}" class="btn btn-link">Learn more ></a>
                                 </div>
                             </div>
                         </div>
@@ -67,30 +69,32 @@
         <div class="iuran-container mt-5">
             <div class="iuran-info">
                 <h1 class="section-title mb-4">Informasi Iuran</h1>
-                <div class="iuran-report">
-                    <div class="status-box">
-                        <div class="status text-center">
-                            <p>Status</p>
+                <a href="{{ route('riwayat-pembayaran') }}" class="text-decoration-none">
+                    <div class="iuran-report">
+                        <div class="status-box">
+                            <div class="status text-center">
+                                <p>Status</p>
+                            </div>
+                            <div class="icon-container">
+                                <img src="{{ asset('storage/rectangleKuning.png') }}" class="icon">
+                            </div>
                         </div>
-                        <div class="icon-container">
-                            <img src="{{ asset('storage/rectangleKuning.png') }}" class="icon">
+                        <div class="payment-status">
+                            <img src="{{ asset('storage/orderComplete.png') }}" alt="">
+                            <div>
+                                <p class="status title">Sudah dibayar</p>
+                                <p class="amount">Rp 10.000</p>
+                            </div>
+                        </div>
+                        <div class="billing-status d-flex align-items-center">
+                            <img src="{{ asset('storage/purchaseOrder.png') }}" alt="">
+                            <div>
+                                <p class="status title">Belum Dibayar</p>
+                                <p class="amount">Rp 50.000</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="payment-status">
-                        <img src="{{ asset('storage/orderComplete.png') }}" alt="">
-                        <div>
-                            <p class="status title">Sudah dibayar</p>
-                            <p class="amount">Rp 10.000</p>
-                        </div>
-                    </div>
-                    <div class="billing-status d-flex align-items-center">
-                        <img src="{{ asset('storage/purchaseOrder.png') }}" alt="">
-                        <div>
-                            <p class="status title">Belum Dibayar</p>
-                            <p class="amount">Rp 50.000</p>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
 
@@ -98,26 +102,28 @@
         <div class="iuran-container mt-5">
             <div class="iuran-info">
                 <h1 class="section-title mb-4">Laporan Keuangan RT</h1>
-                <div class="iuran-report">
-                    <div class="total-box">
-                        <div class="total-status text-center">
-                            <p class="total title">Total iuran saat ini</p>
-                            <p class="amount">Rp 50,000</p> <!-- Example status -->
+                <a href="{{ route('laporan-keuangan') }}" class="text-decoration-none">
+                    <div class="iuran-report">
+                        <div class="total-box">
+                            <div class="total-status text-center">
+                                <p class="total title">Total iuran saat ini</p>
+                                <p class="amount">Rp 50,000</p> <!-- Example status -->
+                            </div>
+                        </div>
+                        <div class="payment-status">
+                            <div class="remaining-funds text-center">
+                                <p class="status title">Sisa</p>
+                                <p class="amount">Rp 50,000</p>
+                            </div>
+                        </div>
+                        <div class="billing-status">
+                            <div class="used-funds text-center">
+                                <p class="status title">Pengeluaran</p>
+                                <p class="amount">Rp 50,000</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="payment-status">
-                        <div class="remaining-funds text-center">
-                            <p class="status title">Sisa</p>
-                            <p class="amount">Rp 50,000</p>
-                        </div>
-                    </div>
-                    <div class="billing-status">
-                        <div class="used-funds text-center">
-                            <p class="status title">Pengeluaran</p>
-                            <p class="amount">Rp 50,000</p>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
 
