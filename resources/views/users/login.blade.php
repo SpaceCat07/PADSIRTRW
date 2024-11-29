@@ -63,6 +63,38 @@
                     <div class="alert alert-danger mt-2">
                         {{ session('aktivasi') }}
                     </div>
+
+                @enderror
+                <!-- @if (session('password'))
+                    <div class="alert alert-danger mt-2">{{ session('password') }}</div>
+                @endif -->
+            </div>
+
+            <p>lupa password anda? <a href="{{route('forgot-password')}}">Klik disini untuk mengubah password</a></p>
+
+            <!-- Login Button -->
+            <div class="text-center">
+                <button type="submit" class="submit-btn btn-warning">Masuk</button>
+            </div>
+        
+            <!-- Messages -->
+            @if(session('error'))
+                <div class="alert alert-danger mt-2">
+                    {{ session('error') }}
+                </div>
+            @endif
+            @if(session('aktivasi'))
+                <div class="alert alert-danger mt-2">
+                    {{ session('aktivasi') }}
+                </div>
+            @endif
+            @if(session('akun'))
+                <div class="alert alert-danger mt-2">
+                    {{ session('akun') }}
+                </div>
+            @endif
+        </form>
+
                 @endif
                 @if (session('akun'))
                     <div class="alert alert-danger mt-2">

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('detail_iuran_rw_rt', function (Blueprint $table) {
             $table -> id();
-            $table -> foreignId('id_iuran_rt') -> constrained('iuran_rt');
             $table -> foreignId('id_iuran_rw') -> constrained('iuran_rw');
+            $table -> foreignId('id_rt') -> constrained('rt');
             $table -> float('jumlah');
             $table -> timestamps();
         });

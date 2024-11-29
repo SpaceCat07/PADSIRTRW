@@ -75,7 +75,6 @@ class UsersController extends Controller
             'no_hp' => 'required',
             'role' => 'required',
             'password' => 'required|String|min:8',
-            'role' => 'required|in:Warga,Admin_RW,Admin_RT,Ketua_RW,Ketua_RT,Super_Admin'
         ]);
 
         if (DB::table('warga') -> where('id_warga', $request -> nik) -> first()) {
@@ -84,7 +83,6 @@ class UsersController extends Controller
             $users -> email = $request -> email;
             $users -> no_hp = $request -> no_hp;
             $users -> password = Hash::make($request -> password);
-            $users -> role = $request -> input('role');
             $users -> save();
 
             return redirect('/account') -> with('success', 'Akun pengguna berhasil dibuat');
@@ -118,6 +116,7 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         // $roleList = User::select('role') -> distinct() -> get();
+        $roleList = ['Warga', 'Admin_RW', 'Admin_RT', 'Ketua_RW', 'Ketua_RT', 'Super_Admin'];
         return view('users.edit', compact('user', 'roleList'));
     }
 

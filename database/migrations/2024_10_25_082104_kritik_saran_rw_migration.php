@@ -16,7 +16,7 @@ return new class extends Migration
             $table -> foreignId('id_rw') -> constrained('rw');
             $table -> foreignId('id_pengguna') -> constrained('pengguna');
             $table -> text('isi');
-            $table -> enum('status', ['dilihat', 'diproses', 'selesai']);
+            $table -> enum('status', ['belum', 'dibaca', 'selesai']);
             $table -> timestamps();
         });
     }
