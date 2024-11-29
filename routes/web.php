@@ -104,9 +104,6 @@ Route::middleware('role:Admin_RT|Super_Admin|Admin_RW') -> group(function () {
 
 // route register warga user by adminRt
 Route::middleware('role:Admin_RT') -> group(function () {
-
-// route register warga user by adminRt
-Route::middleware('role:Admin_RT') -> group(function () {
     // route untuk pergi ke dashboard adminrt
     Route::get('/dashboard/adminrt', function(Request $request){
         $data = getDashboardData($request);
