@@ -12,7 +12,7 @@
         {{-- Action Buttons --}}
         <div class="report-action-buttons">
             <button class="action-btn btn-report" onclick="printReport()">Cetak Laporan</button>
-            <button class="action-btn btn-add-data">+ Tambah Data</button>
+            <a href="{{ route('tambah-data-pemasukan') }}"><button class="action-btn btn-add-data">+ Tambah Data</button></a>
         </div>
 
         {{-- Sort Dropdown --}}

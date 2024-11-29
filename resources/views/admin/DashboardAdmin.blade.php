@@ -1,12 +1,49 @@
 @extends('layouts.adminSidebar')
 
+@php
+    use App\Models\Warga;
+@endphp
+
 @section('content')
     <div class="admin-dashboard-container">
         <div class="header-container">
             <header class="dashboard-header">
-                <p>Hi, Admin RT Khan</p>
-                <h1>Welcome Back!</h1>
+                <div class="header-admin-left">
+                    @if (Auth::user()->role == 'Admin_RT')
+                        <p>Hi, Admin RT {{ Warga::where('id_warga', Auth::user()->id_warga)->first()->nama }}</p>
+                    @elseif (Auth::user()->role == 'Admin_RW')
+                        <p>Hi, Admin RW {{ Warga::where('id_warga', Auth::user()->id_warga)->first()->nama }}</p>
+                    @endif
+                    <h1>Welcome Back!</h1>
+                </div>
+                <div class="header-admin-dropdown text-end me-3">
+                    <a href="#" class="profile-picture link-body-emphasis text-decoration-none" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <p>{{ Warga::where('id_warga', Auth::user()->id_warga)->first()->nama }}</p>
+                        <img src="https://github.com/mdo.png" alt="mdo" width="38" height="38"
+                            class="rounded-circle ms-2 align-middle">
+                    </a>
+                    <ul class="dropdown-menu text-small">
+                        <li><a class="dropdown-item" href="#">New project...</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="{{ route('edit.profil') }}">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <form class="text-center justify-content-center" action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button class="profile-logout-btn" type="submit">Sign out</button>
+                            </form>
+                            <!-- <a class="dropdown-item" href="{{ route('logout') }}">Sign out</a> -->
+                        </li>
+                    </ul>
+                </div>
             </header>
+
+            {{-- <form action="{{ route('logout') }}" method="post"> @csrf
+                <button type="submit">Sign out</button>
+            </form> --}}
         </div>
 
 
@@ -76,7 +113,7 @@
             <!-- Grafik -->
             <div class="admin-card grafik">
                 <div class="print-chart-container">
-                    <button class="print-chart">Cetak</button>
+                    <button id="printButton" class="print-chart">Cetak</button>
                     <h3>Grafik Laporan Pengeluaran</h3>
                 </div>
 
@@ -308,6 +345,37 @@
                     },
                 },
             },
+        });
+
+        // Print chart
+        document.getElementById('printButton').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default button behavior
+
+            // Create a container to hold the charts
+            const chartsContainer = document.createElement('div');
+            chartsContainer.style.display = 'flex';
+            chartsContainer.style.flexDirection = 'column';
+            chartsContainer.style.alignItems = 'center';
+
+            // Get the bar chart and line chart canvas elements
+            const barChartCanvas = document.getElementById('barChart');
+            const lineChartCanvas = document.getElementById('lineChart');
+
+            // Append the charts to the container
+            chartsContainer.appendChild(barChartCanvas.cloneNode(true));
+            chartsContainer.appendChild(lineChartCanvas.cloneNode(true));
+
+            // Use html2canvas to capture the charts
+            html2canvas(chartsContainer).then(canvas => {
+                // Create a new window for printing
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write('<html><head><title>Print Charts</title></head><body>');
+                printWindow.document.write('<h1>Grafik Laporan Pengeluaran</h1>');
+                printWindow.document.body.appendChild(canvas);
+                printWindow.document.write('</body></html>');
+                printWindow.document.close();
+                printWindow.print();
+            });
         });
 
         // Redirects

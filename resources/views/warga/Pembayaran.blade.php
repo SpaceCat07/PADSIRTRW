@@ -3,7 +3,6 @@
 @section('content')
     <?php
     $page = 'pembayaran'; // or 'program-kerja', 'pembayaran', etc.
-    $status = 'Belum Lunas'; // Define a default status for testing
     ?>
 
     <div class="payment-container">
@@ -15,7 +14,6 @@
         </div>
 
         <div class="additional-payment">
-
             <table>
                 <thead>
                     <tr>
@@ -46,43 +44,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input type="checkbox" name="monthly_payment[]" value="January" /></td>
-                        <td>Januari</td>
-                        <td>Rp 5.000</td>
-                        <td class="status-paid">Lunas</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="monthly_payment[]" value="February" /></td>
-                        <td>Februari</td>
-                        <td>Rp 5.000</td>
-                        <td class="status-paid">Lunas</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="monthly_payment[]" value="March" /></td>
-                        <td>Maret</td>
-                        <td>Rp 5.000</td>
-                        <td class="status-paid">Lunas</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="monthly_payment[]" value="April" /></td>
-                        <td>April</td>
-                        <td>Rp 5.000</td>
-                        <td class="status-paid">Lunas</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="monthly_payment[]" value="May" /></td>
-                        <td>Mei</td>
-                        <td>Rp 5.000</td>
-                        <td class="status-due">Belum Lunas</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="monthly_payment[]" value="June" /></td>
-                        <td>Juni</td>
-                        <td>Rp 5.000</td>
-                        <td class="status-due">Belum Lunas</td>
-                    </tr>
-                    <!-- Add remaining months similarly -->
+                    @php
+                    $monthlyStatuses = [
+                        'January' => 'Lunas',
+                        'February' => 'Lunas',
+                        'March' => 'Lunas',
+                        'April' => 'Lunas',
+                        'May' => 'Belum Lunas',
+                        'June' => 'Belum Lunas',
+                        // Add other months similarly
+                    ];
+                    @endphp
+
+                    @foreach ($monthlyStatuses as $month => $status)
+                        <tr>
+                            <td>
+                                @if ($status === 'Belum Lunas')
+                                    <input type="checkbox" name="monthly_payment[]" value="{{ $month }}" />
+                                @endif
+                            </td>
+                            <td>{{ $month }}</td>
+                            <td>Rp 5.000</td>
+                            <td class="{{ $status === 'Lunas' ? 'status-paid' : 'status-due' }}">{{ $status }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

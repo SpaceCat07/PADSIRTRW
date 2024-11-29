@@ -22,7 +22,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <!-- Fonts -->
+    <!-- print -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 </head>
 
 <body>
@@ -33,13 +34,22 @@
 
         <div class="admin-sidebar-content active" id="rt-content">
             <div
-                class="admin-sidebar-item {{ request()->routeIs('admin-dashboard') || request()->routeIs('data-warga') ? 'active' : '' }}">
-                <a href="{{ route('admin-dashboard') }}">
+                class="admin-sidebar-item {{ request()->routeIs('dashboard.adminrt') || request()->routeIs('dashboard.adminrw') || request()->routeIs('data-warga') ? 'active' : '' }}">
+                @if (Auth::user()->role=='Admin_RT')
+                <a href="{{ route('dashboard.adminrt') }}">
                     <img class="default-icon" src="{{ asset('storage/home.png') }}" alt="">
                     <img class="active-icon" src="{{ asset('storage/homeWhite.png') }}" alt=""
                         style="display: none;">
                     Dashboard
                 </a>
+                @elseif(Auth::user()->role=='Admin_RW')
+                <a href="{{ route('dashboard.adminrw') }}">
+                    <img class="default-icon" src="{{ asset('storage/home.png') }}" alt="">
+                    <img class="active-icon" src="{{ asset('storage/homeWhite.png') }}" alt=""
+                        style="display: none;">
+                    Dashboard
+                </a>
+                @endif
             </div>
             <div class="admin-sidebar-item {{ request()->routeIs('admin-program-kerja') || request()->routeIs('edit-program-kerja') || request()->routeIs('tambah-program-kerja') ? 'active' : '' }}">
                 <a href="{{ route('admin-program-kerja') }}">

@@ -34,7 +34,7 @@
         </div>
 
         <div class="about-us" style="background-image: url({{ asset('storage/landingBackground.png') }});">
-            <h2>About Us</h2>
+            <h2 id="about-us">About Us</h2>
             <p>
                 SIMAS hadir sebagai solusi modern untuk mengintegrasikan manajemen data warga, pelaporan keuangan,
                 dan pelaksanaan program kerja dalam satu sistem yang efisien dan transparan. Melalui SIMAS,
@@ -74,7 +74,7 @@
                     allowfullscreen="" loading="lazy">
                 </iframe>
             </div>
-            <div class="contact-info">
+            <div class="contact-info" id="contact-section">
                 <h3>Contact</h3>
                 <div class="contact-info-details">
                     <div class="contact-item">
