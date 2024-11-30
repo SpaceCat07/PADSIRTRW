@@ -95,6 +95,33 @@
             });
         });
 
+        // Sort Table Function
+        function sortTable() {
+            const table = document.getElementById('expenseTable');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const sortSelect = document.getElementById('sort-select');
+            const sortOrder = sortSelect.value;
+
+            // Check if there are rows to sort
+            if (rows.length === 0) return;
+
+            // Sort rows based on the selected order
+            rows.sort((a, b) => {
+                const dateA = new Date(a.cells[1].textContent);
+                const dateB = new Date(b.cells[1].textContent);
+
+                return sortOrder === 'latest' ? dateB - dateA : dateA - dateB;
+            });
+
+            // Clear the table body and append sorted rows
+            tbody.innerHTML = '';
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        // Add event listener for the sort select
+        document.getElementById('sort-select').addEventListener('change', sortTable);
+
         // Print Report Function
         function printReport() {
             const table = document.getElementById('expenseTable');

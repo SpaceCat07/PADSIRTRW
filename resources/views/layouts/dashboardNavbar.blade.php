@@ -62,14 +62,12 @@
                         Saran</a></li>
                 <li>
                     <div class="dropdown text-end me-3">
-                        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                        <a href="#" class="link-body-emphasis text-decoration-none dropdown-toggle"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="https://github.com/mdo.png" alt="mdo" width="38" height="38"
                                 class="rounded-circle ms-2 align-middle">
                         </a>
                         <ul class="dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="#">New project...</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
                             <li><a class="dropdown-item" href="{{ route('edit.profil') }}">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">

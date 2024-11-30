@@ -19,11 +19,14 @@
 
             <!-- Sort by section -->
             <div class="sort-by">
-                Sort by:
-                <select id="sortOptions">
-                    <option value="latest">Latest update</option>
-                    <option value="oldest">Oldest update</option>
-                </select>
+                <div></div>
+                <div class="sort-select-container">
+                    <label for="sort-select">Sort by:</label>
+                    <select id="sort-select">
+                        <option value="latest">Latest update</option>
+                        <option value="oldest">Oldest update</option>
+                    </select>
+                </div>
             </div>
 
             <!-- Program list -->

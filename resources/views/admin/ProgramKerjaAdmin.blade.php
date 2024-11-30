@@ -23,7 +23,6 @@
                 <a href="{{ route('tambah-program-kerja') }}">
                     <button class="add-proker-button">+ ADD NEW</button>
                 </a>
-                
             </div>
 
 
@@ -107,43 +106,65 @@
 
         <!-- Calendar and Notifications -->
         <aside class="calendar-notification">
-            <div class="month-selector">
-                <input type="month" id="monthSelect" value="{{ date('Y-m') }}">
-                <button id="currentMonthBtn">Today</button>
-            </div>
 
-            <div class="calendar">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Mo</th>
-                            <th>Tu</th>
-                            <th>We</th>
-                            <th>Th</th>
-                            <th>Fr</th>
-                            <th>Sa</th>
-                            <th>Su</th>
-                        </tr>
-                    </thead>
-                    <tbody id="calendarBody">
-                        <!-- Calendar dates will be dynamically generated here -->
-                    </tbody>
-                </table>
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <div class="calendar-month"></div>
+                    <div class="calendar-buttons">
+                        <div class="calendar-button today-button">
+                            <i class="fas fa-calendar-day"></i>
+                        </div>
+                        <div class="calendar-button prev-button">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                        <div class="calendar-button next-button">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="calendar-weekdays">
+                    <div class="weekday">Sun</div>
+                    <div class="weekday">Mon</div>
+                    <div class="weekday">Tue</div>
+                    <div class="weekday">Wed</div>
+                    <div class="weekday">Thu</div>
+                    <div class="weekday">Fri</div>
+                    <div class="weekday">Sat</div>
+                </div>
+                <div class="calendar-days">
+                    <!-- Days will be added using JavaScript -->
+                </div>
             </div>
 
             <!-- Notifications -->
             <div class="notification">
-                <h3>Notification</h3>
-                <ul>
-                    <li>1 Kerja Bakti <button>Edit</button> <button>Delete</button></li>
-                    <li>28 Kerja Bakti <button>Edit</button> <button>Delete</button></li>
-                </ul>
+                <div class="notification-header">
+                    <h3>Notification</h3>
+                    <img src="{{ asset('storage/bell.png') }}" alt="">
+                </div>
             </div>
         </aside>
     </div>
 
     <!-- JavaScript -->
     <script>
+        // Toggle sidebar appearance
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuIcon = document.querySelector('.toggle-sidebar-icon');
+            const sidebar = document.querySelector('.admin-sidebar');
+
+            menuIcon.addEventListener('click', (event) => {
+                event.stopPropagation();
+                sidebar.classList.toggle('active');
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!sidebar.contains(event.target) && !menuIcon.contains(event.target)) {
+                    sidebar.classList.remove('active');
+                }
+            });
+        });
+
         // Handle filter buttons
         document.querySelectorAll('.filter-button').forEach(button => {
             button.addEventListener('click', function() {
@@ -174,100 +195,141 @@
             });
         }
 
-        let currentYear = new Date().getFullYear();
-        let currentMonth = new Date().getMonth();
-        const currentDate = new Date().getDate();
+        // Calendar variables and initialization
+        const daysContainer = document.querySelector(".calendar-days"),
+            nextBtn = document.querySelector(".next-button"),
+            prevBtn = document.querySelector(".prev-button"),
+            monthDisplay = document.querySelector(".calendar-month"),
+            todayBtn = document.querySelector(".today-button"),
+            programList = document.getElementById("programList");
 
-        function loadCalendar() {
-            const monthSelect = document.getElementById('monthSelect');
-            const calendarBody = document.getElementById('calendarBody');
+        const months = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
 
-            // Function to update the calendar based on selected month
-            function updateCalendar() {
-                const [year, month] = monthSelect.value.split('-');
+        const date = new Date();
+        let currentMonth = date.getMonth();
+        let currentYear = date.getFullYear();
 
-                // Parse month as an integer and subtract 1 to match JavaScript's zero-based month index
-                const parsedMonth = parseInt(month) - 1;
+        // Dummy data for program dates
+        const events = [{
+                date: "2023-10-28",
+                title: "Posyandu Balita dan Lansia Sehat"
+            },
+            {
+                date: "2023-09-15",
+                title: "Program Imunisasi Anak"
+            },
+            {
+                date: "2023-10-05",
+                title: "Pemeriksaan Kesehatan Gratis"
+            },
+        ];
 
-                const daysInMonth = new Date(year, parsedMonth + 1, 0).getDate(); // Get the last day of the month
-                const firstDay = new Date(year, parsedMonth, 1).getDay(); // Get the first day of the month
+        // Render the calendar
+        function renderCalendar() {
+            const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            const prevDaysInMonth = new Date(currentYear, currentMonth, 0).getDate();
 
-                // Clear previous calendar
-                calendarBody.innerHTML = '';
+            monthDisplay.innerHTML = `${months[currentMonth]} ${currentYear}`;
+            daysContainer.innerHTML = "";
 
-                // Create empty cells for days before the first day of the month
-                let row = '<tr>';
-                for (let i = 0; i < firstDay; i++) {
-                    row += '<td></td>'; // Empty cells
-                }
-
-                // Create cells for days of the month
-                for (let day = 1; day <= daysInMonth; day++) {
-                    row += `<td>${day}</td>`;
-                    if ((day + firstDay) % 7 === 0) { // Start a new row after Sunday
-                        row += '</tr><tr>';
-                    }
-                }
-                row += '</tr>';
-                calendarBody.innerHTML = row;
-
-                // Highlight current date if it falls within the selected month
-                if (currentMonth == parsedMonth && currentYear == year) {
-                    const currentCell = calendarBody.querySelector(`td:nth-child(${currentDate + firstDay})`);
-                    if (currentCell) {
-                        currentCell.classList.add('current-date');
-                    }
-                }
-
-                // Add event listeners to the new calendar cells
-                document.querySelectorAll('.calendar td').forEach(cell => {
-                    cell.addEventListener('click', function() {
-                        const selectedDate = this.innerText.trim();
-                        if (selectedDate) {
-                            // Highlight the selected date
-                            document.querySelectorAll('.calendar td').forEach(td => td.classList.remove(
-                                'selected'));
-                            this.classList.add('selected');
-
-                            // Filter program cards based on selected date
-                            filterByDate(selectedDate);
-                        }
-                    });
-                });
+            // Render previous month's days
+            for (let i = firstDayOfMonth; i > 0; i--) {
+                daysContainer.innerHTML += `<div class="calendar-day prev">${prevDaysInMonth - i + 1}</div>`;
             }
 
-            // Event listener for month selection
-            monthSelect.addEventListener('input', updateCalendar);
+            // Render current month's days
+            for (let i = 1; i <= daysInMonth; i++) {
+                const currentDate = new Date(currentYear, currentMonth, i);
+                const formattedDate = currentDate.toISOString().split('T')[0];
+                const event = events.find(event => event.date === formattedDate);
 
-            // Event listener for "Today" button
-            document.getElementById('currentMonthBtn').addEventListener('click', function() {
-                monthSelect.value = new Date().toISOString().slice(0, 7); // Reset to current month
-                updateCalendar(); // Update the calendar
-            });
+                const isToday =
+                    i === date.getDate() &&
+                    currentMonth === date.getMonth() &&
+                    currentYear === date.getFullYear();
 
-            updateCalendar(); // Initial load
+                daysContainer.innerHTML += `
+            <div class="calendar-day${isToday ? " today" : ""}${event ? " event" : ""}" data-date="${formattedDate}">
+                ${i}${event ? `<div class="event-indicator"></div>` : ""}
+            </div>`;
+            }
+
+            // Render next month's days
+            const nextDays = 42 - daysContainer.childElementCount; // Ensure 6 rows in the calendar
+            for (let i = 1; i <= nextDays; i++) {
+                daysContainer.innerHTML += `<div class="calendar-day next">${i}</div>`;
+            }
+
+            hideTodayBtn();
         }
 
-        // Call loadCalendar on page load
-        loadCalendar();
+        // Handle clicks on calendar days
+        daysContainer.addEventListener("click", (e) => {
+            const day = e.target.closest(".calendar-day");
+            if (day) {
+                const selectedDate = day.getAttribute("data-date");
 
-        // Toggle sidebar appearance
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuIcon = document.querySelector('.toggle-sidebar-icon');
-            const sidebar = document.querySelector('.admin-sidebar');
+                // Highlight the selected day
+                document.querySelectorAll(".calendar-day").forEach(d => d.classList.remove("selected"));
+                day.classList.add("selected");
 
-            // Event listener to toggle sidebar visibility
-            menuIcon.addEventListener('click', (event) => {
-                event.stopPropagation();
-                sidebar.classList.toggle('active');
-            });
+                // Filter program cards by selected date
+                filterProgramsByDate(selectedDate);
+            }
+        });
 
-            // Event listener to hide sidebar when clicking outside
-            document.addEventListener('click', (event) => {
-                if (!sidebar.contains(event.target) && !menuIcon.contains(event.target)) {
-                    sidebar.classList.remove('active');
+        // Function to filter program cards by selected date
+        function filterProgramsByDate(date) {
+            const programCards = document.querySelectorAll(".program-card");
+
+            programCards.forEach(card => {
+                const cardDate = card.getAttribute("data-date");
+
+                if (date === cardDate || !date) {
+                    card.style.display = "flex"; // Show matching cards
+                } else {
+                    card.style.display = "none"; // Hide non-matching cards
                 }
             });
+        }
+
+        // Navigate to the next or previous month
+        nextBtn.addEventListener("click", () => {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            renderCalendar();
         });
+
+        prevBtn.addEventListener("click", () => {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            renderCalendar();
+        });
+
+        // Navigate to the current month
+        todayBtn.addEventListener("click", () => {
+            currentMonth = date.getMonth();
+            currentYear = date.getFullYear();
+            renderCalendar();
+        });
+
+        // Hide the "Today" button if already on the current month
+        function hideTodayBtn() {
+            todayBtn.style.display =
+                currentMonth === date.getMonth() && currentYear === date.getFullYear() ? "none" : "flex";
+        }
+
+        // Initial render
+        renderCalendar();
     </script>
 @endsection

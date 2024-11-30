@@ -53,8 +53,25 @@
 
         // Function to remove item
         function removeItem(element) {
+            // Check if this is the last item
+            const items = document.querySelectorAll('.item');
+            if (items.length === 1) {
+                const userConfirmed = confirm("Batalkan pembayaran?");
+                if (!userConfirmed) {
+                    return; // If user cancels, do nothing
+                }
+            }
+
+            // Remove the item and update the total
             element.parentElement.remove();
             calculateTotal();
+
+            // Check if there are any items left
+            const remainingItems = document.querySelectorAll('.item');
+            if (remainingItems.length === 0) {
+                // If no items left, back to previous page
+                history.back();
+            }
         }
 
         // Function to handle payment submission
@@ -64,13 +81,15 @@
                 alert("Masukkan nomor rekening Anda.");
                 return;
             }
-            alert("Pembayaran berhasil!");
+            alert("Pembayaran berhasil! Silahkan tunggu konfirmasi pembayaran anda.");
+
+            window.location.href = "{{ route('riwayat-pembayaran') }}"
         }
 
         // Function to handle payment cancellation
         function cancelPayment() {
             document.getElementById('account-number').value = '';
-            const userConfirmed = confirm("Apakah Anda yakin ingin membatalkan pembayaran?");
+            const userConfirmed = confirm("Batalkan pembayaran?");
             if (userConfirmed) {
                 history.back(); // Redirects to the previous page if user confirms
             }
