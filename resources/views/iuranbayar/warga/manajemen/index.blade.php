@@ -49,7 +49,7 @@
                         @csrf
                         @method('DELETE')
 
-                        <button type="submit" onclick="alert('Ubah gagal akan menghapus record, apakah anda yakin')">Gagal</button>
+                        <button type="submit" onclick="confirm('Ubah gagal akan menghapus record, apakah anda yakin')">Gagal</button>
                     </form>
                 </td>
                 <td>
