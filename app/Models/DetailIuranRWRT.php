@@ -12,8 +12,10 @@ class DetailIuranRWRT extends Model
     protected $table = 'detail_iuran_rw_rt';
 
     protected $fillable = [
-        'id_iuran_rt',
+        'id_rt',
         'id_iuran_rw',
-        'jumlah'
+        'status',
+        'nomer_rekening',
+        'bukti_pembayaran'
     ];
 }
