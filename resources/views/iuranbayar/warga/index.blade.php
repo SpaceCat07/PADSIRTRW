@@ -67,7 +67,7 @@
                         @endphp
                         <td>
                             @if (is_null($detailIuranBulanan) || $detailIuranBulanan->status === 'gagal')
-                                <input type="checkbox" name="iuran_tambahan[]" value="{{ $tambahan->id }}" />
+                                <input type="checkbox" name="iuran_bulanan[]" value="{{ $bulanan->id }}" />
                             @endif
                         </td>
                         <td>{{ $bulanan->bulan }}</td>
