@@ -10,7 +10,7 @@
         </div>
 
         <div class="login-card p-5 shadow-lg text-white">
-            <h2 class="text-center mb-3 fw-bold">Log In</h2>
+            <h2 class="text-center mb-3 fw-bold text-white">Log In</h2>
 
             <form action="{{ route('login') }}" method="post">
                 @csrf
@@ -65,9 +65,9 @@
                 @endif
             </form>
 
-            <p>lupa password anda? <a href="{{ route('forgot-password') }}">Klik disini untuk mengubah password</a></p>
+            <p class="text-center mt-4">Lupa password anda? <a href="{{ route('forgot-password') }}" class="text-warning fw-bold">Klik disini untuk mengubah password</a></p>
 
-            <p class="text-center mt-4">
+            <p class="text-center">
                 Belum punya akun? <a href="{{ route('account.requestCreate') }}" class="text-warning fw-bold">Klik untuk
                     request akun</a>
             </p>
