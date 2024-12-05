@@ -15,5 +15,7 @@ class DetailIuranRTPengguna extends Model
         'id_iuran_rt',
         'id_pengguna',
         'status',
+        'nomor_rekening',
+        'bukti_pembayaran'
     ];
 }

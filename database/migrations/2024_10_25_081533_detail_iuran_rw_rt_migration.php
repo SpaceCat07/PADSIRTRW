@@ -15,7 +15,9 @@ return new class extends Migration
             $table -> id();
             $table -> foreignId('id_iuran_rw') -> constrained('iuran_rw');
             $table -> foreignId('id_rt') -> constrained('rt');
-            $table -> float('jumlah');
+            $table -> enum('status', ['belum','pending', 'selesai', 'gagal']) -> default('belum');
+            $table -> bigInteger('nomor_rekening');
+            $table -> string('bukti_pembayaran') -> default('default.jpg');
             $table -> timestamps();
         });
     }
