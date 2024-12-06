@@ -69,7 +69,7 @@
         <div class="iuran-container mt-5">
             <div class="iuran-info">
                 <h1 class="section-title mb-4">Informasi Iuran</h1>
-                <a href="{{ route('riwayat-pembayaran') }}" class="text-decoration-none">
+                <a href="{{ route('pembayaran') }}" class="text-decoration-none">
                     <div class="iuran-report">
                         <div class="status-box">
                             <div class="status text-center">

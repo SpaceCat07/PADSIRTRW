@@ -51,14 +51,30 @@
 
             <!-- Data Warga -->
             <div class="admin-card data-warga" data-url="/data-warga/admin">
-                <div class="title-arrow">
-                    <h3>Data Warga</h3>
-                    <img src="{{ asset('storage/arrow.png') }}" alt="">
-                </div>
-                <div class="family-data-container">
-                    <img src="{{ asset('storage/family.png') }}" alt="">
-                    <p>20 Keluarga</p>
-                </div>
+                @if (Auth::user()->role == 'Admin_RT')
+                    <div class="title-arrow">
+                        <h3>Data Warga</h3>
+                        <img src="{{ asset('storage/arrow.png') }}" alt="">
+                    </div>
+                    <div class="family-data-container">
+                        <img src="{{ asset('storage/family.png') }}" alt="">
+                        <p>20 Keluarga</p>
+                    </div>
+                @elseif (Auth::user()->role == 'Admin_RW')
+                    <div class="title-arrow">
+                        <h3>Data RT</h3>
+                        <img src="{{ asset('storage/arrow.png') }}" alt="">
+                    </div>
+                    <div class="family-data-container">
+                        <img src="{{ asset('storage/family.png') }}" alt="">
+                        <p>RT 001</p>
+                    </div>
+                    <div class="family-data-container">
+                        <img src="{{ asset('storage/family.png') }}" alt="">
+                        <p>RT 002</p>
+                    </div>
+                @endif
+
             </div>
 
             <!-- Pembayaran Butuh Konfirmasi -->
@@ -113,8 +129,8 @@
             <!-- Grafik -->
             <div class="admin-card grafik">
                 <div class="print-chart-container">
-                    <button id="printButton" class="print-chart">Cetak</button>
                     <h3>Grafik Laporan Pengeluaran</h3>
+                    <button id="printButton" class="print-chart">Cetak</button>
                 </div>
 
                 {{-- barchart --}}
