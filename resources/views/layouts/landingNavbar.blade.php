@@ -7,7 +7,6 @@
     <title></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!-- Fonts -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
@@ -30,11 +29,6 @@
                 <li><a href="/#about-us" class="nav-link px-2 link-idle">About Us</a></li>
                 <li><a href="/#contact-section" class="nav-link px-2 link-idle">Contact</a></li>
             </ul>
-
-            <!-- <div class="col-md-3 text-end">
-                <button type="button" class="btn btn-outline-primary me-2">Login</button>
-                <button type="button" class="btn btn-primary">Sign-up</button>
-            </div> -->
         </header>
     </div>
 
@@ -47,5 +41,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         crossorigin="anonymous"></script>
 </body>
-
 </html>

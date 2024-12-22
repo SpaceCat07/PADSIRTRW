@@ -1,5 +1,7 @@
 @extends('layouts.landingNavbar')
 
+<link rel="stylesheet" href="{{ asset('css/landing-page.css') }}">
+
 @section('content')
     <div class="landing-page-container">
         <div class="selamat-datang">
