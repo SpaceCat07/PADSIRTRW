@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <meta name="description" content="Your website description">
+    <meta name="keywords" content="Your website keywords">
+    <title>Website Title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <!-- Fonts -->
@@ -20,7 +22,7 @@
             class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <div class="col-md-3 mb-2 mb-md-0">
                 <a href="/" class="logo d-inline-flex link-body-emphasis text-decoration-none">
-                    <img src="{{ asset('storage/Logo.png') }}" alt="Logo" width="40%">
+                    <img src="{{ asset('storage/Logo.png') }}" alt="Logo" width="40%" loading="lazy">
                 </a>
             </div>
 
@@ -35,10 +37,9 @@
     <!-- main content -->
     @yield('content')
 
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous" integrity="sha384-0ND31dBZfAHb0ZERodL6NsmqUyD6QBzd+poEDxfhnNv309E8EulHnC+2dJuyoZyf"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous" integrity="sha384-0ND31dBZfAHb0ZERodL6NsmqUyD6QBzd+poEDxfhnNv309E8EulHnC+2dJuyoZyf"></script>
 </body>
 </html>

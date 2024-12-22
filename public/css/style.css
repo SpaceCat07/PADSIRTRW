@@ -3,64 +3,6 @@ body {
     padding: 0 20px;
 }
 
-/* Navbar */
-.logo {
-    margin-left: 45px;
-}
-
-.header-container {
-    margin: 0 -20px;
-    position: relative;
-    background-color: #ffffff;
-    height: auto;
-    z-index: 10;
-}
-
-.link-active {
-    color: #007bff; /* Change to a more vibrant color */
-    font-weight: 600;
-    border-bottom: 2px solid #007bff; /* Underline for active link */
-}
-
-.link-idle {
-    color: #486284;
-}
-
-.nav li {
-    margin-right: 30px;
-}
-
-.dropdown-menu {
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    border-radius: 8px; /* Rounded corners */
-}
-
-.dropdown-item {
-    width: 100%;
-}
-
-.dropdown-item:hover {
-    background-color: #f1f1f1; /* Light background on hover */
-    color: #000; /* Dark text on hover */
-}
-
-.submit-btn {
-    padding: 15px 20px;
-    margin: 10px 0 10px 0;
-    border: none;
-    border-radius: 9px;
-    cursor: pointer;
-    color: #43459B;
-    font-size: 16px;
-    font-weight: bold;
-    width: 100%;
-    max-width: 130px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
-}
-
-
 /* laman login */
 .login-container {
     max-width: 100%;
