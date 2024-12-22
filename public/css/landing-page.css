@@ -402,22 +402,21 @@ body {
     border-top: solid 1px #D9DBE9;
 }
 
-/* Media landing Page */
 @media (max-width: 1200px) {
     .about-us {
-        padding: 0 20%; /* Adjust padding for medium screens */
+        padding: 0 15%; /* Adjust padding for medium screens */
     }
 
     .selamat-datang-top {
-        gap: 50px; /* Reduce gap for medium screens */
+        gap: 30px; /* Reduce gap for medium screens */
     }
 
     .selamat-datang-top-texts h1 {
-        font-size: 40px; /* Adjust font size for medium screens */
+        font-size: 35px; /* Adjust font size for medium screens */
     }
 
     .selamat-datang-bottom p {
-        font-size: 18px; /* Adjust font size for medium screens */
+        font-size: 16px; /* Adjust font size for medium screens */
     }
 
     .footer-content {
@@ -427,17 +426,17 @@ body {
     }
 
     .footer-logo img {
-        width: 60%; /* Make logo responsive */
+        width: 50%; /* Make logo responsive */
     }
 
     .footer-links {
         justify-content: center; /* Center links */
-        gap: 10px; /* Reduce gap for smaller screens */
+        gap: 15px; /* Reduce gap for smaller screens */
     }
 
     .footer-socials {
         justify-content: center; /* Center social icons */
-        gap: 20px; /* Reduce gap for smaller screens */
+        gap: 25px; /* Reduce gap for smaller screens */
     }
 
     .footer-bottom {
@@ -449,21 +448,21 @@ body {
 
 @media (max-width: 870px) {
     .selamat-datang{  
-        margin-bottom: 5%;
+        margin-bottom: 10%;
     }
 
     .selamat-datang-top {
         flex-direction: column; /* Stack texts and images */
-        gap: 20px; /* Adjust gap for smaller screens */
+        gap: 15px; /* Adjust gap for smaller screens */
     }
 
     .selamat-datang-top-texts {
         text-align: center; /* Center text on smaller screens */
-        max-width: 80%;
+        max-width: 90%;
     }
 
     .selamat-datang-bottom p {
-        font-size: 16px; /* Adjust font size for smaller screens */
+        font-size: 14px; /* Adjust font size for smaller screens */
     }
 
     .image-wrapper {
@@ -472,21 +471,21 @@ body {
     }
 
     .about-us {
-        padding: 0 10%; /* Adjust padding for smaller screens */
+        padding: 0 5%; /* Adjust padding for smaller screens */
     }
 
     .fitur-tersedia {
-        padding: 60px 10px; /* Adjust padding for smaller screens */
+        padding: 40px 5px; /* Adjust padding for smaller screens */
     }
 
     .fitur-tersedia h2 {
-        font-size: 30px; /* Adjust font size for smaller screens */
-        max-width: 200px; /* Adjust max width for smaller screens */
+        font-size: 25px; /* Adjust font size for smaller screens */
+        max-width: 250px; /* Adjust max width for smaller screens */
     }
 
     .fitur-item {
-        width: 90%; /* Make width responsive */
-        max-width: 300px; /* Limit max width */
+        width: 95%; /* Make width responsive */
+        max-width: 350px; /* Limit max width */
         height: auto; /* Allow height to adjust */
     }
 
@@ -497,12 +496,12 @@ body {
 
     .map {
         width: 100%; /* Make width responsive */
-        max-width: 400px; /* Limit max width */
+        max-width: 450px; /* Limit max width */
     }
 
     .map iframe {
         width: 100%; /* Make iframe responsive */
-        height: 200px; /* Adjust height for smaller screens */
+        height: 250px; /* Adjust height for smaller screens */
     }
 }
 
@@ -514,7 +513,7 @@ body {
     }
 
     .image-accessory-wrapper {
-        margin: -5%;
+        margin: -10%;
     }
 
     .img-1-accessory,
@@ -523,21 +522,21 @@ body {
     }
 
     .about-us h2 {
-        font-size: 40px; /* Adjust font size for smaller screens */
+        font-size: 30px; /* Adjust font size for smaller screens */
     }
 
     .about-us p {
-        font-size: 14px;
+        font-size: 12px;
     }
 }
 
 @media (max-width: 480px) {
     .footer-links p,
     .footer-links a {
-        font-size: 14px; /* Reduce font size on very small screens */
+        font-size: 12px; /* Reduce font size on very small screens */
     }
 
     .footer-bottom {
-        padding: 10px 20px; /* Adjust padding for smaller screens */
+        padding: 5px 15px; /* Adjust padding for smaller screens */
     }
 }
