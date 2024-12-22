@@ -169,6 +169,7 @@ body {
     z-index: 1; /* Ensure it's above the selamat-datang section */
     margin-top: -500px; /* This will help create the overlap effect */
     padding-top: 50px; /* Optional padding for spacing */
+    background-attachment: fixed; /* Add this to improve background image behavior */
 }
 
 .about-us h2 {
@@ -176,11 +177,13 @@ body {
     font-weight: 600;
     margin-bottom: 20px;
     color: #FFD25D;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add text shadow for better readability */
 }
 
 .about-us p {
     font-size: 18px;
     font-weight: 500;
+    line-height: 1.5; /* Improve line height for better readability */
 }
 
 .fitur-tersedia {
@@ -192,6 +195,7 @@ body {
     border-radius: 50% 50% 0 0; /* This creates the inward curve */
     z-index: 10;
     position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
 }
 
 .fitur-tersedia h2 {
@@ -201,6 +205,7 @@ body {
     max-width: 400px; 
     text-align: center; 
     margin: 0 auto 50px; 
+    font-weight: 600; /* Increase font weight for better readability */
 }
 
 .fitur-list {
@@ -208,6 +213,7 @@ body {
     justify-content: center;
     gap: 30px;
     flex-wrap: wrap;
+    margin-bottom: 50px; /* Add some space at the bottom */
 }
 
 .fitur-item {
@@ -220,6 +226,11 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
     justify-content: center;
+    transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+
+.fitur-item:hover {
+    transform: scale(1.05); /* Scale up on hover */
 }
 
 .item-1 {
@@ -240,10 +251,12 @@ body {
 .fitur-item h3 {
     font-size: 30px;
     margin-bottom: 20px;
+    font-weight: 600; /* Increase font weight for better readability */
 }
 
 .fitur-item p {
     font-weight: 500;
+    font-size: 16px; /* Increase font size for better readability */
 }
 
 .contact-section {
