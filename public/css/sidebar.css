@@ -1,0 +1,94 @@
+/* Sidebar */
+/* Sidebar Container */
+.sidebar {
+    width: 290px;
+    height: 100vh;
+    background-color: #3E3D85;
+    padding: 30px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Horizontal Toggle for RT/RW */
+.toggle-container {
+    display: flex;
+    justify-content: center; /* Center the items */
+    align-items: center; /* Center items vertically */
+    border-radius: 12px;
+    margin-top: 90px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.toggle-item {
+    flex: 1;
+    text-align: center;
+    padding: 15px 0;
+    cursor: pointer;
+    font-weight: 600;
+    color: white;
+    font-size: 20px;
+    transition: background-color 0.3s, font-weight 0.3s;
+    position: relative; /* For positioning the underline */
+}
+
+/* Active toggle with bottom border */
+.toggle-item.active {
+    color: #FFCF00;
+    font-weight: 600;
+    font-size: 20px;
+    border-bottom: 3px solid #FFCF00; /* Bottom border for active toggle */
+}
+
+/* Vertical line between toggles */
+.vertical-line {
+    width: 2px; /* Width of the vertical line */
+    height: 40%; /* Height of the vertical line */
+    background-color: white; /* Color of the vertical line */
+    margin: 0 10px; /* Space around the vertical line */
+}
+
+.sidebar-content {
+    margin-top: 60px;
+    margin-left: 30px;
+}
+
+/* Sidebar Item */
+.sidebar-item {
+    padding: 20px 40px;
+    margin-bottom: 10px;
+    margin-right: -20px;
+    color: white;
+    font-size: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: relative; /* For positioning the active item */
+}
+
+/* Hover effect */
+.sidebar-item:hover {
+    font-size: 20px;
+    background-color: #6A68A5;
+    margin-right: -20px;
+    border-radius: 10px 0 0 10px;
+}
+
+/* Active sidebar item */
+.sidebar-item.active {
+    background-color: white; /* Change to white when active */
+    color: #3E3D85; /* Text color for active item */
+    font-weight: 600;
+    font-size: 20px;
+    border-radius: 7px 0 0 7px;
+    margin-right: -20px; /* Negative margin to pull it to the right */
+    padding-right: 20px; /* Add padding to the right for space */
+}
+
+/* Optional: To ensure the last item has no margin at the bottom */
+.sidebar-item:last-child {
+    margin-bottom: 0; /* Remove bottom margin for the last item */
+}

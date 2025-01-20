@@ -1,31 +1,71 @@
 /* Navbar */
-.logo {
-    margin-left: 45px;
+body {
+    top: 20;
+    left: -20;
 }
 
-.header-container {
-    margin: 0 -20px;
-    position: relative;
-    background-color: #ffffff;
-    height: auto;
-    z-index: 10;
+.container-fluid {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    margin-right: 50px;
+}
+
+.logo {
+    width: 100%;
+    margin-left: 0;
 }
 
 .link-active {
-    color: #03A9F4; /* More vibrant color */
+    color: #03A9F4;
     font-weight: 600;
-    border-bottom: 2px solid #03A9F4; /* Underline for active link */
+    border-bottom: 2px solid #03A9F4;
     transition: all 0.3s ease;
 }
 
 .link-idle {
     color: #486284;
     transition: all 0.3s ease;
+}
+
+.nav-link {
+    margin-right: 20px;
+    font-size: 16px; /* Text size */
+    font-weight: 500; /* Slightly bold text */
+}
+
+/* Dropdown Menu Styling */
+.navbar-collapse {
+    background-color: #ffffff; /* Background color of the dropdown */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for better visibility */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px; /* Spacing around items */
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+.navbar-nav .nav-link {
+    color: #486284; /* Default text color */
+    font-size: 16px; /* Text size */
+    font-weight: 500; /* Slightly bold text */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #03A9F4; /* Hover color */
+    background-color: rgba(3, 169, 244, 0.1); /* Subtle hover background */
+    border-radius: 5px; /* Rounded corners on hover */
+    padding: 5px 10px; /* Add padding for hover effect */
+}
+
+/* Toggler Icon Styling */
+.navbar-toggler {
+    border: 1px solid #ddd; /* Border around the toggler */
+    padding: 5px; /* Spacing inside the toggler */
+    border-radius: 4px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background for the toggler */
+}
+
+.navbar-toggler:hover {
+    background-color: #e9ecef; /* Slightly darker background on hover */
 }
 
 .nav li {
@@ -36,8 +76,8 @@
 .dropdown-menu {
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
     padding: 20px;
 }
 
@@ -48,8 +88,8 @@
 }
 
 .dropdown-item:hover {
-    background-color: #f1f1f1; /* Light background on hover */
-    color: #000; /* Dark text on hover */
+    background-color: #f1f1f1;
+    color: #000;
 }
 
 .submit-btn {
@@ -64,10 +104,23 @@
     width: 100%;
     max-width: 130px;
     background-color: #43459B;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
 }
 
 .submit-btn:hover {
     background-color: #3B3F54;
+}
+
+/* Main Content Styling */
+
+/* Mobile View Adjustments */
+@media (max-width: 768px) {
+    .navbar-collapse {
+        margin-top: 10px; /* Space between the toggler and dropdown */
+    }
+
+    .navbar-nav .nav-item {
+        text-align: center; /* Center align items in mobile view */
+    }
 }

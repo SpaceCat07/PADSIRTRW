@@ -1,0 +1,128 @@
+body {
+    margin-top: 50px;
+}
+
+/* laman login */
+.login-container {
+    max-width: 100%;
+    height: 65vh;
+    margin-top: 50px;
+    align-items: center;
+}
+
+.login-vector {
+    margin: 0;
+    padding: 0;
+}
+
+.login-vector img {
+    display: block;
+    height: auto;
+}
+
+.login-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #4b4c9d;
+    width: 100%;
+    min-height: 500px;
+    border-radius: 150px 0 150px 0;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    max-width: 750px;
+}
+
+.form-floating {
+    position: relative;
+}
+
+.form-floating label {
+    top: 10%;
+    left: 15px;
+    transform: translateY(-10%);
+    /* padding: 0 5px; */
+    transition: 0.2s ease all;
+    pointer-events: none;
+}
+
+.form-control {
+    height: 50px;
+    border: none;
+    background-color: #fff;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border: 2px solid #ffc107;
+}
+
+.form-floating input:focus~label,
+.form-floating input:not(:placeholder-shown)~label {
+    top: 0;
+    left: 10px;
+    transform: translateY(-100%);
+    font-size: 0.85rem;
+    color: #ffc107;
+}
+
+.password-toggle {
+    cursor: pointer;
+    color: black;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    text-decoration: #43459B;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+/* Media Queries */
+
+/* Medium screens (Laptops) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .login-card {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .login-vector img {
+        display: none;
+    }
+}
+
+/* Small screens (Tablets) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .login-card {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    .login-vector img {
+        display: none;
+    }
+}
+
+/* Extra small screens (Mobiles) */
+@media (max-width: 575px) {
+    .login-card {
+        max-width: 100%;
+        margin: 0 10%;
+        border-radius: 50px 0 50px 0;
+    }
+    .login-vector img {
+        display: none;
+    }
+    .form-floating label {
+        font-size: 0.7rem;
+    }
+    .form-control {
+        height: 40px;
+    }
+}

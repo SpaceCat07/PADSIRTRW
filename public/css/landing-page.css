@@ -1,11 +1,11 @@
 /* Landing Page */
 body {
     margin: 0;
-    padding: 0 2%;
 }
 
 .landing-page-container{
     margin: 0 -2%;
+    padding-top: 100px;
 }
 
 .selamat-datang {
@@ -14,7 +14,7 @@ body {
     padding: 5% 2%;
     margin-bottom: -5%; /* Keep this for the overlap effect */
     border-radius: 0 0 50% 50%; /* This creates the inward curve */
-    z-index: 10;
+    z-index: 2;
     position: relative;
 }
 
@@ -193,7 +193,7 @@ body {
     text-align: center;
     margin-top: -500px; /* Keep this for the overlap effect */
     border-radius: 50% 50% 0 0; /* This creates the inward curve */
-    z-index: 10;
+    z-index: 2;
     position: relative;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
 }
@@ -266,7 +266,7 @@ body {
     gap: 40px;
     justify-content: center;
     align-items: center;
-    z-index: 10;
+    z-index: 2;
     position: relative;
 }
 
@@ -446,7 +446,7 @@ body {
     }
 }
 
-@media (max-width: 870px) {
+@media (max-width: 1010px) {
     .selamat-datang{  
         margin-bottom: 10%;
     }

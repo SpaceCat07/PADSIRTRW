@@ -1,0 +1,243 @@
+/* Dashboard Container */
+.dashboard-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    position: relative;
+    background: #FFFFFF;
+}
+
+/* Carousel Styles */
+.carousel-container {
+    padding: 20% 10%;
+    height: 1200px;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.carousel-title h1 {
+    font-size: 52px;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
+.carousel-title-highlight {
+    width: 500px;
+    padding: 10px;
+    background-color: #FFD25D;
+    border-radius: 0 40px 0 40px;
+}
+
+.carousel-title-highlight h1 {
+    font-size: 52px;
+    font-weight: 700;
+    color: #676AFF;
+}
+
+.row {
+    text-align: center;
+    justify-content: space-between;
+}
+
+.carousel-card {
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.carousel-card-title,
+.carousel-card-text {
+    color: #676AFF;
+}
+
+.carousel-card-title {
+    font-size: 36px;
+    margin-bottom: 5px;
+    font-style: italic;
+    align-items: left;
+}
+
+.carousel-card-text {
+    font-size: 20px;
+}
+
+.carousel-card-date-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn.btn-link {
+    font-size: 16px;
+    font-weight: 500;
+    color: #676AFF;
+    text-decoration: none;
+}
+
+.custom-card {
+    max-width: 600px;
+    width: 100%;
+    height: 350px;
+    margin: auto;
+    border-radius: 100px 0 100px 0;
+    z-index: 1;
+    position: relative;
+}
+
+.carousel-card-body {
+    width: 75%;
+    margin-left: 80px;
+    margin-top: -45px;
+    padding: 15px 35px;
+    border-radius: 0 40px 0 40px;
+    background-color: #FFD25D;
+    z-index: 2;
+    position: relative;
+    text-align: left; /* Align text to the left */
+}
+
+.carousel-card:hover {
+    transform: scale(1.05);
+}
+
+/* Carousel Control Styles */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #313272;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+    background-color: #242563;
+    transform: scale(1.2) rotate(15deg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-10%);
+    z-index:  1;
+    transition: all 0.3s ease;
+}
+
+/* Informasi Iuran Section */
+.iuran-info {
+    max-width: 1200px;
+    margin: auto;
+    margin-bottom: 70px;
+}
+
+.iuran-report {
+    display: flex;
+    flex-direction: row;
+}
+
+.iuran-report a {
+    text-decoration: none;
+}
+
+.iuran-info img {
+    width: 90px;
+    height: auto;
+    margin: 0 5px;
+}
+
+.section-title {
+    font-size: 36px;
+    color: #313272;
+}
+
+.iuran-info p {
+    margin: 0 10px;
+}
+
+/* Status Box Styles */
+.status-box,
+.payment-status,
+.billing-status,
+.total-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 11px;
+    background: #D9D9D9;
+}
+
+.status-box {
+    max-width: 150px;
+    width: 100%;
+    flex-direction: column;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.payment-status,
+.billing-status,
+.total-box {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.316);
+}
+
+.payment-status,
+.billing-status {
+    align-items: center;
+    background: #FFFFFF;
+    border: none;
+    padding: 15px;
+}
+
+.total-box {
+    background-color: #676AFF;
+    color: #ffffff;
+}
+
+.total.title {
+    font-size: 25px;
+    color: #ffffff;
+}
+
+.status p {
+    font-size: 24px;
+    color: #313272;
+}
+
+.status.title {
+    color: #000;
+    font-size: 25px;
+}
+
+/* Amount Style */
+.amount {
+    font-weight: 500;
+    font-size: 30px;
+    margin: 5px 0 0;
+}
+
+/* Charts Container */
+.charts-container {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0;
+}
+
+/* dashboard */
+@media (max-width: 768px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+    }
+}

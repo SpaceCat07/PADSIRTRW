@@ -1,0 +1,122 @@
+body {
+    margin: 0;
+}
+
+.user-registration-container {
+    max-width: 1300px;
+    margin: 2rem auto;
+    padding: 1rem;
+    text-align: center;
+}
+
+.admin-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.user-registration-form-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto 100px;
+    padding: 50px;
+    background-color: #676AFF80;
+    border-radius: 0 40px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-registration-form-container .form-group {
+    margin-bottom: 40px;
+}
+
+.user-registration-form-container .register-button {
+    background-color: #43459B;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.form-group label {
+    width: 300px;
+    font-weight: 600;
+    color: #43459B;
+}
+
+.form-group input {
+    justify-content: left;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="password"],
+.form-group textarea,
+.form-group select {
+    width: 800px;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2); /* Add inset shadow */
+    transition: border-color 0.3s;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="date"]:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #9d8df1;
+}
+
+.form-group input[type="date"], 
+.form-group input[type="file"],
+.custom-file-upload {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.492);
+    transition: border-color 0.3s;
+    cursor: pointer;
+}
+
+.submit-button-group {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+}
+
+.register-button {
+    padding: 10px;
+    width: 200px;
+    margin: 10px;
+    background-color: #676AFF;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.492); /* Added shadow */
+    transition: background-color 0.3s;
+}
+
+.register-button[type="cancel"] {
+    background-color: #fff;
+    color: #43459B;
+    font-weight: 600;
+}
+
+.register-button:hover {
+    background-color: #362b7e;
+}
+
+.register-button:hover[type="cancel"] {
+    background-color: #c0c0c0;
+}

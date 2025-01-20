@@ -1,5 +1,8 @@
 @extends('layouts.landingNavbar')
 
+<title>SIMAS - Lupa Password</title>
+<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+
 @section('content')
     <div class="login-container d-flex justify-content-center align-items-center">
         <div class="login-card p-5 shadow-lg text-white">

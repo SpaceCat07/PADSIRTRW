@@ -1,0 +1,20 @@
+/* Page kritik-saran */
+.kritik-card {
+    margin-top: 10%;
+    background-color: #676AFF;
+    width: 100%;
+    border-radius: 0 110px 0 110px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    max-width: 750px;
+}
+
+.rounded-custom {
+    border-radius: 25px; /* Adjust the radius for more roundness */
+    height: 60px; /* Increase the height */
+    padding: 15px; /* Add padding for better appearance */
+    margin-top: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #676AFF;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}

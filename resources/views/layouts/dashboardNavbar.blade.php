@@ -13,7 +13,7 @@
     <!-- bootstrap and css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
     <!-- script for carousel -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
@@ -31,7 +31,7 @@
     <div class="header-container">
         <!-- header -->
         <header
-            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom bg-white position-fixed w-100 z-3">
             <div class="col-md-3 mb-2 mb-md-0">
                 <a href="/" class="logo d-inline-flex link-body-emphasis text-decoration-none">
                     <img src="{{ asset('storage/Logo.png') }}" alt="Logo" width="40%">
@@ -43,8 +43,7 @@
                         class="nav-link px-2 {{ $page == 'dashboard' ? 'link-active' : 'link-idle' }}">Dashboard</a>
                 </li>
                 <li><a href="/program-kerja"
-                        class="nav-link px-2 {{ $page == 'program-kerja' ? 'link-active' : 'link-idle' }}">Program
-                        Kerja</a></li>
+                        class="nav-link px-2 {{ $page == 'program-kerja' ? 'link-active' : 'link-idle' }}">Program Kerja</a></li>
                 <li class="nav-item dropdown">
                     <a href="#"
                         class="nav-link dropdown-toggle px-2 {{ $page == 'pembayaran' ? 'link-active' : 'link-idle' }}"

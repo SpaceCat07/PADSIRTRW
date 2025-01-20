@@ -1,5 +1,8 @@
 @extends('layouts.dashboardNavbar')
 
+<title>SIMAS - Program Kerja</title>
+<link rel="stylesheet" href="{{ asset('css/lihat-proker.css') }}">
+
 @section('content')
     <?php
     $page = 'program-kerja'; // or 'program-kerja', 'pembayaran', etc.
