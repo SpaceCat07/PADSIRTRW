@@ -1,5 +1,8 @@
 @extends('layouts.landingNavbar')
 
+<title>SIMAS - Login</title>
+<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+
 @section('content')
     <div class="login-container d-flex justify-content-center align-items-center">
 

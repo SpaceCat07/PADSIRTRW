@@ -1,26 +1,29 @@
 @extends('layouts.landingNavbar')
 
+<title>SIMAS - Request Akun</title>
+<link rel="stylesheet" href="{{ asset('css/account-request.css') }}">
+
 @section('content')
     <?php
-    $page = 'dashboard'; // or 'program-kerja', 'pembayaran', etc.
+    $currentPage = 'dashboard'; // or 'program-kerja', 'pembayaran', etc.
     ?>
 
     {{-- Header --}}
-    <div class="data-warga-container">
+    <div class="user-registration-container">
         <header class="admin-header">
             <h1>Register User</h1>
         </header>
     </div>
 
-    <div class="edit-keuangan-container">
-        <form action="{{ route('account.requestStore') }}" method="POST" class="edit-program-form"
+    <div class="user-registration-form-container">
+        <form action="{{ route('account.requestStore') }}" method="POST" class="user-registration-form"
             onsubmit="return confirm('Apakah Anda yakin ingin menyimpan perubahan?');">
             @csrf
 
             <div class="form-group">
-                <label for="nik">NIK</label>
-                <input type="text" id="nik" name="nik" placeholder="NIK" required>
-                @error('nik')
+                <label for="nationalIdentityNumber">National Identity Number (NIK)</label>
+                <input type="text" id="nationalIdentityNumber" name="nationalIdentityNumber" placeholder="NIK" required>
+                @error('nationalIdentityNumber')
                     <div class="alert alert-danger mt-2">
                         {{ $message }}
                     </div>
@@ -28,9 +31,9 @@
             </div>
 
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email" required>
-                @error('email')
+                <label for="emailAddress">Email Address</label>
+                <input type="email" id="emailAddress" name="emailAddress" placeholder="Email Address" required>
+                @error('emailAddress')
                     <div class="alert alert-danger mt-2">
                         {{ $message }}
                     </div>
@@ -38,9 +41,9 @@
             </div>
 
             <div class="form-group">
-                <label for="no_hp">Nomor Telepon</label>
-                <input type="tel" id="no_hp" name="no_hp" placeholder="Nomor Telepon" required>
-                @error('no_hp')
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" required>
+                @error('phoneNumber')
                     <div class="alert alert-danger mt-2">
                         {{ $message }}
                     </div>
@@ -58,13 +61,13 @@
             </div>
 
             <div class="form-group">
-                <label for="role">Role</label>
-                <select name="role" id="role" required>
+                <label for="userRole">User  Role</label>
+                <select name="userRole" id="userRole" required>
                     @foreach ($roleList as $role)
                         <option value="{{ $role }}">{{ $role }}</option>
                     @endforeach
                 </select>
-                @error('role')
+                @error('userRole')
                     <div class="alert alert-danger mt-2">
                         {{ $message }}
                     </div>
@@ -72,37 +75,37 @@
             </div>
 
             <div class="submit-button-group">
-                <button type="submit" class="proker-submit-button">Register</button>
+                <button type="submit" class="register-button">Register</button>
             </div>
         </form>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const form = document.querySelector('.edit-program-form');
+            const form = document.querySelector('.user-registration-form');
 
             form.addEventListener('submit', (event) => {
-                const nik = document.getElementById('nik').value.trim();
-                const email = document.getElementById('email').value.trim();
-                const no_hp = document.getElementById('no_hp').value.trim();
+                const nationalIdentityNumber = document.getElementById('nationalIdentityNumber').value.trim();
+                const emailAddress = document.getElementById('emailAddress').value.trim();
+                const phoneNumber = document.getElementById('phoneNumber').value.trim();
                 const password = document.getElementById('password').value.trim();
 
                 let isValid = true;
                 let errorMessages = [];
 
-                if (nik === '') {
+                if (nationalIdentityNumber === '') {
                     isValid = false;
-                    errorMessages.push('NIK tidak boleh kosong.');
+                    errorMessages.push('National Identity Number (NIK) tidak boleh kosong.');
                 }
 
-                if (email === '') {
+                if (emailAddress === '') {
                     isValid = false;
-                    errorMessages.push('Email tidak boleh kosong.');
+                    errorMessages.push('Email Address tidak boleh kosong.');
                 }
 
-                if (no_hp === '') {
+                if (phoneNumber === '') {
                     isValid = false;
-                    errorMessages.push('Nomor Telepon tidak boleh kosong.');
+                    errorMessages.push('Phone Number tidak boleh kosong.');
                 }
 
                 if (password === '') {

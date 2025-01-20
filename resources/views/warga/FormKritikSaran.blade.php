@@ -1,5 +1,8 @@
 @extends('layouts.dashboardNavbar')
 
+<title>SIMAS - Program Kerja</title>
+<link rel="stylesheet" href="{{ asset('css/kritik-saran.css') }}">
+
 @section('content')
     <?php
     $page = 'kritik-saran'; // or 'program-kerja', 'pembayaran', etc.

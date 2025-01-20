@@ -1,5 +1,6 @@
 @extends('layouts.landingNavbar')
 
+<title>SIMAS - Landing Page</title>
 <link rel="stylesheet" href="{{ asset('css/landing-page.css') }}">
 
 @section('content')

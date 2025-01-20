@@ -1,5 +1,9 @@
 @extends('layouts.dashboardNavbar')
 
+<title>SIMAS - dashboard</title>
+<link rel="stylesheet" href="{{ asset('css/dashboard-warga.css') }}">
+<link rel="stylesheet" href="{{ asset('css/charts.css') }}">
+
 @section('content')
     <?php
     $page = 'dashboard'; // or 'program-kerja', 'pembayaran', etc.

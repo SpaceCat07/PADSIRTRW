@@ -1,0 +1,167 @@
+/* Program Kerja */
+/* Main container */
+.proker-main {
+    padding-left: 290px;
+}
+
+.proker-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+/* Search and filter section */
+.search-filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-filter input[type="text"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px 15px;
+    border: 2px solid #ccc; 
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s; 
+}
+
+.search-filter input[type="text"]:focus {
+    border-color: #6a5acd; /* Change border color on focus (purple) */
+}
+
+.search-filter.text-center {
+    max-width: 200px;
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background-color: #43459B;
+    font-size: 14px;
+    color: #f0f0f0;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.search-filter select:hover,
+.search-filter select:focus {
+    border-color: #483d8b; /* Darker purple on hover and focus */
+}
+
+/* Sort by text */
+.sort-by {
+    display: flex;
+    flex-direction: row;
+    margin: 40px 0 20px;
+    justify-content: space-between;
+    align-items: center;
+    color: #888;
+    font-size: 16px;
+}
+
+.sort-by select {
+    border: none; 
+    background: none; 
+    padding: 5px 10px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    outline: none; 
+    border-radius: 5px; 
+    transition: background 0.3s; 
+}
+
+.sort-by select:hover {
+    background: #f0f0f0; /* Light background on hover */
+}
+
+.sort-by select:focus {
+    outline: none; /* Remove outline when focused */
+}
+
+/* Program list container */
+.program-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Program card styling */
+.program-card {
+    display: flex;
+    flex-direction: row;
+    width: 900px;
+    z-index: 1;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 20px;
+    align-items: center;
+    background-color: #fff;
+    transition: transform 0.2s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.program-card:hover {
+    transform: scale(1.02); /* Slightly scale up on hover */
+}
+
+.program-card .date {
+    background-color: #FFD700;
+    color: #333;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bold;
+    max-width: 120px;
+    width: 100%;
+}
+
+.program-card .date .month {
+    font-size: 12px;
+    color: #313272;
+}
+
+.program-card .date .day {
+    font-size: 30px;
+    color: #43459B;
+}
+
+.program-card .date .day-of-week {
+    color: #43459B;
+}
+
+.program-card .details {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.program-card .details h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.program-card .details p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.program-card .details .time-location {
+    font-size: 14px;
+    color: #888;
+}
+
+.program-card .more-options {
+    font-size: 24px;
+    color: #888;
+    cursor: pointer;
+}
+
+.time {
+    color: #676AFF;
+    font-weight: 600;
+}

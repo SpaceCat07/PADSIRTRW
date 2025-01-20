@@ -1,0 +1,102 @@
+/* charts */
+/* General Chart Styling */
+.barchart,
+.linechart {
+    width: 100%;
+    max-width: 550px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.325);
+}
+
+/* Responsive Canvas */
+.piechart canvas,
+.barchart canvas,
+.linechart canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Pie Chart Specific Adjustments */
+.piechart {
+    width: 100%;
+    max-width: 300px;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px; /* Rounded corners */
+}
+
+.admin-card.pemasukan-pengeluaran {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    box-shadow: none;
+}
+
+.admin-card.grafik {
+    border: none;
+    box-shadow: none;
+    padding: 20px 90px;
+}
+
+.admin-card h3 {
+    max-width: 400px;
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #313272; /* Darker text for readability */
+    font-weight: bold;
+    text-align: left;
+}
+
+.admin-card.pemasukan-pengeluaran h3 {
+    margin: 30px 0 0 50px;
+}
+
+.keuangan-chart,
+.print-chart-container,
+.keuangan-info.chart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.keuangan-info {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 10px 20px;
+}
+
+.keuangan-info label {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.keuangan-info p {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.keuangan-info img{
+    margin-right: 20px;
+}
+
+.keuangan-info.pemasukan,
+.keuangan-info.pengeluaran {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.325);
+}
+
+.keuangan-info.pemasukan {
+    background-color: #676AFF;
+}
+
+.keuangan-info.pengeluaran {
+    background-color: #313272;
+}

@@ -1,11 +1,11 @@
 /* Landing Page */
 body {
     margin: 0;
-    padding: 0 2%;
 }
 
 .landing-page-container{
     margin: 0 -2%;
+    padding-top: 100px;
 }
 
 .selamat-datang {
@@ -14,7 +14,7 @@ body {
     padding: 5% 2%;
     margin-bottom: -5%; /* Keep this for the overlap effect */
     border-radius: 0 0 50% 50%; /* This creates the inward curve */
-    z-index: 10;
+    z-index: 2;
     position: relative;
 }
 
@@ -169,6 +169,7 @@ body {
     z-index: 1; /* Ensure it's above the selamat-datang section */
     margin-top: -500px; /* This will help create the overlap effect */
     padding-top: 50px; /* Optional padding for spacing */
+    background-attachment: fixed; /* Add this to improve background image behavior */
 }
 
 .about-us h2 {
@@ -176,11 +177,13 @@ body {
     font-weight: 600;
     margin-bottom: 20px;
     color: #FFD25D;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add text shadow for better readability */
 }
 
 .about-us p {
     font-size: 18px;
     font-weight: 500;
+    line-height: 1.5; /* Improve line height for better readability */
 }
 
 .fitur-tersedia {
@@ -190,8 +193,9 @@ body {
     text-align: center;
     margin-top: -500px; /* Keep this for the overlap effect */
     border-radius: 50% 50% 0 0; /* This creates the inward curve */
-    z-index: 10;
+    z-index: 2;
     position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
 }
 
 .fitur-tersedia h2 {
@@ -201,6 +205,7 @@ body {
     max-width: 400px; 
     text-align: center; 
     margin: 0 auto 50px; 
+    font-weight: 600; /* Increase font weight for better readability */
 }
 
 .fitur-list {
@@ -208,6 +213,7 @@ body {
     justify-content: center;
     gap: 30px;
     flex-wrap: wrap;
+    margin-bottom: 50px; /* Add some space at the bottom */
 }
 
 .fitur-item {
@@ -220,6 +226,11 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
     justify-content: center;
+    transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+
+.fitur-item:hover {
+    transform: scale(1.05); /* Scale up on hover */
 }
 
 .item-1 {
@@ -240,10 +251,12 @@ body {
 .fitur-item h3 {
     font-size: 30px;
     margin-bottom: 20px;
+    font-weight: 600; /* Increase font weight for better readability */
 }
 
 .fitur-item p {
     font-weight: 500;
+    font-size: 16px; /* Increase font size for better readability */
 }
 
 .contact-section {
@@ -253,7 +266,7 @@ body {
     gap: 40px;
     justify-content: center;
     align-items: center;
-    z-index: 10;
+    z-index: 2;
     position: relative;
 }
 
@@ -389,22 +402,21 @@ body {
     border-top: solid 1px #D9DBE9;
 }
 
-/* Media landing Page */
 @media (max-width: 1200px) {
     .about-us {
-        padding: 0 20%; /* Adjust padding for medium screens */
+        padding: 0 15%; /* Adjust padding for medium screens */
     }
 
     .selamat-datang-top {
-        gap: 50px; /* Reduce gap for medium screens */
+        gap: 30px; /* Reduce gap for medium screens */
     }
 
     .selamat-datang-top-texts h1 {
-        font-size: 40px; /* Adjust font size for medium screens */
+        font-size: 35px; /* Adjust font size for medium screens */
     }
 
     .selamat-datang-bottom p {
-        font-size: 18px; /* Adjust font size for medium screens */
+        font-size: 16px; /* Adjust font size for medium screens */
     }
 
     .footer-content {
@@ -414,17 +426,17 @@ body {
     }
 
     .footer-logo img {
-        width: 60%; /* Make logo responsive */
+        width: 50%; /* Make logo responsive */
     }
 
     .footer-links {
         justify-content: center; /* Center links */
-        gap: 10px; /* Reduce gap for smaller screens */
+        gap: 15px; /* Reduce gap for smaller screens */
     }
 
     .footer-socials {
         justify-content: center; /* Center social icons */
-        gap: 20px; /* Reduce gap for smaller screens */
+        gap: 25px; /* Reduce gap for smaller screens */
     }
 
     .footer-bottom {
@@ -434,23 +446,23 @@ body {
     }
 }
 
-@media (max-width: 870px) {
+@media (max-width: 1010px) {
     .selamat-datang{  
-        margin-bottom: 5%;
+        margin-bottom: 10%;
     }
 
     .selamat-datang-top {
         flex-direction: column; /* Stack texts and images */
-        gap: 20px; /* Adjust gap for smaller screens */
+        gap: 15px; /* Adjust gap for smaller screens */
     }
 
     .selamat-datang-top-texts {
         text-align: center; /* Center text on smaller screens */
-        max-width: 80%;
+        max-width: 90%;
     }
 
     .selamat-datang-bottom p {
-        font-size: 16px; /* Adjust font size for smaller screens */
+        font-size: 14px; /* Adjust font size for smaller screens */
     }
 
     .image-wrapper {
@@ -459,21 +471,21 @@ body {
     }
 
     .about-us {
-        padding: 0 10%; /* Adjust padding for smaller screens */
+        padding: 0 5%; /* Adjust padding for smaller screens */
     }
 
     .fitur-tersedia {
-        padding: 60px 10px; /* Adjust padding for smaller screens */
+        padding: 40px 5px; /* Adjust padding for smaller screens */
     }
 
     .fitur-tersedia h2 {
-        font-size: 30px; /* Adjust font size for smaller screens */
-        max-width: 200px; /* Adjust max width for smaller screens */
+        font-size: 25px; /* Adjust font size for smaller screens */
+        max-width: 250px; /* Adjust max width for smaller screens */
     }
 
     .fitur-item {
-        width: 90%; /* Make width responsive */
-        max-width: 300px; /* Limit max width */
+        width: 95%; /* Make width responsive */
+        max-width: 350px; /* Limit max width */
         height: auto; /* Allow height to adjust */
     }
 
@@ -484,12 +496,12 @@ body {
 
     .map {
         width: 100%; /* Make width responsive */
-        max-width: 400px; /* Limit max width */
+        max-width: 450px; /* Limit max width */
     }
 
     .map iframe {
         width: 100%; /* Make iframe responsive */
-        height: 200px; /* Adjust height for smaller screens */
+        height: 250px; /* Adjust height for smaller screens */
     }
 }
 
@@ -501,7 +513,7 @@ body {
     }
 
     .image-accessory-wrapper {
-        margin: -5%;
+        margin: -10%;
     }
 
     .img-1-accessory,
@@ -510,21 +522,21 @@ body {
     }
 
     .about-us h2 {
-        font-size: 40px; /* Adjust font size for smaller screens */
+        font-size: 30px; /* Adjust font size for smaller screens */
     }
 
     .about-us p {
-        font-size: 14px;
+        font-size: 12px;
     }
 }
 
 @media (max-width: 480px) {
     .footer-links p,
     .footer-links a {
-        font-size: 14px; /* Reduce font size on very small screens */
+        font-size: 12px; /* Reduce font size on very small screens */
     }
 
     .footer-bottom {
-        padding: 10px 20px; /* Adjust padding for smaller screens */
+        padding: 5px 15px; /* Adjust padding for smaller screens */
     }
 }
