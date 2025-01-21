@@ -139,7 +139,9 @@ Route::middleware('role:Admin_RT') -> group(function () {
 
     Route::get('/manajemen-iuran-rt', [ManajemenDetailIuranRTPengguna::class, 'index']) -> name('manajemen-detail-iuran-rt-pengguna.index');
     Route::patch('/manajemen-iuran-rt/{id}/selesai', [ManajemenDetailIuranRTPengguna::class, 'detailSelesai']) -> name('manajemen-detail-iuran-rt-pengguna.selesai');
+    Route::get('/manajemen-iuran-rt/{id}/gagal', [ManajemenDetailIuranRTPengguna::class, 'keGagal']) -> name('manajemen-detail-iuran-rt-pengguna.keGagal');
     Route::delete('/manajemen-iuran-rt/{id}', [ManajemenDetailIuranRTPengguna::class, 'detailGagal']) -> name('manajemen-detail-iuran-rt-pengguna.gagal');
+    Route::get('/manajemen-iuran-rt/lihatgambar/{filename}', [ManajemenDetailIuranRTPengguna::class, 'show']) -> name('manajemen-detail-rt-pengguna.show');
 
     Route::get('/bayar-iuran-rt', [PembayaranIuranRTController::class, 'index']) -> name('bayar-iuran-rt.index');
     Route::post('/bayar-iuran-rt', [PembayaranIuranRTController::class, 'bayar']) -> name('bayar-iuran-rt.bayar');

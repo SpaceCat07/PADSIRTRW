@@ -49,12 +49,17 @@ class PembayaranIuranWargaController extends Controller
             $iuranTambahan = IuranRT::whereIn('id', $iuranTambahanIds)->get();
         }
 
-        return view('iuranbayar.warga.bayar', compact('iuranBulanan', 'iuranTambahan'));
+        // return view('iuranbayar.warga.bayar', compact('iuranBulanan', 'iuranTambahan'));
+        // dd(compact('iuranBulanan', 'iuranTambahan'));
+        return redirect()->route('bayar-iuran.konfirmasi') -> with(compact('iuranBulanan', 'iuranTambahan'));
     }
 
     public function konfirmasi()
     {
-        return view('iuranbayar.warga.bayar');
+        $iuranBulanan = session('iuranBulanan', collect());
+        $iuranTambahan = session('iuranTambahan', collect());
+        return view('iuranbayar.warga.bayar', compact('iuranBulanan', 'iuranTambahan'));
+        // return view('iuranbayar.warga.bayar');
     }
 
     public function konfirmasiBayar(Request $request)
@@ -64,11 +69,31 @@ class PembayaranIuranWargaController extends Controller
 
         $userId = Auth::user()->id;
 
+        // $this->validate($request, [
+        //     // 'nomor_rekening' => 'required|numeric',
+        //     'bukti_pembayaran' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]);
+        // dd($request -> all());
+
+        if ($request -> hasFile('bukti_pembayaran')) {
+            $file = $request -> file('bukti_pembayaran');
+            $fileNameWithExt = $file -> getClientOriginalName();
+            $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $file -> getClientOriginalExtension();
+            $filenameToStore = $filename . '_' . time() . '_'. $extension;
+
+            $file -> storeAs('BuktiPembayaranIuranRTPengguna', $filenameToStore);
+        } else {
+            return redirect() -> back() -> with('pesan','File is required');
+        }
+
         foreach ($iuranTambahanIds as $id) {
             DetailIuranRTPengguna::create([
                 'id_iuran_rt' => $id,
                 'id_pengguna' => $userId,
-                'status' => 'pending'
+                'status' => 'pending',
+                // 'nomor_rekening' => $request->input('nomor_rekening'),
+                'bukti_pembayaran' => $filenameToStore,
             ]);
         }
 
@@ -76,7 +101,9 @@ class PembayaranIuranWargaController extends Controller
             DetailIuranRTPengguna::create([
                 'id_iuran_rt' => $id,
                 'id_pengguna' => $userId,
-                'status' => 'pending'
+                'status' => 'pending',
+                // 'nomor_rekening' => $request->input('nomor_rekening'),
+                'bukti_pembayaran' => $filenameToStore,
             ]);
         }
 

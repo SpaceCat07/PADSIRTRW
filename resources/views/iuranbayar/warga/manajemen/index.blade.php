@@ -1,3 +1,14 @@
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-success">
+        {{ session('error') }}
+    </div>
+@endif
 <table>
     <thead>
         <tr>
@@ -5,6 +16,7 @@
             <th>No. Rekening</th>
             <th>Tanggal</th>
             <th>Total</th>
+            <th>Bukti Pembayaran</th>
             <th>Keterangan</th>
             <th>Action</th>
             <th>Status</th>
@@ -34,6 +46,9 @@
                      {{IuranRT::where('id', $detail->id_iuran_rt)->first()->total_iuran}}
                 </td>
                 <td>
+                    <img src="{{route('manajemen-detail-rt-pengguna.show', $detail -> id)}}" alt="" width="100" >
+                </td>
+                <td>
                     {{IuranRT::where('id', $detail->id_iuran_rt)->first()->jenis_iuran}}
                     {{IuranRT::where('id', $detail->id_iuran_rt)->first()->bulan}}
                 </td>
@@ -45,12 +60,14 @@
                         <button type="submit">Selesai</button>
                     </form>
 
-                    <form action="{{route('manajemen-detail-iuran-rt-pengguna.gagal', $detail -> id)}}" method="post">
+                    <!-- <form action="{{route('manajemen-detail-iuran-rt-pengguna.gagal', $detail -> id)}}" method="post">
                         @csrf
                         @method('DELETE')
 
                         <button type="submit" onclick="confirm('Ubah gagal akan menghapus record, apakah anda yakin')">Gagal</button>
-                    </form>
+                    </form> -->
+
+                    <a href="{{route('manajemen-detail-iuran-rt-pengguna.keGagal', $detail -> id)}}">Gagal</a>
                 </td>
                 <td>
                     {{$detail -> status}}
