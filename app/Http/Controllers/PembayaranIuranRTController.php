@@ -56,11 +56,24 @@ class PembayaranIuranRTController extends Controller
         // $userId = Auth::user()->id;
         $rt_warga = Warga::where('id_warga', Auth::user() -> id_warga)->first()->id_rt;
 
+        if ($request -> hasFile('bukti_pembayaran')) {
+            $file = $request -> file('bukti_pembayaran');
+            $fileNameWithExt = $file -> getClientOriginalName();
+            $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $file -> getClientOriginalExtension();
+            $filenameToStore = $filename . '_' . time() . '_'. $extension;
+
+            $file -> storeAs('BuktiPembayaranIuranRWRT', $filenameToStore);
+        } else {
+            return redirect() -> back() -> with('pesan','File is required');
+        }
+
         foreach ($iuranBulananIds as $id){
             DetailIuranRWRT::create([
                 'id_iuran_rw' => $id,
                 'id_rt' => $rt_warga,
                 'status' => 'pending',
+                'bukti_pembayaran' => $filenameToStore,
             ]);
         }
 
@@ -69,6 +82,7 @@ class PembayaranIuranRTController extends Controller
                 'id_iuran_rw' => $id,
                 'id_rt' => $rt_warga,
                 'status' => 'pending',
+                'bukti_pembayaran' => $filenameToStore,
             ]);
         }
 

@@ -36,7 +36,7 @@
     </tbody>
 </table>
 
-<form action="{{ route('bayar-iuran-rt.konfirmasibayar') }}" method="post">
+<form action="{{ route('bayar-iuran-rt.konfirmasibayar') }}" method="post" enctype="multipart/form-data">
     @csrf
 
     @php
@@ -50,6 +50,7 @@
     <p>{{'Nomor Rekening RW anda adalah '. RWModel::find($rw_warga) -> nomer_rekening}}</p>
     <input type="hidden" name="iuran_tambahan" value="{{ json_encode($iuranTambahan->pluck('id')) }}">
     <input type="hidden" name="iuran_bulanan" value="{{ json_encode($iuranBulanan->pluck('id')) }}">
-    <input type="number" name="nomor_rekening" id="" placeholder="Nomor Rekening yang anda gunakan">
+    <!-- <input type="number" name="nomor_rekening" id="" placeholder="Nomor Rekening yang anda gunakan"> -->
+    <input type="file" name="bukti_pembayaran" id="">
     <button type="submit">Proses Pembayaran</button>
 </form>

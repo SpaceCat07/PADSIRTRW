@@ -203,7 +203,9 @@ Route::middleware('role:Admin_RW') -> group(function () {
 
     Route::get('/manajemen-iuran-rw', [ManajemenDetailIuranRWRT::class, 'index']) -> name('manajemen-detail-iuran-rw-rt.index');
     Route::patch('/manajemen-iuran-rw/{id}/selesai', [ManajemenDetailIuranRWRT::class, 'detailSelesai']) -> name('manajemen-detail-iuran-rw-rt.selesai');
+    Route::get('/manajemen-iuran-rw/{id}/gagal', [ManajemenDetailIuranRWRT::class, 'keGagal']) -> name('manajemen-detail-iuran-rw-rt.keGagal');
     Route::delete('/manajemen-iuran-rw/{id}', [ManajemenDetailIuranRWRT::class, 'detailGagal']) -> name('manajemen-detail-iuran-rw-rt.gagal');
+    Route::get('/manajemen-iuran-rw/lihatgambar/{filename}', [ManajemenDetailIuranRWRT::class, 'show']) -> name('manajemen-detail-rw-rt.show');
 });
 
 // middleware untuk role ketua rt
