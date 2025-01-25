@@ -6,6 +6,7 @@ use App\Models\KritikSaranRT;
 use App\Models\KritikSaranRW;
 use App\Models\RTModel;
 use App\Models\RWModel;
+use App\Models\Warga;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
@@ -14,38 +15,22 @@ class KritikSaranController extends Controller
 {
     public function index()
     {
-        $listRW = RWModel::get(['nama_rw']);
-        $listRT = RTModel::get(['nama_rt']);
-        return view('kritiksaran.index', compact('listRW', 'listRT'));
+        return view('kritiksaran.index');
     }
 
     public function store(Request $request)
     {
         $this-> validate($request, [
-            'tujuan' => 'required',
-            'isi' => 'required',
+            'isi' => 'required|string',
         ]);
 
-        $list_rw = RWModel::pluck('nama_rw') -> toArray();
-        $list_rt = RTModel::pluck('nama_rt') -> toArray();
-
-        if(in_array($request->tujuan, $list_rw)){
-            KritikSaranRW::create([
-                'id_rw' => RWModel::where('nama_rw', $request->tujuan) -> first() -> id,
-                'id_pengguna' => Auth::user() -> id,
-                'isi' => $request->isi,
-                'status' => 'belum'
-            ]);
-        } else if(in_array($request->tujuan, $list_rt)){
-            KritikSaranRT::create([
-                'id_rt' => RTModel::where('nama_rt', $request->tujuan) -> first() -> id,
-                'id_pengguna' => Auth::user() -> id,
-                'isi' => $request->isi,
-                'status' => 'belum'
-            ]);
-        } else {
-            return redirect()->route('kritik.index')->with('pesan', 'RT atau RW tidak ditemukan');
-        }
+        // langsung melakukan kritik ke rt masing masing pengguna
+        KritikSaranRT::create([
+            'id_rt' => Warga::where('id_warga', Auth::user() -> id_warga) -> first() -> id_rt,
+            'id_pengguna' => Auth::user() -> id,
+            'isi' => $request->isi,
+            'status' => 'belum'
+        ]);
         return redirect()->route('kritik.index')->with('pesan', 'Kritik dan Saran berhasil dikirim');
     }
 

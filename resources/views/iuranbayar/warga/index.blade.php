@@ -11,7 +11,7 @@
             <thead>
                 <tr>
                     <th>Pilih</th>
-                    <th>Jenis Iuran</th>
+                    <th>Nama Iuran</th>
                     <th>Nominal</th>
                     <th>Status</th>
                 </tr>
@@ -29,7 +29,7 @@
                                 <input type="checkbox" name="iuran_tambahan[]" value="{{ $tambahan->id }}" />
                             @endif
                         </td>
-                        <td>{{ $tambahan->jenis_iuran }}</td>
+                        <td>{{ $tambahan->nama_iuran }}</td>
                         <td>Rp {{ number_format($tambahan->total_iuran, 0, ',', '.') }}</td>
                         <td>
                             @if ( optional($detailIuranTambahan) -> status === 'belum')
