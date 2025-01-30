@@ -1,0 +1,337 @@
+body {
+    margin: 0;
+    padding: 0 20px;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    position: relative;
+    background: #FFFFFF;
+}
+
+/* Admin Dashboard */
+.admin-dashboard-container {
+    margin: 40px 20px 20px 350px;
+    max-width: 1000px;
+    width: calc(100vw - 350px);
+    transition: width 0.3s ease; /* Smooth transition for width changes */
+}
+
+.dashboard-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.header-admin-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-picture {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-admin-dropdown img {
+    width: 50px;
+    height: auto;
+}
+
+.dashboard-header p {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.dashboard-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.admin-card {
+    width: 700px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.325);
+}
+
+.admin-card.data-warga,
+.admin-card.program-kerja,
+.admin-card.kritik-saran {
+    max-width: 300px;
+}
+
+.admin-card.data-warga,
+.admin-card.program-kerja,
+.admin-card.kritik-saran,
+.admin-card.manajemen-iuran {
+    cursor: pointer;
+}
+
+/* Konfirmasi Pembayaran */
+.admin-card.pembayaran-list {
+    max-width: 600px;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #676AFF4D;
+    color: #000000;
+    font-weight: 500;
+}
+
+.title-arrow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-arrow img {
+    width: 20px;
+    height: 20px;
+    margin: 0 0 30px;
+}
+
+/* Data Keluarga (Warga) */
+.family-data-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 0 20px 0;
+}
+
+.family-data-container p {
+    margin: 0 0 0 20px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Proker Section */
+.admin-card.date {
+    padding: 10px 20px;
+}
+
+.program-card.admin {
+    width: auto;
+    padding: 10px 0 30px 0;
+    margin: 20px;
+    border: none;
+    border-radius: 0;
+    border-bottom: 0.7px solid #000;
+    box-shadow: none;
+}
+
+/* Kritik Saran Section */
+.kritik-saran-card.admin {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.profile-icon.admin {
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+    width: 100%;
+}
+
+.profile-icon.admin h5 {
+    margin: 0;
+}
+
+.profile-icon.admin img {
+    height: 40px;
+    width: auto;
+    margin-right: 10px;
+}
+
+/* charts */
+/* General Chart Styling */
+.barchart,
+.linechart {
+    width: 100%;
+    max-width: 550px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.325);
+}
+
+/* Responsive Canvas */
+.piechart canvas,
+.barchart canvas,
+.linechart canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Pie Chart Specific Adjustments */
+.piechart {
+    width: 100%;
+    max-width: 300px;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px; /* Rounded corners */
+}
+
+.admin-card.pemasukan-pengeluaran {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    box-shadow: none;
+}
+
+.admin-card.grafik {
+    border: none;
+    box-shadow: none;
+    padding: 20px 90px;
+}
+
+.admin-card h3 {
+    max-width: 400px;
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #313272; /* Darker text for readability */
+    font-weight: bold;
+    text-align: left;
+}
+
+.admin-card.pemasukan-pengeluaran h3 {
+    margin: 30px 0 0 50px;
+}
+
+.keuangan-chart,
+.print-chart-container,
+.keuangan-info.chart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.keuangan-info {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 10px 20px;
+}
+
+.keuangan-info label {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.keuangan-info p {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.keuangan-info img {
+    margin-right: 20px;
+}
+
+.keuangan-info.pemasukan,
+.keuangan-info.pengeluaran {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.325);
+}
+
+.keuangan-info.pemasukan {
+    background-color: #676AFF;
+}
+
+.keuangan-info.pengeluaran {
+    background-color: #313272;
+}
+
+/* cetak button */
+.print-chart {
+    height: 30px;
+    background-color: #676AFF2E;
+    padding: 0 20px;
+    color: #000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.325);
+}
+
+.print-chart:hover {
+    background-color: #3c3ed22e;
+}
+
+/* Dropdown Customization */
+.chart-controls .custom-select {
+    flex: 1;
+    margin: 0 5px;
+}
+
+.chart-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-select {
+    border: 1px solid #dcdcdc; /* Subtle border */
+    border-radius: 4px; /* Match with pie chart border */
+    padding: 8px;
+    font-size: 14px;
+    background: #ffffff; /* White background */
+    color: #555555; /* Neutral text color */
+    transition: border 0.3s ease, background 0.3s ease;
+}
+
+.form-select:hover {
+    background: #f3f3f3; /* Slight hover effect */
+    border-color: #bbbbbb; /* Highlight border */
+}
+
+/* charts colors */
+:root {
+    /* Pie Chart Colors */
+    --pie-pemasukan-bg: #676AFF; /* Blue */
+    --pie-pengeluaran-bg: #FFD25D; /* Yellow */
+
+    /* Bar Chart Colors */
+    --bar-pemasukan-bg: #676AFF; /* Blue */
+    --bar-pengeluaran-bg: #43459B; /* Dark Blue */
+
+    /* Line Chart Colors */
+    --line-thismonth-bg: rgba(103, 106, 255, 0.2); /* Light Blue with Transparency */
+    --line-thismonth-border: #43459B; /* Dark Blue Line */
+    --line-lastmonth-bg: rgba(67, 69, 155, 0.2); /* Darker Blue with Transparency */
+    --line-lastmonth-border: #676AFF; /* Blue Line */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1400px) {
+    .admin-dashboard-container {
+        margin: 40px 20px; /* Adjust margin when sidebar is hidden */
+        width: calc(100vw - 40px); /* Full width minus side margins */
+    }
+}
+
+@media (max-width: 1400px) {
+    .admin-dashboard-container {
+        margin: 40px auto; /* Center the container */
+        width: 100%; /* Full width when sidebar is hidden */
+        max-width: 1000px; /* Maintain the max width */
+    }
+}

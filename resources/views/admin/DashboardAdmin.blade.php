@@ -4,6 +4,10 @@
     use App\Models\Warga;
 @endphp
 
+<title>SIMAS - dashboard</title>
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/charts.css') }}">
+
 @section('content')
     <div class="admin-dashboard-container">
         <div class="header-container">

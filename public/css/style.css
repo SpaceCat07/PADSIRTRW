@@ -1546,7 +1546,6 @@ table .no-data {
 }
 
 .filter-add-group {
-
     display: flex;
     justify-content: space-between;
 }
