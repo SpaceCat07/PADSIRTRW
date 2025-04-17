@@ -268,6 +268,7 @@ body {
 .kritik-saran,
 .pemasukan,
 .pengeluaran,
+.saldo,
 .perbandingan,
 .grafik-laporan {
     border: 1px solid #ddd;
@@ -446,7 +447,6 @@ button:hover {
     background-color: #ffcc4b;
     color: black;
     border: none;
-    padding: 0.5rem 1rem;
 }
 
 /* Table Styling */
@@ -1124,7 +1124,6 @@ table .no-data {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
 }
 
-
 /* ---------------- Admin and Ketua ----------------- */
 /* admin sidebar */
 .admin-sidebar {
@@ -1205,7 +1204,6 @@ table .no-data {
 .admin-sidebar-item:last-child {
     margin-bottom: 0; /* Remove bottom margin for the last item */
 }
-
 
 /* Data Warga */
 
@@ -1336,7 +1334,6 @@ table .no-data {
     padding: 0.25rem 0.5rem;
     cursor: pointer;
 }
-
 
 /* Kritik Saran Admin */
 .filter-button {
@@ -1499,8 +1496,6 @@ table .no-data {
     background: #cd3232a6;
 }
 
-
-
 /* Laporan Pengeluaran and Pemasukan */
 .laporan-container {
     max-width: 1200px;
@@ -1529,8 +1524,6 @@ table .no-data {
     background-color: #FFC107;
 }
 
-
-
 /* Proker Admin/ program kerja admin */
 .admin-proker-container {
     max-width: 1300px;
@@ -1546,7 +1539,6 @@ table .no-data {
 }
 
 .filter-add-group {
-
     display: flex;
     justify-content: space-between;
 }
@@ -1730,7 +1722,6 @@ table .no-data {
     transform: scale(0.95); /* Slightly shrink on click */
 }
 
-
 /* Notifications */
 .notification {
     min-height: 200px;
@@ -1884,7 +1875,6 @@ table .no-data {
     background-color: #0056b3; /* Change to a darker shade for hover effect */
 }
 
-
 /* Form Tambah/Edit Laporan Keuangan */
 .edit-keuangan-container {
     max-width: 1200px;
@@ -1903,7 +1893,6 @@ table .no-data {
 .edit-keuangan-container .proker-submit-button{
     background-color: #43459B;
 }
-
 
 /* Admin Dashboard */
 .admin-dashboard-container {
@@ -2135,7 +2124,8 @@ table .no-data {
 }
 
 .keuangan-info.pemasukan,
-.keuangan-info.pengeluaran {
+.keuangan-info.pengeluaran,
+.keuangan-info.saldo {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -2145,8 +2135,12 @@ table .no-data {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.325);
 }
 
+.keuangan-info.saldo {
+    background-color: #4A90E2;
+}
+
 .keuangan-info.pemasukan {
-    background-color: #676AFF;
+    background-color: #4A90E2; /* Changed to a distinct blue color */
 }
 
 .keuangan-info.pengeluaran {
@@ -2165,7 +2159,6 @@ table .no-data {
 .print-chart:hover {
     background-color: #3c3ed22e;
 }
-
 
 /* Dropdown Customization */
 .chart-controls .custom-select {
@@ -2212,7 +2205,6 @@ table .no-data {
     --line-lastmonth-bg: rgba(67, 69, 155, 0.2); /* Darker Blue with Transparency */
     --line-lastmonth-border: #676AFF; /* Blue Line */
 }
-
 
 /* Manajemen Iuran Page  */
 /* General Button Styles */
@@ -2290,7 +2282,6 @@ table .no-data {
     justify-content: Center;
     align-items: center;
 }
-
 
 /* edit profile page */
 /* Container for Sidebar and Edit Profile Section */

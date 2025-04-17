@@ -1,6 +1,8 @@
 @extends('layouts.dashboardNavbar')
 
 @section('content')
+<title>SIMAS - pembayaran</title>
+<link rel="stylesheet" href="{{ asset('css/pembayaran.css') }}">
     <?php
     $page = 'pembayaran'; // or 'program-kerja', 'pembayaran', etc.
     ?>

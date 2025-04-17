@@ -61,6 +61,10 @@
     justify-content: space-between;
 }
 
+.keuangan-chart {
+    align-items: center;
+}
+
 .keuangan-info {
     display: flex;
     flex-direction: column;
@@ -83,7 +87,8 @@
 }
 
 .keuangan-info.pemasukan,
-.keuangan-info.pengeluaran {
+.keuangan-info.pengeluaran,
+.keuangan-info.saldo {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -93,10 +98,31 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.325);
 }
 
+.keuangan-info.saldo {
+    background-color: #4A90E2;
+}
+
 .keuangan-info.pemasukan {
     background-color: #676AFF;
 }
 
 .keuangan-info.pengeluaran {
     background-color: #313272;
+}
+
+/* charts colors */
+:root {
+    /* Pie Chart Colors */
+    --pie-pemasukan-bg: #676AFF; /* Blue */
+    --pie-pengeluaran-bg: #FFD25D; /* Yellow */
+
+    /* Bar Chart Colors */
+    --bar-pemasukan-bg: #676AFF; /* Blue */
+    --bar-pengeluaran-bg: #43459B; /* Dark Blue */
+
+    /* Line Chart Colors */
+    --line-thismonth-bg: rgba(103, 106, 255, 0.2); /* Light Blue with Transparency */
+    --line-thismonth-border: #43459B; /* Dark Blue Line */
+    --line-lastmonth-bg: rgba(67, 69, 155, 0.2); /* Darker Blue with Transparency */
+    --line-lastmonth-border: #676AFF; /* Blue Line */
 }

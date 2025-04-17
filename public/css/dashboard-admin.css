@@ -1,0 +1,507 @@
+/* Admin Dashboard */
+.admin-dashboard-container {
+    margin: 40px 20px 20px 350px;
+    max-width: 1000px;
+    width: calc(100vw - 350px);
+    transition: width 0.3s ease; /* Smooth transition for width changes */
+}
+
+.dashboard-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.header-admin-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-picture {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-admin-dropdown img {
+    width: 50px;
+    height: auto;
+}
+
+.dashboard-header p{
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.dashboard-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.admin-card {
+    width: 700px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.325);
+}
+
+.admin-card.data-warga,
+.admin-card.program-kerja,
+.admin-card.kritik-saran {
+    max-width: 300px;
+}
+
+.admin-card.data-warga,
+.admin-card.program-kerja,
+.admin-card.kritik-saran,
+.admin-card.manajemen-iuran {
+    cursor: pointer;
+}
+
+/* Konfirmasi Pembayaran */
+.admin-card.pembayaran-list {
+    max-width: 600px;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #676AFF4D;
+    color: #000000;
+    font-weight: 500;
+}
+
+.title-arrow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-arrow img {
+    width: 20px;
+    height: 20px;
+    margin: 0 0 30px;
+}
+
+/* Data Keluarga (Warga) */
+.family-data-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 0 20px 0;
+}
+
+.family-data-container p {
+    margin: 0 0 0 20px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Proker Section */
+.admin-card.date {
+    padding: 10px 20px;
+}
+
+.program-card.admin {
+    width: auto;
+    padding: 10px 0 30px 0;
+    margin: 20px;
+    border: none;
+    border-radius: 0;
+    border-bottom: 0.7px solid #000;
+    box-shadow: none;
+}
+
+/* Kritik Saran Section */
+.kritik-saran-card.admin {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.profile-icon.admin {
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+    width: 100%;
+}
+
+.profile-icon.admin h5 {
+    margin: 0;
+}
+
+.profile-icon.admin img {
+    height: 40px;
+    width: auto;
+    margin-right: 10px;
+}
+
+/* cetak button */
+.print-chart {
+    height: 30px;
+    background-color: #676AFF2E;
+    padding: 0 20px;
+    color: #000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.325);
+}
+
+.print-chart:hover {
+    background-color: #3c3ed22e;
+}
+
+/* Dropdown Customization */
+.chart-controls .custom-select {
+    flex: 1;
+    margin: 0 5px;
+}
+
+.chart-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-select {
+    border: 1px solid #dcdcdc; /* Subtle border */
+    border-radius: 4px; /* Match with pie chart border */
+    padding: 8px;
+    font-size: 14px;
+    background: #ffffff; /* White background */
+    color: #555555; /* Neutral text color */
+    transition: border 0.3s ease, background 0.3s ease;
+}
+
+.form-select:hover {
+    background: #f3f3f3; /* Slight hover effect */
+    border-color: #bbbbbb; /* Highlight border */
+}
+
+/* Button Colors */
+.status-btn.yes {
+    background-color: #d4f6e1;
+    color: #4caf50;
+    border: 1px solid #4caf50;
+}
+
+.status-btn.no {
+    background-color: #f6d4d4;
+    color: #e53935;
+    border: 1px solid #e53935;
+}
+
+.status-btn.paid {
+    background-color: #d4f6e1;
+    color: #4caf50;
+    border: 1px solid #4caf50;
+}
+
+.status-btn.rejected {
+    background-color: #f6d4d4;
+    color: #e53935;
+    border: 1px solid #e53935;
+}
+
+/* Dashboard ketua RT/RW */
+.dashboard-rt-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    margin: 20px 25px;
+}
+
+.data-warga,
+.pembayaran-konfirmasi,
+.program-kerja,
+.kritik-saran,
+.pemasukan,
+.pengeluaran,
+.saldo,
+.perbandingan,
+.grafik-laporan {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.data-warga {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+.pembayaran-konfirmasi {
+    grid-column: 2 / 4;
+    grid-row: 1 / 2;
+}
+
+.program-kerja {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+.kritik-saran {
+    grid-column: 1 / 2;
+    grid-row: 3 / 5;
+}
+
+.pemasukan {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+
+.pengeluaran {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+}
+
+.perbandingan {
+    grid-column: 2 / 4;
+    grid-row: 3 / 4;
+}
+
+.grafik-laporan {
+    grid-column: 2 / 4;
+    grid-row: 4 / 5;
+}
+
+.warga-photo {
+    width: 100%;
+    height: 100px;
+    background-color: #eee;
+    margin-bottom: 10px;
+}
+
+.payment-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.program-box,
+.message-box,
+.chart-box {
+    height: 100px;
+    background-color: #f7f7f7;
+    margin-top: 10px;
+}
+
+.comparison-chart {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.legend {
+    display: flex;
+    flex-direction: column;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.grey-box,
+.dark-box {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+}
+
+.grey-box {
+    background-color: lightgrey;
+}
+
+.dark-box {
+    background-color: grey;
+}
+
+.pie-chart {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: grey;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Program card styling */
+.program-card {
+    display: flex;
+    flex-direction: row;
+    width: 900px;
+    z-index: 1;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 20px;
+    align-items: center;
+    background-color: #fff;
+    transition: transform 0.2s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.program-card:hover {
+    transform: scale(1.02); /* Slightly scale up on hover */
+}
+
+.program-card .date {
+    background-color: #FFD700;
+    color: #333;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bold;
+    max-width: 120px;
+    width: 100%;
+}
+
+.program-card .date .month {
+    font-size: 12px;
+    color: #313272;
+}
+
+.program-card .date .day {
+    font-size: 30px;
+    color: #43459B;
+}
+
+.program-card .date .day-of-week {
+    color: #43459B;
+}
+
+.program-card .details {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.program-card .details h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.program-card .details p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.program-card .details .time-location {
+    font-size: 14px;
+    color: #888;
+}
+
+.program-card .more-options {
+    font-size: 24px;
+    color: #888;
+    cursor: pointer;
+}
+
+.time {
+    color: #676AFF;
+    font-weight: 600;
+}
+
+/* Page kritik-saran */
+.kritik-card {
+    background-color: #676AFF;
+    width: 100%;
+    border-radius: 0 110px 0 110px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    max-width: 750px;
+}
+
+.rounded-custom {
+    border-radius: 25px; /* Adjust the radius for more roundness */
+    height: 60px; /* Increase the height */
+    padding: 15px; /* Add padding for better appearance */
+    margin-top: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #676AFF;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Kritik Saran Admin */
+.filter-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.filter-button.active {
+    background-color: #9d8df1;
+    color: #fff;
+}
+
+.kritik-saran-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.kritik-saran-card {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 0 15px 15px 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.512);
+    cursor: pointer;
+}
+
+.kritik-saran-card.unread {
+    background-color: #c7b3fc;
+}
+
+.kritik-saran-card.complete {
+    background-color: #eee;
+}
+
+.profile-icon {
+    font-size: 30px;
+    margin-right: 15px;
+}
+
+.kritik-saran-content h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.kritik-saran-content p {
+    margin: 5px 0 0;
+    color: #555;
+}

@@ -142,6 +142,12 @@
                 <canvas id="barChart"></canvas>
             </div>
         </div>
+
+        <div class="piechart-container">
+            <div class="piechart">
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -161,12 +167,47 @@
             lineLastMonthBorder: rootStyles.getPropertyValue('--line-lastmonth-border').trim(),
         };
 
+        const piechart_data = @json($piechart_data);
         const barchart_data = @json($barchart_data);
         const linechart_data = @json($linechart_data);
         const totalPemasukan = @json($totalPemasukan);
         const totalPengeluaran = @json($totalPengeluaran);
+        const totalSaldo = @json($totalSaldo);
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
         const barCtx = document.getElementById('barChart').getContext('2d');
         const lineCtx = document.getElementById('lineChart').getContext('2d');
+
+        // Pie Chart
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: piechart_data.labels,
+                datasets: [{
+                    data: piechart_data.data,
+                    backgroundColor: [
+                        chartColors.piePemasukanBg,
+                        chartColors.piePengeluaranBg,
+                    ],
+                    borderWidth: 0,
+                }, ],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    datalabels: {
+                        formatter: (value, ctx) => {
+                            const total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                            return `${((value / total) * 100).toFixed(1)}%`;
+                        },
+                        color: '#fff',
+                        font: {
+                            weight: 'bold',
+                            size: 14
+                        },
+                    },
+                },
+            },
+        });
 
         // Bar Chart
         new Chart(barCtx, {
