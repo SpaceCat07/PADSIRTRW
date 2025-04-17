@@ -1,6 +1,8 @@
 @extends('layouts.checkoutNavbar')
 
 @section('content')
+<title>SIMAS - checkout</title>
+<link rel="stylesheet" href="{{ asset('css/checkout.css') }}">
     <?php
     $page = 'pembayaran'; // or 'program-kerja', 'pembayaran', etc.
     ?>

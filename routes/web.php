@@ -306,6 +306,7 @@ function getDashboardData(Request $request) {
     // Calculate total Pemasukan and Pengeluaran for the Pie Chart
     $totalPemasukan = array_sum($pemasukanData);
     $totalPengeluaran = array_sum($pengeluaranData);
+    $totalSaldo = $totalPemasukan - $totalPengeluaran;
 
     // Pie Chart Data
     $piechart_data = [
@@ -352,7 +353,7 @@ function getDashboardData(Request $request) {
         ]
     ];
 
-    return compact('barchart_data', 'linechart_data', 'piechart_data', 'totalPemasukan', 'totalPengeluaran', 'year', 'interval');
+    return compact('barchart_data', 'linechart_data', 'piechart_data', 'totalPemasukan', 'totalPengeluaran', 'totalSaldo', 'year', 'interval');
 }
 
 // Admin Dashboard Route

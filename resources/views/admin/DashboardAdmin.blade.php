@@ -5,7 +5,7 @@
 @endphp
 
 <title>SIMAS - dashboard</title>
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/dashboard-admin.css') }}">
 <link rel="stylesheet" href="{{ asset('css/charts.css') }}">
 
 @section('content')
@@ -104,6 +104,15 @@
                 <h3>Perbandingan Pemasukan dan Pengeluaran</h3>
                 <div class="keuangan-chart">
                     <div class="keuangan-info">
+                        <div class="keuangan-info saldo" data-url="/laporan-saldo/admin">
+                            <div>
+                                <img src="{{ asset('storage/deposit.png') }}" alt="">
+                            </div>
+                            <div>
+                                <label for="saldo" class="keuangan-info-label">Saldo</label>
+                                <p>Rp {{ number_format($totalSaldo, 0, ',', '.') }}</p>
+                            </div>
+                        </div>
                         <div class="keuangan-info pemasukan" data-url="/laporan-pemasukan/admin">
                             <div>
                                 <img src="{{ asset('storage/deposit.png') }}" alt="">
@@ -273,6 +282,7 @@
         const linechart_data = @json($linechart_data);
         const totalPemasukan = @json($totalPemasukan);
         const totalPengeluaran = @json($totalPengeluaran);
+        const totalSaldo = @json($totalSaldo);
         const pieCtx = document.getElementById('pieChart').getContext('2d');
         const barCtx = document.getElementById('barChart').getContext('2d');
         const lineCtx = document.getElementById('lineChart').getContext('2d');

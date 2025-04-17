@@ -15,7 +15,8 @@
 
             <form action="" method="post">
                 @csrf
-                <!-- Dropdown for selecting recipient -->
+                {{-- INI HARUSNYA BUAT MILIH RT  --}}
+                {{-- <!-- Dropdown for selecting recipient -->
                 <div class="dropdown-penerima mb-4">
                     <select class="form-select px-3 rounded-custom" name="recipient" id="recipientSelect" required>
                         <option value="" disabled selected>Ditujukan untuk RT berapa?</option>
@@ -23,13 +24,14 @@
                         <option value="recipient2">RT 2</option>
                         <option value="recipient3">RT 3</option>
                     </select>
-                </div>
+                </div> --}}
 
+                {{-- INI HARUSNYA UNTUK FORM NAMA --}}
                 <!-- Floating label for name field -->
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     <label for="floatingEmail" class="form-label fw-semibold">Nama</label>
                     <input type="text" class="form-control px-3" name="name" id="floatingName" required>
-                </div>
+                </div> --}}
 
                 <!-- Floating label for content field -->
                 <div class="mb-4 position-relative">
