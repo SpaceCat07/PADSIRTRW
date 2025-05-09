@@ -417,7 +417,6 @@ Route::get('/kritik-saran/admin', function () {
     return view('/admin/KritikSaranAdmin');
 })->name('admin-kritik-saran');
 
-
 Route::get('/program-kerja', function () {
     return view('/warga/LihatProgramKerja');
 })->name('program-kerja');
@@ -426,6 +425,10 @@ Route::get('/laporan-keuangan/warga', function () {
     return view('/warga/LaporanKeuangan');
 })->name('laporan-keuangan');
 
+Route::get('/dompet-warga/warga', function () {
+    return view('/warga/DompetWarga');
+})->name('dompet-warga');
+
 Route::get('/riwayat-pembayaran/warga', function () {
     return view('/warga/RiwayatPembayaran');
 })->name('riwayat-pembayaran');
@@ -433,6 +436,10 @@ Route::get('/riwayat-pembayaran/warga', function () {
 Route::get('/bayar/warga', function () {
     return view('/warga/Pembayaran');
 })->name('pembayaran');
+
+Route::get('/checkout/warga', function () {
+    return view('/warga/Checkout');
+})->name('checkout');
 
 Route::get('/kritik-saran/warga', function () {
     return view('/warga/FormKritikSaran');

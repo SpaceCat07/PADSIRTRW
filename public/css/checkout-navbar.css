@@ -16,9 +16,9 @@ body {
 }
 
 .link-active {
-    color: #03A9F4;
+    color: #FFD15D !important;
     font-weight: 600;
-    border-bottom: 2px solid #03A9F4 !important;
+    border-bottom: 2px solid #FFD15D !important;
     transition: all 0.3s ease;
 }
 
@@ -31,7 +31,8 @@ body {
     margin-right: 20px;
     font-size: 16px !important; /* Text size */
     font-weight: 500 !important; /* Slightly bold text */
-    color: #486284 !important;
+    color: #ffffff;
+    font-style: none;
 }
 
 /* Dropdown Menu Styling */

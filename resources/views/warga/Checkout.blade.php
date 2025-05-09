@@ -10,25 +10,12 @@
     <div class="checkout-container">
         <h2 style="color: #43459B; margin-left: 30px">Item</h2> <!-- Updated header -->
         <ul id="item-list">
-            @php $total = 0; @endphp <!-- Initialize total -->
-            <div class="checkout-item-container">
-                @foreach ($selectedItems as $item)
-                    <li class="item" data-price="5000"> <!-- Adjust price as needed -->
-                        <span class="remove" onclick="removeItem(this)">
-                            <div class="remove-container"> <!-- New container for icon and text -->
-                                <img src="{{ asset('storage/Remove.png') }}" alt="Remove" class="remove-icon">
-                                <span class="remove-text">remove</span> <!-- Text underneath the icon -->
-                            </div>
-                        </span>
-                        <label class="item-label">Bayar Kas Bulanan {{ $item }}</label>
-                        <span class="checkout-amount">Rp 5.000</span>
-                    </li>
-                    @php $total += 5000; @endphp <!-- Update total amount -->
-                @endforeach
+            <div class="checkout-item-container" id="checkoutItemContainer">
+                <li>Loading items...</li>
             </div>
         </ul>
 
-        <div class="total-section">TOTAL: Rp <span id="total">{{ number_format($total) }}</span></div>
+        <div class="total-section">TOTAL: Rp <span id="total">0</span></div>
         <!-- Format total -->
 
         <div class="input-section">
@@ -38,63 +25,122 @@
         </div>
 
         <div class="checkout-buttons">
-            <button class="checkout-btn pay-btn" onclick="submitPayment()">SUDAH BAYAR</button>
-            <button class="checkout-btn cancel-btn" onclick="cancelPayment()">BATAL</button>
+            <button class="checkout-btn pay-btn" id="submitPaymentBtn">SUDAH BAYAR</button>
+            <button class="checkout-btn cancel-btn" id="cancelPaymentBtn">BATAL</button>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        // Function to calculate the total
-        function calculateTotal() {
-            let total = 0;
-            document.querySelectorAll('.item').forEach(item => {
-                total += parseInt(item.getAttribute('data-price'));
-            });
-            document.getElementById('total').textContent = total.toLocaleString();
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkoutItemContainer = document.getElementById('checkoutItemContainer');
+            const totalSpan = document.getElementById('total');
+            const accountNumberInput = document.getElementById('account-number');
+            const submitPaymentBtn = document.getElementById('submitPaymentBtn');
+            const cancelPaymentBtn = document.getElementById('cancelPaymentBtn');
 
-        // Function to remove item
-        function removeItem(element) {
-            // Check if this is the last item
-            const items = document.querySelectorAll('.item');
-            if (items.length === 1) {
-                const userConfirmed = confirm("Batalkan pembayaran?");
-                if (!userConfirmed) {
-                    return; // If user cancels, do nothing
+            let items = [];
+
+            function fetchSelectedItems() {
+                // Fetch selected items from API endpoint instead of query params
+                axios.get('/api/selected-items')
+                    .then(response => {
+                        items = response.data;
+                        renderItems();
+                    })
+                    .catch(error => {
+                        checkoutItemContainer.innerHTML = '<li>Failed to load items.</li>';
+                        console.error('Error fetching selected items:', error);
+                    });
+            }
+
+            function renderItems() {
+                checkoutItemContainer.innerHTML = '';
+                let total = 0;
+                if (!items || !items.monthly || !items.additional) {
+                    checkoutItemContainer.innerHTML = '<li>No items to display.</li>';
+                    totalSpan.textContent = '0';
+                    return;
                 }
+                // For simplicity, assume each item costs 5000
+                const pricePerItem = 5000;
+
+                items.monthly.forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = 'item';
+                    li.setAttribute('data-price', pricePerItem);
+                    li.innerHTML = `
+                        <span class="remove" onclick="removeItem(this)">
+                            <div class="remove-container">
+                                <img src="{{ asset('storage/Remove.png') }}" alt="Remove" class="remove-icon">
+                                <span class="remove-text">remove</span>
+                            </div>
+                        </span>
+                        <label class="item-label">Bayar Kas Bulanan ${item}</label>
+                        <span class="checkout-amount">Rp ${pricePerItem.toLocaleString()}</span>
+                    `;
+                    checkoutItemContainer.appendChild(li);
+                    total += pricePerItem;
+                });
+
+                items.additional.forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = 'item';
+                    li.setAttribute('data-price', pricePerItem);
+                    li.innerHTML = `
+                        <span class="remove" onclick="removeItem(this)">
+                            <div class="remove-container">
+                                <img src="{{ asset('storage/Remove.png') }}" alt="Remove" class="remove-icon">
+                                <span class="remove-text">remove</span>
+                            </div>
+                        </span>
+                        <label class="item-label">Bayar Iuran Tambahan ${item}</label>
+                        <span class="checkout-amount">Rp ${pricePerItem.toLocaleString()}</span>
+                    `;
+                    checkoutItemContainer.appendChild(li);
+                    total += pricePerItem;
+                });
+
+                totalSpan.textContent = total.toLocaleString();
             }
 
-            // Remove the item and update the total
-            element.parentElement.remove();
-            calculateTotal();
+            window.removeItem = function(element) {
+                const li = element.closest('.item');
+                li.remove();
+                calculateTotal();
+                if (checkoutItemContainer.children.length === 0) {
+                    window.history.back();
+                }
+            };
 
-            // Check if there are any items left
-            const remainingItems = document.querySelectorAll('.item');
-            if (remainingItems.length === 0) {
-                // If no items left, back to previous page
-                history.back();
+            function calculateTotal() {
+                let total = 0;
+                document.querySelectorAll('.item').forEach(item => {
+                    total += parseInt(item.getAttribute('data-price'));
+                });
+                totalSpan.textContent = total.toLocaleString();
             }
-        }
 
-        // Function to handle payment submission
-        function submitPayment() {
-            const accountNumber = document.getElementById('account-number').value;
-            if (!accountNumber) {
-                alert("Masukkan nomor rekening Anda.");
-                return;
-            }
-            alert("Pembayaran berhasil! Silahkan tunggu konfirmasi pembayaran anda.");
+            submitPaymentBtn.addEventListener('click', () => {
+                const accountNumber = accountNumberInput.value.trim();
+                if (!accountNumber) {
+                    alert("Masukkan nomor rekening Anda.");
+                    return;
+                }
+                // Here you can send payment confirmation to API if needed
+                alert("Pembayaran berhasil! Silahkan tunggu konfirmasi pembayaran anda.");
+                window.location.href = "{{ route('riwayat-pembayaran') }}";
+            });
 
-            window.location.href = "{{ route('riwayat-pembayaran') }}"
-        }
+            cancelPaymentBtn.addEventListener('click', () => {
+                accountNumberInput.value = '';
+                const userConfirmed = confirm("Batalkan pembayaran?");
+                if (userConfirmed) {
+                    window.history.back();
+                }
+            });
 
-        // Function to handle payment cancellation
-        function cancelPayment() {
-            document.getElementById('account-number').value = '';
-            const userConfirmed = confirm("Batalkan pembayaran?");
-            if (userConfirmed) {
-                history.back(); // Redirects to the previous page if user confirms
-            }
-        }
+            fetchSelectedItems();
+        });
     </script>
 @endsection

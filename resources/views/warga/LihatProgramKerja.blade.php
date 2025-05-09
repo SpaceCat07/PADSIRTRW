@@ -14,8 +14,8 @@
         <div class="proker-container">
             <!-- Search and filter section -->
             <div class="search-filter">
-                <input type="text" placeholder="Search...">
-                <select class="text-center">
+                <input type="text" placeholder="Search..." id="searchInput">
+                <select class="text-center" id="dateFilter">
                     <option value="">dd / mm / yyyy</option>
                 </select>
             </div>
@@ -34,117 +34,112 @@
 
             <!-- Program list -->
             <div class="program-list" id="programList">
-                <!-- Program card (dummy data) -->
-                <div class="program-card" data-date="2023-10-28" data-status="upcoming">
-                    <div class="date">
-                        <div class="month">OKTOBER</div>
-                        <div class="day">28</div>
-                        <div class="day-of-week">Senin</div>
-                    </div>
-                    <div class="details">
-                        <h3>Posyandu Balita dan Lansia Sehat</h3>
-                        <p>Program ini memberikan pelayanan kesehatan rutin bagi balita dan lansia, bekerja sama dengan
-                            puskesmas setempat. Warga dapat mengakses layanan imunisasi, pemeriksaan kesehatan dasar, dan
-                            edukasi gizi yang penting bagi keluarga.</p>
-                        <div class="time-location">
-                            <span class="time">08.00 WIB</span> &bull; Lokasi di Balai Desa
-                        </div>
-                    </div>
-                    <div class="more-options">⋮</div>
-                </div>
-
-                <div class="program-card" data-date="2023-09-15" data-status="completed">
-                    <div class="date">
-                        <div class="month">SEPTEMBER</div>
-                        <div class="day">15</div>
-                        <div class="day-of-week">Jumat</div>
-                    </div>
-                    <div class="details">
-                        <h3>Program Imunisasi Anak</h3>
-                        <p>Program ini bertujuan untuk memberikan imunisasi kepada anak-anak di wilayah setempat.</p>
-                        <div class="time-location">
-                            <span class="time">09.00 WIB</span> &bull; Lokasi di Puskesmas
-                        </div>
-                    </div>
-                    <div class="more-options">⋮</div>
-                </div>
-
-                <div class="program-card" data-date="2023-10-05" data-status="upcoming">
-                    <div class="date">
-                        <div class="month">OKTOBER</div>
-                        <div class="day">05</div>
-                        <div class="day-of-week">Kamis</div>
-                    </div>
-                    <div class="details">
-                        <h3>Pemeriksaan Kesehatan Gratis</h3>
-                        <p>Pelayanan pemeriksaan kesehatan gratis bagi masyarakat.</p>
-                        <div class="time-location">
-                            <span class="time">10.00 WIB</span> &bull; Lokasi di Balai Desa
-                        </div>
-                    </div>
-                    <div class="more-options">⋮</div>
-                </div>
-
-                <!-- Add more program cards as necessary -->
+                <!-- Program cards will be dynamically inserted here -->
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        document.getElementById('sortOptions').addEventListener('change', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const programList = document.getElementById('programList');
-            const programs = Array.from(document.querySelectorAll('.program-card'));
-            const sortBy = this.value;
+            const searchInput = document.getElementById('searchInput');
+            const sortSelect = document.getElementById('sort-select');
+            const dateFilter = document.getElementById('dateFilter');
 
-            programs.sort((a, b) => {
-                const dateA = new Date(a.getAttribute('data-date'));
-                const dateB = new Date(b.getAttribute('data-date'));
+            let programs = [];
 
-                return sortBy === 'latest' ? dateB - dateA : dateA - dateB;
-            });
+            // Fetch program data from API
+            function fetchPrograms() {
+                axios.get('/api/programs')
+                    .then(response => {
+                        programs = response.data;
+                        populateDateFilter();
+                        renderPrograms(programs);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching programs:', error);
+                        programList.innerHTML = '<p>Failed to load program data.</p>';
+                    });
+            }
 
-            programList.innerHTML = ''; // Clear the existing program cards
-            programs.forEach(program => programList.appendChild(program)); // Append sorted program cards
-        });
-
-        // Sidebar filtering
-        const sidebarItems = document.querySelectorAll('.sidebar-item');
-
-        for (let item of sidebarItems) {
-            item.addEventListener('click', function() {
-                const status = this.textContent.trim() === 'Mendatang' ? 'upcoming' : 'completed';
-
-                // Highlight the selected sidebar item
-                for (let i of sidebarItems) i.classList.remove('active');
-                this.classList.add('active');
-
-                // Filter program cards
-                const programCards = document.querySelectorAll('.program-card');
-                programCards.forEach(card => {
-                    if (card.getAttribute('data-status') === status) {
-                        card.style.display = 'flex'; // Show matching cards
-                    } else {
-                        card.style.display = 'none'; // Hide non-matching cards
-                    }
-                });
-            });
-        }
-
-        // Search functionality
-        document.querySelector('.search-filter input').addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            const programCards = document.querySelectorAll('.program-card');
-
-            programCards.forEach(card => {
-                const title = card.querySelector('h3').textContent.toLowerCase();
-                const description = card.querySelector('p').textContent.toLowerCase();
-
-                if (title.includes(searchTerm) || description.includes(searchTerm)) {
-                    card.style.display = 'flex'; // Show matching cards
-                } else {
-                    card.style.display = 'none'; // Hide non-matching cards
+            // Render program cards
+            function renderPrograms(data) {
+                programList.innerHTML = '';
+                if (data.length === 0) {
+                    programList.innerHTML = '<p>No programs found.</p>';
+                    return;
                 }
-            });
+                data.forEach(program => {
+                    const card = document.createElement('div');
+                    card.className = 'program-card';
+                    card.setAttribute('data-date', program.date);
+                    card.setAttribute('data-status', program.status);
+
+                    card.innerHTML = `
+                        <div class="date">
+                            <div class="month">${program.month}</div>
+                            <div class="day">${program.day}</div>
+                            <div class="day-of-week">${program.day_of_week}</div>
+                        </div>
+                        <div class="details">
+                            <h3>${program.title}</h3>
+                            <p>${program.description}</p>
+                            <div class="time-location">
+                                <span class="time">${program.time}</span> &bull; Lokasi di ${program.location}
+                            </div>
+                        </div>
+                        <div class="more-options">⋮</div>
+                    `;
+                    programList.appendChild(card);
+                });
+            }
+
+            // Populate date filter dropdown with unique dates
+            function populateDateFilter() {
+                const dates = [...new Set(programs.map(p => p.date))].sort();
+                dateFilter.innerHTML = '<option value="">dd / mm / yyyy</option>';
+                dates.forEach(date => {
+                    const option = document.createElement('option');
+                    option.value = date;
+                    option.textContent = date;
+                    dateFilter.appendChild(option);
+                });
+            }
+
+            // Filter programs by search term and date filter
+            function filterPrograms() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedDate = dateFilter.value;
+
+                let filtered = programs.filter(program => {
+                    const matchesSearch = program.title.toLowerCase().includes(searchTerm) ||
+                        program.description.toLowerCase().includes(searchTerm);
+                    const matchesDate = selectedDate ? program.date === selectedDate : true;
+                    return matchesSearch && matchesDate;
+                });
+
+                sortPrograms(filtered);
+            }
+
+            // Sort programs by date
+            function sortPrograms(data) {
+                const sortBy = sortSelect.value;
+                data.sort((a, b) => {
+                    const dateA = new Date(a.date);
+                    const dateB = new Date(b.date);
+                    return sortBy === 'latest' ? dateB - dateA : dateA - dateB;
+                });
+                renderPrograms(data);
+            }
+
+            // Event listeners
+            searchInput.addEventListener('input', filterPrograms);
+            sortSelect.addEventListener('change', filterPrograms);
+            dateFilter.addEventListener('change', filterPrograms);
+
+            // Initial fetch
+            fetchPrograms();
         });
     </script>
 @endsection

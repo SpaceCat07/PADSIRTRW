@@ -16,7 +16,9 @@
 
     </style>
 </head>
-
+<?php
+$page = 'program-kerja'; // or 'program-kerja', 'pembayaran', etc.
+?>
 <body>
 
     <div class="sidebar">

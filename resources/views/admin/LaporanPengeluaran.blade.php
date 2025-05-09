@@ -1,5 +1,8 @@
 @extends('layouts.adminSidebar')
 
+<title>SIMAS - laporan pengeluaran</title>
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
 @section('content')
     <div class="data-warga-container">
         <header class="admin-header">

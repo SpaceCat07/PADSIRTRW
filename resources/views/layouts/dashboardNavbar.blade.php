@@ -43,7 +43,8 @@
                         class="nav-link px-2 {{ $page == 'dashboard' ? 'link-active' : 'link-idle' }}">Dashboard</a>
                 </li>
                 <li><a href="/program-kerja"
-                        class="nav-link px-2 {{ $page == 'program-kerja' ? 'link-active' : 'link-idle' }}">Program Kerja</a></li>
+                        class="nav-link px-2 {{ $page == 'program-kerja' ? 'link-active' : 'link-idle' }}">Program Kerja</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a href="#"
                         class="nav-link dropdown-toggle px-2 {{ $page == 'pembayaran' ? 'link-active' : 'link-idle' }}"
@@ -52,13 +53,13 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('pembayaran') }}">Bayar</a></li>
-                        <li><a class="dropdown-item" href="{{ route('riwayat-pembayaran') }}">Riwayat</a></li>
+                        <li><a class="dropdown-item" href="{{ route('riwayat-pembayaran') }}">Riwayat</a>
+                        </li>
                     </ul>
                 </li>
 
                 <li><a href="/kritik-saran/warga"
-                        class="nav-link px-2 {{ $page == 'kritik-saran' ? 'link-active' : 'link-idle' }}">Kritik
-                        Saran</a></li>
+                        class="nav-link px-2 {{ $page == 'kritik-saran' ? 'link-active' : 'link-idle' }}">Kritik Saran</a></li>
                 <li>
                     <div class="dropdown text-end me-3">
                         <a href="#" class="link-body-emphasis text-decoration-none dropdown-toggle"

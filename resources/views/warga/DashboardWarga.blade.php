@@ -21,37 +21,9 @@
             </div>
             <div class="carousel-content col-md-7">
                 <div id="programKerjaCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <a href="{{ route('program-kerja') }}">
-                                <div class="carousel-card custom-card p-5"
-                                    style="background-image: url({{ asset('storage/carouselBackground.png') }});">
-                                    <!-- No content in this card, just the background -->
-                                </div>
-                            </a>
-                            <div class="carousel-card-body">
-                                <h5 class="carousel-card-title">Rapat Mingguan</h5>
-                                <div class="carousel-card-date-link">
-                                    <p class="carousel-card-text">Senin 33 Maret 2033</p>
-                                    <a href="{{ route('program-kerja') }}" class="btn btn-link">Learn more ></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="carousel-card custom-card p-5"
-                                style="background-image: url({{ asset('storage/carouselBackground.png') }});">
-                                <!-- No content in this card, just the background -->
-                            </div>
-                            <div class="carousel-card-body">
-                                <h5 class="carousel-card-title">Posyandu Balita & Lansia</h5>
-                                <div class="carousel-card-date-link">
-                                    <p class="carousel-card-text">Minggu 32 Maret 2033</p>
-                                    <a href="{{ route('program-kerja') }}" class="btn btn-link">Learn more ></a>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="carousel-inner" id="programCarouselInner">
+                        <!-- Program carousel items will be dynamically inserted here -->
                     </div>
-
                     <!-- Navigation Buttons -->
                     <button class="carousel-control-prev" type="button" data-bs-target="#programKerjaCarousel"
                         data-bs-slide="prev">
@@ -70,33 +42,26 @@
 
     <div class="dashboard-container">
         <!-- Informasi Iuran Section -->
-        <div class="iuran-container mt-5">
-            <div class="iuran-info">
+        <div class="dompet-container mt-5">
+            <div class="dompet-overview">
+                <div class="saldo-overview">
+                    <h3 class="saldo-title">Saldo Dompet Anda</h3>
+                    <h1 class="saldo-amount">Rp. 100.000</h1>
+                </div>
+                <div class="saldo-buttons">
+                    <a href="">
+                        <button>tambah saldo</button>
+                    </a>
+                    <a href="{{ route ('dompet-warga')}}">
+                        <button>riwayat transaksi</button>
+                    </a>
+                </div>
+            </div>
+            <div class="iuran-overview">
                 <h1 class="section-title mb-4">Informasi Iuran</h1>
                 <a href="{{ route('pembayaran') }}" class="text-decoration-none">
-                    <div class="iuran-report">
-                        <div class="status-box">
-                            <div class="status text-center">
-                                <p>Status</p>
-                            </div>
-                            <div class="icon-container">
-                                <img src="{{ asset('storage/rectangleKuning.png') }}" class="icon">
-                            </div>
-                        </div>
-                        <div class="payment-status">
-                            <img src="{{ asset('storage/orderComplete.png') }}" alt="">
-                            <div>
-                                <p class="status title">Sudah dibayar</p>
-                                <p class="amount">Rp 10.000</p>
-                            </div>
-                        </div>
-                        <div class="billing-status d-flex align-items-center">
-                            <img src="{{ asset('storage/purchaseOrder.png') }}" alt="">
-                            <div>
-                                <p class="status title">Belum Dibayar</p>
-                                <p class="amount">Rp 50.000</p>
-                            </div>
-                        </div>
+                    <div class="iuran-report" id="iuranReport">
+                        <!-- Payment status will be dynamically inserted here -->
                     </div>
                 </a>
             </div>
@@ -104,28 +69,11 @@
 
         <!-- Laporan Keuangan RT -->
         <div class="iuran-container mt-5">
-            <div class="iuran-info">
+            <div class="laporan-info">
                 <h1 class="section-title mb-4">Laporan Keuangan RT</h1>
                 <a href="{{ route('laporan-keuangan') }}" class="text-decoration-none">
-                    <div class="iuran-report">
-                        <div class="total-box">
-                            <div class="total-status text-center">
-                                <p class="total title">Total iuran saat ini</p>
-                                <p class="amount">Rp 50,000</p> <!-- Example status -->
-                            </div>
-                        </div>
-                        <div class="payment-status">
-                            <div class="remaining-funds text-center">
-                                <p class="status title">Sisa</p>
-                                <p class="amount">Rp 50,000</p>
-                            </div>
-                        </div>
-                        <div class="billing-status">
-                            <div class="used-funds text-center">
-                                <p class="status title">Pengeluaran</p>
-                                <p class="amount">Rp 50,000</p>
-                            </div>
-                        </div>
+                    <div class="iuran-report" id="laporanKeuangan">
+                        <!-- Financial report will be dynamically inserted here -->
                     </div>
                 </a>
             </div>
@@ -150,121 +98,199 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
     <script>
-        // Ensure Chart.js Plugin is registered
-        Chart.register(ChartDataLabels);
+        document.addEventListener('DOMContentLoaded', function () {
+            const programCarouselInner = document.getElementById('programCarouselInner');
+            const iuranReport = document.getElementById('iuranReport');
+            const laporanKeuangan = document.getElementById('laporanKeuangan');
 
-        // Access CSS variables
-        const rootStyles = getComputedStyle(document.documentElement);
-        const chartColors = {
-            piePemasukanBg: rootStyles.getPropertyValue('--pie-pemasukan-bg').trim(),
-            piePengeluaranBg: rootStyles.getPropertyValue('--pie-pengeluaran-bg').trim(),
-            barPemasukanBg: rootStyles.getPropertyValue('--bar-pemasukan-bg').trim(),
-            barPengeluaranBg: rootStyles.getPropertyValue('--bar-pengeluaran-bg').trim(),
-            lineThisMonthBg: rootStyles.getPropertyValue('--line-thismonth-bg').trim(),
-            lineThisMonthBorder: rootStyles.getPropertyValue('--line-thismonth-border').trim(),
-            lineLastMonthBg: rootStyles.getPropertyValue('--line-lastmonth-bg').trim(),
-            lineLastMonthBorder: rootStyles.getPropertyValue('--line-lastmonth-border').trim(),
-        };
+            let pieChart, barChart, lineChart;
 
-        const piechart_data = @json($piechart_data);
-        const barchart_data = @json($barchart_data);
-        const linechart_data = @json($linechart_data);
-        const totalPemasukan = @json($totalPemasukan);
-        const totalPengeluaran = @json($totalPengeluaran);
-        const totalSaldo = @json($totalSaldo);
-        const pieCtx = document.getElementById('pieChart').getContext('2d');
-        const barCtx = document.getElementById('barChart').getContext('2d');
-        const lineCtx = document.getElementById('lineChart').getContext('2d');
+            // Fetch dashboard data from API
+            axios.get('/api/dashboard-data')
+                .then(response => {
+                    const data = response.data;
 
-        // Pie Chart
-        new Chart(pieCtx, {
-            type: 'pie',
-            data: {
-                labels: piechart_data.labels,
-                datasets: [{
-                    data: piechart_data.data,
-                    backgroundColor: [
-                        chartColors.piePemasukanBg,
-                        chartColors.piePengeluaranBg,
-                    ],
-                    borderWidth: 0,
-                }, ],
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    datalabels: {
-                        formatter: (value, ctx) => {
-                            const total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                            return `${((value / total) * 100).toFixed(1)}%`;
+                    // Render program carousel items
+                    if (data.programKerja && data.programKerja.length > 0) {
+                        programCarouselInner.innerHTML = '';
+                        data.programKerja.forEach((program, index) => {
+                            const activeClass = index === 0 ? 'active' : '';
+                            const item = document.createElement('div');
+                            item.className = `carousel-item ${activeClass}`;
+                            item.innerHTML = `
+                                <a href="/program-kerja">
+                                    <div class="carousel-card custom-card p-5" style="background-image: url('/storage/carouselBackground.png');"></div>
+                                </a>
+                                <div class="carousel-card-body">
+                                    <h5 class="carousel-card-title">${program.title}</h5>
+                                    <div class="carousel-card-date-link">
+                                        <p class="carousel-card-text">${program.dateFormatted}</p>
+                                        <a href="/program-kerja" class="btn btn-link">Learn more ></a>
+                                    </div>
+                                </div>
+                            `;
+                            programCarouselInner.appendChild(item);
+                        });
+                    }
+
+                    // Render Informasi Iuran
+                    if (data.iuran) {
+                        iuranReport.innerHTML = `
+                            <div class="status-box">
+                                <div class="status text-center">
+                                    <p>Status</p>
+                                </div>
+                                <div class="icon-container">
+                                    <img src="/storage/rectangleKuning.png" class="icon">
+                                </div>
+                            </div>
+                            <div class="payment-status">
+                                <img src="/storage/orderComplete.png" alt="">
+                                <div>
+                                    <p class="status title">${data.iuran.statusPaidText}</p>
+                                    <p class="amount">${data.iuran.statusPaidAmount}</p>
+                                </div>
+                            </div>
+                            <div class="billing-status d-flex align-items-center">
+                                <img src="/storage/purchaseOrder.png" alt="">
+                                <div>
+                                    <p class="status title">${data.iuran.statusDueText}</p>
+                                    <p class="amount">${data.iuran.statusDueAmount}</p>
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    // Render Laporan Keuangan RT
+                    if (data.laporanKeuangan) {
+                        laporanKeuangan.innerHTML = `
+                            <div class="total-box">
+                                <div class="total-status text-center">
+                                    <p class="total title">Total iuran saat ini</p>
+                                    <p class="amount">${data.laporanKeuangan.totalIuran}</p>
+                                </div>
+                            </div>
+                            <div class="payment-status">
+                                <div class="remaining-funds text-center">
+                                    <p class="status title">Sisa</p>
+                                    <p class="amount">${data.laporanKeuangan.sisa}</p>
+                                </div>
+                            </div>
+                            <div class="billing-status">
+                                <div class="used-funds text-center">
+                                    <p class="status title">Pengeluaran</p>
+                                    <p class="amount">${data.laporanKeuangan.pengeluaran}</p>
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    // Initialize charts
+                    const pieCtx = document.getElementById('pieChart').getContext('2d');
+                    const barCtx = document.getElementById('barChart').getContext('2d');
+                    const lineCtx = document.getElementById('lineChart').getContext('2d');
+
+                    if (pieChart) pieChart.destroy();
+                    if (barChart) barChart.destroy();
+                    if (lineChart) lineChart.destroy();
+
+                    pieChart = new Chart(pieCtx, {
+                        type: 'pie',
+                        data: {
+                            labels: data.piechartData.labels,
+                            datasets: [{
+                                data: data.piechartData.data,
+                                backgroundColor: [
+                                    getComputedStyle(document.documentElement).getPropertyValue('--pie-pemasukan-bg').trim(),
+                                    getComputedStyle(document.documentElement).getPropertyValue('--pie-pengeluaran-bg').trim(),
+                                ],
+                                borderWidth: 0,
+                            }],
                         },
-                        color: '#fff',
-                        font: {
-                            weight: 'bold',
-                            size: 14
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                datalabels: {
+                                    formatter: (value, ctx) => {
+                                        const total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                        return `${((value / total) * 100).toFixed(1)}%`;
+                                    },
+                                    color: '#fff',
+                                    font: {
+                                        weight: 'bold',
+                                        size: 14
+                                    },
+                                },
+                            },
                         },
-                    },
-                },
-            },
-        });
+                    });
 
-        // Bar Chart
-        new Chart(barCtx, {
-            type: 'bar',
-            data: {
-                labels: barchart_data.labels,
-                datasets: [{
-                        label: 'Pemasukan',
-                        data: barchart_data.datasets[0].data,
-                        backgroundColor: chartColors.barPemasukanBg,
-                    },
-                    {
-                        label: 'Pengeluaran',
-                        data: barchart_data.datasets[1].data,
-                        backgroundColor: chartColors.barPengeluaranBg,
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: true
-                    },
-                },
-            },
-        });
+                    barChart = new Chart(barCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: data.barchartData.labels,
+                            datasets: [
+                                {
+                                    label: 'Pemasukan',
+                                    data: data.barchartData.datasets[0].data,
+                                    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--bar-pemasukan-bg').trim(),
+                                },
+                                {
+                                    label: 'Pengeluaran',
+                                    data: data.barchartData.datasets[1].data,
+                                    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--bar-pengeluaran-bg').trim(),
+                                },
+                            ],
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: true
+                                },
+                            },
+                        },
+                    });
 
-        // Line Chart
-        new Chart(lineCtx, {
-            type: 'line',
-            data: {
-                labels: linechart_data.labels,
-                datasets: [{
-                        label: 'This Month',
-                        data: linechart_data.datasets[0].data,
-                        backgroundColor: chartColors.lineThisMonthBg,
-                        borderColor: chartColors.lineThisMonthBorder,
-                        fill: true,
-                    },
-                    {
-                        label: 'Last Month',
-                        data: linechart_data.datasets[1].data,
-                        backgroundColor: chartColors.lineLastMonthBg,
-                        borderColor: chartColors.lineLastMonthBorder,
-                        fill: true,
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: true
-                    },
-                },
-            },
+                    lineChart = new Chart(lineCtx, {
+                        type: 'line',
+                        data: {
+                            labels: data.linechartData.labels,
+                            datasets: [
+                                {
+                                    label: 'This Month',
+                                    data: data.linechartData.datasets[0].data,
+                                    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--line-thismonth-bg').trim(),
+                                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--line-thismonth-border').trim(),
+                                    fill: true,
+                                },
+                                {
+                                    label: 'Last Month',
+                                    data: data.linechartData.datasets[1].data,
+                                    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--line-lastmonth-bg').trim(),
+                                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--line-lastmonth-border').trim(),
+                                    fill: true,
+                                },
+                            ],
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: true
+                                },
+                            },
+                        },
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching dashboard data:', error);
+                });
         });
     </script>
 @endsection

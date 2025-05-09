@@ -1,5 +1,8 @@
 @extends('layouts.adminSidebar')
 
+<title>SIMAS - kritik dan saran</title>
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
 @section('content')
     {{-- Header --}}
     <div class="data-warga-container">
@@ -10,42 +13,19 @@
     </div>
 
     {{-- Kritik dan Saran List --}}
-    <div class="kritik-saran-container">
-
-        {{-- Status Filters --}}
+    <div class="kritik-saran-container" id="kritikSaranContainer">
         <div class="status-filters">
             <button class="filter-button active" data-filter="all">All</button>
             <button class="filter-button" data-filter="unread">Unread</button>
             <button class="filter-button" data-filter="complete">Complete</button>
         </div>
-
-        <div class="kritik-saran-card unread">
-            <div class="profile-icon"><img src="{{ asset('storage/maleUser.png') }}" alt=""></div>
-            <div class="kritik-saran-content">
-                <h4>John Doe</h4>
-                <p>Saran untuk kegiatan kedepannya dapat dimulai tepat waktu sesuai dengan jadwal yang telah diinformasikan sebelumnya.</p>
-            </div>
-        </div>
-
-        <div class="kritik-saran-card unread">
-            <div class="profile-icon"><img src="{{ asset('storage/maleUser.png') }}" alt=""></div>
-            <div class="kritik-saran-content">
-                <h4>Jane Doe</h4>
-                <p>Tolong lebih tegas pada warga yang suka memasang musik dengan volume tinggi di malam hari karena dapat mengganggu istirahat warga lainnya.</p>
-            </div>
-        </div>
-
-        <div class="kritik-saran-card complete">
-            <div class="profile-icon"><img src="{{ asset('storage/maleUser.png') }}" alt=""></div>
-            <div class="kritik-saran-content">
-                <h4>John Doe</h4>
-                <p>Terlalu banyak iuran-iuran tambahan, uang saya habis.</p>
-            </div>
+        <div id="kritikSaranList">
+            <div>Loading kritik dan saran...</div>
         </div>
     </div>
 
     {{-- Popup --}}
-    <div class="popup-container" id="messagePopup">
+    <div class="popup-container" id="messagePopup" style="display:none;">
         <div class="popup">
             <button class="close-popup" id="closePopup">&times;</button>
             <div class="popup-header">
@@ -61,9 +41,11 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.kritik-saran-card');
+            const kritikSaranList = document.getElementById('kritikSaranList');
+            const filterButtons = document.querySelectorAll('.filter-button');
             const popupContainer = document.getElementById('messagePopup');
             const closePopup = document.getElementById('closePopup');
             const popupName = document.getElementById('popupName');
@@ -72,80 +54,88 @@
             const markComplete = document.getElementById('markComplete');
             const markUnread = document.getElementById('markUnread');
 
-            let currentCard = null; // Track the currently opened card
+            let kritikData = [];
+            let currentCard = null;
 
-            // Open popup when card is clicked
-            cards.forEach(card => {
-                card.addEventListener('click', () => {
-                    currentCard = card; // Store reference to the clicked card
-                    const name = card.querySelector('h4').textContent;
-                    const message = card.querySelector('p').textContent;
-                    const status = card.classList.contains('unread') ? 'Unread' : 'Complete';
+            function fetchKritikSaran() {
+                axios.get('/api/kritik-saran')
+                    .then(response => {
+                        kritikData = response.data;
+                        renderKritikSaran(kritikData);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching kritik dan saran:', error);
+                        kritikSaranList.innerHTML = '<div>Failed to load data.</div>';
+                    });
+            }
 
-                    popupName.value = name;
-                    popupMessage.value = message;
-                    messageStatus.textContent = status;
-
-                    popupContainer.style.display = 'flex';
+            function renderKritikSaran(data) {
+                if (!data || data.length === 0) {
+                    kritikSaranList.innerHTML = '<div>No kritik dan saran found.</div>';
+                    return;
+                }
+                kritikSaranList.innerHTML = '';
+                data.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'kritik-saran-card ' + (item.status === 'unread' ? 'unread' : 'complete');
+                    card.innerHTML = `
+                        <div class="profile-icon"><img src="{{ asset('storage/maleUser.png') }}" alt=""></div>
+                        <div class="kritik-saran-content">
+                            <h4>${item.name}</h4>
+                            <p>${item.message}</p>
+                        </div>
+                    `;
+                    card.addEventListener('click', () => openPopup(card, item));
+                    kritikSaranList.appendChild(card);
                 });
-            });
+            }
 
-            // Close popup
+            function openPopup(card, item) {
+                currentCard = card;
+                popupName.value = item.name;
+                popupMessage.value = item.message;
+                messageStatus.textContent = item.status === 'unread' ? 'Unread' : 'Complete';
+                popupContainer.style.display = 'flex';
+            }
+
             closePopup.addEventListener('click', () => {
                 popupContainer.style.display = 'none';
             });
 
-            // Mark as complete
             markComplete.addEventListener('click', () => {
                 if (currentCard) {
                     currentCard.classList.remove('unread');
                     currentCard.classList.add('complete');
+                    messageStatus.textContent = 'Complete';
+                    // Optionally, send update to API here
                 }
                 popupContainer.style.display = 'none';
             });
 
-            // Mark as unread
             markUnread.addEventListener('click', () => {
                 if (currentCard) {
                     currentCard.classList.remove('complete');
                     currentCard.classList.add('unread');
+                    messageStatus.textContent = 'Unread';
+                    // Optionally, send update to API here
                 }
                 popupContainer.style.display = 'none';
             });
-        });
 
-        // Filter function to show/hide cards based on status
-        document.querySelectorAll('.filter-button').forEach(button => {
-            button.addEventListener('click', () => {
-                const filter = button.getAttribute('data-filter');
-                document.querySelectorAll('.kritik-saran-card').forEach(card => {
-                    const cardStatus = card.classList.contains('unread') ? 'unread' : 'complete';
-                    card.style.display = (filter === 'all' || filter === cardStatus) ? 'flex' : 'none';
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.getAttribute('data-filter');
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    if (filter === 'all') {
+                        renderKritikSaran(kritikData);
+                    } else {
+                        renderKritikSaran(kritikData.filter(item => item.status === filter));
+                    }
                 });
-
-                // Highlight active filter button
-                document.querySelectorAll('.filter-button').forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-            });
-        });
-
-        // Toggle sidebar appearance
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuIcon = document.querySelector('.toggle-sidebar-icon');
-            const sidebar = document.querySelector('.admin-sidebar');
-
-            // Event listener to toggle sidebar visibility
-            menuIcon.addEventListener('click', (event) => {
-                event.stopPropagation();
-                sidebar.classList.toggle('active');
             });
 
-            // Event listener to hide sidebar when clicking outside
-            document.addEventListener('click', (event) => {
-                if (!sidebar.contains(event.target) && !menuIcon.contains(event.target)) {
-                    sidebar.classList.remove('active');
-                }
-            });
+            fetchKritikSaran();
         });
     </script>
 @endsection

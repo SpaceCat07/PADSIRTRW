@@ -89,3 +89,129 @@ table .no-data {
 .pay-button:hover {
     background-color: #5a4dc7;
 }
+
+/* Riwayat Pembayaran container */
+.payment-history-container {
+    max-width: 1100px;
+    margin: auto;
+    background-color: #FFF;
+    border-radius: 8px;
+    padding: 150px 20px;
+}
+
+/* Title */
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Filter buttons */
+.status-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.status-filters button {
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    background-color: #FFF;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #555;
+    transition: all 0.3s ease;
+}
+
+.status-filters button:hover,
+.status-filters button.active {
+    background-color: #ffffff;
+    border-color: #6a5acd;
+    color: #333;
+    transition: 0.3s ease;
+}
+
+/* Date picker */
+.date-picker {
+    margin-left: auto;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border: 2px solid white;
+    border-radius: 10px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    background-color: #4A3AFF;
+    color: #FFF;
+}
+
+tr:nth-child(even) {
+    background-color: #F5F5F5;
+}
+
+/* Status colors */
+.status-success {
+    color: green;
+}
+
+.status-pending {
+    color: blue;
+}
+
+.status-rejected {
+    color: red;
+}
+
+/* Pagination and items per page */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pagination button {
+    border: none;
+    background-color: #FFF;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.pagination button:disabled {
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.items-per-page {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+select {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}

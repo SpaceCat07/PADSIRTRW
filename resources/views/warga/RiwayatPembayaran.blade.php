@@ -2,11 +2,12 @@
 
 @section('content')
 <title>SIMAS - riwayat</title>
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/pembayaran.css') }}">
     <?php
     $page = 'pembayaran'; // or 'program-kerja', 'pembayaran', etc.
     ?>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('js/pagination.js') }}"></script>
 
     <div class="payment-history-container">
@@ -17,7 +18,6 @@
             <button class="filter-button" data-filter="success">Complete</button>
             <button class="filter-button" data-filter="pending">Pending</button>
             <button class="filter-button" data-filter="rejected">Rejected</button>
-            {{-- <button class="date-picker">Pilih Tanggal</button> --}}
         </div>
 
         <table>
@@ -30,31 +30,15 @@
                 </tr>
             </thead>
             <tbody id="payment-table">
-                <tr data-status="success">
-                    <td>#16643</td>
-                    <td>28 October, 2024</td>
-                    <td>5000</td>
-                    <td class="status-success">Success</td>
+                <tr>
+                    <td colspan="4">Loading...</td>
                 </tr>
-                <tr data-status="rejected">
-                    <td>#13568</td>
-                    <td>15 September, 2024</td>
-                    <td>5000</td>
-                    <td class="status-rejected">Rejected</td>
-                </tr>
-                <tr data-status="pending">
-                    <td>#12345</td>
-                    <td>29 Agustus, 2024</td>
-                    <td>5000</td>
-                    <td class="status-pending">Pending</td>
-                </tr>
-                <!-- Additional rows here -->
             </tbody>
         </table>
 
         <div class="pagination-container">
             <div class="items-per-page">
-                <select>
+                <select id="itemsPerPageSelect">
                     <option value="6">6</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
@@ -63,43 +47,116 @@
             </div>
 
             <div class="pagination">
-                <button disabled>&lt;</button>
-                <span>1</span>
-                <span>of 1 pages</span>
-                <button disabled>&gt;</button>
+                <button id="prevPageBtn" disabled><</button>
+                <span id="currentPage">1</span>
+                <span>of <span id="totalPages">1</span> pages</span>
+                <button id="nextPageBtn" disabled>></button>
             </div>
         </div>
     </div>
 
     <script>
-        // Handle filter buttons
-        document.querySelectorAll('.filter-button').forEach(button => {
-            button.addEventListener('click', function() {
-                // Remove active class from all buttons and add to the clicked one
-                document.querySelectorAll('.filter-button').forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                
-                // Get filter type from data-filter attribute
-                const filter = button.getAttribute('data-filter');
-                
-                // Filter table rows
-                filterTable(filter);
+        document.addEventListener('DOMContentLoaded', () => {
+            const paymentTable = document.getElementById('payment-table');
+            const filterButtons = document.querySelectorAll('.filter-button');
+            const itemsPerPageSelect = document.getElementById('itemsPerPageSelect');
+            const prevPageBtn = document.getElementById('prevPageBtn');
+            const nextPageBtn = document.getElementById('nextPageBtn');
+            const currentPageSpan = document.getElementById('currentPage');
+            const totalPagesSpan = document.getElementById('totalPages');
+
+            let payments = [];
+            let filteredPayments = [];
+            let currentPage = 1;
+            let itemsPerPage = parseInt(itemsPerPageSelect.value);
+
+            function fetchPayments() {
+                axios.get('/api/payment-history')
+                    .then(response => {
+                        payments = response.data;
+                        filteredPayments = payments;
+                        currentPage = 1;
+                        renderTable();
+                        updatePagination();
+                    })
+                    .catch(error => {
+                        console.error('Error fetching payment history:', error);
+                        paymentTable.innerHTML = '<tr><td colspan="4">Failed to load data.</td></tr>';
+                    });
+            }
+
+            function renderTable() {
+                paymentTable.innerHTML = '';
+                if (filteredPayments.length === 0) {
+                    paymentTable.innerHTML = '<tr><td colspan="4">No payment history found.</td></tr>';
+                    return;
+                }
+                const start = (currentPage - 1) * itemsPerPage;
+                const end = start + itemsPerPage;
+                const pageItems = filteredPayments.slice(start, end);
+
+                pageItems.forEach(payment => {
+                    const row = document.createElement('tr');
+                    row.setAttribute('data-status', payment.status.toLowerCase());
+                    row.innerHTML = `
+                        <td>#${payment.id}</td>
+                        <td>${payment.date}</td>
+                        <td>${payment.total}</td>
+                        <td class="status-${payment.status.toLowerCase()}">${payment.status}</td>
+                    `;
+                    paymentTable.appendChild(row);
+                });
+            }
+
+            function updatePagination() {
+                const totalPages = Math.ceil(filteredPayments.length / itemsPerPage);
+                totalPagesSpan.textContent = totalPages;
+                currentPageSpan.textContent = currentPage;
+                prevPageBtn.disabled = currentPage === 1;
+                nextPageBtn.disabled = currentPage === totalPages || totalPages === 0;
+            }
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const filter = button.getAttribute('data-filter');
+                    if (filter === 'all') {
+                        filteredPayments = payments;
+                    } else {
+                        filteredPayments = payments.filter(p => p.status.toLowerCase() === filter);
+                    }
+                    currentPage = 1;
+                    renderTable();
+                    updatePagination();
+                });
             });
-        });
 
-        // Filter function to show/hide rows based on status
-        function filterTable(status) {
-            const rows = document.querySelectorAll('#payment-table tr');
-
-            rows.forEach(row => {
-                const rowStatus = row.getAttribute('data-status');
-                
-                if (status === 'all' || rowStatus === status) {
-                    row.style.display = ''; // Show row
-                } else {
-                    row.style.display = 'none'; // Hide row
+            prevPageBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderTable();
+                    updatePagination();
                 }
             });
-        }
+
+            nextPageBtn.addEventListener('click', () => {
+                const totalPages = Math.ceil(filteredPayments.length / itemsPerPage);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderTable();
+                    updatePagination();
+                }
+            });
+
+            itemsPerPageSelect.addEventListener('change', () => {
+                itemsPerPage = parseInt(itemsPerPageSelect.value);
+                currentPage = 1;
+                renderTable();
+                updatePagination();
+            });
+
+            fetchPayments();
+        });
     </script>
 @endsection

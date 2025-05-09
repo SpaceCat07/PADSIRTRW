@@ -6,6 +6,20 @@
     border-radius: 0 110px 0 110px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
     max-width: 750px;
+    max-height: 500px;
+}
+
+textarea.form-control {
+    height: 200px; /* Keep your existing height */
+    border: 1px solid white; /* Keep your existing border */
+    box-shadow: inset 0 4px 20px rgba(0, 0, 0, 0.2); /* Add a prominent shadow */
+    border-radius: 8px; /* Optional: Add some border radius for a softer look */
+    transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+textarea.form-control:focus {
+    box-shadow: inset 0 6px 30px rgba(0, 0, 0, 0.3); /* Stronger shadow on focus */
+    outline: none; /* Remove default outline */
 }
 
 .rounded-custom {

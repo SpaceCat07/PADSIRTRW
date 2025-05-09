@@ -1,9 +1,5 @@
 @extends('layouts.adminSidebar')
 
-@php
-    use App\Models\Warga;
-@endphp
-
 <title>SIMAS - dashboard</title>
 <link rel="stylesheet" href="{{ asset('css/dashboard-admin.css') }}">
 <link rel="stylesheet" href="{{ asset('css/charts.css') }}">
@@ -13,17 +9,13 @@
         <div class="header-container">
             <header class="dashboard-header">
                 <div class="header-admin-left">
-                    @if (Auth::user()->role == 'Admin_RT')
-                        <p>Hi, Admin RT {{ Warga::where('id_warga', Auth::user()->id_warga)->first()->nama }}</p>
-                    @elseif (Auth::user()->role == 'Admin_RW')
-                        <p>Hi, Admin RW {{ Warga::where('id_warga', Auth::user()->id_warga)->first()->nama }}</p>
-                    @endif
+                    <p id="adminGreeting">Hi, Admin</p>
                     <h1>Welcome Back!</h1>
                 </div>
                 <div class="header-admin-dropdown text-end me-3">
                     <a href="#" class="profile-picture link-body-emphasis text-decoration-none" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <p>{{ Warga::where('id_warga', Auth::user()->id_warga)->first()->nama }}</p>
+                        <p id="adminName">Admin</p>
                         <img src="https://github.com/mdo.png" alt="mdo" width="38" height="38"
                             class="rounded-circle ms-2 align-middle">
                     </a>
@@ -39,63 +31,34 @@
                                 @csrf
                                 <button class="profile-logout-btn" type="submit">Sign out</button>
                             </form>
-                            <!-- <a class="dropdown-item" href="{{ route('logout') }}">Sign out</a> -->
                         </li>
                     </ul>
                 </div>
             </header>
-
-            {{-- <form action="{{ route('logout') }}" method="post"> @csrf
-                <button type="submit">Sign out</button>
-            </form> --}}
         </div>
-
 
         <div class="dashboard-content">
 
             <!-- Data Warga -->
-            <div class="admin-card data-warga" data-url="/data-warga/admin">
-                @if (Auth::user()->role == 'Admin_RT')
-                    <div class="title-arrow">
-                        <h3>Data Warga</h3>
-                        <img src="{{ asset('storage/arrow.png') }}" alt="">
-                    </div>
-                    <div class="family-data-container">
-                        <img src="{{ asset('storage/family.png') }}" alt="">
-                        <p>20 Keluarga</p>
-                    </div>
-                @elseif (Auth::user()->role == 'Admin_RW')
-                    <div class="title-arrow">
-                        <h3>Data RT</h3>
-                        <img src="{{ asset('storage/arrow.png') }}" alt="">
-                    </div>
-                    <div class="family-data-container">
-                        <img src="{{ asset('storage/family.png') }}" alt="">
-                        <p>RT 001</p>
-                    </div>
-                    <div class="family-data-container">
-                        <img src="{{ asset('storage/family.png') }}" alt="">
-                        <p>RT 002</p>
-                    </div>
-                @endif
-
+            <div class="admin-card data-warga" id="dataWargaCard" data-url="/data-warga/admin">
+                <div class="title-arrow">
+                    <h3 id="dataWargaTitle">Data Warga</h3>
+                    <img src="{{ asset('storage/arrow.png') }}" alt="">
+                </div>
+                <div class="family-data-container">
+                    <img src="{{ asset('storage/family.png') }}" alt="">
+                    <p id="familyCount">Loading...</p>
+                </div>
             </div>
 
             <!-- Pembayaran Butuh Konfirmasi -->
-            <div class="admin-card manajemen-iuran" data-url="/manajemen-iuran/admin">
+            <div class="admin-card manajemen-iuran" id="manajemenIuranCard" data-url="/manajemen-iuran/admin">
                 <div class="title-arrow">
                     <h3>Pembayaran butuh konfirmasi</h3>
                     <img src="{{ asset('storage/arrow.png') }}" alt="">
                 </div>
-                <ul>
-                    <div class="admin-card pembayaran-list">
-                        <span>No. Rekening 1871xx87xx</span>
-                        <span>Rp 35.000</span>
-                    </div>
-                    <div class="admin-card pembayaran-list">
-                        <span>No. Rekening 1871xx87xx</span>
-                        <span>Rp 15.000</span>
-                    </div>
+                <ul id="pembayaranList">
+                    <li>Loading...</li>
                 </ul>
             </div>
 
@@ -104,31 +67,31 @@
                 <h3>Perbandingan Pemasukan dan Pengeluaran</h3>
                 <div class="keuangan-chart">
                     <div class="keuangan-info">
-                        <div class="keuangan-info saldo" data-url="/laporan-saldo/admin">
+                        <div class="keuangan-info saldo" id="saldoInfo" data-url="/laporan-saldo/admin">
                             <div>
                                 <img src="{{ asset('storage/deposit.png') }}" alt="">
                             </div>
                             <div>
                                 <label for="saldo" class="keuangan-info-label">Saldo</label>
-                                <p>Rp {{ number_format($totalSaldo, 0, ',', '.') }}</p>
+                                <p id="saldoAmount">Loading...</p>
                             </div>
                         </div>
-                        <div class="keuangan-info pemasukan" data-url="/laporan-pemasukan/admin">
+                        <div class="keuangan-info pemasukan" id="pemasukanInfo" data-url="/laporan-pemasukan/admin">
                             <div>
                                 <img src="{{ asset('storage/deposit.png') }}" alt="">
                             </div>
                             <div>
                                 <label for="pemasukan" class="keuangan-info-label">Pemasukan</label>
-                                <p>Rp {{ number_format($totalPemasukan, 0, ',', '.') }}</p>
+                                <p id="pemasukanAmount">Loading...</p>
                             </div>
                         </div>
-                        <div class="keuangan-info pengeluaran" data-url="/laporan-pengeluaran/admin">
+                        <div class="keuangan-info pengeluaran" id="pengeluaranInfo" data-url="/laporan-pengeluaran/admin">
                             <div>
                                 <img src="{{ asset('storage/getCash.png') }}" alt="">
                             </div>
                             <div>
                                 <label for="pengeluaran" class="keuangan-info-label">Pengeluaran</label>
-                                <p>Rp {{ number_format($totalPengeluaran, 0, ',', '.') }}</p>
+                                <p id="pengeluaranAmount">Loading...</p>
                             </div>
                         </div>
                     </div>
@@ -156,17 +119,17 @@
                     <div class="chart-controls">
                         <div class="custom-select">
                             <select id="yearSelector" class="form-select">
-                                <option value="2022" {{ $year == 2022 ? 'selected' : '' }}>2022</option>
-                                <option value="2023" {{ $year == 2023 ? 'selected' : '' }}>2023</option>
-                                <option value="2024" {{ $year == 2024 ? 'selected' : '' }}>2024</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024" selected>2024</option>
                             </select>
                         </div>
 
                         <div class="custom-select">
                             <select id="intervalSelector" class="form-select">
-                                <option value="7-days" {{ $interval == '7-days' ? 'selected' : '' }}>7 Days</option>
-                                <option value="month" {{ $interval == 'month' ? 'selected' : '' }}>Month</option>
-                                <option value="yoy" {{ $interval == 'yoy' ? 'selected' : '' }}>Year-over-Year</option>
+                                <option value="7-days" selected>7 Days</option>
+                                <option value="month">Month</option>
+                                <option value="yoy">Year-over-Year</option>
                             </select>
                         </div>
                     </div>
@@ -240,6 +203,10 @@
     </div>
 
     <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
     <script>
         // Sidebar initialization
         document.addEventListener('DOMContentLoaded', () => {
@@ -277,151 +244,137 @@
             lineLastMonthBorder: rootStyles.getPropertyValue('--line-lastmonth-border').trim(),
         };
 
-        const piechart_data = @json($piechart_data);
-        const barchart_data = @json($barchart_data);
-        const linechart_data = @json($linechart_data);
-        const totalPemasukan = @json($totalPemasukan);
-        const totalPengeluaran = @json($totalPengeluaran);
-        const totalSaldo = @json($totalSaldo);
-        const pieCtx = document.getElementById('pieChart').getContext('2d');
-        const barCtx = document.getElementById('barChart').getContext('2d');
-        const lineCtx = document.getElementById('lineChart').getContext('2d');
-
-        // Pie Chart
-        new Chart(pieCtx, {
-            type: 'pie',
-            data: {
-                labels: piechart_data.labels,
-                datasets: [{
-                    data: piechart_data.data,
-                    backgroundColor: [
-                        chartColors.piePemasukanBg,
-                        chartColors.piePengeluaranBg,
-                    ],
-                    borderWidth: 0,
-                }, ],
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    datalabels: {
-                        formatter: (value, ctx) => {
-                            const total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                            return `${((value / total) * 100).toFixed(1)}%`;
-                        },
-                        color: '#fff',
-                        font: {
-                            weight: 'bold',
-                            size: 14
-                        },
-                    },
-                },
-            },
-        });
-
-        // Bar Chart
-        new Chart(barCtx, {
-            type: 'bar',
-            data: {
-                labels: barchart_data.labels,
-                datasets: [{
-                        label: 'Pemasukan',
-                        data: barchart_data.datasets[0].data,
-                        backgroundColor: chartColors.barPemasukanBg,
-                    },
-                    {
-                        label: 'Pengeluaran',
-                        data: barchart_data.datasets[1].data,
-                        backgroundColor: chartColors.barPengeluaranBg,
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: true
-                    },
-                },
-            },
-        });
-
-        // Line Chart
-        new Chart(lineCtx, {
-            type: 'line',
-            data: {
-                labels: linechart_data.labels,
-                datasets: [{
-                        label: 'This Month',
-                        data: linechart_data.datasets[0].data,
-                        backgroundColor: chartColors.lineThisMonthBg,
-                        borderColor: chartColors.lineThisMonthBorder,
-                        fill: true,
-                    },
-                    {
-                        label: 'Last Month',
-                        data: linechart_data.datasets[1].data,
-                        backgroundColor: chartColors.lineLastMonthBg,
-                        borderColor: chartColors.lineLastMonthBorder,
-                        fill: true,
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: true
-                    },
-                },
-            },
-        });
-
-        // Print chart
-        document.getElementById('printButton').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default button behavior
-
-            // Create a container to hold the charts
-            const chartsContainer = document.createElement('div');
-            chartsContainer.style.display = 'flex';
-            chartsContainer.style.flexDirection = 'column';
-            chartsContainer.style.alignItems = 'center';
-
-            // Get the bar chart and line chart canvas elements
-            const barChartCanvas = document.getElementById('barChart');
-            const lineChartCanvas = document.getElementById('lineChart');
-
-            // Append the charts to the container
-            chartsContainer.appendChild(barChartCanvas.cloneNode(true));
-            chartsContainer.appendChild(lineChartCanvas.cloneNode(true));
-
-            // Use html2canvas to capture the charts
-            html2canvas(chartsContainer).then(canvas => {
-                // Create a new window for printing
-                const printWindow = window.open('', '_blank');
-                printWindow.document.write('<html><head><title>Print Charts</title></head><body>');
-                printWindow.document.write('<h1>Grafik Laporan Pengeluaran</h1>');
-                printWindow.document.body.appendChild(canvas);
-                printWindow.document.write('</body></html>');
-                printWindow.document.close();
-                printWindow.print();
-            });
-        });
-
-        // Redirects
+        // Fetch dashboard data from API
         document.addEventListener('DOMContentLoaded', () => {
-            // Select all admin cards that need click events
-            const cards = document.querySelectorAll('.admin-card, .keuangan-info');
+            axios.get('/api/admin-dashboard-data')
+                .then(response => {
+                    const data = response.data;
 
-            // Add click event listener to each card
-            cards.forEach(card => {
-                card.addEventListener('click', () => {
-                    const url = card.getAttribute('data-url'); // Get the URL from data attribute
-                    if (url) {
-                        window.location.href = url; // Redirect to the specified URL
+                    // Update greeting and admin name
+                    document.getElementById('adminGreeting').textContent = `Hi, Admin ${data.adminName}`;
+                    document.getElementById('adminName').textContent = data.adminName;
+
+                    // Update Data Warga
+                    document.getElementById('dataWargaTitle').textContent = data.userRole === 'Admin_RT' ? 'Data Warga' : 'Data RT';
+                    document.querySelector('.family-data-container p').textContent = data.familyCount;
+
+                    // Update Pembayaran Butuh Konfirmasi
+                    const pembayaranList = document.getElementById('pembayaranList');
+                    pembayaranList.innerHTML = '';
+                    if (data.payments && data.payments.length > 0) {
+                        data.payments.forEach(payment => {
+                            const li = document.createElement('li');
+                            li.className = 'admin-card pembayaran-list';
+                            li.innerHTML = `<span>No. Rekening ${payment.accountNumber}</span><span>Rp ${payment.amount}</span>`;
+                            pembayaranList.appendChild(li);
+                        });
+                    } else {
+                        pembayaranList.innerHTML = '<li>No payments to confirm.</li>';
                     }
+
+                    // Update Pemasukan dan Pengeluaran
+                    document.getElementById('saldoAmount').textContent = `Rp ${data.totalSaldo.toLocaleString()}`;
+                    document.getElementById('pemasukanAmount').textContent = `Rp ${data.totalPemasukan.toLocaleString()}`;
+                    document.getElementById('pengeluaranAmount').textContent = `Rp ${data.totalPengeluaran.toLocaleString()}`;
+
+                    // Pie Chart
+                    const pieCtx = document.getElementById('pieChart').getContext('2d');
+                    new Chart(pieCtx, {
+                        type: 'pie',
+                        data: {
+                            labels: data.piechartData.labels,
+                            datasets: [{
+                                data: data.piechartData.data,
+                                backgroundColor: [
+                                    chartColors.piePemasukanBg,
+                                    chartColors.piePengeluaranBg,
+                                ],
+                                borderWidth: 0,
+                            }],
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                datalabels: {
+                                    formatter: (value, ctx) => {
+                                        const total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                        return `${((value / total) * 100).toFixed(1)}%`;
+                                    },
+                                    color: '#fff',
+                                    font: {
+                                        weight: 'bold',
+                                        size: 14
+                                    },
+                                },
+                            },
+                        },
+                    });
+
+                    // Bar Chart
+                    const barCtx = document.getElementById('barChart').getContext('2d');
+                    new Chart(barCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: data.barchartData.labels,
+                            datasets: [
+                                {
+                                    label: 'Pemasukan',
+                                    data: data.barchartData.datasets[0].data,
+                                    backgroundColor: chartColors.barPemasukanBg,
+                                },
+                                {
+                                    label: 'Pengeluaran',
+                                    data: data.barchartData.datasets[1].data,
+                                    backgroundColor: chartColors.barPengeluaranBg,
+                                },
+                            ],
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: true
+                                },
+                            },
+                        },
+                    });
+
+                    // Line Chart
+                    const lineCtx = document.getElementById('lineChart').getContext('2d');
+                    new Chart(lineCtx, {
+                        type: 'line',
+                        data: {
+                            labels: data.linechartData.labels,
+                            datasets: [
+                                {
+                                    label: 'This Month',
+                                    data: data.linechartData.datasets[0].data,
+                                    backgroundColor: chartColors.lineThisMonthBg,
+                                    borderColor: chartColors.lineThisMonthBorder,
+                                    fill: true,
+                                },
+                                {
+                                    label: 'Last Month',
+                                    data: data.linechartData.datasets[1].data,
+                                    backgroundColor: chartColors.lineLastMonthBg,
+                                    borderColor: chartColors.lineLastMonthBorder,
+                                    fill: true,
+                                },
+                            ],
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: true
+                                },
+                            },
+                        },
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching admin dashboard data:', error);
                 });
-            });
         });
     </script>
 @endsection

@@ -1,0 +1,159 @@
+.body {
+    padding: 0;
+}
+
+.dompet-container {
+    display: flex;
+    padding: 30px;
+}
+
+.saldo-container {
+    background: #FFD766;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px;
+    width: 30%;
+    border-radius: 12px 0 0 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.saldo-container h2 {
+    font-size: 36px;
+    color: #313272;
+    font-weight: 600;
+}
+
+.saldo-section p {
+    color: #313272;
+    font-size: 20px;
+}
+
+.saldo-amount {
+    margin-top: 20px;
+    font-size: 48px;
+    font-weight: bold;
+    color: #2D2D2D;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.saldo-buttons {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.saldo-buttons button {
+    padding: 10px 20px;
+    width: 100%;
+    height: 60px;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-tambah {
+    background: white;
+    color: #25225B;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-riwayat {
+    background: #5D8BFF;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-tambah:hover {
+    background: rgb(235, 235, 235); /* Smooth gradient */
+    color: #25225B;
+    box-shadow: 0 4px 12px rgba(91, 123, 255, 0.6);
+}
+
+.btn-riwayat:hover {
+    background: linear-gradient(135deg, #5a4dc7, #6C63FF);
+    color: white;
+    box-shadow: 0 4px 12px rgba(91, 123, 255, 0.4);
+}
+
+.riwayat-section h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.riwayat-section {
+    background: white;
+    flex: 1;
+    padding: 30px;
+    border-radius: 0 12px 12px 0;
+    box-shadow:
+        inset 0 4px 8px -5px rgba(0, 0, 0, 0.18),   /* Top shadow */
+        inset -7px 0 7px -7px rgba(0, 0, 0, 0),     /* No left shadow */
+        inset 7px 0 9px -5px rgba(0, 0, 0, 0.15),   /* Right shadow */
+        inset 0 -4px 8px -5px rgba(0, 0, 0, 0.18);
+}
+
+.riwayat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.transaksi-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #F9F9F9;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.transaksi-detail {
+    display: flex;
+    flex-direction: row;
+}
+
+.transaksi-subdetail {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.transaksi-title {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.transaksi-subtitle {
+    font-size: 14px;
+    color: #666;
+}
+
+.transaksi-amount {
+    text-align: right;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.status-berhasil {
+    color: #2EAD63;
+    font-size: 14px;
+    text-align: end;
+}
+
+.status-gagal {
+    color: #D22F27;
+    font-size: 14px;
+    text-align: end;
+}

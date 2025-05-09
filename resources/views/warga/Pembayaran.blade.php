@@ -25,9 +25,9 @@
                         <th>Status</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="additionalPaymentBody">
                     <tr>
-                        <td colspan="4" class="no-data">Not Found</td>
+                        <td colspan="4" class="no-data">Loading...</td>
                     </tr>
                 </tbody>
             </table>
@@ -45,77 +45,111 @@
                         <th>Status</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @php
-                    $monthlyStatuses = [
-                        'January' => 'Lunas',
-                        'February' => 'Lunas',
-                        'March' => 'Lunas',
-                        'April' => 'Lunas',
-                        'May' => 'Belum Lunas',
-                        'June' => 'Belum Lunas',
-                        // Add other months similarly
-                    ];
-                    @endphp
-
-                    @foreach ($monthlyStatuses as $month => $status)
-                        <tr>
-                            <td>
-                                @if ($status === 'Belum Lunas')
-                                    <input type="checkbox" name="monthly_payment[]" value="{{ $month }}" />
-                                @endif
-                            </td>
-                            <td>{{ $month }}</td>
-                            <td>Rp 5.000</td>
-                            <td class="{{ $status === 'Lunas' ? 'status-paid' : 'status-due' }}">{{ $status }}</td>
-                        </tr>
-                    @endforeach
+                <tbody id="monthlyPaymentBody">
+                    <tr>
+                        <td colspan="4" class="no-data">Loading...</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
 
-        <button class="pay-button" onclick="proceedToCheckout()">Bayar</button>
-
-        <script>
-            function proceedToCheckout() {
-                const selectedItems = [];
-                const checkboxes = document.querySelectorAll('input[name="monthly_payment[]"]:checked');
-
-                checkboxes.forEach((checkbox) => {
-                    selectedItems.push(checkbox.value); // Get the value of each checked item
-                });
-
-                if (selectedItems.length > 0) {
-                    // Redirect to the checkout page with selected items as query parameters
-                    window.location.href = `{{ route('checkout') }}?items=${encodeURIComponent(JSON.stringify(selectedItems))}`;
-                } else {
-                    alert('Please select at least one item to proceed to checkout.');
-                }
-            }
-
-            function populateYearPicker() {
-                const yearPicker = document.getElementById('year-picker');
-                const currentYear = new Date().getFullYear();
-                const startYear = 2000; // Change this to the earliest year you want to display
-
-                for (let year = currentYear; year >= startYear; year--) {
-                    const option = document.createElement('option');
-                    option.value = year;
-                    option.textContent = year;
-                    yearPicker.appendChild(option);
-                }
-            }
-
-            // Call the function to populate the year picker when the page loads
-            populateYearPicker();
-
-            // Optional: handle selection
-            yearPicker.addEventListener('change', function() {
-                const selectedYear = this.value;
-                alert("Tahun yang dipilih: " + selectedYear);
-                // Further action can be added here based on the selected year
-            });
-        </script>
-
+        <button class="pay-button" id="payButton">Bayar</button>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const yearPicker = document.getElementById('year-picker');
+        const additionalPaymentBody = document.getElementById('additionalPaymentBody');
+        const monthlyPaymentBody = document.getElementById('monthlyPaymentBody');
+        const payButton = document.getElementById('payButton');
+
+        function populateYearPicker() {
+            const currentYear = new Date().getFullYear();
+            const startYear = 2000; // Change this to the earliest year you want to display
+
+            for (let year = currentYear; year >= startYear; year--) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                yearPicker.appendChild(option);
+            }
+        }
+
+        function fetchPaymentData(year) {
+            axios.get(`/api/payments?year=${year}`)
+                .then(response => {
+                    const data = response.data;
+                    renderAdditionalPayments(data.additionalPayments);
+                    renderMonthlyPayments(data.monthlyPayments);
+                })
+                .catch(error => {
+                    console.error('Error fetching payment data:', error);
+                    additionalPaymentBody.innerHTML = '<tr><td colspan="4">Failed to load data.</td></tr>';
+                    monthlyPaymentBody.innerHTML = '<tr><td colspan="4">Failed to load data.</td></tr>';
+                });
+        }
+
+        function renderAdditionalPayments(payments) {
+            if (!payments || payments.length === 0) {
+                additionalPaymentBody.innerHTML = '<tr><td colspan="4">No data found.</td></tr>';
+                return;
+            }
+            additionalPaymentBody.innerHTML = '';
+            payments.forEach(payment => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><input type="checkbox" name="additional_payment[]" value="${payment.id}" /></td>
+                    <td>${payment.type}</td>
+                    <td>${payment.amount}</td>
+                    <td class="${payment.status === 'Lunas' ? 'status-paid' : 'status-due'}">${payment.status}</td>
+                `;
+                additionalPaymentBody.appendChild(row);
+            });
+        }
+
+        function renderMonthlyPayments(payments) {
+            if (!payments || payments.length === 0) {
+                monthlyPaymentBody.innerHTML = '<tr><td colspan="4">No data found.</td></tr>';
+                return;
+            }
+            monthlyPaymentBody.innerHTML = '';
+            payments.forEach(payment => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${payment.status === 'Belum Lunas' ? `<input type="checkbox" name="monthly_payment[]" value="${payment.month}" />` : ''}</td>
+                    <td>${payment.month}</td>
+                    <td>${payment.amount}</td>
+                    <td class="${payment.status === 'Lunas' ? 'status-paid' : 'status-due'}">${payment.status}</td>
+                `;
+                monthlyPaymentBody.appendChild(row);
+            });
+        }
+
+        payButton.addEventListener('click', () => {
+            const selectedAdditional = Array.from(document.querySelectorAll('input[name="additional_payment[]"]:checked')).map(cb => cb.value);
+            const selectedMonthly = Array.from(document.querySelectorAll('input[name="monthly_payment[]"]:checked')).map(cb => cb.value);
+
+            if (selectedAdditional.length === 0 && selectedMonthly.length === 0) {
+                alert('Please select at least one item to proceed to checkout.');
+                return;
+            }
+
+            const selectedItems = {
+                additional: selectedAdditional,
+                monthly: selectedMonthly
+            };
+
+            // Redirect to checkout page with selected items as query parameter
+            window.location.href = `{{ route('checkout') }}?items=${encodeURIComponent(JSON.stringify(selectedItems))}`;
+        });
+
+        yearPicker.addEventListener('change', function() {
+            fetchPaymentData(this.value);
+        });
+
+        // Initial setup
+        populateYearPicker();
+        yearPicker.value = new Date().getFullYear();
+        fetchPaymentData(yearPicker.value);
+    </script>
 @endsection
