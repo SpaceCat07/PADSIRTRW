@@ -73,11 +73,7 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <form class="text-center justify-content-center" action="{{ route('logout') }}" method="post">
-                                    @csrf
-                                    <button class="profile-logout-btn" type="submit">Sign out</button>
-                                </form>
-                                <!-- <a class="dropdown-item" href="{{ route('logout') }}">Sign out</a> -->
+                                <a class="dropdown-item logout-button" href="#" style="cursor: pointer;">Sign out</a>
                             </li>
                         </ul>
                     </div>
@@ -94,6 +90,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="{{ asset('js/carousel.js') }}"></script>
+    <script src="{{ asset('js/auth.js') }}"></script>
 </body>
 
 </html>

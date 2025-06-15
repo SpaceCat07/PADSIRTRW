@@ -83,9 +83,8 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <form action="{{ route('logout') }}" method="post"> @csrf
-                                    <button type="submit">Sign out</button>
-                                </form>
+                                <a class="dropdown-item logout-button" href="#" style="cursor: pointer;">Sign out</a>
+                            </li>
                             </li>
                         </ul>
                     </div>
@@ -103,7 +102,7 @@
     @yield('content')
 
 
-
+    <script src="{{ asset('js/auth.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>

@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok && result.success) {
                 responseMessage.innerHTML = '<div class="alert alert-success p-2">Password berhasil direset! Anda akan diarahkan ke halaman login...</div>';
                 setTimeout(() => {
-                    window.location.href = `{{ route('masuk') }}`; // Arahkan ke route login Anda
+                    window.location.href = '{{ route('masuk') }}'; // Arahkan ke route login Anda
                 }, 3000);
             } else {
                 if (result.errors) {

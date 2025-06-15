@@ -54,80 +54,17 @@
 </div>
 
 <script>
-    const roleRedirectRoutes = {
+    // Objek ini HARUS TETAP di sini karena dibuat oleh Blade.
+    // auth.js akan menggunakan variabel global ini.
+    window.roleRedirectRoutes = {
         Admin_RT: "{{ route('admin-dashboard') }}",
         Admin_RW: "{{ route('admin-dashboard') }}",
         Warga: "{{ route('dashboard.warga') }}"
     };
 </script>
 
-<!-- Axios CDN -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-<script>
-    const togglePassword = document.querySelector('#togglePassword');
-    const passwordField = document.querySelector('#floatingPassword');
+<script src="{{ asset('js/auth.js') }}"></script>
 
-    togglePassword.addEventListener('click', function () {
-        const isVisible = passwordField.getAttribute('type') === 'password';
-        passwordField.setAttribute('type', isVisible ? 'text' : 'password');
-        this.classList.toggle('fa-eye-slash');
-        this.classList.toggle('fa-eye');
-    });
-
-    const loginForm = document.getElementById('loginForm');
-    const loginError = document.getElementById('loginError');
-    const loginSuccess = document.getElementById('loginSuccess');
-
-    loginForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        loginError.classList.add('d-none');
-        loginSuccess.classList.add('d-none');
-
-        const email = document.querySelector('#floatingEmail').value;
-        const password = document.querySelector('#floatingPassword').value;
-
-        // Hardcode API base URL to 127.0.0.1:8001 as user wants access only via 127.0.0.1
-        const apiBaseUrl = 'https://sirtrw-api.vansite.cloud';
-
-        axios.post(apiBaseUrl + '/api/login', {
-            email: email,
-            password: password
-        })
-        .then(function (response) {
-            // Tampilkan pesan berhasil
-            loginSuccess.textContent = 'Login berhasil! Redirecting...';
-            loginSuccess.classList.remove('d-none');
-
-            // Simpan token ke localStorage
-            localStorage.setItem('token', response.data.data.token);
-
-            // Ambil role dari response
-            const userRole = response.data.data.user.role;
-
-            // Simpan role ke localStorage
-            localStorage.setItem('userRole', userRole);
-
-            // Redirect berdasarkan role
-            console.log('Role:', userRole);
-            console.log('Redirect URL:', roleRedirectRoutes[userRole]);
-
-            let redirectUrl = roleRedirectRoutes[userRole] || '/';
-
-            setTimeout(() => {
-                window.location.href = redirectUrl;
-            }, 1500);
-        })
-        .catch(function (error) {
-            if (error.response && error.response.data && error.response.data.message) {
-                loginError.textContent = error.response.data.message;
-            } else {
-                loginError.textContent = 'Terjadi kesalahan saat login.';
-            }
-            loginError.classList.remove('d-none');
-        });
-
-    });
-</script>
 @endsection

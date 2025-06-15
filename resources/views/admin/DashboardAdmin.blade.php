@@ -30,10 +30,10 @@
                     <li><a class="dropdown-item" href="{{ route('edit.profil') }}">Profile</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
-                        <form class="text-center" action="{{ route('logout') }}" method="post">
-                            @csrf
-                            <button class="profile-logout-btn" type="submit">Sign out</button>
-                        </form>
+                        {{-- HAPUS <form> DAN GANTI DENGAN INI --}}
+                        <a class="dropdown-item logout-button" href="#" style="cursor: pointer;">
+                            Sign out
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -137,6 +137,7 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+<script src="{{ asset('js/auth.js') }}"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
