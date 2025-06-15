@@ -1,0 +1,121 @@
+/* ========================================= */
+/* == CSS UNTUK FORM TAMBAH KEUANGAN == */
+/* ========================================= */
+
+/* Container Utama Form */
+.admin-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem auto 0;
+}
+
+.form-wrapper {
+    max-width: 800px;
+    margin: 2rem auto; /* Memberi jarak dari header dan menengahkan */
+    padding: 50px;
+    background-color: #EAEAFE; /* Warna ungu muda sesuai desain */
+    border-radius: 30px; /* Sudut yang sangat tumpul */
+}
+
+/* Form Layout dengan CSS Grid */
+.keuangan-form {
+    display: grid;
+    /* Dua kolom: label (auto) dan input (1fr/fleksibel) */
+    grid-template-columns: auto 1fr; 
+    gap: 20px 25px; /* Jarak vertikal dan horizontal */
+    align-items: center; /* Menyelaraskan label dan input secara vertikal */
+}
+
+/* Styling untuk setiap baris di form */
+.form-row {
+    /* Menggunakan display: contents agar elemen di dalamnya bisa menjadi bagian dari grid parent */
+    display: contents; 
+}
+
+/* Styling untuk Label (Nominal, Tanggal, dll) */
+.keuangan-form label {
+    font-size: 1.1rem; /* 18px */
+    font-weight: 600;
+    color: #313272; /* Warna ungu tua */
+    text-align: right; /* Rata kanan */
+}
+
+/* Styling untuk semua input fields */
+.keuangan-form input[type="text"],
+.keuangan-form input[type="date"],
+.keuangan-form textarea {
+    width: 100%;
+    padding: 12px 18px;
+    border: 1px solid #D9D9F2; /* Border yang sangat soft */
+    border-radius: 12px; /* Sudut tumpul */
+    background-color: #fff;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.keuangan-form input:focus,
+.keuangan-form textarea:focus {
+    outline: none;
+    border-color: #676AFF;
+    box-shadow: 0 0 0 3px rgba(103, 106, 255, 0.2);
+}
+
+/* Tombol Upload File Custom */
+.file-upload-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #fff;
+    border: 1px solid #D9D9F2;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #555;
+    transition: background-color 0.2s;
+}
+.custom-file-upload:hover {
+    background-color: #f7f7f7;
+}
+.file-name-display {
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* Tombol Simpan */
+.submit-button-container {
+    /* Mengambil 2 kolom grid dan menaruh tombol di tengah */
+    grid-column: 1 / -1; 
+    text-align: center;
+    margin-top: 20px;
+}
+
+.simpan-button {
+    padding: 14px 50px;
+    background-color: #43459B; /* Warna ungu tua dari referensi */
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 15px rgba(67, 69, 155, 0.3);
+}
+
+.simpan-button:hover {
+    background-color: #313272;
+    transform: translateY(-2px);
+}
+.simpan-button:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+    transform: none;
+}

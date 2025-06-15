@@ -1,0 +1,150 @@
+/* =================================================== */
+/* ==   STYLE UNTUK HALAMAN TAMBAH PROGRAM KERJA    == */
+/* =================================================== */
+
+/* --- Main Container --- */
+.data-warga-container {
+    max-width: 1000px;
+    margin: 3rem auto 0;
+    padding: 1rem;
+}
+
+.admin-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.edit-program-container {
+    max-width: 1000px;
+    margin: 10px auto; /* Memberi jarak dari header dan menengahkan kontainer */
+    padding: 40px 50px; /* Padding internal agar elemen tidak menempel di tepi */
+    background-color: #676AFF;
+    border-radius: 0 110px 0 110px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    color: #ffffff; /* Warna teks default di dalam kontainer adalah putih */
+}
+
+/* --- Form & Form Grouping --- */
+.edit-program-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px; /* Jarak antara setiap form-group */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* --- Input Fields & Textarea --- */
+/* Gaya umum untuk semua input agar seragam dan modern */
+.edit-program-form input[type="text"],
+.edit-program-form input[type="number"],
+.edit-program-form input[type="date"],
+.edit-program-form input[type="time"],
+.edit-program-form textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f8f9fa; /* Latar belakang terang agar teks mudah dibaca */
+    font-size: 15px;
+    color: #333;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Efek saat input di-klik (focus) */
+.edit-program-form input:focus,
+.edit-program-form textarea:focus {
+    outline: none;
+    border-color: #676AFF; /* Border berubah warna menjadi warna utama */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(103, 106, 255, 0.3); /* Efek glow */
+}
+
+/* Spesifik untuk Textarea */
+.edit-program-form textarea {
+    min-height: 140px; /* Tinggi minimal textarea */
+    resize: vertical; /* Memungkinkan pengguna mengubah ukuran tinggi textarea */
+}
+
+/* --- Custom File Upload Button --- */
+.custom-file-upload {
+    display: inline-block;
+    padding: 12px 25px;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #676AFF;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s;
+    border: 2px solid #ffffff;
+}
+
+.custom-file-upload:hover {
+    background-color: #f0f0ff;
+    transform: translateY(-2px);
+}
+
+/* Teks nama file yang dipilih */
+#file-name {
+    margin-left: 15px;
+    font-style: italic;
+    color: #e0e0e0; /* Warna lebih redup agar tidak terlalu menonjol */
+}
+
+/* --- Submit Button --- */
+/* Mengambil inspirasi dari .rounded-custom */
+.submit-button-group {
+    text-align: center; /* Menengahkan tombol */
+    margin-top: 20px;
+}
+
+.proker-submit-button {
+    padding: 15px 50px;
+    border-radius: 25px; /* Radius agar tombol berbentuk kapsul */
+    height: auto; /* Tinggi disesuaikan dengan padding */
+    border: none;
+    background-color: #ffffff;
+    color: #676AFF;
+    font-size: 18px;
+    font-weight: 700; /* Lebih tebal agar menonjol */
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.proker-submit-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* --- Header --- */
+/* Sedikit styling untuk header agar konsisten */
+.admin-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.admin-header h1 {
+    font-size: 36px;
+    font-weight: 500;
+    color: #333;
+}
+
+.toggle-sidebar-icon img {
+    width: 30px;
+    cursor: pointer;
+}

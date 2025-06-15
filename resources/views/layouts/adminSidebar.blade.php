@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
     <!-- chart -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
@@ -27,38 +26,23 @@
 </head>
 
 <body>
-    <div class="admin-sidebar">
+    <div class="admin-sidebar active">
         <div class="sidebar-logo">
             <img src="{{ asset('storage/Logo.png') }}" alt="Logo" width="40%">
         </div>
 
         <div class="admin-sidebar-content active" id="rt-content">
-            <div
-                class="admin-sidebar-item {{ request()->routeIs('dashboard.adminrt') || request()->routeIs('dashboard.adminrw') || request()->routeIs('data-warga') ? 'active' : '' }}">
-                @if (Auth::user()->role=='Admin_RT')
-                <a href="{{ route('dashboard.adminrt') }}">
-                    <img class="default-icon" src="{{ asset('storage/home.png') }}" alt="">
-                    <img class="active-icon" src="{{ asset('storage/homeWhite.png') }}" alt=""
-                        style="display: none;">
-                    Dashboard
-                </a>
-                @elseif(Auth::user()->role=='Admin_RW')
-                <a href="{{ route('dashboard.adminrw') }}">
-                    <img class="default-icon" src="{{ asset('storage/home.png') }}" alt="">
-                    <img class="active-icon" src="{{ asset('storage/homeWhite.png') }}" alt=""
-                        style="display: none;">
-                    Dashboard
-                </a>
-                @endif
-            </div>
-            <div class="admin-sidebar-item {{ request()->routeIs('admin-program-kerja') || request()->routeIs('edit-program-kerja') || request()->routeIs('tambah-program-kerja') ? 'active' : '' }}">
-                <a href="{{ route('admin-program-kerja') }}">
-                    <img class="default-icon" src="{{ asset('storage/prokerList.png') }}" alt="">
-                    <img class="active-icon" src="{{ asset('storage/prokerListWhite.png') }}" alt=""
-                        style="display: none;">
-                    Program Kerja
-                </a>
-            </div>
+            <a id="dashboard-link" class="admin-sidebar-item {{ request()->routeIs('admin-dashboard') ? 'active' : '' }}" href="{{ route('admin-dashboard') }}">
+                <img class="default-icon" src="{{ asset('storage/home.png') }}" alt="">
+                <img class="active-icon" src="{{ asset('storage/homeWhite.png') }}" alt="" style="display: none;">
+                Dashboard
+            </a>
+            <a class="admin-sidebar-item {{ request()->routeIs('admin-program-kerja') || request()->routeIs('edit-program-kerja') || request()->routeIs('tambah-program-kerja') ? 'active' : '' }}" href="{{ route('admin-program-kerja') }}">
+                <img class="default-icon" src="{{ asset('storage/prokerList.png') }}" alt="">
+                <img class="active-icon" src="{{ asset('storage/prokerListWhite.png') }}" alt=""
+                    style="display: none;">
+                Program Kerja
+            </a>
             <div class="admin-sidebar-item {{ request()->routeIs('laporan-pengeluaran') || request()->routeIs('laporan-pemasukan') || request()->routeIs('tambah-data-pemasukan') || request()->routeIs('tambah-data-pengeluaran') ? 'active' : '' }}"
                 role="button" data-bs-toggle="collapse" data-bs-target="#collapseLaporan" aria-expanded="false"
                 aria-controls="collapseLaporan">
@@ -85,14 +69,12 @@
                     </li>
                 </ul>
             </div>
-            <div class="admin-sidebar-item {{ request()->routeIs('admin-kritik-saran') ? 'active' : '' }}">
-                <a href="{{ route('admin-kritik-saran') }}">
-                    <img class="default-icon" src="{{ asset('storage/kritikSaranMail.png') }}" alt="">
-                    <img class="active-icon" src="{{ asset('storage/kritikSaranMailWhite.png') }}" alt=""
-                        style="display: none;">
-                    Kritik dan Saran
-                </a>
-            </div>
+            <a class="admin-sidebar-item {{ request()->routeIs('admin-kritik-saran') ? 'active' : '' }}" href="{{ route('admin-kritik-saran') }}">
+                <img class="default-icon" src="{{ asset('storage/kritikSaranMail.png') }}" alt="">
+                <img class="active-icon" src="{{ asset('storage/kritikSaranMailWhite.png') }}" alt=""
+                    style="display: none;">
+                Kritik dan Saran
+            </a>
         </div>
 
         <div class="admin-sidebar-content" id="rw-content"></div>

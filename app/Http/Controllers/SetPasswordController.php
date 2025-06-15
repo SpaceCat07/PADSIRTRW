@@ -9,8 +9,7 @@ class SetPasswordController extends Controller
 {
     public function setPassword($id)
     {
-        $user = User::find($id);
-        return view('users.setPassword', compact('user'));
+        return view('users.setPassword', ['id' => $id]);
     }
 
     public function updatePassword(Request $request, $id)

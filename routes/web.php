@@ -389,8 +389,8 @@ Route::get('/program-kerja/admin', function () {
     return view('/admin/ProgramKerjaAdmin');
 })->name('admin-program-kerja');
 
-Route::get('/edit-program-kerja/admin', function () {
-    return view('/admin/EditProgramKerja');
+Route::get('/admin/program-kerja/edit/{id}', function ($id) {
+    return view('/admin/EditProgramKerja', ['id' => $id]);
 })->name('edit-program-kerja');
 
 Route::get('/tambah-program-kerja/admin', function () {
@@ -426,7 +426,7 @@ Route::get('/laporan-keuangan/warga', function () {
 })->name('laporan-keuangan');
 
 Route::get('/dompet-warga/warga', function () {
-    return view('/warga/DompetWarga');
+    return view('/dompet/DompetWarga');
 })->name('dompet-warga');
 
 Route::get('/riwayat-pembayaran/warga', function () {
@@ -441,6 +441,10 @@ Route::get('/checkout/warga', function () {
     return view('/warga/Checkout');
 })->name('checkout');
 
+Route::get('/checkout-confirmation/warga', function () {
+    return view('/warga/CheckoutConfirmation');
+})->name('checkout-confirmation');
+
 Route::get('/kritik-saran/warga', function () {
     return view('/warga/FormKritikSaran');
 })->name('kritik-saran');
@@ -448,9 +452,5 @@ Route::get('/kritik-saran/warga', function () {
 Route::get('/edit-profil/warga', function () {
     return view('/warga/editInfo');
 })->name('edit.profil');
-
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout'); // Update with your controller and method
-
-
 // // chartttt
 // Route::get('/admin/DashboardAdmin', [ChartController::class, 'barChart']);

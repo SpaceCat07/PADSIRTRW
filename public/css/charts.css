@@ -1,128 +1,49 @@
-/* charts */
-/* General Chart Styling */
+/* File: public/css/charts.css */
+
+/* :root untuk menyimpan variabel warna, ini bisa Anda pindah ke file CSS global jika ada */
+:root {
+    --pie-pemasukan-bg: #676AFF;
+    --pie-pengeluaran-bg: #FFD25D;
+    --line-pemasukan-border: #676AFF;
+    --line-pengeluaran-border: #F44336;
+}
+
+/* Wadah untuk Pie Chart */
+.piechart-wrapper {
+    flex: 1; /* Ambil sisa ruang */
+    position: relative;
+    min-width: 200px;
+    min-height: 200px;
+    max-height: 250px;
+}
+
+/* Wadah untuk Bar dan Line Chart */
 .barchart,
 .linechart {
+    position: relative;
+    /* Tinggi kita tetapkan di sini agar reusable */
+    height: 350px; 
     width: 100%;
-    max-width: 550px;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.325);
 }
 
-/* Responsive Canvas */
-.piechart canvas,
-.barchart canvas,
-.linechart canvas {
-    width: 100% !important;
-    height: auto !important;
+.chart-title {
+    text-align: center;
+    font-size: 1rem;
+    color: #666;
+    font-weight: 500;
+    margin-bottom: 15px;
 }
 
-/* Pie Chart Specific Adjustments */
-.piechart {
-    width: 100%;
-    max-width: 300px;
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 8px; /* Rounded corners */
-}
-
-.admin-card.pemasukan-pengeluaran {
+/* Kontrol filter untuk line chart */
+.chart-controls {
     display: flex;
-    flex-direction: column;
-    border: none;
-    box-shadow: none;
+    gap: 10px;
+    margin-bottom: 15px;
 }
-
-.admin-card.grafik {
-    border: none;
-    box-shadow: none;
-    padding: 20px 90px;
-}
-
-.admin-card h3 {
-    max-width: 400px;
-    font-size: 28px;
-    margin-bottom: 30px;
-    color: #313272; /* Darker text for readability */
-    font-weight: bold;
-    text-align: left;
-}
-
-.admin-card.pemasukan-pengeluaran h3 {
-    margin: 30px 0 0 50px;
-}
-
-.keuangan-chart,
-.print-chart-container,
-.keuangan-info.chart {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.keuangan-chart {
-    align-items: center;
-}
-
-.keuangan-info {
-    display: flex;
-    flex-direction: column;
-    margin: 20px;
-    padding: 10px 20px;
-}
-
-.keuangan-info label {
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.keuangan-info p {
-    font-size: 20px;
-    font-weight: 400;
-}
-
-.keuangan-info img{
-    margin-right: 20px;
-}
-
-.keuangan-info.pemasukan,
-.keuangan-info.pengeluaran,
-.keuangan-info.saldo {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: #ffffff;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.325);
-}
-
-.keuangan-info.saldo {
-    background-color: #4A90E2;
-}
-
-.keuangan-info.pemasukan {
-    background-color: #676AFF;
-}
-
-.keuangan-info.pengeluaran {
-    background-color: #313272;
-}
-
-/* charts colors */
-:root {
-    /* Pie Chart Colors */
-    --pie-pemasukan-bg: #676AFF; /* Blue */
-    --pie-pengeluaran-bg: #FFD25D; /* Yellow */
-
-    /* Bar Chart Colors */
-    --bar-pemasukan-bg: #676AFF; /* Blue */
-    --bar-pengeluaran-bg: #43459B; /* Dark Blue */
-
-    /* Line Chart Colors */
-    --line-thismonth-bg: rgba(103, 106, 255, 0.2); /* Light Blue with Transparency */
-    --line-thismonth-border: #43459B; /* Dark Blue Line */
-    --line-lastmonth-bg: rgba(67, 69, 155, 0.2); /* Darker Blue with Transparency */
-    --line-lastmonth-border: #676AFF; /* Blue Line */
+.chart-controls .form-select {
+    flex: 1;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 14px;
 }

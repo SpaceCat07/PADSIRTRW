@@ -9,6 +9,13 @@ body {
     padding: 1rem;
 }
 
+.admin-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
 /* Sidebar toggle icon */
 .toggle-sidebar-icon {
     width: fit-content;
@@ -133,6 +140,7 @@ button:hover {
     display: flex;
     flex-direction: row;
     width: 900px;
+    height: auto !important;
     z-index: 1;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
@@ -252,6 +260,23 @@ button:hover {
 }
 
 /* Small Calendar */
+/* Style untuk kalender kustom */
+.calendar-day.empty {
+    background-color: transparent;
+    box-shadow: none;
+    cursor: default;
+}
+
+.calendar-day.event .event-indicator { /* Pastikan ini sudah ada di CSS Anda, jika belum tambahkan */
+    position: absolute;
+    bottom: 5px; /* Sesuaikan */
+    right: 5px;  /* Sesuaikan */
+    width: 8px;
+    height: 8px;
+    background-color: tomato; /* Warna indikator event */
+    border-radius: 50%;
+}
+
 .calendar-container {
     width: 100%;
     height: auto;

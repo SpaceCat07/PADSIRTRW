@@ -5,6 +5,9 @@
 .dompet-container {
     display: flex;
     padding: 30px;
+    min-height: 500px;
+    max-height: 600px;
+    height: 100%;
 }
 
 .saldo-container {
@@ -156,4 +159,87 @@
     color: #D22F27;
     font-size: 14px;
     text-align: end;
+}
+
+.topup-section {
+    background: white;
+    flex: 1;
+    padding: 30px;
+    border-radius: 0 12px 12px 0;
+    box-shadow:
+        inset 0 4px 8px -5px rgba(0, 0, 0, 0.18),
+        inset -7px 0 7px -7px rgba(0, 0, 0, 0),
+        inset 7px 0 9px -5px rgba(0, 0, 0, 0.15),
+        inset 0 -4px 8px -5px rgba(0, 0, 0, 0.18);
+}
+
+.topup-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 60px;
+    height: 100%;
+}
+
+
+.topup-form p {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.nominal-input {
+    display: flex;
+    align-items: center;
+    font-size: 36px;
+    color: #555;
+    border-bottom: 2px solid #5D8BFF;
+    padding-bottom: 5px;
+    margin-bottom: 30px;
+}
+
+.nominal-input span {
+    margin-right: 10px;
+}
+
+.nominal-input input {
+    border: none;
+    font-size: 36px;
+    width: 100%;
+    outline: none;
+    background: none;
+}
+
+.metode-pembayaran label {
+    font-size: 16px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.metode-pembayaran select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #5D8BFF;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.btn-lanjutkan {
+    background-color: #F4F6FF;
+    color: #5D8BFF;
+    border: none;
+    /* margin-top: auto;
+    margin-bottom: 60px; */
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s ease;
+}
+
+.btn-lanjutkan:hover {
+    background-color: #e2eaff;
 }
