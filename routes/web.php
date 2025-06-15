@@ -46,8 +46,6 @@ Route::get('/masuk', function () {
     return view('users.login');
 })->name('masuk');
 
-Route::post('/logout', [AuthController::class, 'logout']) -> name('logout');
-
 Route::get('/forgot-password', function () {
     return view('users.forgotPassword');
 })->name('forgot-password');
