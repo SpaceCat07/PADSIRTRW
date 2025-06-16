@@ -7,11 +7,16 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin: 2rem auto 0;
+    margin: 3rem auto 0;
+    max-width: 1000px;
+}
+
+.admin-header h1 {
+    color: #3b3b3b;
 }
 
 .form-wrapper {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 2rem auto; /* Memberi jarak dari header dan menengahkan */
     padding: 50px;
     background-color: #EAEAFE; /* Warna ungu muda sesuai desain */

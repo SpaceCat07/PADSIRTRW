@@ -133,7 +133,6 @@
 </div>
 
 
-{{-- GANTI TOTAL SEMUA KODE JAVASCRIPT ANDA DENGAN INI --}}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
@@ -163,7 +162,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. FUNGSI UTAMA
     async function initDashboard() {
-        console.log("Memulai inisialisasi dashboard...");
+        console.log("Memulai inisialisasi dashboard untuk role:", userRole);
+
+        // Promise.allSettled sudah benar, kita lanjutkan
         const results = await Promise.allSettled([
             axiosInstance.get('/mutasi'),
             axiosInstance.get('/warga'),
@@ -174,29 +175,76 @@ document.addEventListener('DOMContentLoaded', () => {
         ]);
         const [mutasiResult, wargaResult, pembayaranResult, prokerResult, kritikResult, meResult] = results;
 
-        // Proses setiap hasil promise
-        if (meResult.status === 'fulfilled') processUserData(meResult.value.data);
-        else console.error("Gagal mengambil data user:", meResult.reason);
-
-        if (wargaResult.status === 'fulfilled') processWargaData(wargaResult.value.data);
-        else console.error("Gagal mengambil data warga:", wargaResult.reason);
-
-        if (pembayaranResult.status === 'fulfilled') processPembayaranData(pembayaranResult.value.data);
-        else console.error("Gagal mengambil data pembayaran:", pembayaranResult.reason);
-        
-        if (prokerResult.status === 'fulfilled') processProkerData(prokerResult.value.data);
-        else document.getElementById('prokerContainer').innerHTML = '<p class="text-danger">Gagal memuat data.</p>';
-
-        if (kritikResult.status === 'fulfilled') processKritikData(kritikResult.value.data);
-        else document.getElementById('kritikContainer').innerHTML = '<p class="text-danger">Gagal memuat data.</p>';
-
-        if (mutasiResult.status === 'fulfilled') {
-            const transactions = (userRole.includes('rt') ? mutasiResult.value.data.data.rt : mutasiResult.value.data.data.rw) || [];
-            processFinancialData(transactions);
+        // Langkah 1: Proses data user dan dapatkan ID spesifiknya
+        let user, userRtId, userRwId;
+        if (meResult.status === 'fulfilled') {
+            user = meResult.value.data.data;
+            // Gunakan optional chaining (?.) untuk keamanan jika 'warga' tidak ada
+            userRtId = user.warga?.rt_id;
+            userRwId = user.warga?.rw_id;
+            processUserData(meResult.value.data);
         } else {
-             console.error("Gagal memuat data keuangan:", mutasiResult.reason);
-             document.getElementById('pemasukanAmount').textContent = 'Error';
-             document.getElementById('pengeluaranAmount').textContent = 'Error';
+            console.error("Kritis: Gagal mengambil data user:", meResult.reason);
+            // Hentikan jika data user gagal, karena semua filter bergantung pada ini
+            return;
+        }
+
+        // Langkah 2: Proses setiap data dengan filter berdasarkan role dan ID
+        if (wargaResult.status === 'fulfilled') {
+            const allWarga = wargaResult.value.data.data || [];
+            // Jika admin RT, filter warganya. Jika RW, tampilkan semua (karena akan dikelompokkan)
+            const filteredWarga = userRole.includes('rt')
+                ? allWarga.filter(w => w.rt_id === userRtId)
+                : allWarga;
+            processWargaData({ data: filteredWarga }); // Bungkus lagi agar formatnya sama
+        } else {
+            console.error("Gagal mengambil data warga:", wargaResult.reason);
+        }
+
+        if (pembayaranResult.status === 'fulfilled') {
+            const allPembayaran = pembayaranResult.value.data.data || [];
+            const filteredPembayaran = userRole.includes('rt')
+                ? allPembayaran.filter(p => p.rt_id === userRtId)
+                : allPembayaran.filter(p => p.rw_id === userRwId);
+            processPembayaranData({ data: filteredPembayaran });
+        } else {
+            console.error("Gagal mengambil data pembayaran:", pembayaranResult.reason);
+        }
+
+        if (prokerResult.status === 'fulfilled') {
+            const allProker = prokerResult.value.data.data || [];
+            const filteredProker = userRole.includes('rt')
+                ? allProker.filter(p => p.rt_id === userRtId)
+                : allProker.filter(p => p.rw_id === userRwId);
+            processProkerData({ data: filteredProker });
+        } else {
+            document.getElementById('prokerContainer').innerHTML = '<p class="text-danger">Gagal memuat data.</p>';
+        }
+
+        if (kritikResult.status === 'fulfilled') {
+            const allKritik = kritikResult.value.data.data || [];
+            const filteredKritik = userRole.includes('rt')
+                ? allKritik.filter(k => k.user.warga.rt_id === userRtId)
+                : allKritik; // Admin RW melihat semua kritik
+            processKritikData({ data: filteredKritik });
+        } else {
+            document.getElementById('kritikContainer').innerHTML = '<p class="text-danger">Gagal memuat data.</p>';
+        }
+        
+        // Langkah 3: Proses data keuangan dengan filter yang sudah benar
+        if (mutasiResult.status === 'fulfilled') {
+            const mutasiData = mutasiResult.value.data.data;
+            // Pilih bucket data (rt atau rw) berdasarkan role
+            const baseTransactions = (userRole.includes('rt') ? mutasiData.rt : mutasiData.rw) || [];
+            // Filter lagi berdasarkan ID spesifik
+            const finalTransactions = baseTransactions.filter(t =>
+                userRole.includes('rt') ? t.rt_id === userRtId : t.rw_id === userRwId
+            );
+            processFinancialData(finalTransactions);
+        } else {
+            console.error("Gagal memuat data keuangan:", mutasiResult.reason);
+            document.getElementById('pemasukanAmount').textContent = 'Error';
+            document.getElementById('pengeluaranAmount').textContent = 'Error';
         }
     }
 

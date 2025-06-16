@@ -49,10 +49,11 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // ... (konfigurasi dan referensi elemen tidak berubah)
-    const API_URL = 'https://sirtrw-api.vansite.cloud/api/mutasi';
+    // === 1. KONFIGURASI & REFERENSI ELEMEN ===
+    const API_BASE_URL = 'https://sirtrw-api.vansite.cloud/api';
     const tableBody = document.querySelector('#expenseTable tbody');
     const sortSelect = document.getElementById('sort-select');
     const itemsPerPageSelect = document.querySelector('.items-per-page');
@@ -61,65 +62,73 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextPageBtn = document.getElementById('nextPage');
     const menuIcon = document.querySelector('.toggle-sidebar-icon');
     const sidebar = document.querySelector('.admin-sidebar');
-    
+
     let allData = [], currentPage = 1, itemsPerPage = parseInt(itemsPerPageSelect.value, 10);
 
+    // === 2. FUNGSI UTAMA PENGAMBIL DATA ===
     async function fetchData() {
         const token = localStorage.getItem('token');
-        let userRole = localStorage.getItem('userRole');
+        let userRole = localStorage.getItem('userRole')?.toLowerCase();
 
         if (!token || !userRole) {
             tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: red;">Error: Informasi login (Token atau Role) tidak ditemukan.</td></tr>';
             return;
         }
 
-        // Normalisasi role ke huruf kecil
-        userRole = userRole.toLowerCase();
-        
+        tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Mengambil data...</td></tr>';
+
         try {
-            const response = await fetch(API_URL, { headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/json' }});
-            if (!response.ok) throw new Error(`Gagal mengambil data. Status: ${response.status}`);
-            
-            const result = await response.json();
+            // Ambil data mutasi dan data profil admin secara bersamaan
+            const [mutasiResponse, meResponse] = await Promise.all([
+                axios.get(`${API_BASE_URL}/mutasi`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                axios.get(`${API_BASE_URL}/me`, { headers: { 'Authorization': `Bearer ${token}` } })
+            ]);
 
-            if (result.success && result.data) {
-                let sourceData = [];
-                // ================================================================
-                // === PERBAIKAN FINAL: Gunakan .includes() untuk mengecek role ===
-                if (userRole.includes('rw') && Array.isArray(result.data.rw)) {
-                    console.log("Role terdeteksi sebagai RW.");
-                    sourceData = result.data.rw;
-                } else if (userRole.includes('rt') && Array.isArray(result.data.rt)) {
-                    console.log("Role terdeteksi sebagai RT.");
-                    sourceData = result.data.rt;
-                }
-                // ================================================================
-                
-                allData = sourceData.filter(item => item.variance === 'outflow'); // <-- Filter untuk pengeluaran
+            // Olah data yang didapat
+            const mutasiData = mutasiResponse.data.data;
+            const user = meResponse.data.data;
+            const userRtId = user.warga?.rt_id;
+            const userRwId = user.warga?.rw_id;
 
-                if (allData.length === 0) {
-                     tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Tidak ada data pengeluaran ditemukan.</td></tr>';
-                } else {
-                     sortTable();
-                }
+            // --- FILTER BERTINGKAT ---
+            // 1. Pilih "ember" data (rt atau rw) berdasarkan role
+            const sourceData = (userRole.includes('rt') ? mutasiData.rt : mutasiData.rw) || [];
+
+            // 2. Saring data berdasarkan ID spesifik dari admin yang login
+            const idFilteredData = sourceData.filter(item => {
+                return userRole.includes('rt') ? item.rt_id === userRtId : item.rw_id === userRwId;
+            });
+
+            // 3. Saring lagi untuk hanya menampilkan data pengeluaran ('outflow')
+            allData = idFilteredData.filter(item => item.variance === 'outflow');
+            // --- AKHIR FILTER ---
+
+            if (allData.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Tidak ada data pengeluaran ditemukan untuk Anda.</td></tr>';
             } else {
-                throw new Error('Format data dari API tidak sesuai harapan.');
+                sortTable(); // Urutkan dan render data yang sudah bersih
             }
+
         } catch (error) {
             console.error('Kesalahan saat fetch data:', error);
-            tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;"><strong>Gagal Memuat Data:</strong><br>${error.message}</td></tr>`;
+            const errorMessage = error.response?.data?.message || error.message || "Terjadi kesalahan";
+            tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;"><strong>Gagal Memuat Data:</strong><br>${errorMessage}</td></tr>`;
         } finally {
             updatePaginationControls();
         }
     }
 
-    // ... (Sisa fungsi JavaScript tidak ada perubahan)
+    // === 3. FUNGSI-FUNGSI BANTUAN (TIDAK ADA PERUBAHAN) ===
     function renderTable(){tableBody.innerHTML="";if(allData.length===0&&currentPage===1){tableBody.innerHTML='<tr><td colspan="5" style="text-align: center;">Tidak ada data pengeluaran ditemukan.</td></tr>';return}const startIndex=(currentPage-1)*itemsPerPage;const endIndex=startIndex+itemsPerPage;const pageData=allData.slice(startIndex,endIndex);pageData.forEach(item=>{const row=document.createElement('tr');const formattedValue=new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0}).format(item.value);row.innerHTML=`<td>${item.id}</td><td>${item.date}</td><td>${formattedValue}</td><td>${item.notes||"-"}</td><td><button class="btn-view" disabled>Lihat</button></td>`;tableBody.appendChild(row)})}
     function updatePaginationControls(){const totalPages=Math.ceil(allData.length/itemsPerPage);pageInfo.textContent=`Halaman ${currentPage} dari ${totalPages||1}`;prevPageBtn.disabled=currentPage===1;nextPageBtn.disabled=currentPage===totalPages||totalPages===0}
     function sortTable(){const sortOrder=sortSelect.value;allData.sort((a,b)=>{const dateA=new Date(a.date);const dateB=new Date(b.date);return sortOrder==='latest'?dateB-dateA:dateA-dateB});currentPage=1;renderTable();updatePaginationControls()}
+
+    // === 4. EVENT LISTENERS ===
     sortSelect.addEventListener('change',sortTable);itemsPerPageSelect.addEventListener('change',e=>{itemsPerPage=parseInt(e.target.value,10);sortTable()});prevPageBtn.addEventListener('click',()=>{if(currentPage>1){currentPage--;renderTable();updatePaginationControls()}});nextPageBtn.addEventListener('click',()=>{const totalPages=Math.ceil(allData.length/itemsPerPage);if(currentPage<totalPages){currentPage++;renderTable();updatePaginationControls()}});
     if(menuIcon&&sidebar){menuIcon.addEventListener('click',event=>{event.stopPropagation();sidebar.classList.toggle('active')});document.addEventListener('click',event=>{if(sidebar.classList.contains('active')&&!sidebar.contains(event.target)&&!menuIcon.contains(event.target)){sidebar.classList.remove('active')}})}
-    window.printReport=function(){let printContent=`<html><head><title>Laporan Pengeluaran</title><style>body{font-family:Arial,sans-serif}table{width:100%;border-collapse:collapse}th,td{border:1px solid #ddd;padding:8px;text-align:left}th{background-color:#6A5ACD;color:#fff}h1{text-align:center}</style></head><body><h1>Laporan Pengeluaran</h1><table><thead><tr><th>ID</th><th>Tanggal</th><th>Nominal</th><th>Keterangan</th></tr></thead><tbody>`;allData.forEach(item=>{const formattedValue=new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0}).format(item.value);printContent+=`<tr><td>${item.id}</td><td>${item.date}</td><td>${formattedValue}</td><td>${item.notes||"-"}</td></tr>`});printContent+=`</tbody></table></body></html>`;const printWindow=window.open('','','width=800,height=600');printWindow.document.write(printContent);printWindow.document.close();printWindow.focus();printWindow.print()}
+    window.printReport=function(){let printContent=`<html><head><title>Laporan Pengeluaran</title><style>body{font-family:Arial,sans-serif}table{width:100%;border-collapse:collapse}th,td{border:1px solid #ddd;padding:8px;text-align:left}th{background-color:#CD5C5C;color:#fff}h1{text-align:center}</style></head><body><h1>Laporan Pengeluaran</h1><table><thead><tr><th>ID</th><th>Tanggal</th><th>Nominal</th><th>Keterangan</th></tr></thead><tbody>`;allData.forEach(item=>{const formattedValue=new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0}).format(item.value);printContent+=`<tr><td>${item.id}</td><td>${item.date}</td><td>${formattedValue}</td><td>${item.notes||"-"}</td></tr>`});printContent+=`</tbody></table></body></html>`;const printWindow=window.open('','','width=800,height=600');printWindow.document.write(printContent);printWindow.document.close();printWindow.focus();printWindow.print()}
+    
+    // === 5. PANGGILAN AWAL ===
     fetchData();
 });
 </script>

@@ -279,9 +279,45 @@
 
 /* Charts Container */
 .charts-container {
+    display: flex !important; /* Paksa Flexbox */
+    flex-wrap: wrap; /* Agar responsif di layar kecil */
+    gap: 24px;
+    width: 100%;
+    margin: 40px 0;
+}
+
+/* KOLOM KIRI: berisi line & bar chart */
+.linechart-barchart {
+    flex: 2 1 500px; /* Lebar fleksibel, basis 500px, bisa membesar */
     display: flex;
-    flex-direction: row;
-    margin: 20px 0;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* KOLOM KANAN: berisi pie chart */
+.piechart-container {
+    flex: 1 1 300px; /* Lebar fleksibel, basis 300px, lebih kecil */
+    display: flex; /* Tambahkan ini agar isinya (piechart) bisa diatur */
+}
+
+/* KARTU PEMBUNGKUS SETIAP CHART */
+.linechart,
+.barchart,
+.piechart {
+    background: #f8f9fa;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+    width: 100%; /* Memenuhi lebar kolomnya */
+}
+
+/* WADAH CANVAS: Memberi tinggi yang pasti */
+/* Kita gabungkan semua canvas ke dalam satu aturan */
+.linechart,
+.barchart,
+.piechart {
+    position: relative;
+    height: 320px; /* Beri tinggi yang sama untuk konsistensi */
 }
 
 /* dashboard */

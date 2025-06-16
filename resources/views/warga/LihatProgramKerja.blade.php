@@ -65,7 +65,7 @@
                 if (!token) { /* ... token error ... */ return; }
                 programList.innerHTML = '<p>Mengambil data program...</p>';
 
-                axios.get('http://127.0.0.1:8001/api/proker', { headers: { 'Authorization': `Bearer ${token}` } })
+                axios.get('https://sirtrw-api.vansite.cloud/api/proker', { headers: { 'Authorization': `Bearer ${token}` } })
                 .then(response => {
                     if (response.data && response.data.success && response.data.code === 200 && Array.isArray(response.data.data)) {
                         allPrograms = response.data.data.map(proker => {

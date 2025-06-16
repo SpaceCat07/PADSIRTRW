@@ -147,5 +147,3 @@ Route::get('/kritik-saran/warga', function () {
 Route::get('/edit-profil/warga', function () {
     return view('/warga/editInfo');
 })->name('edit.profil');
-// // chartttt
-// Route::get('/admin/DashboardAdmin', [ChartController::class, 'barChart']);

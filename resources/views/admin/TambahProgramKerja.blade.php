@@ -72,121 +72,147 @@
         </form>
     </div>
 
-    {{--
-        ================================================================
-        SCRIPT UNTUK LOGIKA FORM
-        ================================================================
-    --}}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Menggabungkan semua script dalam satu event listener ---
+            // --- 1. SETUP AWAL & DEFINISI ELEMEN ---
             const form = document.getElementById('add-program-form');
             const menuIcon = document.querySelector('.toggle-sidebar-icon');
             const sidebar = document.querySelector('.admin-sidebar');
             const fileInput = document.getElementById('image');
-            const fileLabel = document.getElementById('file-label');
             const fileNameSpan = document.getElementById('file-name');
             const errorMessagesDiv = document.getElementById('error-messages');
-
-            // --- Mendapatkan data dari localStorage ---
-            const token = localStorage.getItem('token'); // Pastikan nama key sesuai
-            const userRole = localStorage.getItem('userRole');   // Pastikan nama key sesuai
-
-            // --- Logika Kondisional untuk Label RT/RW ---
             const rtRwLabel = document.getElementById('rt_rw_label');
-            if (userRole === 'Admin_RT') {
-                rtRwLabel.textContent = 'Nomor RT';
-            } else if (userRole === 'Admin_RW') {
-                rtRwLabel.textContent = 'Nomor RW';
+            const rtRwInput = document.getElementById('rt_rw_id'); // Kita ambil inputnya
+
+            const token = localStorage.getItem('token');
+            const userRole = localStorage.getItem('userRole')?.toLowerCase() || 'admin_rt'; // lebih baik pakai lowercase
+
+            // Variabel untuk menyimpan ID admin yang didapat dari API
+            let adminRtId = null;
+            let adminRwId = null;
+
+
+            // --- 2. FUNGSI UNTUK MENGAMBIL DATA ADMIN & MENYIAPKAN FORM ---
+            async function setupAdminInfo() {
+                if (!token) {
+                    alert('Token tidak ditemukan. Silakan login kembali.');
+                    return;
+                }
+
+                try {
+                    // Ambil data profil admin dari API /me
+                    const response = await axios.get('https://sirtrw-api.vansite.cloud/api/me', {
+                        headers: { Authorization: `Bearer ${token}` }
+                    });
+
+                    const user = response.data.data;
+                    adminRtId = user.warga?.rt_id;
+                    adminRwId = user.warga?.rw_id;
+
+                    // Logika untuk mengisi dan mengunci form berdasarkan role
+                    if (userRole.includes('rt')) {
+                        rtRwLabel.textContent = 'Nomor RT';
+                        rtRwInput.value = adminRtId; // Isi otomatis
+                        rtRwInput.readOnly = true; // Kunci inputnya
+                    } else if (userRole.includes('rw')) {
+                        rtRwLabel.textContent = 'Nomor RW';
+                        rtRwInput.value = adminRwId; // Isi otomatis
+                        rtRwInput.readOnly = true; // Kunci inputnya
+                    }
+
+                } catch (error) {
+                    console.error('Gagal mengambil data admin:', error);
+                    alert('Gagal memuat informasi admin. Pastikan Anda login dengan benar.');
+                    // Matikan form jika data admin gagal diambil
+                    form.querySelector('button[type="submit"]').disabled = true;
+                }
             }
 
-            // --- UX: Menampilkan nama file yang dipilih ---
-            fileInput.addEventListener('change', () => {
-                if (fileInput.files.length > 0) {
-                    fileNameSpan.textContent = fileInput.files[0].name;
-                } else {
-                    fileNameSpan.textContent = '';
-                }
-            });
 
-            // --- Logika Pengiriman Form ke API ---
+            // --- 3. EVENT LISTENER UNTUK SUBMIT FORM ---
             form.addEventListener('submit', async (event) => {
-                event.preventDefault(); // Mencegah form submit default
-                errorMessagesDiv.textContent = ''; // Bersihkan pesan error lama
+                event.preventDefault();
+                errorMessagesDiv.textContent = '';
 
                 if (!confirm('Apakah Anda yakin ingin menyimpan program kerja ini?')) {
                     return;
                 }
 
-                // Menggunakan FormData untuk mengirim file dan data teks
+                // Validasi: Pastikan ID admin sudah terisi
+                if ((userRole.includes('rt') && !adminRtId) || (userRole.includes('rw') && !adminRwId)) {
+                    alert('Gagal menyimpan. Data ID admin tidak ditemukan. Silakan muat ulang halaman.');
+                    return;
+                }
+
                 const formData = new FormData();
                 formData.append('title', document.getElementById('title').value);
                 formData.append('description', document.getElementById('description').value);
                 formData.append('date', document.getElementById('date').value);
                 formData.append('time', document.getElementById('time').value);
                 formData.append('location', document.getElementById('location').value);
-                
-                // Tambahkan rt_id atau rw_id berdasarkan role
-                const rtRwId = document.getElementById('rt_rw_id').value;
-                if (userRole === 'Admin_RT') {
-                    formData.append('rt_id', rtRwId);
-                } else if (userRole === 'Admin_RW') {
-                    formData.append('rw_id', rtRwId);
+
+                // Tambahkan rt_id atau rw_id dari variabel yang sudah kita simpan, BUKAN dari input manual
+                if (userRole.includes('rt')) {
+                    formData.append('rt_id', adminRtId);
+                } else if (userRole.includes('rw')) {
+                    formData.append('rw_id', adminRwId);
                 }
 
-                // Tambahkan file jika ada yang dipilih
                 if (fileInput.files.length > 0) {
                     formData.append('image', fileInput.files[0]);
-                } else {
-                    // Berdasarkan contoh Postman Anda, 'image' bisa null
-                    formData.append('image', null); 
                 }
 
                 try {
-                    const response = await fetch('https://sirtrw-api.vansite.cloud/api/proker', {
-                        method: 'POST',
+                    // Menggunakan Axios agar konsisten dengan halaman lain
+                    const response = await axios.post('https://sirtrw-api.vansite.cloud/api/proker', formData, {
                         headers: {
                             'Authorization': `Bearer ${token}`,
-                            'Accept': 'application/json',
-                        },
-                        body: formData, // FormData sudah menyertakan header Content-Type yang benar
+                            'Content-Type': 'multipart/form-data', // Axios otomatis mengatur ini untuk FormData
+                        }
                     });
 
-                    const result = await response.json();
+                    alert('Program kerja berhasil ditambahkan!');
+                    window.location.href = '/admin/program-kerja'; // Arahkan ke halaman daftar proker admin
 
-                    if (response.ok) {
-                        alert('Program kerja berhasil ditambahkan!');
-                        // Arahkan ke halaman daftar program kerja atau halaman lain yang sesuai
-                        window.location.href = '/program-kerja/admin';
-                    } else {
-                        // Menampilkan pesan error dari API
-                        let errorText = `Error: ${result.message}`;
-                        if (result.errors) {
-                            errorText += '\n' + Object.values(result.errors).join('\n');
-                        }
-                        errorMessagesDiv.textContent = errorText;
-                        alert(errorText); // Tampilkan juga sebagai alert
-                    }
                 } catch (error) {
                     console.error('Terjadi kesalahan:', error);
-                    errorMessagesDiv.textContent = 'Tidak dapat terhubung ke server. Silakan coba lagi nanti.';
-                    alert('Terjadi kesalahan koneksi. Periksa konsol untuk detail.');
+                    let errorText = 'Terjadi kesalahan pada server.';
+                    if (error.response) {
+                        // Menampilkan pesan error validasi dari API Laravel
+                        if (error.response.status === 422 && error.response.data.errors) {
+                            const errors = error.response.data.errors;
+                            errorText = Object.values(errors).map(e => e[0]).join('\n');
+                        } else {
+                            errorText = error.response.data.message || 'Error tidak diketahui.';
+                        }
+                    }
+                    errorMessagesDiv.innerText = errorText; // Gunakan innerText agar newline tampil
+                    alert(`Gagal menambahkan program:\n${errorText}`);
                 }
             });
 
-            // --- Script untuk Toggle Sidebar ---
+
+            // --- 4. EVENT LISTENER LAINNYA (UX & SIDEBAR) ---
+            fileInput.addEventListener('change', () => {
+                fileNameSpan.textContent = fileInput.files.length > 0 ? fileInput.files[0].name : '';
+            });
+
             if (menuIcon && sidebar) {
                 menuIcon.addEventListener('click', (event) => {
                     event.stopPropagation();
                     sidebar.classList.toggle('active');
                 });
-
                 document.addEventListener('click', (event) => {
                     if (!sidebar.contains(event.target) && !menuIcon.contains(event.target)) {
                         sidebar.classList.remove('active');
                     }
                 });
             }
+
+
+            // --- 5. PANGGIL FUNGSI INISIASI SAAT HALAMAN DIMUAT ---
+            setupAdminInfo();
         });
-    </script>
+        </script>
 @endsection

@@ -3,13 +3,11 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 1rem;
+    margin: 3rem auto 0;
 }
 
 .admin-header h1 {
-    font-size: 1.75rem;
     color: #3b3b3b;
-    justify-content: center;
 }
 
 /* Sort by text */
@@ -116,6 +114,7 @@ button:hover {
 .pagination button {
     border: none;
     background-color: #FFF;
+    color: #aaa;
     cursor: pointer;
     padding: 5px 10px;
 }
