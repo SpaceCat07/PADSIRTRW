@@ -1,0 +1,146 @@
+/* Laporan Keuangan */
+/* Main Container Styling */
+
+.financial-report {
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: auto;
+    max-width: 1300px;
+    width: 100%;
+}
+
+.financial-report h1 {
+    font-size: 2rem;
+    text-align: left;
+    font-weight: bold;
+    color: #4b4c9d;
+}
+
+/* Button Styling */
+.btn-group {
+    margin: 0;
+    border-radius: 7px; /* This will be the overall border-radius */
+    overflow: hidden; /* Ensure the buttons stay within the rounded corners */
+}
+
+.btn-filter {
+    border: 1px solid #ddd;
+    color: #4b4c9d;
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0; /* Remove border-radius to avoid rounding on individual buttons */
+}
+
+.btn-filter:first-child {
+    border-top-left-radius: 7px; /* Round the top left corner of the first button */
+    border-bottom-left-radius: 7px; /* Round the bottom left corner of the first button */
+}
+
+.btn-filter:last-child {
+    border-top-right-radius: 7px; /* Round the top right corner of the second button */
+    border-bottom-right-radius: 7px; /* Round the bottom right corner of the second button */
+}
+
+.btn-filter.active {
+    background-color: #ffcc4b;
+    color: black;
+}
+
+.btn-select-month {
+    background-color: #ffcc4b;
+    color: black;
+    border: none;
+}
+
+/* Table Styling */
+.financial-table {
+    width: 100%;
+    border: none;
+}
+
+.financial-table th {
+    background-color: #9698FF;
+    color: white;
+    padding: 0.75rem;
+}
+
+.financial-table td {
+    padding: 0.75rem;
+    background-color: #f3f3f3;
+}
+
+/* Pagination Styling */
+.pagination-container {
+    font-size: 0.875rem;
+    color: #555;
+}
+
+.pagination-select {
+    background-color: #ffcc4b;
+    border: none;
+    color: black;
+    padding: 0.25rem;
+    margin-right: 0.25rem;
+}
+
+.btn-pagination {
+    background-color: transparent;
+    border: none;
+    color: #555;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border: 2px solid white;
+    border-radius: 10px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    background-color: #4A3AFF;
+    color: #FFF;
+}
+
+tr:nth-child(even) {
+    background-color: #F5F5F5;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #f1f3f5;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+table th {
+    background-color: #5a4dc7;
+    color: white;
+    font-weight: bold;
+}
+
+table .no-data {
+    color: #aaa;
+    text-align: center;
+    font-size: 14px;
+}

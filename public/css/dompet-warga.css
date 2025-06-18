@@ -243,3 +243,12 @@
 .btn-lanjutkan:hover {
     background-color: #e2eaff;
 }
+
+/* Tambahkan ini di dompet-warga.css */
+.transaksi-amount.inflow {
+    color: #28a745; /* Warna hijau untuk pemasukan */
+}
+
+.transaksi-amount.outflow {
+    color: #dc3545; /* Warna merah untuk pengeluaran */
+}

@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.className = `program-card ${statusClass}`;
             card.setAttribute('data-id', program.id);
             card.setAttribute('data-date', program.date);
-            const editUrl = `/admin/program-kerja/edit/${program.id}`;
+            const editUrl = `/edit-program-kerja/admin/${program.id}`;
             card.innerHTML = `
                 <div class="date">
                     <div class="month">${program.month}</div>

@@ -76,15 +76,35 @@ Route::get('/data-warga/admin', function () {
     return view('/admin/DataWarga');
 })->name('data-warga');
 
+Route::get('/tambah-data-warga/admin', function () {
+    return view('/admin/TambahDataWarga');
+})->name('tambah-data-warga');
+
+Route::get('/edit-data-warga/admin/{id}', function ($id) {
+    return view('admin/EditDataWarga', ['wargaId' => $id]);
+})->name('edit-data-warga');
+
+Route::get('/aktivasi-akun/admin', function () {
+    return view('/admin/AktivasiAkun');
+})->name('aktivasi-akun');
+
 Route::get('/manajemen-iuran/admin', function () {
     return view('/admin/ManajemenIuran');
 })->name('manajemen-iuran');
+
+Route::get('/tambah-iuran/admin', function () {
+    return view('/admin/TambahIuran');
+})->name('tambah-iuran');
+
+Route::get('/edit-iuran/admin/{id}', function ($id) {
+    return view('admin/EditIuran', ['iuranId' => $id]);
+})->name('edit-iuran');
 
 Route::get('/program-kerja/admin', function () {
     return view('/admin/ProgramKerjaAdmin');
 })->name('admin-program-kerja');
 
-Route::get('/admin/program-kerja/edit/{id}', function ($id) {
+Route::get('edit-program-kerja/admin/{id}', function ($id) {
     return view('/admin/EditProgramKerja', ['id' => $id]);
 })->name('edit-program-kerja');
 

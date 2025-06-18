@@ -1,4 +1,4 @@
-/* Laporan Pengeluaran and Pemasukan */
+/* Laporan Pengeluaran and Pemasukan, also data warga */
 .admin-header {
     display: flex;
     align-items: center;
@@ -43,7 +43,7 @@
 .laporan-container {
     max-width: 1200px;
     width: 100%;
-    margin: auto;
+    margin: 2rem auto;
 }
 
 .report-action-buttons {

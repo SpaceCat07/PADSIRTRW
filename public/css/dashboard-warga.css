@@ -171,6 +171,7 @@
     max-width: 1200px;
     width: 100%;
     height: 400px;
+    padding: 30px;
     margin: auto;
     margin-bottom: 70px;
     background: #E8E9F1;
@@ -178,19 +179,18 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.iuran-overview h1 {
-    margin: 30px;
-}
-
-.laporan-info {
+/* .laporan-info {
     max-width: 1200px;
     margin: auto;
     margin-bottom: 70px;
-}
+} */
 
 .iuran-report {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: hidden;
+    height: calc(100% - 80px);
 }
 
 .iuran-report a {
@@ -203,6 +203,193 @@
     margin: 0 5px;
 }
 
+.iuran-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e0e0e0;
+    color: #333; /* Warna teks default */
+}
+
+.iuran-item-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    flex-shrink: 0; /* Mencegah item menyusut */
+}
+
+.iuran-item-card .iuran-details .iuran-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #313272;
+    margin-bottom: 0.25rem;
+}
+
+.iuran-item-card .iuran-details .iuran-meta {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 0;
+    text-transform: capitalize;
+}
+
+.iuran-item-card .iuran-amount {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #676AFF;
+}
+
+/* Hapus border untuk item terakhir */
+.iuran-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.iuran-details .iuran-name {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.iuran-details .iuran-meta {
+    font-size: 0.85rem;
+    color: #6c757d; /* Warna abu-abu untuk detail */
+    margin-bottom: 0;
+    text-transform: capitalize;
+}
+
+.iuran-amount {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary-color, #676AFF); /* Menggunakan variabel warna utama jika ada */
+}
+
+/* Menyesuaikan container agar padding tidak berlebihan saat ada list */
+#iuranReport:not(:empty) {
+    padding: 1.5rem; /* Atur padding container jika berisi list */
+}
+
+#iuranReport:empty + .p-3 {
+    display: block; /* Menampilkan pesan jika kosong */
+}
+
+.financial-section {
+    display: flex;
+    flex-direction: column;
+    gap: 50px; /* Jarak antara Laporan Keuangan dan Grafik */
+    margin-top: 50px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.btn-detail {
+    background-color: #f0f2f5;
+    color: #313272;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+.btn-detail:hover {
+    background-color: #e4e6eb;
+}
+
+
+/* === [BARU] CONTAINER LAPORAN (SUMMARY + PIE) === */
+.financial-report-container .report-body {
+    display: flex;
+    gap: 24px;
+}
+
+.report-summary {
+    flex: 1; /* Ambil sisa ruang */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.report-pie-chart {
+    flex-basis: 35%; /* Lebar spesifik untuk pie chart */
+    max-width: 400px;
+    height: 250px; /* Atur tinggi container pie chart */
+}
+
+
+/* === [BARU] KARTU SUMMARY LAPORAN === */
+.summary-row {
+    display: flex;
+    gap: 16px;
+}
+
+.summary-card, .summary-card-full {
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.summary-card {
+    flex: 1;
+    background-color: #f8f9fa; /* Warna putih keabuan */
+    border: 1px solid #e9ecef;
+}
+
+.summary-card-full {
+    width: 100%;
+    background-color: #e8e9f1; /* Warna abu-abu terang */
+}
+
+.summary-card p, .summary-card-full p {
+    font-size: 1rem;
+    color: #6c757d;
+    margin: 0;
+}
+
+.summary-card .amount {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #313272;
+    margin-top: 8px;
+    display: block;
+}
+
+.summary-card-full .amount-highlight {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #313272;
+    margin-top: 8px;
+    display: block;
+}
+
+.charts-container {
+    display: flex !important; /* Paksa Flexbox */
+    flex-wrap: wrap; /* Agar responsif di layar kecil */
+    gap: 24px;
+    width: 100%;
+    margin: 40px 0;
+}
+
+.charts-body {
+    display: flex;
+    flex-wrap: wrap; /* Agar responsif */
+    gap: 24px;
+    width: 100%;
+}
+
+.charts-body .linechart, .charts-body .barchart {
+    flex: 1 1 400px; /* Izinkan grafik membesar dan menyusut */
+}
+
 .section-title {
     font-size: 36px;
     color: #313272;
@@ -213,7 +400,7 @@
 }
 
 /* Status Box Styles */
-.status-box,
+/* .status-box,
 .payment-status,
 .billing-status,
 .total-box {
@@ -253,7 +440,7 @@
 .total-box {
     background-color: #676AFF;
     color: #ffffff;
-}
+} */
 
 .total.title {
     font-size: 25px;
@@ -277,22 +464,13 @@
     margin: 5px 0 0;
 }
 
-/* Charts Container */
-.charts-container {
-    display: flex !important; /* Paksa Flexbox */
-    flex-wrap: wrap; /* Agar responsif di layar kecil */
-    gap: 24px;
-    width: 100%;
-    margin: 40px 0;
-}
-
 /* KOLOM KIRI: berisi line & bar chart */
-.linechart-barchart {
-    flex: 2 1 500px; /* Lebar fleksibel, basis 500px, bisa membesar */
+/* .linechart-barchart {
+    flex: 2 1 500px;
     display: flex;
     flex-direction: column;
     gap: 24px;
-}
+} */
 
 /* KOLOM KANAN: berisi pie chart */
 .piechart-container {
@@ -324,5 +502,149 @@
 @media (max-width: 768px) {
     .dashboard-container {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Target: Laptop & Tablet Besar (Landscape) */
+@media (max-width: 1200px) {
+    .carousel-container {
+        /* Mulai kurangi tinggi dan padding carousel yang sangat besar */
+        height: auto;
+        min-height: 80vh;
+        padding: 15% 8%;
+    }
+    
+    .carousel-title h1, .carousel-title-highlight h1 {
+        font-size: 44px; /* Kurangi ukuran font judul */
+    }
+}
+
+
+/* Target: Tablet (Portrait) */
+@media (max-width: 992px) {
+    .carousel-container {
+        padding: 50px 30px; /* Gunakan padding tetap agar tidak terlalu besar */
+        min-height: auto;
+    }
+
+    /* KUNCI 1: Mengubah layout carousel menjadi 1 kolom */
+    .carousel-container .row {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .carousel-title-highlight {
+        width: 100%; /* Lebar highlight mengikuti container */
+        max-width: 450px;
+    }
+
+    .custom-card {
+        max-width: 100%; /* Kartu carousel mengisi ruang */
+    }
+
+    /* KUNCI 2: Mengubah layout dompet & iuran menjadi 1 kolom */
+    .dompet-container {
+        flex-direction: column;
+        gap: 30px; /* Beri jarak antar kartu */
+        margin-top: 30px;
+    }
+
+    .dompet-overview, .iuran-overview {
+        margin-top: 0;
+        border-radius: 15px; /* Beri radius di semua sisi */
+        max-height: none; /* Hapus batasan tinggi */
+        height: auto; /* Biarkan tinggi menyesuaikan konten */
+    }
+    
+    /* KUNCI 3: Mengubah layout Laporan Keuangan (summary + pie) menjadi 1 kolom */
+    .financial-report-container .report-body {
+        flex-direction: column;
+        align-items: center; /* Pusatkan pie chart */
+    }
+
+    .report-pie-chart {
+        flex-basis: auto;
+        width: 100%;
+        max-width: 350px; /* Batasi agar tidak terlalu besar di tablet */
+    }
+
+    .charts-body {
+        /* Di tablet, pastikan chart menjadi 1 kolom */
+        flex-direction: column;
+    }
+}
+
+
+/* Target: HP Besar & Tablet Kecil */
+@media (max-width: 767px) {
+    .dashboard-container {
+        padding: 15px;
+    }
+
+    .carousel-title h1, .carousel-title-highlight h1 {
+        font-size: 36px; /* Perkecil lagi font judul */
+    }
+
+    /* Atur posisi dan ukuran detail di dalam kartu carousel */
+    .carousel-card-body {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: -60px; /* Sesuaikan posisi overlap */
+        padding: 15px 25px;
+    }
+
+    .carousel-card-title {
+        font-size: 28px;
+    }
+    .carousel-card-text {
+        font-size: 16px;
+    }
+
+    /* Tombol di dalam dompet agar tidak terlalu lebar */
+    .saldo-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .saldo-buttons button {
+        width: 100%;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+
+    /* KUNCI 4: Mengubah kartu pemasukan/pengeluaran menjadi 1 kolom */
+    .summary-row {
+        flex-direction: column;
+    }
+}
+
+
+/* Target: HP Kecil (Portrait) */
+@media (max-width: 576px) {
+    .carousel-container {
+        padding: 40px 15px;
+    }
+
+    .carousel-title h1, .carousel-title-highlight h1 {
+        font-size: 28px;
+    }
+    
+    .carousel-card-title {
+        font-size: 22px;
+    }
+    
+    /* Perkecil ukuran nominal di kartu laporan */
+    .summary-card .amount {
+        font-size: 1.5rem;
+    }
+    .summary-card-full .amount-highlight {
+        font-size: 1.75rem;
+    }
+
+    /* Perkecil ukuran chart agar muat */
+    .linechart, .barchart, .piechart {
+        height: 280px;
     }
 }

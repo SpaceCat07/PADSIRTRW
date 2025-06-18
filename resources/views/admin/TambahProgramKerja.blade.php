@@ -16,21 +16,16 @@
     <div class="edit-program-container">
         {{-- Form Tambah Program Kerja --}}
         <form id="add-program-form" class="edit-program-form" enctype="multipart/form-data">
-            {{--
-                Catatan: @csrf dan @method('POST') dihapus karena tidak diperlukan untuk
-                API call stateless yang menggunakan Bearer Token. Method ('POST') akan
-                didefinisikan di dalam JavaScript (fetch).
-            --}}
 
             {{-- Menampilkan pesan error dari API --}}
-            <div id="error-messages" style="color: red; margin-bottom: 15px;"></div>
+            {{-- style dihapus, diatur oleh #error-messages di CSS --}}
+            <div id="error-messages"></div>
 
             <div class="form-group">
                 <label for="title">Judul Program</label>
                 <input type="text" id="title" name="title" placeholder="Masukkan Judul Program" required>
             </div>
 
-            {{-- Input untuk RT atau RW berdasarkan role --}}
             <div class="form-group">
                 <label for="rt_rw_id" id="rt_rw_label">Nomor RT/RW</label>
                 <input type="number" id="rt_rw_id" name="rt_rw_id" placeholder="Masukkan Nomor" required>
@@ -43,7 +38,6 @@
 
             <div class="form-group">
                 <label for="time">Waktu Pelaksanaan</label>
-                {{-- Menggunakan type="time" untuk konsistensi data --}}
                 <input type="time" id="time" name="time" required>
             </div>
 
@@ -54,16 +48,19 @@
 
             <div class="form-group">
                 <label for="description">Deskripsi Program</label>
-                <textarea id="description" name="description" rows="5" placeholder="Masukkan Deskripsi Program" required></textarea>
+                <textarea id="description" name="description" rows="5" placeholder="Masukkan Deskripsi Program"
+                    required></textarea>
             </div>
 
             <div class="form-group">
                 <label for="image">Gambar</label>
-                <input type="file" id="image" name="image" accept="image/jpeg, image/png" style="display: none;">
+                {{-- style dihapus, diatur oleh #image di CSS --}}
+                <input type="file" id="image" name="image" accept="image/jpeg, image/png">
                 <label for="image" class="custom-file-upload" id="file-label">
                     + Upload JPG/PNG
                 </label>
-                <span id="file-name" style="margin-left: 10px;"></span>
+                {{-- style dihapus, diatur oleh #file-name di CSS --}}
+                <span id="file-name"></span>
             </div>
 
             <div class="submit-button-group">
@@ -214,5 +211,5 @@
             // --- 5. PANGGIL FUNGSI INISIASI SAAT HALAMAN DIMUAT ---
             setupAdminInfo();
         });
-        </script>
+    </script>
 @endsection

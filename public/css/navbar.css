@@ -31,7 +31,7 @@ body {
     margin-right: 20px;
     font-size: 16px !important; /* Text size */
     font-weight: 500 !important; /* Slightly bold text */
-    color: #486284 !important;
+    color: #486284;
 }
 
 /* Dropdown Menu Styling */
@@ -116,13 +116,111 @@ body {
 
 /* Main Content Styling */
 
-/* Mobile View Adjustments */
-@media (max-width: 768px) {
-    .navbar-collapse {
-        margin-top: 10px; /* Space between the toggler and dropdown */
+/* Tombol Burger (Defaultnya tersembunyi di layar besar) */
+.navbar-toggler-custom {
+    display: none; /* Sembunyikan di desktop */
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    display: none;
+    flex-direction: column;
+    gap: 5px; /* Jarak antar garis burger */
+    cursor: pointer;
+}
+
+.toggler-icon {
+    background-color: #333; /* Warna garis burger */
+    height: 3px;
+    width: 25px;
+    border-radius: 2px;
+}
+
+/* Selector ini hanya menargetkan navbar yang punya style background biru */
+.header-container[style*="#676AFF"] {
+
+    /* Mengubah warna link yang tidak aktif menjadi putih */
+    & .link-idle {
+        color: white !important;
+        opacity: 0.8;
     }
 
-    .navbar-nav .nav-item {
-        text-align: center; /* Center align items in mobile view */
+    /* Mengubah warna link aktif menjadi kuning, termasuk garis bawahnya */
+    & .link-active {
+        color: #FFD25D !important;
+        border-bottom-color: #FFD25D !important;
+    }
+
+    /* Membuat ikon burger (garis-garisnya) menjadi putih */
+    & .toggler-icon {
+        background-color: #ffffff;
+    }
+}
+
+/* Aturan tambahan untuk Tampilan Mobile Navbar Biru */
+@media (max-width: 991.98px) {
+
+    /* Saat menu mobile di navbar biru terbuka... */
+    .header-container[style*="#676AFF"] header > .nav.nav-active {
+        /* Ganti background dropdown menjadi biru tua */
+        background-color: #4b4c9d;
+    }
+
+    /* Ubah warna teks di dalam dropdown menjadi putih */
+    .header-container[style*="#676AFF"] header > .nav.nav-active .nav-link {
+        color: white !important;
+    }
+    
+    /* Beri efek hover yang sesuai di dropdown gelap */
+    .header-container[style*="#676AFF"] header > .nav.nav-active .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Aturan untuk layar Tablet dan di bawahnya */
+@media (max-width: 991.98px) {
+    /* Munculkan tombol burger */
+    .navbar-toggler-custom {
+        display: flex;
+    }
+
+    /* Sembunyikan menu navigasi utama */
+    header > .nav {
+        display: none;
+    }
+
+    /* Saat menu aktif (setelah burger diklik), tampilkan sebagai blok */
+    header > .nav.nav-active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Posisi di bawah header */
+        left: 0;
+        right: 0;
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    /* Tata ulang item menu di mobile */
+    header > .nav.nav-active .nav-link {
+        width: 100%;
+        text-align: left;
+        padding: 10px;
+    }
+    
+    header > .nav.nav-active li {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    /* Hilangkan garis bawah di mobile, ganti dengan background hover */
+    .link-active, .link-idle:hover {
+        border-bottom: none;
+    }
+    .nav-link:hover {
+        background-color: #f1f1f1;
+        border-radius: 5px;
     }
 }

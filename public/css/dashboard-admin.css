@@ -44,7 +44,13 @@
     color: #313272;
     font-weight: 700;
 }
-.title-arrow { display: flex; justify-content: space-between; align-items: center; }
+.title-arrow { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 10px;
+}
+
 .title-arrow h3 { margin-bottom: 0; }
 .title-arrow img { width: 20px; height: 20px; }
 
@@ -55,10 +61,10 @@
 #wargaListContainer .warga-item p { margin: 0; font-weight: 600; }
 #wargaListContainer .warga-item span { color: #888; }
 
-/* Pembayaran Konfirmasi */
-#pembayaranList { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
-#pembayaranList li { background-color: #f7f9fc; border: 1px solid #e0e0e0; padding: 15px; border-radius: 10px; display: flex; justify-content: space-between; font-weight: 500; }
-#pembayaranList li span:last-child { font-weight: 700; }
+/* iuran Konfirmasi */
+#iuranList { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+#iuranList li { background-color: #f7f9fc; border: 1px solid #e0e0e0; padding: 15px; border-radius: 10px; display: flex; justify-content: space-between; font-weight: 500; }
+#iuranList li span:last-child { font-weight: 700; }
 
 /* Kartu Finansial Kecil - Sesuai Desain */
 .financial-summary-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -95,7 +101,7 @@
 }
 .program-card:last-child { border-bottom: none; padding-bottom: 0; }
 .program-card .date {
-    background-color: #FFF8E1;
+    background-color: #FFD700;
     color: #333;
     padding: 10px;
     text-align: center;
@@ -124,3 +130,88 @@
 }
 .kritik-saran-card .kritik-saran-content h4 { font-size: 1rem; font-weight: 600; margin: 0; }
 .kritik-saran-card .kritik-saran-content p { font-size: 0.9rem; color: #666; margin: 5px 0 0; }
+
+/* Target: Laptop Kecil & Tablet Besar (Landscape) */
+@media (max-width: 1200px) {
+    .admin-dashboard-container {
+        margin: 40px; /* Kurangi margin utama */
+    }
+
+    .dashboard-main-content {
+        /* Sedikit longgarkan kolom kiri agar tidak terlalu sempit */
+        grid-template-columns: minmax(280px, 1fr) 2fr;
+    }
+}
+
+/* Target: Tablet (Portrait) */
+@media (max-width: 992px) {
+    .admin-dashboard-container {
+        margin: 30px;
+    }
+
+    /* INI KUNCI UTAMA: Mengubah layout utama dari 2 kolom menjadi 1 kolom */
+    .dashboard-main-content {
+        grid-template-columns: 1fr;
+    }
+
+    .header-greeting h1 {
+        font-size: 1.8rem; /* Perkecil ukuran font judul header */
+    }
+}
+
+/* Target: HP Besar & Tablet Kecil */
+@media (max-width: 767px) {
+    .admin-dashboard-container {
+        margin: 20px;
+    }
+
+    /* Tata ulang header agar lebih rapi di layar sempit */
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .admin-card {
+        padding: 20px; /* Kurangi padding di dalam kartu */
+    }
+
+    /* Ubah kartu finansial (pemasukan/pengeluaran) menjadi 1 kolom */
+    .financial-summary-cards {
+        grid-template-columns: 1fr;
+    }
+
+    /* Tata ulang pie chart dan legend-nya menjadi vertikal */
+    .pie-chart-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Sesuaikan ukuran chart agar tidak terlalu besar */
+    .barchart, .linechart {
+        height: 250px;
+    }
+}
+
+/* Target: HP Kecil (Portrait) */
+@media (max-width: 576px) {
+    .admin-dashboard-container {
+        margin: 15px;
+    }
+
+    .admin-card {
+        padding: 15px;
+    }
+
+    .header-greeting h1 {
+        font-size: 1.5rem;
+    }
+    .dashboard-header p {
+        font-size: 16px;
+    }
+
+    /* Perkecil ukuran font di dalam kartu finansial */
+    .financial-card p {
+        font-size: 1.5rem;
+    }
+}

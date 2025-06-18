@@ -1,23 +1,23 @@
 body {
-    margin-top: 50px;
+    /* Menghapus margin atas agar container bisa mengontrol posisinya sendiri */
 }
 
 /* laman login */
 .login-container {
     max-width: 100%;
-    height: 65vh;
-    margin-top: 50px;
+    /* Menggunakan min-height agar tidak terpotong di layar pendek */
+    min-height: 90vh;
+    display: flex; /* Memastikan align-items berfungsi */
     align-items: center;
-}
-
-.login-vector {
-    margin: 0;
-    padding: 0;
+    justify-content: center; /* Menengahkan kartu jika vector hilang */
+    padding: 20px; /* Padding untuk jarak aman di layar kecil */
+    margin-top: 0;
 }
 
 .login-vector img {
     display: block;
     height: auto;
+    max-width: 100%; /* Membuat gambar responsif */
 }
 
 .login-card {
@@ -26,7 +26,9 @@ body {
     justify-content: center;
     background-color: #4b4c9d;
     width: 100%;
-    min-height: 500px;
+    /* Biarkan tinggi otomatis menyesuaikan konten */
+    height: auto;
+    padding: 40px 60px; /* Menggunakan padding untuk ukuran */
     border-radius: 150px 0 150px 0;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
     max-width: 750px;
@@ -40,7 +42,6 @@ body {
     top: 10%;
     left: 15px;
     transform: translateY(-10%);
-    /* padding: 0 5px; */
     transition: 0.2s ease all;
     pointer-events: none;
 }
@@ -85,44 +86,50 @@ body {
     background-color: #e0a800;
 }
 
-/* Media Queries */
 
-/* Medium screens (Laptops) */
-@media (min-width: 768px) and (max-width: 1199px) {
-    .login-card {
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    .login-vector img {
+/* ================================== */
+/* MEDIA QUERIES             */
+/* ================================== */
+
+/* Untuk layar di bawah 1200px (Laptop, Tablet) */
+@media (max-width: 1199.98px) {
+    .login-vector {
+        /* Menyembunyikan gambar vektor di semua layar yang lebih kecil dari PC besar */
         display: none;
+    }
+    .login-container {
+        /* Memastikan container tidak terlalu tinggi di layar laptop */
+        min-height: 80vh;
     }
 }
 
-/* Small screens (Tablets) */
-@media (min-width: 576px) and (max-width: 767px) {
-    .login-card {
-        max-width: 500px;
-        margin: 0 auto;
+/* Untuk layar di bawah 768px (Tablet kecil & HP) */
+@media (max-width: 767.98px) {
+    .login-container {
+        /* Hapus vertical centering dan biarkan mengalir dari atas */
+        align-items: flex-start;
+        padding: 40px 20px; /* Padding atas-bawah ditambah */
+        min-height: auto; /* Biarkan tinggi menyesuaikan konten */
     }
-    .login-vector img {
-        display: none;
+    
+    .login-card {
+        padding: 30px 40px;
+        border-radius: 100px 0 100px 0; /* Kurangi radius sudut */
+    }
+
+    .login-card h2 {
+        font-size: 1.5rem; /* Perkecil judul */
     }
 }
 
-/* Extra small screens (Mobiles) */
-@media (max-width: 575px) {
+/* Untuk layar di bawah 576px (HP) */
+@media (max-width: 575.98px) {
     .login-card {
-        max-width: 100%;
-        margin: 0 10%;
-        border-radius: 50px 0 50px 0;
+        padding: 30px 25px;
+        border-radius: 80px 0 80px 0;
     }
-    .login-vector img {
-        display: none;
-    }
-    .form-floating label {
-        font-size: 0.7rem;
-    }
+
     .form-control {
-        height: 40px;
+        height: 45px; /* Perkecil tinggi input */
     }
 }

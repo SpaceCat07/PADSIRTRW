@@ -124,3 +124,42 @@
     cursor: not-allowed;
     transform: none;
 }
+
+.keuangan-form select {
+    /* --- Meniru style dari input text --- */
+    width: 100%;
+    padding: 12px 40px 12px 18px; /* Padding kanan ditambah untuk ruang panah */
+    border: 1px solid #D9D9F2;
+    border-radius: 12px;
+    background-color: #fff;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    
+    /* --- Kustomisasi Khusus Dropdown --- */
+    -webkit-appearance: none; /* Menghilangkan style default browser di Chrome/Safari */
+    -moz-appearance: none;    /* Menghilangkan style default browser di Firefox */
+    appearance: none;          /* Menghilangkan style default browser */
+
+    /* Menambahkan panah custom menggunakan SVG */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23313272' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px 12px;
+}
+
+/* --- Menggabungkan state :focus untuk semua elemen form --- */
+.keuangan-form input:focus,
+.keuangan-form textarea:focus,
+.keuangan-form select:focus { /* Tambahkan select di sini */
+    outline: none;
+    border-color: #676AFF;
+    box-shadow: 0 0 0 3px rgba(103, 106, 255, 0.2);
+}
+
+/* Style untuk dropdown saat disabled */
+.keuangan-form select:disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+}

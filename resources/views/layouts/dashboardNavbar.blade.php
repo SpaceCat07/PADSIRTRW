@@ -38,12 +38,19 @@
                 </a>
             </div>
 
+            <button class="navbar-toggler-custom" type="button" aria-label="Toggle navigation">
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+            </button>
+
             <ul class="nav col-12 col-md-auto mb-2 justify-content-right mb-md-0">
                 <li><a href="/dashboard/warga"
                         class="nav-link px-2 {{ $page == 'dashboard' ? 'link-active' : 'link-idle' }}">Dashboard</a>
                 </li>
                 <li><a href="/program-kerja"
-                        class="nav-link px-2 {{ $page == 'program-kerja' ? 'link-active' : 'link-idle' }}">Program Kerja</a>
+                        class="nav-link px-2 {{ $page == 'program-kerja' ? 'link-active' : 'link-idle' }}">Program
+                        Kerja</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a href="#"
@@ -59,7 +66,8 @@
                 </li>
 
                 <li><a href="/kritik-saran/warga"
-                        class="nav-link px-2 {{ $page == 'kritik-saran' ? 'link-active' : 'link-idle' }}">Kritik Saran</a></li>
+                        class="nav-link px-2 {{ $page == 'kritik-saran' ? 'link-active' : 'link-idle' }}">Kritik
+                        Saran</a></li>
                 <li>
                     <div class="dropdown text-end me-3">
                         <a href="#" class="link-body-emphasis text-decoration-none dropdown-toggle"
@@ -88,9 +96,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        crossorigin="anonymous"></script>
     <script src="{{ asset('js/carousel.js') }}"></script>
     <script src="{{ asset('js/auth.js') }}"></script>
+    <script src="{{ asset('js/navbar.js') }}"></script>
 </body>
 
 </html>

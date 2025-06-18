@@ -10,7 +10,7 @@
     <!-- bootstrap and css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/checkout-navbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
     <!-- script for carousel -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
@@ -40,6 +40,12 @@
                 </a>
             </div>
 
+            <button class="navbar-toggler-custom" type="button" aria-label="Toggle navigation">
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+            </button>
+
             <ul class="nav col-12 col-md-auto mb-2 justify-content-right mb-md-0">
                 <li>
                     <a href="/dashboard/warga"
@@ -64,8 +70,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#"
-                        class="nav-link px-2 {{ $page == 'kritik-saran' ? 'link-active' : 'link-idle' }}"
+                    <a href="#" class="nav-link px-2 {{ $page == 'kritik-saran' ? 'link-active' : 'link-idle' }}"
                         style="{{ $page == 'kritik-saran' ? 'color: #FFD25D;' : 'color: white;' }}">Kritik Saran</a>
                 </li>
                 <li>
@@ -76,26 +81,20 @@
                                 class="rounded-circle ms-2 align-middle">
                         </a>
                         <ul class="dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="#">New project...</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
                             <li>
                                 <a class="dropdown-item logout-button" href="#" style="cursor: pointer;">Sign out</a>
                             </li>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
             </ul>
+    </div>
+    </li>
+    </ul>
 
-            <!-- <div class="col-md-3 text-end">
+    <!-- <div class="col-md-3 text-end">
                 <button type="button" class="btn btn-outline-primary me-2">Login</button>
                 <button type="button" class="btn btn-primary">Sign-up</button>
             </div> -->
-        </header>
+    </header>
     </div>
 
     <!-- main content and sidebar -->
@@ -105,8 +104,11 @@
     <script src="{{ asset('js/auth.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        crossorigin="anonymous"></script>
     <script src="{{ asset('js/carousel.js') }}"></script>
+    <script src="{{ asset('js/auth.js') }}"></script>
+    <script src="{{ asset('js/navbar.js') }}"></script>
 </body>
 
 </html>

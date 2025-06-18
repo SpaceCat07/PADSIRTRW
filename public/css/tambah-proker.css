@@ -39,10 +39,24 @@
     flex-direction: column;
 }
 
+.form-group-full-width {
+    grid-column: 1 / -1;
+}
+
 .form-group label {
     margin-bottom: 8px;
     font-size: 16px;
     font-weight: 600;
+}
+
+/* Deskripsi di atas form */
+.form-description {
+    grid-column: 1 / -1; /* Membuat elemen ini memakan semua kolom grid */
+    text-align: center;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
 /* --- Input Fields & Textarea --- */
@@ -108,6 +122,7 @@
 .submit-button-group {
     text-align: center; /* Menengahkan tombol */
     margin-top: 20px;
+    grid-column: 1 / -1;
 }
 
 .proker-submit-button {
@@ -147,4 +162,46 @@
 .toggle-sidebar-icon img {
     width: 30px;
     cursor: pointer;
+}
+
+/* Wadah untuk pesan respons dari server */
+#responseMessage {
+    grid-column: 1 / -1;
+    text-align: center;
+    min-height: 24px; /* Memberi ruang agar layout tidak "loncat" saat pesan muncul */
+    font-weight: 500;
+}
+
+/* Pesan sukses yang muncul di #responseMessage */
+#responseMessage .alert-success {
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* Pesan error yang muncul di #responseMessage */
+#responseMessage .alert-danger {
+    color: #842029;
+    background-color: #f8d7da;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+#error-messages {
+    color: red;
+    margin-bottom: 15px;
+    grid-column: 1 / -1; /* Membuat pesan error memakan lebar penuh */
+    font-weight: 500;
+}
+
+/* Image File */
+#image {
+    display: none;
+}
+
+#file-name {
+    margin-left: 10px;
+    color: #555;
+    font-style: italic;
 }
