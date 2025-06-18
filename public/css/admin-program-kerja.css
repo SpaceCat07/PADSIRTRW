@@ -448,3 +448,73 @@ button:hover {
         margin: 10px 0; /* Adjust margin for smaller screens */
     }
 }
+
+/* Target: Laptop & Tablet Besar */
+@media (max-width: 1200px) {
+    /* KUNCI 1: Ubah layout utama menjadi 1 kolom */
+    .admin-proker-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .program-card-container {
+        width: 100%;
+    }
+
+    /* Buat sidebar kalender mengisi lebar penuh */
+    .calendar-notification {
+        width: 100%;
+        max-width: 100%;
+        flex-direction: row; /* Buat kalender & notif menyamping di tablet */
+        gap: 30px;
+    }
+    
+    .calendar-container, .notification {
+        flex: 1;
+    }
+}
+
+/* Target: Tablet (Portrait) */
+@media (max-width: 992px) {
+    /* Atur ulang baris filter dan tombol tambah */
+    .filter-add-group {
+        flex-direction: column;
+        align-items: stretch; /* Buat elemen mengisi lebar */
+        gap: 15px;
+    }
+
+    .add-proker-button {
+        text-align: center;
+    }
+
+    /* Di tablet, kalender & notif kembali ditumpuk */
+    .calendar-notification {
+        flex-direction: column;
+    }
+}
+
+/* Target: HP (Lanscape & Portrait) */
+@media (max-width: 767px) {
+    body {
+        padding: 0 10px;
+    }
+
+    .proker-header-container {
+        padding: 1rem 0;
+    }
+    
+    /* KUNCI 2: Ubah layout kartu menjadi vertikal */
+    .program-card {
+        flex-direction: column;
+        align-items: flex-start; /* Rata kiri semua item di kartu */
+        gap: 15px;
+    }
+
+    .program-card .date {
+        width: 100%; /* Blok tanggal mengisi lebar */
+    }
+
+    .program-card .details h3 {
+        font-size: 18px;
+    }
+}

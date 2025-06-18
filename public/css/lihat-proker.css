@@ -165,3 +165,77 @@
     color: #676AFF;
     font-weight: 600;
 }
+
+/* Target: Laptop & di bawahnya */
+@media (max-width: 1200px) {
+    /* KUNCI 1: Hapus padding besar untuk sidebar di layar yang lebih kecil */
+    .proker-main {
+        padding-left: 0;
+    }
+
+    /* Membuat kartu menjadi fleksibel, tidak lagi 900px */
+    .program-card {
+        width: 100%;
+        max-width: 900px; /* Batas atas tetap ada */
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Target: Tablet (Portrait) dan di bawahnya */
+@media (max-width: 992px) {
+    .proker-container {
+        padding: 15px;
+    }
+
+    /* KUNCI 2: Atur ulang baris search & sort menjadi vertikal */
+    .search-filter,
+    .sort-by {
+        flex-direction: column;
+        align-items: stretch; /* Buat elemen mengisi lebar */
+        gap: 15px;
+    }
+
+    .search-filter input[type="text"] {
+        max-width: 100%; /* Input search mengisi lebar penuh */
+    }
+}
+
+/* Target: HP (Lanscape & Portrait) */
+@media (max-width: 767px) {
+    
+    /* KUNCI 3: Ubah layout kartu dari menyamping menjadi vertikal */
+    .program-card {
+        flex-direction: column;
+        align-items: flex-start; /* Rata kiri semua item di kartu */
+        gap: 15px;
+        position: relative; /* Diperlukan untuk posisi tombol 'more' */
+        padding: 15px;
+    }
+
+    .program-card .date {
+        max-width: 100%; /* Lebar penuh di mode vertikal */
+        padding: 10px;
+    }
+
+    .program-card .details {
+        padding-left: 0; /* Hapus padding kiri karena sudah tidak menyamping */
+        width: 100%;
+    }
+
+    /* Posisikan tombol titik tiga ke pojok kanan atas kartu */
+    .program-card .more-options {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    /* Perkecil ukuran font yang besar */
+    .program-card .date .day {
+        font-size: 24px;
+    }
+
+    .program-card .details h3 {
+        font-size: 18px;
+    }
+}

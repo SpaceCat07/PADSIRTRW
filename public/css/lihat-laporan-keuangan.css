@@ -144,3 +144,60 @@ table .no-data {
     text-align: center;
     font-size: 14px;
 }
+
+/* Target: Tablet (Portrait) dan di bawahnya */
+@media (max-width: 767px) {
+    .financial-report {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    /* Atur ulang header filter agar tidak berantakan */
+    .financial-report .d-flex.justify-content-between {
+        flex-direction: column;
+        align-items: stretch !important; /* Buat semua item rata kiri-kanan */
+        gap: 15px;
+    }
+
+    .btn-group {
+        width: 100%; /* Buat grup tombol mengisi lebar */
+    }
+
+    .btn-filter {
+        flex-grow: 1; /* Buat tombol di grup sama lebarnya */
+    }
+
+    .btn-select-month {
+        width: 100%;
+    }
+
+    /* KUNCI: Membuat tabel bisa di-scroll ke samping */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* Scroll lebih mulus di iOS */
+    }
+    
+    .financial-table {
+        min-width: 700px; /* Beri lebar minimal agar kolom tidak gepeng */
+    }
+    
+    /* Atur ulang pagination menjadi vertikal */
+    .pagination-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* Target: HP Kecil (Portrait) */
+@media (max-width: 576px) {
+    .financial-report h1 {
+        font-size: 1.5rem; /* Perkecil judul utama */
+    }
+
+    /* Perkecil font di dalam tabel agar lebih muat */
+    .financial-table th,
+    .financial-table td {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+}

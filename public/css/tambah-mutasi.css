@@ -163,3 +163,79 @@
     color: #6c757d;
     cursor: not-allowed;
 }
+
+/* Target: Tablet (Portrait) dan di bawahnya */
+@media (max-width: 992px) {
+    /* Kurangi padding dan radius sudut yang besar */
+    .form-wrapper {
+        padding: 40px 30px;
+        border-radius: 0 80px 0 80px;
+    }
+}
+
+/* Target: HP (Lanscape & Portrait) */
+@media (max-width: 767px) {
+    /* KUNCI: Ubah layout grid dari 2 kolom menjadi 1 kolom */
+    .keuangan-form {
+        grid-template-columns: 1fr; /* Semua elemen akan memakan 1 kolom penuh */
+        gap: 15px; /* Kurangi jarak antar baris */
+    }
+
+    /* KUNCI: Ubah perataan teks label menjadi rata kiri */
+    .keuangan-form label {
+        text-align: left;
+        margin-bottom: 0; /* Hapus margin bawah karena sudah diatur oleh 'gap' */
+    }
+
+    /* Karena semua elemen sekarang 1 kolom, pastikan elemen ini juga ikut */
+    .submit-button-container {
+        grid-column: 1 / -1; /* Ini sudah benar, hanya untuk konsistensi */
+    }
+
+    /* Atur ulang kontainer utama */
+    .form-wrapper {
+        padding: 30px 20px;
+        border-radius: 0 60px 0 60px;
+    }
+    .admin-header {
+        margin-top: 2rem;
+        padding: 0 15px;
+    }
+    .admin-header h1 {
+        font-size: 1.8rem;
+    }
+
+    /* Atur ulang tombol upload file menjadi vertikal */
+    .file-upload-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
+
+/* Target: HP Kecil (Portrait) */
+@media (max-width: 576px) {
+    .form-wrapper {
+        padding: 25px 15px;
+        border-radius: 0 40px 0 40px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    
+    /* Perkecil ukuran font dan padding input */
+    .keuangan-form label {
+        font-size: 1rem;
+    }
+    .keuangan-form input[type="text"],
+    .keuangan-form input[type="date"],
+    .keuangan-form textarea,
+    .keuangan-form select {
+        padding: 12px 15px;
+        font-size: 0.95rem;
+    }
+
+    .simpan-button {
+        width: 100%; /* Buat tombol simpan mengisi lebar */
+        padding: 14px 20px;
+    }
+}

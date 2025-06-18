@@ -181,3 +181,47 @@ table .no-data {
     text-align: center;
     font-size: 14px;
 }
+
+/* Target: HP (Lanscape & Portrait) */
+@media (max-width: 767px) {
+    .laporan-container {
+        margin-top: 1rem;
+        padding: 0 15px;
+    }
+
+    .admin-header h1 {
+        font-size: 1.5rem;
+    }
+
+    /* KUNCI: Atur ulang baris kontrol menjadi vertikal */
+    .report-controls,
+    .sort-by {
+        flex-direction: column;
+        align-items: stretch; /* Buat semua item selebar kontainer */
+        gap: 15px;
+    }
+    .report-action-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    .report-action-buttons .action-btn {
+        width: 100%;
+        text-align: center;
+    }
+    
+    /* KUNCI: Atur ulang pagination menjadi vertikal */
+    .pagination-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* Target: HP Kecil (Portrait) */
+@media (max-width: 576px) {
+    /* Perkecil font di dalam tabel agar lebih muat */
+    table th,
+    table td {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+}

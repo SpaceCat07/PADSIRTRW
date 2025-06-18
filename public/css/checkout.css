@@ -221,3 +221,95 @@ input[value="dompet"]:checked ~ .pin-wrapper,
 input[value="transfer"]:checked ~ .transfer-wrapper {
     display: flex;
 }
+
+/* Target: Tablet (Portrait) dan di bawahnya */
+@media (max-width: 992px) {
+    /* KUNCI: Ubah layout utama menjadi 1 kolom */
+    .checkout-container {
+        flex-direction: column;
+        align-items: center; /* Pusatkan konten saat ditumpuk */
+        padding: 30px 20px; /* Tambahkan padding agar tidak menempel di tepi */
+    }
+
+    /* Sesuaikan kedua bagian agar lebarnya penuh */
+    .input-section,
+    .item-container {
+        flex: none; /* Hapus flex-grow */
+        width: 100%;
+        max-width: 600px; /* Beri batas lebar agar tidak terlalu lebar di tablet */
+    }
+
+    .item-container {
+        order: 1; /* Tampilkan Rincian Item terlebih dahulu */
+    }
+
+    .input-section {
+        order: 2; /* Tampilkan Form Pembayaran setelahnya */
+    }
+
+    .input-section {
+        padding: 0; /* Hapus padding samping karena sudah ada di container */
+    }
+}
+
+
+/* Target: HP (Lanscape & Portrait) */
+@media (max-width: 767px) {
+    .checkout-container {
+        padding: 20px 15px;
+        gap: 30px;
+    }
+    
+    .item-container {
+        max-width: 100%; /* Biarkan mengisi penuh di HP */
+    }
+
+    /* Perkecil ukuran input PIN agar muat */
+    .pin-input input {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+    .pin-input {
+        gap: 10px;
+    }
+    
+    /* Perkecil ukuran font di daftar item */
+    .item label, .checkout-amount {
+        font-size: 16px;
+    }
+
+    .item .remove {
+        margin-right: 15px;
+    }
+    .remove-icon {
+        width: 30px;
+    }
+
+    /* Tata ulang tombol pembayaran */
+    .checkout-buttons {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .checkout-btn {
+        width: 100%;
+    }
+}
+
+
+/* Target: HP Kecil (Portrait) */
+@media (max-width: 576px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Tumpuk opsi pembayaran agar lebih besar target kliknya */
+    .payment-options {
+        flex-direction: column;
+    }
+    
+    .pin-input input {
+        width: 40px;
+        height: 40px;
+    }
+}

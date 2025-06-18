@@ -356,3 +356,50 @@ table .no-data {
     background-color: #fef3c7; /* Kuning muda */
     color: #92400e;
 }
+
+/* Target: HP (Lanscape & Portrait) */
+@media (max-width: 767px) {
+    .data-warga-container {
+        margin-top: 1rem;
+        padding: 0 15px;
+    }
+
+    .admin-header h1 {
+        font-size: 1.5rem;
+    }
+
+    /* KUNCI: Atur ulang baris kontrol menjadi vertikal */
+    .controls-group {
+        flex-direction: column;
+        align-items: stretch; /* Buat semua item selebar kontainer */
+    }
+    
+    .search-bar input {
+        min-width: unset; /* Hapus lebar minimal di mobile */
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    .action-buttons .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* KUNCI: Atur ulang pagination menjadi vertikal */
+    .pagination-container {
+        flex-direction: column-reverse; /* Taruh page-control di atas */
+        gap: 20px;
+    }
+}
+
+/* Target: HP Kecil (Portrait) */
+@media (max-width: 576px) {
+    /* Perkecil font di dalam tabel agar lebih muat */
+    .data-warga-table th,
+    .data-warga-table td {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+}

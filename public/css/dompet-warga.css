@@ -252,3 +252,93 @@
 .transaksi-amount.outflow {
     color: #dc3545; /* Warna merah untuk pengeluaran */
 }
+
+/* Target: Tablet (Portrait) dan di bawahnya */
+@media (max-width: 992px) {
+    /* KUNCI: Ubah layout utama dari 2 kolom menjadi 1 kolom */
+    .dompet-container {
+        flex-direction: column;
+        gap: 30px; /* Tambah jarak antar kartu saat ditumpuk */
+        padding: 20px;
+        height: auto; /* Biarkan tinggi menyesuaikan konten */
+        max-height: none;
+    }
+
+    /* Sesuaikan kedua kontainer agar lebarnya penuh dan radius sudutnya benar */
+    .saldo-container, 
+    .riwayat-section, 
+    .topup-section {
+        width: 100%;
+        border-radius: 12px; /* Terapkan radius di semua sudut */
+    }
+
+    .riwayat-list {
+        /* Sesuaikan tinggi list riwayat di mode tumpuk */
+        max-height: 500px;
+    }
+
+    /* Perkecil ukuran font yang besar */
+    .saldo-container h2 {
+        font-size: 28px;
+    }
+    .saldo-amount {
+        font-size: 40px;
+    }
+}
+
+/* Target: HP (Lanscape & Portrait) */
+@media (max-width: 767px) {
+    .dompet-container {
+        padding: 15px;
+    }
+
+    .saldo-container, 
+    .riwayat-section,
+    .topup-section {
+        padding: 25px; /* Kurangi padding dalam kartu */
+    }
+
+    .saldo-amount {
+        font-size: 32px;
+        padding: 15px;
+    }
+
+    .saldo-buttons {
+        /* Tombol lebih baik ditumpuk di layar sempit */
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .saldo-buttons button {
+        font-size: 18px;
+    }
+}
+
+/* Target: HP Kecil (Portrait) */
+@media (max-width: 576px) {
+    .saldo-container, 
+    .riwayat-section,
+    .topup-section {
+        padding: 20px;
+    }
+
+    .saldo-container h2 {
+        font-size: 24px;
+    }
+
+    /* Sesuaikan ukuran font di form Top Up */
+    .topup-form p {
+        font-size: 16px;
+    }
+    .nominal-input, .nominal-input input {
+        font-size: 28px;
+    }
+
+    /* Perkecil ukuran font di daftar transaksi */
+    .transaksi-title, .transaksi-amount {
+        font-size: 15px;
+    }
+    .transaksi-subtitle, .status-berhasil, .status-gagal {
+        font-size: 13px;
+    }
+}

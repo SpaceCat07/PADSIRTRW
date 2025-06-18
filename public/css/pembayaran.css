@@ -215,3 +215,87 @@ select {
     border: 1px solid #ddd;
     border-radius: 4px;
 }
+
+/* Target: Tablet (Portrait) dan di bawahnya */
+@media (max-width: 992px) {
+    /* Kurangi padding vertikal yang besar di kedua halaman */
+    .payment-container,
+    .payment-history-container {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+}
+
+/* Target: HP (Lanscape & Portrait) */
+@media (max-width: 767px) {
+    .payment-container,
+    .payment-history-container {
+        padding: 40px 15px; /* Perkecil padding horizontal */
+    }
+
+    /* Atur ulang header di halaman bayar iuran */
+    .column-flex {
+        flex-direction: column;
+        align-items: flex-start; /* Rata kiri */
+        gap: 15px;
+    }
+
+    .payment-container h2 {
+        font-size: 1.3em;
+    }
+
+    /* KUNCI: Membuat tabel bisa di-scroll ke samping */
+    .additional-payment,
+    .monthly-payment,
+    .table-responsive { /* .table-responsive mungkin sudah ada di HTML Riwayat */
+        overflow-x: auto;
+        /* Menambahkan scroll yang lebih mulus di iOS */
+        -webkit-overflow-scrolling: touch;
+        /* Menambahkan border halus agar terlihat bisa di-scroll */
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+    }
+
+    /* Pastikan table tidak "gepeng" di dalam container scroll */
+    .additional-payment table,
+    .monthly-payment table,
+    .table-responsive table {
+        min-width: 600px; /* Beri lebar minimal agar kolom tidak terlalu sempit */
+    }
+
+    /* Buat tombol filter di riwayat bisa wrap */
+    .status-filters {
+        flex-wrap: wrap;
+    }
+
+    /* KUNCI: Menata ulang pagination menjadi vertikal */
+    .pagination-container {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center; /* Pusatkan semuanya */
+    }
+
+    /* Tombol bayar menjadi lebar penuh */
+    .pay-button {
+        width: 100%;
+        max-width: 100%;
+        padding: 12px;
+    }
+}
+
+
+/* Target: HP Kecil (Portrait) */
+@media (max-width: 576px) {
+    /* Perkecil ukuran font di dalam tabel */
+    table th,
+    table td {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .status-filters button {
+        width: auto; /* Biarkan lebar tombol mengikuti teks */
+        padding: 5px 12px;
+        flex-grow: 1; /* Agar tombol mengisi ruang jika ada sisa */
+    }
+}

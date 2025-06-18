@@ -120,3 +120,57 @@ body {
 .register-button:hover[type="cancel"] {
     background-color: #c0c0c0;
 }
+
+/* Target: Tablet (Portrait) dan di bawahnya */
+@media (max-width: 992px) {
+    /* Kurangi padding pada container utama */
+    .user-registration-form-container {
+        padding: 40px;
+    }
+
+    /* KUNCI: Ubah layout form menjadi vertikal (label di atas, input di bawah) */
+    .form-group {
+        flex-direction: column;
+        align-items: flex-start; /* Rata kiri untuk label dan input */
+        gap: 8px; /* Beri sedikit jarak antara label dan input */
+    }
+
+    /* Hapus lebar tetap pada label dan input agar fleksibel */
+    .form-group label,
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"],
+    .form-group input[type="password"],
+    .form-group textarea,
+    .form-group select {
+        width: 100%; /* Buat semua elemen mengisi lebar penuh */
+    }
+}
+
+/* Target: HP (Lanscape & Portrait) */
+@media (max-width: 767px) {
+    .user-registration-container {
+        margin-top: 0;
+        padding: 0;
+    }
+
+    /* Hapus radius sudut yang besar dan kurangi padding */
+    .user-registration-form-container {
+        padding: 30px 20px;
+        border-radius: 0;
+        margin-bottom: 0;
+        box-shadow: none;
+    }
+
+    /* Tengahkan grup tombol dan buat menjadi vertikal */
+    .submit-button-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .register-button {
+        width: 100%; /* Tombol mengisi lebar penuh agar mudah ditekan */
+        max-width: 300px;
+    }
+}

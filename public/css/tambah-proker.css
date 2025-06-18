@@ -205,3 +205,77 @@
     color: #555;
     font-style: italic;
 }
+
+/* Target: Tablet (Portrait) dan di bawahnya */
+@media (max-width: 992px) {
+    /* Kurangi padding dan radius sudut yang besar */
+    .edit-program-container {
+        padding: 40px 30px;
+        border-radius: 0 80px 0 80px;
+    }
+
+    .data-warga-container {
+        margin-top: 2rem;
+        padding: 0 1rem;
+    }
+}
+
+/* Target: HP (Lanscape & Portrait) */
+@media (max-width: 767px) {
+    .data-warga-container {
+        margin-top: 1rem;
+    }
+
+    .edit-program-container {
+        padding: 30px 20px;
+        border-radius: 0 60px 0 60px;
+    }
+
+    /* Perkecil ukuran font judul dan deskripsi */
+    .admin-header h1 {
+        font-size: 28px;
+    }
+
+    .form-description {
+        font-size: 18px;
+    }
+
+    /* Perkecil tinggi textarea */
+    .edit-program-form textarea {
+        min-height: 120px;
+    }
+}
+
+/* Target: HP Kecil (Portrait) */
+@media (max-width: 576px) {
+    .edit-program-container {
+        padding: 25px 15px;
+        border-radius: 0 40px 0 40px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .admin-header h1 {
+        font-size: 24px;
+    }
+    
+    .form-description {
+        font-size: 16px;
+    }
+
+    /* Perkecil ukuran font input dan label */
+    .form-group label,
+    .edit-program-form input[type="text"],
+    .edit-program-form input[type="number"],
+    .edit-program-form input[type="date"],
+    .edit-program-form input[type="time"],
+    .edit-program-form textarea {
+        font-size: 14px;
+    }
+    
+    /* Perkecil tombol submit */
+    .proker-submit-button {
+        padding: 12px 40px;
+        font-size: 16px;
+    }
+}
