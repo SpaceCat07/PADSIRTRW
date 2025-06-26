@@ -7,7 +7,7 @@
 @section('content')
     <?php
     $page = 'dashboard'; // or 'program-kerja', 'pembayaran', etc.
-                                    ?>
+    ?>
 
     <!-- Carousel Container -->
     <div class="carousel-container" style="background-image: url('{{ asset('storage/dashboardBackground.png') }}');">

@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('css/pembayaran.css') }}">
     <?php
     $page = 'pembayaran'; // or 'program-kerja', 'pembayaran', etc.
-        ?>
+    ?>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('js/pagination.js') }}"></script>
@@ -48,10 +48,9 @@
 
             <div class="pagination">
                 <button id="prevPageBtn" disabled>
-                    << /button>
-                        <span id="currentPage">1</span>
+                    <<<span id="currentPage">1</span>
                         <span>of <span id="totalPages">1</span> pages</span>
-                        <button id="nextPageBtn" disabled>></button>
+                        <button id="nextPageBtn" disabled>>></button>
             </div>
         </div>
     </div>
@@ -157,11 +156,11 @@
                     const statusClass = (payment.status === 'done' ? 'success' : payment.status).toLowerCase();
 
                     row.innerHTML = `
-                    <td>#${String(payment.id).padStart(4, '0')}</td>
-                    <td>${formatDate(payment.date)}</td>
-                    <td>${formatCurrency(payment.total)}</td>
-                    <td class="status-${statusClass}">${payment.status}</td>
-                `;
+                            <td>#${String(payment.id).padStart(4, '0')}</td>
+                            <td>${formatDate(payment.date)}</td>
+                            <td>${formatCurrency(payment.total)}</td>
+                            <td class="status-${statusClass}">${payment.status}</td>
+                        `;
                     paymentTable.appendChild(row);
                 });
             }

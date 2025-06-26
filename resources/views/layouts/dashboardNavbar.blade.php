@@ -65,9 +65,17 @@
                     </ul>
                 </li>
 
-                <li><a href="/kritik-saran/warga"
-                        class="nav-link px-2 {{ $page == 'kritik-saran' ? 'link-active' : 'link-idle' }}">Kritik
-                        Saran</a></li>
+                <li class="nav-item dropdown">
+                    <a href="#"
+                        class="nav-link dropdown-toggle px-2 {{ in_array($page, ['kritik-saran', 'riwayat-kritik-saran']) ? 'link-active' : 'link-idle' }}"
+                        id="kritikSaranDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Kritik & Saran
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="kritikSaranDropdown">
+                        <li><a class="dropdown-item" href="{{ route('kritik-saran') }}">Buat Baru</a></li>
+                        <li><a class="dropdown-item" href="{{ route('riwayat-kritik-saran') }}">Riwayat Saya</a></li>
+                    </ul>
+                </li>
                 <li>
                     <div class="dropdown text-end me-3">
                         <a href="#" class="link-body-emphasis text-decoration-none dropdown-toggle"

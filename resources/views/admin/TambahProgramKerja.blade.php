@@ -28,7 +28,7 @@
 
             <div class="form-group">
                 <label for="rt_rw_id" id="rt_rw_label">Nomor RT/RW</label>
-                <input type="number" id="rt_rw_id" name="rt_rw_id" placeholder="Masukkan Nomor" required>
+                <input class="input-disabled" type="number" id="rt_rw_id" name="rt_rw_id" placeholder="Masukkan Nomor" required disabled>
             </div>
 
             <div class="form-group">
@@ -170,7 +170,7 @@
                     });
 
                     alert('Program kerja berhasil ditambahkan!');
-                    window.location.href = '/admin/program-kerja'; // Arahkan ke halaman daftar proker admin
+                    window.location.href = '/program-kerja/admin'; // Arahkan ke halaman daftar proker admin
 
                 } catch (error) {
                     console.error('Terjadi kesalahan:', error);

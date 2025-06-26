@@ -136,6 +136,29 @@ select {
     border-radius: 4px;
 }
 
+.total-pemasukan-card {
+    background: linear-gradient(135deg, #676AFF, #4A3AFF);
+    color: white;
+    padding: 20px 25px;
+    border-radius: 15px;
+    margin-bottom: 25px; /* Jarak ke tabel di bawahnya */
+    box-shadow: 0 8px 25px rgba(74, 58, 255, 0.25);
+    text-align: center;
+}
+
+.total-pemasukan-card p {
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.total-pemasukan-card span {
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: block;
+}
+
 /* Table styling */
 table {
     width: 100%;

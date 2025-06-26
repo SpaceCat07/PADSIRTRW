@@ -64,9 +64,6 @@
         <button class="pay-button" id="payButton">Bayar</button>
     </div>
 
-    {{-- ====================================================== --}}
-    {{--                SCRIPT FUNGSIONAL LENGKAP               --}}
-    {{-- ====================================================== --}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {

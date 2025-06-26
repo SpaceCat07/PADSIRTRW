@@ -140,9 +140,13 @@
                         variance: varianceSelect.value,
                     };
 
-                    // Tambahkan bulan HANYA jika jenisnya 'monthly'
                     if (payload.variance === 'monthly') {
+                        // Jika iuran bulanan, ambil dari pilihan dropdown
                         payload.month = monthSelect.value;
+                    } else if (payload.variance === 'additional') {
+                        // Jika iuran tambahan, gunakan NAMA BULAN saat ini secara otomatis
+                        const currentMonthName = new Date().toLocaleString('en-US', { month: 'long' });
+                        payload.month = currentMonthName;
                     }
 
                     // Tambahkan rt_id atau rw_id secara otomatis

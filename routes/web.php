@@ -164,6 +164,10 @@ Route::get('/kritik-saran/warga', function () {
     return view('/warga/FormKritikSaran');
 })->name('kritik-saran');
 
+Route::get('/riwayat-kritik-saran/warga', function () {
+    return view('/warga/KritikSaranWarga');
+})->name('riwayat-kritik-saran');
+
 Route::get('/edit-profil/warga', function () {
     return view('/warga/editInfo');
 })->name('edit.profil');

@@ -73,7 +73,6 @@
             const pinInputs = document.querySelectorAll('.pin-box');
             const submitPaymentBtn = document.getElementById('submitPaymentBtn');
             const cancelPaymentBtn = document.getElementById('cancelPaymentBtn');
-
             const token = localStorage.getItem('token');
             let checkoutData = { items: [], total: 0 };
             let currentWalletBalance = 0;
@@ -212,7 +211,7 @@
                     return;
                 }
 
-                // Proses untuk metode Dompet
+                // --- Validasi di sisi pengguna (tetap dipertahankan) ---
                 const pin = Array.from(pinInputs).map(input => input.value).join('');
 
                 if (pin.length !== 4) {
@@ -229,31 +228,24 @@
                 submitPaymentBtn.textContent = 'MEMPROSES...';
 
                 try {
-                    // LANGKAH 1: POTONG SALDO DOMPET
-                    const walletPayload = {
-                        name: "Pembayaran Iuran",
-                        status: "success",
-                        value: -checkoutData.total
-                    };
-                    const walletResponse = await axiosInstance.post('/wallet', walletPayload);
+                    // =================================================================
+                    //            BAGIAN PEMOTONGAN SALDO TOTAL DIHAPUS
+                    // =================================================================
+                    // const walletPayload = { ... };
+                    // await axiosInstance.post('/wallet', walletPayload); --> BARIS INI DIHAPUS
 
-                    if (!walletResponse.data.success) {
-                        throw new Error('Gagal memotong saldo dompet.');
+
+                    // LANGSUNG KE LANGKAH PENCATATAN PEMBAYARAN IURAN SATU PER SATU
+                    // Backend akan menangani pemotongan saldo untuk setiap request ini
+                    console.log('Memulai pencatatan pembayaran iuran satu per satu...');
+                    for (const item of checkoutData.items) {
+                        const iuranPayPayload = { iuran: item.id };
+                        console.log(`Mengirim pencatatan untuk iuran ID: ${item.id}`);
+                        await axiosInstance.post('/iuran/pay', iuranPayPayload);
+                        console.log(`Pencatatan untuk iuran ID: ${item.id} berhasil.`);
                     }
 
-                    // LANGKAH 2: CATAT SETIAP PEMBAYARAN IURAN
-                    const paymentRecordPromises = checkoutData.items.map(item => {
-                        // --- PERBAIKAN KUNCI ADA DI SINI ---
-                        // Menggunakan 'iuran' sebagai nama key, sesuai hasil tes Postman.
-                        const iuranPayPayload = {
-                            iuran: item.id
-                        };
-                        return axiosInstance.post('/iuran/pay', iuranPayPayload);
-                    });
-
-                    await Promise.all(paymentRecordPromises);
-
-                    // LANGKAH 3: JIKA SEMUA BERHASIL, BERI NOTIFIKASI & REDIRECT
+                    // JIKA SEMUA BERHASIL, BERI NOTIFIKASI & REDIRECT
                     alert("Pembayaran berhasil!");
                     window.location.href = "{{ route('riwayat-pembayaran') }}";
 
@@ -265,12 +257,9 @@
                 }
             }
 
-
             // =================================================================
             // 3. EVENT LISTENERS & INISIALISASI
             // =================================================================
-
-            // Event listener untuk tombol radio, konfirmasi, dan batal
             dompetRadio.addEventListener('change', togglePaymentSection);
             transferRadio.addEventListener('change', togglePaymentSection);
             submitPaymentBtn.addEventListener('click', submitPayment);
