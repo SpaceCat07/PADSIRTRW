@@ -1,67 +1,261 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SIMAS - Sistem Informasi Masyarakat RW/RT
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="200" alt="Laravel Logo">
 </p>
 
-## About Laravel
+<p align="center">
+  <strong>Sistem Informasi Masyarakat RW 05, Desa Pabean, Kec. Dringu, Kab. Probolinggo</strong>
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tentang SIMAS
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+SIMAS (Sistem Informasi Masyarakat) adalah aplikasi web berbasis Laravel yang dirancang untuk memudahkan pengelolaan administrasi dan kegiatan masyarakat di tingkat RW (Rukun Warga) dan RT (Rukun Tetangga). Aplikasi ini menyediakan platform digital yang memungkinkan warga untuk berinteraksi dengan pengurus RW/RT secara efisien dan transparan.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Fitur Utama
 
-## Learning Laravel
+### 👥 Manajemen Pengguna
+- **Multi-Role System**: Admin, Warga, Pengurus RW/RT
+- **Autentikasi & Otorisasi**: Login/logout dengan sistem keamanan
+- **Manajemen Profil**: Edit dan kelola informasi pengguna
+- **Aktivasi Akun**: Sistem persetujuan akun baru
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 💰 Sistem Pembayaran & Iuran
+- **Manajemen Iuran RW/RT**: Pencatatan dan tracking iuran bulanan
+- **Pembayaran Digital**: Integrasi dengan Midtrans Payment Gateway
+- **Riwayat Pembayaran**: Tracking status pembayaran warga
+- **Notifikasi Email**: Pemberitahuan pembayaran gagal/berhasil
+- **Laporan Keuangan**: Pemasukan dan pengeluaran RW/RT
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 📋 Program Kerja
+- **Manajemen Program Kerja**: CRUD program kerja RW/RT
+- **Penjadwalan**: Waktu dan lokasi pelaksanaan kegiatan
+- **Status Tracking**: On progress/selesai
+- **Galeri Foto**: Dokumentasi kegiatan
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 💬 Komunikasi
+- **Kritik & Saran**: Platform feedback dari warga
+- **Notifikasi**: Sistem pemberitahuan untuk berbagai aktivitas
 
-## Laravel Sponsors
+### 📊 Laporan & Dashboard
+- **Dashboard Admin**: Overview data dan statistik
+- **Dashboard Warga**: Informasi personal dan kegiatan
+- **Laporan Keuangan**: Transparansi pengelolaan dana
+- **Visualisasi Data**: Chart dan grafik untuk analisis
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Teknologi yang Digunakan
 
-### Premium Partners
+### Backend
+- **Laravel 10**: Framework PHP modern
+- **PHP 8.1+**: Bahasa pemrograman utama
+- **MySQL**: Database management system
+- **Laravel Sanctum**: API authentication
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Frontend
+- **Blade Templates**: Laravel templating engine
+- **Bootstrap**: CSS framework untuk responsive design
+- **JavaScript**: Interaktivitas dan AJAX
+- **CSS3**: Styling dan animasi
 
-## Contributing
+### Payment Gateway
+- **Midtrans**: Payment processor untuk transaksi digital
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Email Service
+- **Laravel Mail**: Sistem email notification
 
-## Code of Conduct
+## Struktur Database
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Aplikasi ini menggunakan beberapa tabel utama:
+- `users`: Data pengguna sistem
+- `warga`: Informasi warga
+- `rw`, `rt`: Data RW dan RT
+- `proker`: Program kerja
+- `iuran_rw`, `iuran_rt`: Data iuran
+- `keuangan_rw`, `keuangan_rt`: Laporan keuangan
+- `kritik_saran_rw`, `kritik_saran_rt`: Feedback warga
 
-## Security Vulnerabilities
+## Instalasi
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Persyaratan Sistem
+- PHP 8.1 atau lebih tinggi
+- Composer
+- Node.js & NPM
+- MySQL 5.7+
+- Apache/Nginx
+
+### Langkah Instalasi
+
+1. **Clone Repository**
+```bash
+git clone https://github.com/username/PADSIRTRW.git
+cd PADSIRTRW
+```
+
+2. **Install Dependencies**
+```bash
+composer install
+npm install
+```
+
+3. **Environment Setup**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+4. **Database Setup**
+```bash
+# Edit .env file dengan konfigurasi database
+php artisan migrate
+php artisan db:seed
+```
+
+5. **Midtrans Configuration**
+```bash
+# Tambahkan ke .env file
+MIDTRANS_SERVER_KEY=your_server_key
+MIDTRANS_CLIENT_KEY=your_client_key
+MIDTRANS_IS_PRODUCTION=false
+MIDTRANS_IS_SANITIZED=true
+MIDTRANS_IS_3DS=true
+```
+
+6. **Build Assets**
+```bash
+npm run build
+```
+
+7. **Start Development Server**
+```bash
+php artisan serve
+```
+
+## Konfigurasi
+
+### Database
+Edit file `.env` untuk konfigurasi database:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=simas_db
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### Email
+Konfigurasi email untuk notifikasi:
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your-email@gmail.com
+MAIL_PASSWORD=your-app-password
+MAIL_ENCRYPTION=tls
+```
+
+### Storage
+Setup symbolic link untuk storage:
+```bash
+php artisan storage:link
+```
+
+## Penggunaan
+
+### Admin
+- Login ke `/masuk`
+- Akses dashboard admin di `/dashboard/admin`
+- Kelola data warga, iuran, dan program kerja
+
+### Warga
+- Login ke `/masuk`
+- Akses dashboard warga di `/dashboard/warga`
+- Lihat program kerja, bayar iuran, berikan feedback
+
+### Pengurus RW/RT
+- Login sesuai level akses
+- Kelola program kerja dan iuran sesuai wilayah
+
+## API Documentation
+
+Aplikasi ini menyediakan API endpoints untuk:
+- Autentikasi pengguna
+- Manajemen data warga
+- Transaksi pembayaran
+- CRUD program kerja
+
+## Testing
+
+Jalankan test suite:
+```bash
+php artisan test
+```
+
+## Deployment
+
+### Production Setup
+1. Set environment ke production di `.env`
+2. Optimize application:
+```bash
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+
+3. Setup web server (Apache/Nginx)
+4. Configure SSL certificate
+5. Setup database backup
+
+## Kontribusi
+
+Kami menerima kontribusi dari developer lain. Silakan:
+1. Fork repository
+2. Buat branch feature (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
+
+## Roadmap
+
+- [ ] Mobile app (React Native/Flutter)
+- [ ] Real-time notifications
+- [ ] Advanced reporting
+- [ ] Integration with government systems
+- [ ] Multi-language support
+
+## Support
+
+Jika Anda mengalami masalah atau memiliki pertanyaan:
+- Buka issue di GitHub
+- Email: support@simas.com
+- Documentation: [Wiki](https://github.com/username/PADSIRTRW/wiki)
+
+## Security
+
+Jika Anda menemukan kerentanan keamanan, silakan laporkan ke:
+- Email: security@simas.com
+- Jangan publish vulnerability secara publik
+
+## Changelog
+
+### v1.0.0
+- Initial release
+- Basic CRUD operations
+- Payment integration
+- Email notifications
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-"# PADSIRTRW" 
+Aplikasi ini dilisensikan under [MIT License](LICENSE).
+
+## Credits
+
+- **Laravel Framework**: [Laravel](https://laravel.com)
+- **Midtrans Payment**: [Midtrans](https://midtrans.com)
+- **Bootstrap**: [Bootstrap](https://getbootstrap.com)
+
+---
+
+<p align="center">
+Dibuat dengan ❤️ untuk kemajuan masyarakat RW 05, Desa Pabean
+</p> 
