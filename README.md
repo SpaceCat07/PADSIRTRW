@@ -22,7 +22,7 @@ SIMAS (Sistem Informasi Masyarakat) adalah aplikasi web berbasis Laravel yang di
 
 ### 💰 Sistem Pembayaran & Iuran
 - **Manajemen Iuran RW/RT**: Pencatatan dan tracking iuran bulanan
-- **Pembayaran Digital**: Integrasi dengan Midtrans Payment Gateway
+- **Pembayaran Digital**: Sistem pembayaran terintegrasi
 - **Riwayat Pembayaran**: Tracking status pembayaran warga
 - **Notifikasi Email**: Pemberitahuan pembayaran gagal/berhasil
 - **Laporan Keuangan**: Pemasukan dan pengeluaran RW/RT
@@ -58,7 +58,7 @@ SIMAS (Sistem Informasi Masyarakat) adalah aplikasi web berbasis Laravel yang di
 - **CSS3**: Styling dan animasi
 
 ### Payment Gateway
-- **Midtrans**: Payment processor untuk transaksi digital
+- **Sistem Pembayaran**: Payment processor untuk transaksi digital
 
 ### Email Service
 - **Laravel Mail**: Sistem email notification
@@ -110,14 +110,10 @@ php artisan migrate
 php artisan db:seed
 ```
 
-5. **Midtrans Configuration**
+5. **Payment Configuration**
 ```bash
-# Tambahkan ke .env file
-MIDTRANS_SERVER_KEY=your_server_key
-MIDTRANS_CLIENT_KEY=your_client_key
-MIDTRANS_IS_PRODUCTION=false
-MIDTRANS_IS_SANITIZED=true
-MIDTRANS_IS_3DS=true
+# Tambahkan ke .env file sesuai kebutuhan payment gateway
+# Konfigurasi payment gateway yang digunakan
 ```
 
 6. **Build Assets**
@@ -184,28 +180,6 @@ Aplikasi ini menyediakan API endpoints untuk:
 - Transaksi pembayaran
 - CRUD program kerja
 
-## Testing
-
-Jalankan test suite:
-```bash
-php artisan test
-```
-
-## Deployment
-
-### Production Setup
-1. Set environment ke production di `.env`
-2. Optimize application:
-```bash
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-```
-
-3. Setup web server (Apache/Nginx)
-4. Configure SSL certificate
-5. Setup database backup
-
 ## Kontribusi
 
 Kami menerima kontribusi dari developer lain. Silakan:
@@ -214,27 +188,6 @@ Kami menerima kontribusi dari developer lain. Silakan:
 3. Commit changes (`git commit -m 'Add amazing feature'`)
 4. Push to branch (`git push origin feature/amazing-feature`)
 5. Open Pull Request
-
-## Roadmap
-
-- [ ] Mobile app (React Native/Flutter)
-- [ ] Real-time notifications
-- [ ] Advanced reporting
-- [ ] Integration with government systems
-- [ ] Multi-language support
-
-## Support
-
-Jika Anda mengalami masalah atau memiliki pertanyaan:
-- Buka issue di GitHub
-- Email: support@simas.com
-- Documentation: [Wiki](https://github.com/username/PADSIRTRW/wiki)
-
-## Security
-
-Jika Anda menemukan kerentanan keamanan, silakan laporkan ke:
-- Email: security@simas.com
-- Jangan publish vulnerability secara publik
 
 ## Changelog
 
@@ -251,11 +204,10 @@ Aplikasi ini dilisensikan under [MIT License](LICENSE).
 ## Credits
 
 - **Laravel Framework**: [Laravel](https://laravel.com)
-- **Midtrans Payment**: [Midtrans](https://midtrans.com)
 - **Bootstrap**: [Bootstrap](https://getbootstrap.com)
 
 ---
 
 <p align="center">
-Dibuat dengan ❤️ untuk kemajuan masyarakat RW 05, Desa Pabean
+Dibuat oleh Kelompok 9 PAD
 </p> 
