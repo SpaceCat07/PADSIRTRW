@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>Sistem Informasi Masyarakat RW 05, Desa Pabean, Kec. Dringu, Kab. Probolinggo</strong>
+  <strong>Sistem Informasi Masyarakat RT/RW</strong>
 </p>
 
 ## Tentang SIMAS
